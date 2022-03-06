@@ -60,13 +60,13 @@ namespace xstrat.MVVM.View
                 }
                 else
                 {
-                    MessageBox.Show("invalid user or password: " + result.Item2);
+                    Error.Content = "invalid user or password: " + result.Item2;
                     return;
                 }
             }
             else
             {
-                MessageBox.Show("invalid input");
+                Error.Content = "invalid input";
                 return;
             }
         }

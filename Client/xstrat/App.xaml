@@ -24,6 +24,9 @@
             <DataTemplate DataType="{x:Type viewModel:AboutViewModel}">
                 <view:AboutView/>
             </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModel:SkinSwitcherViewModel}">
+                <view:SkinSwitcherView/>
+            </DataTemplate>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

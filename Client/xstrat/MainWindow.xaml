@@ -83,8 +83,14 @@
                              FontSize="14"
                              Style="{StaticResource MenuButtonTheme}"
                              Command="{Binding SettingsViewCommand}"/>
-                
-                
+
+                <RadioButton Content="Skin Switcher"
+                             Height="50"
+                             Foreground="White"
+                             FontSize="14"
+                             Style="{StaticResource MenuButtonTheme}"
+                             Command="{Binding SkinSwitcherViewCommand}"/>
+
                 <RadioButton Content="About"
                              Height="50"
                              Foreground="White"

@@ -5,14 +5,15 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:xstrat.MVVM.View" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="775" d:DesignWidth="1150">
     <Grid>
         <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="0,-65,0,0" CanVerticallyScroll="False" VerticalAlignment="Center">
             <Image Source="/Images/slogan.png" Width="250" Height="65"/>
             <Label Foreground="White" Content="User Login" HorizontalAlignment="Center" FontSize="20" FontWeight="SemiBold" Margin="0,10,0,20"/>
-            <Border Background="#202020" CornerRadius="10" Margin="0,15,0,0">
+            <Label Name="Error" Content="" HorizontalAlignment="Center" Foreground="Red" MaxWidth="250"/>
+            <Border Background="#202020" CornerRadius="10" Margin="0,0,0,0">
                 <StackPanel Orientation="Horizontal">
-                    <materialDesign:PackIcon x:Name="EmailIcon" HorizontalAlignment="Center" Kind="Person" VerticalAlignment="Center" Foreground="white" Margin="10,0,0,0"/>
+                    <materialDesign:PackIcon x:Name="EmailIcon" HorizontalAlignment="Center" Kind="Email" VerticalAlignment="Center" Foreground="white" Margin="10,0,0,0"/>
                     <TextBox x:Name="email" Height="30" Width="200" CaretBrush="White" Background="Transparent" BorderThickness="0" Margin="5,5,5,5" Text="email" VerticalContentAlignment="Center"  Foreground="White"></TextBox>
                 </StackPanel>                
             </Border>

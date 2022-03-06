@@ -1,17 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using Microsoft.WindowsAPICodePack.Dialogs;
+using xstrat.Core;
 
 namespace xstrat.MVVM.View
 {
@@ -23,6 +13,21 @@ namespace xstrat.MVVM.View
         public SettingsView()
         {
             InitializeComponent();
+            SkinSwitcherPathDisplay.Text = SettingsHandler.SkinSwitcherPath;
+        }
+
+        private void SkinSwitcherPickPathBtn_Click(object sender, RoutedEventArgs e)
+        {
+            CommonOpenFileDialog dialog = new CommonOpenFileDialog();
+            dialog.InitialDirectory = @"C:\Program Files (x86)\Ubisoft\Ubisoft Game Launcher\savegames";
+            dialog.IsFolderPicker = true;
+            if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
+            {
+                var path = dialog.FileName;
+                SettingsHandler.SkinSwitcherPath = path;
+                SkinSwitcherPathDisplay.Text = path;
+                SettingsHandler.Save();
+            }
         }
     }
 }

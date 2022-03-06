@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 D:\Github repos\xstrat\Client\xstrat\App.xaml
-6-1992285446
+91320390921
 
-19956033922
-30-381851466
-MainWindow.xaml;MVVM\View\AboutView.xaml;MVVM\View\HomeView.xaml;MVVM\View\LoginView.xaml;MVVM\View\SettingsView.xaml;Theme\MenuButtonTheme.xaml;
+24-1289399120
+351542601317
+MainWindow.xaml;MVVM\View\AboutView.xaml;MVVM\View\HomeView.xaml;MVVM\View\LoginView.xaml;MVVM\View\RegisterView.xaml;MVVM\View\SettingsView.xaml;MVVM\View\SkinSwitcherView.xaml;Theme\MenuButtonTheme.xaml;Theme\ToggleSwitch.xaml;
 
 False
 

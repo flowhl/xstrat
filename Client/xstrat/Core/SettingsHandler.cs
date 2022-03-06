@@ -13,7 +13,7 @@ namespace xstrat.Core
 
         /*FILE:
          * Stay logged in
-         * 
+         * SkinswitcherUbiFolder
          */
         
 
@@ -23,6 +23,8 @@ namespace xstrat.Core
         //settings propeties:
         public static bool StayLoggedin { get; set; }
         public static string token { get; set; }
+        public static string SkinSwitcherPath { get; set; }
+        public static bool SkinSwitcherStatus { get; set; }
 
         public static void Initialize()
         {
@@ -45,6 +47,8 @@ namespace xstrat.Core
             {
                 StayLoggedin = Convert.ToBoolean(lines[0]);
                 token = lines[1];
+                SkinSwitcherPath = lines[2];
+                SkinSwitcherStatus = Convert.ToBoolean(lines[3]);
             }
             catch (Exception ex)
             {
@@ -57,7 +61,9 @@ namespace xstrat.Core
         {
             string[] newlines = {
             StayLoggedin.ToString(),
-            token
+            token,
+            SkinSwitcherPath,
+            SkinSwitcherStatus.ToString()
             };
 
             using (StreamWriter outputFile = new StreamWriter(Path.Combine(SettingsFile)))
@@ -70,7 +76,9 @@ namespace xstrat.Core
         {
             string[] newlines = {
             false.ToString(),
-            ""
+            "",
+            "",
+            false.ToString()
             };
 
             using (StreamWriter outputFile = new StreamWriter(Path.Combine(SettingsFile)))

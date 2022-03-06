@@ -56,13 +56,13 @@ namespace xstrat
             request.AddJsonBody(new { name = _name, email = _email, password = _pw });
 
             var response = await client.ExecuteAsync<RestResponse>(request);
-            if (response.StatusCode != System.Net.HttpStatusCode.OK) //success
+            if (response.StatusCode == System.Net.HttpStatusCode.OK) //success
             {
                 return (true, "");
             }
-            else if (response.StatusCode != System.Net.HttpStatusCode.Conflict) //duplicate
+            else if (response.StatusCode == System.Net.HttpStatusCode.Conflict) //duplicate
             {
-                return (false, "duplicate error");
+                return (false, "email allready registered");
             }
             return (false, "db error");
         }
@@ -95,6 +95,11 @@ namespace xstrat
             }
             client.Authenticator = null;
             return (false);
+        }
+
+        public static async Task<bool> ResetEmail()
+        {
+            throw new NotImplementedException();
         }
 
 
