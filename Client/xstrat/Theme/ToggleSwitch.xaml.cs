@@ -23,7 +23,7 @@ namespace xstrat.Theme
         Thickness LeftSide = new Thickness(-39, 0, 0, 0);
         Thickness RightSide = new Thickness(0, 0, -39, 0);
         SolidColorBrush Off = new SolidColorBrush(Color.FromRgb(160, 160, 160));
-        SolidColorBrush On = new SolidColorBrush(Color.FromRgb(130, 190, 125));
+        SolidColorBrush On = (SolidColorBrush)new BrushConverter().ConvertFrom("#336cb5");
         private bool Toggled = false;
         public ToggleSwitch()
         {

@@ -151,6 +151,133 @@ module.exports = {
             return callBack(null,results[0]);                
         }
         );
-    }
+    },
+    getTeamByUser_id:(id, callBack) => {
+        pool.query(
+            "SELECT team_id FROM user WHERE id = ?",
+        [id],
+        (error,results,fields)=>{
+            if(error){
+            return callBack(error);
+            }
+            return callBack(null,results[0]);
+        }
+        );
+    },
+    createTeam: (name, user_id, game_id, pw, callBack) => {
+        //for some reason this sql does not work - fix later
+        pool.query("INSERT INTO team (name, admin_user_id, game_id, join_password) values(?,?,?,?)"),
+        [name, user_id, game_id, pw],
+        (error,results,fields) => {
+            if(error){
+                console.log(err);
+                return callBack(error);
+            }
+            console.log(results);
+            return callBack(null,results);                
+        };
+    },
+    updateTeamName: (team_id, user_id, newname) =>{
+        pool.query(
+            'Update team SET name = ? WHERE id = ? AND admin_user_id = ?',
+            [
+                newname,
+                team_id,
+                user_id
+            ],
+            (error, results)=>{
+                if(error){
+                   return callBack(error);
+                }
+                return callBack(null,"DB OK");                
+            }
+        );
+    },
+    deleteTeam: (team_id, user_id,) => {
+        pool.query(
+            'DELETE FROM team WHERE id = ? AND admin_user_id = ?',
+            [
+                team_id,
+                user_id
+            ],
+            (error, results)=>{
+                if(error){
+                   return callBack(error);
+                }
+                return callBack(null,"DB OK");                
+            }
+        );
+
+    },
+    verifyTeamJoinPassword: (team_id, join_password) =>{
+        pool.query(
+            'SELECT COUNT(id) FROM team WHERE id = ? AND join_password = ?',
+            [
+                team_id,
+                join_password
+            ],
+            (error,results)=>{
+                if(error){
+                   return callBack(error);
+                }
+                return callBack(results,"DB OK");                
+            }
+        );
+    },
+    verifyTeamAdmin: (team_id, user_id) =>{
+        pool.query(
+            'SELECT COUNT(id) FROM team WHERE id = ? AND admin_user_id = ?',
+            [
+                team_id,
+                user_id
+            ],
+            (error,results)=>{
+                if(error){
+                   return callBack(error);
+                }
+                
+                return callBack(null,results);                
+            }
+        );
+    },
+    joinTeam: (team_id, user_id) => {
+        pool.query(
+            'Update user SET team_id = ? WHERE id = ?',
+            [
+                team_id,
+                user_id
+            ],
+            (error)=>{
+                if(error){
+                   return callBack(error);
+                }
+                return callBack(null,"DB OK");                
+            }
+        );
+    },
+    leaveTeam: (user_id) => {
+        pool.query(
+            'Update user SET team_id = null WHERE id = ?',
+            [
+                user_id
+            ],
+            (error)=>{
+                if(error){
+                   return callBack(error);
+                }
+                return callBack(null,"DB OK");                
+            }
+        );
+    },
+
+    
+
+//#endregion
+//#region routines
+    // newRoutine: (name, team_id, callBack) {
+        
+    // }
+
+
 //#endregion
 };

@@ -8,3 +8,4 @@ node_modules
 *.cache
 Client/packages/WindowsAPICodePack.1.1.2/content/license.txt
 Client/packages/WindowsAPICodePack.1.1.2/content/Windows Logo.png
+*.pdb

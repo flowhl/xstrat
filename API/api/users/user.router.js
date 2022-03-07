@@ -9,11 +9,13 @@ const {
      changeName, 
      changePassword,
      getMyMember,
-     verifyToken
+     verifyToken,
+     getTeamByUser_id,
+     deleteUser,
+     createTeam
     } = require("./user.controller");
 const router = require("express").Router();
 const {checkToken} = require("../../auth/token_validation");
-const { deleteUser } = require("./user.service");
 
 //#region user control
 router.post("/login", login)
@@ -41,7 +43,8 @@ router.get("/mymember", [checkToken], getMyMember)
 // router.post("/setTeamAdmin", [checkToken], setTeamAdmin)
 // router.post("/newStrat", [checkToken], newStrat)
 
-
+router.get("/myteamid", [checkToken], getTeamByUser_id)
+router.post("/createteam", [checkToken], createTeam)
 router.get("/", getUserByUserId);
 router.get("/getusers", [checkToken], getUsers)
 //#endregion

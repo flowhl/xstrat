@@ -1,4 +1,4 @@
-const { create_user, create_member,getMemberByUserID,getUserByUserId,getUsers,getUserByEmail, deleteAccount, changeEmail, changeName, changePassword, getMyMember} = require("./user.service");
+const { create_user, create_member,getMemberByUserID,getUserByUserId,getUsers,getUserByEmail, deleteAccount, changeEmail, changeName, changePassword, getMyMember, getTeamByUser_id, updateTeamName, deleteTeam, createTeam} = require("./user.service");
 
 const {genSaltSync, hashSync, compareSync} = require("bcrypt");
 const { sign } = require("jsonwebtoken");
@@ -216,7 +216,7 @@ module.exports = {
     },
 
     getUserByUserId: (req, res) =>{
-        const id = req.params.id;
+        const id = req.body.id;
         getUserByUserId(id, (err,results) => {
             if (err) {
                 console.log(err);
@@ -258,6 +258,76 @@ module.exports = {
               data: results
           });
       })
-  }
+  },
+//#endregion
+//#region team
+    getTeamByUser_id: (req, res) => {
+        const id = req.id;
+        getTeamByUser_id(id, (err, results) => {
+            if (err) {
+                console.log(err);
+                return res.status(500).json({
+                    success: 0,
+                    message: "Database connection error"
+                });
+            }
+            else if(!results){
+                return res.status(200).json({
+                    success: 0,
+                    data: "Team not found"
+                });
+            }
+            return res.status(200).json({
+                success: 1,
+                data: results
+            });
+        });
+    },
+    createTeam: (req, res) => {
+        const name = req.body.name;
+        const user_id = req.id;
+        const game_id = req.body.game_id;
+        const pw = Math.random().toString(36).slice(-8);
+        createTeam(name, user_id, game_id, pw, (err, results) => {
+            if (err) {
+                console.log(err);
+                return res.status(500).json({
+                    success: 0,
+                    message: "Database connection error"
+                });
+            }
+            else{
+                return res.status(200).json({
+                    success: 1,
+                    data: results
+                });
+            }
+        }) 
+    },
+    //only if admin
+    updateTeamName: (req, res) => {
+        const team_id = req.params.team_id;
+        const user_id = req.id;
+        const newname = req.params.newname;
+        updateTeamName(team_id, user_id, newname, (err, results) =>{
+            if (err) {
+                console.log(err);
+                return res.status(500).json({
+                    success: 0,
+                    message: "Database connection error"
+                });
+            }
+            else{
+                return res.status(200).json({
+                    success: 1,
+                    data: results
+                });
+            }
+        })
+    },
+    //only if admin
+    deleteTeam: (req, res) => {
+
+    }
 //#endregion
 };
