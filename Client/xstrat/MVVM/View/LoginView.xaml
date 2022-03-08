@@ -8,7 +8,7 @@
              d:DesignHeight="775" d:DesignWidth="1150">
     <Grid>
         <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="0,-65,0,0" CanVerticallyScroll="False" VerticalAlignment="Center">
-            <Image Source="/Images/slogan.png" Width="250" Height="65"/>
+            <Image Source="/Images/slogan.png" Width="260" Height="65"/>
             <Label Foreground="White" Content="User Login" HorizontalAlignment="Center" FontSize="20" FontWeight="SemiBold" Margin="0,10,0,20"/>
             <Label Name="Error" Content="" HorizontalAlignment="Center" Foreground="Red" MaxWidth="250"/>
             <Border Background="#202020" CornerRadius="10" Margin="0,0,0,0">

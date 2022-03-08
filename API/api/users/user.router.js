@@ -12,7 +12,8 @@ const {
      verifyToken,
      getTeamByUser_id,
      deleteUser,
-     createTeam
+     createTeam,
+     activateAccount,
     } = require("./user.controller");
 const router = require("express").Router();
 const {checkToken} = require("../../auth/token_validation");
@@ -47,5 +48,6 @@ router.get("/myteamid", [checkToken], getTeamByUser_id)
 router.post("/createteam", [checkToken], createTeam)
 router.get("/", getUserByUserId);
 router.get("/getusers", [checkToken], getUsers)
+router.get("/account/activate/:token", activateAccount)
 //#endregion
 module.exports = router

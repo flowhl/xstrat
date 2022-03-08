@@ -14,6 +14,7 @@ namespace xstrat
     public partial class MainWindow : Window
     {
         MainViewModel mv;
+        public bool NewlyRegistered = false;
         public MainWindow()
         {
             InitializeComponent();
@@ -90,10 +91,12 @@ namespace xstrat
                 SettingsHandler.Save();
             }
             ApiHandler.AddBearer(token);
+            NewlyRegistered = false;
             mv.CurrentView = new HomeView();
         }
         public void RegisterComplete()
         {
+            NewlyRegistered = true;
             mv.CurrentView = new LoginView();
         }
         

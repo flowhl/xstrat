@@ -20,12 +20,49 @@ module.exports = {
             }
         );
     },
-    create_member:(user_id, callBack) =>{
+    createVerification:(token, user_id, callBack) =>{
         pool.query(
-            "INSERT INTO member (user_id) values(?)",
+            "INSERT INTO verification (string, user_id) values(?,?)",
             [
+                token,
                 user_id
             ],
+            (error,results,fields)=>{
+                if(error){
+                   return callBack(error);
+                }
+                console.log(results);
+                return callBack(null,results);                
+            }
+        );
+    },
+    getVerification:(token, callBack) => {
+        pool.query(
+            "SELECT * FROM verification WHERE string = ? AND time > (NOW() - INTERVAL '1' HOUR)",
+            [token],
+            (error,results,fields)=>{
+                if(error){
+                   return callBack(error);
+                }
+                return callBack(null,results);                
+            }
+        );
+    },
+    clearVerification:(callBack) => {
+        pool.query(
+            "DELETE FROM verification WHERE time < (NOW() - INTERVAL '1' HOUR)",
+            (error,results,fields)=>{
+                if(error){
+                   return callBack(error);
+                }
+                return callBack(null,results);                
+            }
+        );
+    },
+    activateAccount:(user_id, callBack) => {
+        pool.query(
+            "Update user SET active = 1 WHERE id = ?",
+            [user_id],
             (error,results,fields)=>{
                 if(error){
                    return callBack(error);
@@ -130,7 +167,7 @@ module.exports = {
     },
     getUserByEmail: (email, callBack) =>{
         pool.query(
-            "SELECT * FROM user WHERE email = ?",
+            "SELECT * FROM user WHERE email = ? AND active = 1",
         [email],
         (error,results,fields)=>{
             if(error){
@@ -164,7 +201,7 @@ module.exports = {
         }
         );
     },
-    createTeam: (name, user_id, game_id, pw, callBack) => {
+    newTeam: (name, user_id, game_id, pw, callBack) => {
         //for some reason this sql does not work - fix later
         pool.query("INSERT INTO team (name, admin_user_id, game_id, join_password) values(?,?,?,?)"),
         [name, user_id, game_id, pw],
@@ -269,7 +306,6 @@ module.exports = {
             }
         );
     },
-
     
 
 //#endregion

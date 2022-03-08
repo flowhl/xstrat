@@ -27,6 +27,14 @@ namespace xstrat.MVVM.View
         public LoginView()
         {
             InitializeComponent();
+            if (wnd.NewlyRegistered)
+            {
+                Error.Content = "Please confirm the email to verify your account";
+            }
+            else
+            {
+                Error.Content = null;
+            }
         }
 
         private void Login_Click(object sender, RoutedEventArgs e)

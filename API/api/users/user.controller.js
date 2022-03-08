@@ -1,8 +1,8 @@
-const { create_user, create_member,getMemberByUserID,getUserByUserId,getUsers,getUserByEmail, deleteAccount, changeEmail, changeName, changePassword, getMyMember, getTeamByUser_id, updateTeamName, deleteTeam, createTeam} = require("./user.service");
+const { create_user, getMemberByUserID,getUserByUserId,getUsers,getUserByEmail, deleteAccount, changeEmail, changeName, changePassword, getMyMember, getTeamByUser_id, updateTeamName, deleteTeam, newTeam, createVerification, getVerification, clearVerification, activateAccount} = require("./user.service");
 
 const {genSaltSync, hashSync, compareSync} = require("bcrypt");
 const { sign } = require("jsonwebtoken");
-
+const {sendEmail} = require("./user.mailservice")
 module.exports = {
 //#region user control
     login: (req, res) => {
@@ -61,22 +61,26 @@ module.exports = {
                 });
             }
             const user_id = results.insertId;
-            create_member(user_id, (err, results) => {
-                if (err) {
-                    console.log(err);
-                    return res.status(500).json({
-                        success: 0,
-                        message: "Database connection error"
-                    });
-                }
-                else{
-                    return res.status(200).json({
-                        success: 1,
-                        data: results
-                    });
-                }
-            })
-            
+            var crypto = require("crypto");
+            const token = crypto.randomBytes(64).toString('hex');
+            createVerification(token, user_id, (err, results) => {
+              if(err){
+                return res.status(500).json({
+                    success: 0,
+                    message: err.message
+                });
+              }
+              else{
+                  console.log(token);
+                  const link = process.env.HOSTDOMAIN + "/api/account/activate/" + token;
+                  sendEmail(body.email, link)
+                  return res.status(200).json({
+                      success: 1,
+                      message: "Account created. Please check your emails!"
+                  })
+              }
+            }
+            );
         });
       }
       else{
@@ -86,6 +90,54 @@ module.exports = {
         });
       }
       
+    },
+    activateAccount: (req, res) => {
+        const token = req.params.token;
+        getVerification(token, (err, results) => {
+            if(err){
+                return res.status(500).json({
+                    success: 0,
+                    message: "DB error"
+                });
+              }
+              if(!results){
+                return res.status(400).json({
+                    success: 0,
+                    message: "no account found!"
+                });
+              }
+              else{
+                const user_id = results[0].user_id
+                console.log("verify:", user_id)
+                activateAccount(user_id, (err, results) => {
+                    if(err){
+                        return res.status(500).json({
+                            success: 0,
+                            message: err.message
+                        });
+                      }
+                    else if(!results){
+                        return res.status(400).json({
+                            success: 0,
+                            message: "no account found!"
+                        });
+                    }
+                    else{
+                        clearVerification((err, results) => {
+                            if(err){
+                                console.log(err)
+                            }
+                        });
+                        return res.status(200).json({
+                            success: 1,
+                            message: "account successfully activated!"
+                        });
+
+                    }
+                });
+              }
+        }
+        );
     },
     verifyToken:(req, res) =>{
         return res.status(200).json({
@@ -288,7 +340,7 @@ module.exports = {
         const user_id = req.id;
         const game_id = req.body.game_id;
         const pw = Math.random().toString(36).slice(-8);
-        createTeam(name, user_id, game_id, pw, (err, results) => {
+        newTeam(name, user_id, game_id, pw, (err, results) => {
             if (err) {
                 console.log(err);
                 return res.status(500).json({
