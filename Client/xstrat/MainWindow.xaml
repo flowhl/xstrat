@@ -84,6 +84,13 @@
                              Style="{StaticResource MenuButtonTheme}"
                              Command="{Binding SettingsViewCommand}"/>
 
+                <RadioButton Content="Routines"
+                             Height="50"
+                             Foreground="White"
+                             FontSize="14"
+                             Style="{StaticResource MenuButtonTheme}"
+                             Command="{Binding RoutinesViewCommand}"/>
+
                 <RadioButton Content="Skin Switcher"
                              Height="50"
                              Foreground="White"

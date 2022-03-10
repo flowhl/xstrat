@@ -1,0 +1,22 @@
+﻿<UserControl x:Class="xstrat.MVVM.View.RoutinesView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:xstrat.MVVM.View" xmlns:local1="clr-namespace:xstrat.Theme"
+             mc:Ignorable="d" 
+             d:DesignHeight="775" d:DesignWidth="1150">
+    <Grid>
+        <ScrollViewer>
+            <StackPanel Name="sp" AllowDrop="True" Background="#202020" PreviewMouseLeftButtonDown="sp_PreviewMouseLeftButtonDown" PreviewMouseLeftButtonUp="sp_PreviewMouseLeftButtonUp" PreviewMouseMove="sp_PreviewMouseMove"
+                DragEnter="sp_DragEnter" Drop="sp_Drop" Width="800" Height="775" HorizontalAlignment="Left">
+            <local1:Routine x:Name="Routine1"/>
+            <local1:Routine x:Name="Routine2"/>
+            <local1:Routine x:Name="Routine3"/>
+            <local1:Routine x:Name="Routine4"/>
+            
+        </StackPanel>
+        </ScrollViewer>
+        
+    </Grid>
+</UserControl>

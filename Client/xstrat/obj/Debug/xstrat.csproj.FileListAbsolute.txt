@@ -65,3 +65,7 @@ D:\Github repos\xstrat\Client\xstrat\obj\Debug\xstrat.csproj.CopyComplete
 D:\Github repos\xstrat\Client\xstrat\obj\Debug\xstrat.exe
 D:\Github repos\xstrat\Client\xstrat\obj\Debug\xstrat.pdb
 D:\Github repos\xstrat\Client\xstrat\obj\Debug\xstrat.csproj.AssemblyReference.cache
+D:\Github repos\xstrat\Client\xstrat\obj\Debug\MVVM\View\RoutinesView.g.cs
+D:\Github repos\xstrat\Client\xstrat\obj\Debug\Theme\Routine.g.cs
+D:\Github repos\xstrat\Client\xstrat\obj\Debug\MVVM\View\RoutinesView.baml
+D:\Github repos\xstrat\Client\xstrat\obj\Debug\Theme\Routine.baml

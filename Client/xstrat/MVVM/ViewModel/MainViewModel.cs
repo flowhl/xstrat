@@ -15,6 +15,7 @@ namespace xstrat.MVVM.ViewModel
         public RelayCommand RegisterViewCommand { get; set; }
         public RelayCommand LoginViewCommand { get; set; }
         public RelayCommand SkinSwitcherViewCommand { get; set; }
+        public RelayCommand RoutinesViewCommand { get; set; }
 
 
         public HomeViewModel HomeVM { get; set; }
@@ -23,6 +24,7 @@ namespace xstrat.MVVM.ViewModel
         public RegisterViewModel RegisterVM { get; set; }
         public LoginViewModel LoginVM { get; set; }
         public SkinSwitcherViewModel SkinSwitcherVM { get; set; }
+        public RoutinesViewModel RoutinesVM { get; set; }
 
         public object _currentView;
 
@@ -43,6 +45,7 @@ namespace xstrat.MVVM.ViewModel
             LoginVM = new LoginViewModel();
             RegisterVM = new RegisterViewModel();
             SkinSwitcherVM = new SkinSwitcherViewModel();
+            RoutinesVM = new RoutinesViewModel();
             CurrentView = HomeVM;
 
             HomeViewCommand = new RelayCommand(o => {CurrentView = HomeVM;});
@@ -51,6 +54,7 @@ namespace xstrat.MVVM.ViewModel
             RegisterViewCommand = new RelayCommand(o => { CurrentView = RegisterVM; });
             LoginViewCommand = new RelayCommand(o => { CurrentView = LoginVM; });
             SkinSwitcherViewCommand = new RelayCommand(o => { CurrentView = SkinSwitcherVM; });
+            RoutinesViewCommand = new RelayCommand(o => { CurrentView = RoutinesVM; });
         }
     }
 }

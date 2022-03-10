@@ -118,6 +118,13 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Core\ApiHandler.cs" />
+    <Compile Include="MVVM\ViewModel\RoutinesViewModel.cs" />
+    <Compile Include="MVVM\View\RoutinesView.xaml.cs">
+      <DependentUpon>RoutinesView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Theme\Routine.xaml.cs">
+      <DependentUpon>Routine.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Theme\ToggleSwitch.xaml.cs">
       <DependentUpon>ToggleSwitch.xaml</DependentUpon>
     </Compile>
@@ -153,6 +160,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="MVVM\View\RoutinesView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MVVM\View\SettingsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -162,6 +173,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Theme\MenuButtonTheme.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Theme\Routine.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
