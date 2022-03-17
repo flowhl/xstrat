@@ -310,9 +310,103 @@ module.exports = {
 
 //#endregion
 //#region routines
-    // newRoutine: (name, team_id, callBack) {
-        
-    // }
+    newRoutine: (user_id, callBack) => {
+        pool.query( 'INSERT INTO routine (title, user_id) VALUES(?,?)',
+        [
+            "Routine",
+            user_id
+        ],
+        (error,results,fields) => {
+            if(error){
+                console.log(error);
+                return callBack(error);
+            }
+            console.log(results);
+            return callBack(null,results);                
+        }
+        )
+    },
+    deleteRoutine: (user_id, routine_id, callBack) =>{
+        pool.query( 'DELETE FROM routine WHERE user_id = ? AND id = ?',
+        [
+            user_id,
+            routine_id
+        ],
+        (error,results,fields) => {
+            if(error){
+                console.log(error);
+                return callBack(error);
+            }
+            console.log(results);
+            return callBack(null,results);                
+        }
+        )
+    },
+    getRoutineContent: (user_id, routine_id, callBack) => {
+        pool.query(
+            'SELECT content FROM routine WHERE id = ? AND user_id = ?',
+            [
+                routine_id,
+                user_id
+            ],
+            (error,results)=>{
+                if(error){
+                   return callBack(error);
+                }
+                return callBack(null,results);                
+            }
+        );
+    },
+    getRoutines: (user_id, callBack) => {
+        pool.query(
+            'SELECT * FROM routine WHERE user_id = ?',
+            [
+                user_id
+            ],
+            (error,results)=>{
+                if(error){
+                   return callBack(error);
+                }
+                return callBack(null,results);                
+            }
+        );
+    },
+    saveRoutine: (title, content, user_id, routine_id, callBack) => {
+        pool.query(
+            'Update routine SET title = ?, content = ? WHERE user_id = ? AND id = ?',
+            [
+                title,
+                content,
+                user_id,
+                routine_id
+            ],
+            (error)=>{
+                if(error){
+                   return callBack(error);
+                }
+                return callBack(null,"DB OK");                
+            }
+        );
+    },
+    renameRoutine: (title, user_id, routine_id, callBack) => {
+        pool.query(
+            'Update routine SET title = ? WHERE user_id = ? AND id = ?',
+            [
+                title,
+                user_id,
+                routine_id
+            ],
+            (error)=>{
+                if(error){
+                   return callBack(error);
+                }
+                return callBack(null,"DB OK");                
+            }
+        );
+    },
+
+
+
 
 
 //#endregion

@@ -14,6 +14,13 @@ const {
      deleteUser,
      createTeam,
      activateAccount,
+     newRoutine,
+     deleteRoutine,
+     getRoutineContent,
+     getRoutines,
+     saveRoutine,
+     testConnection,
+     renameRoutine
     } = require("./user.controller");
 const router = require("express").Router();
 const {checkToken} = require("../../auth/token_validation");
@@ -46,8 +53,17 @@ router.get("/mymember", [checkToken], getMyMember)
 
 router.get("/myteamid", [checkToken], getTeamByUser_id)
 router.post("/createteam", [checkToken], createTeam)
-router.get("/", getUserByUserId);
+router.get("/", testConnection);
 router.get("/getusers", [checkToken], getUsers)
 router.get("/account/activate/:token", activateAccount)
 //#endregion
+//#region Routines
+router.post("/routines/new", [checkToken], newRoutine)
+router.post("/routines/delete", [checkToken], deleteRoutine)
+router.post("/routines/content", [checkToken], getRoutineContent)
+router.get("/routines/all", [checkToken], getRoutines)
+router.post("/routines/save", [checkToken], saveRoutine)
+router.post("/routines/rename", [checkToken], renameRoutine)
+//#endregion
+
 module.exports = router

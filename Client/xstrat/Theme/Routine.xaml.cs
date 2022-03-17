@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using xstrat.Core;
 
 namespace xstrat.Theme
 {
@@ -20,92 +21,58 @@ namespace xstrat.Theme
     /// </summary>
     public partial class Routine : UserControl
     {
-        public string Header { get; set; }
-        public string Body { get; set; }
-        public int Count { get; set; }
-        public int Duration { get; set; }
+        public string Head { get; set; }
+        public string createdDate;
+        public int ID;
+        public EventHandler<RoutineButtonClicked> MoveButtonEvent;
 
-        public Routine()
+        public Routine(string header, string createdDate, int id)
         {
             InitializeComponent();
-
+            Head = header;
+            this.createdDate = createdDate.Replace("T", " ");
+            var charsToRemove = new string[] { "T", "Z"};
+            foreach (var c in charsToRemove)
+            {
+                this.createdDate = this.createdDate.Replace(c, string.Empty);
+            }
+            ID = id;
+            UpdateUI();
         }
 
-        private void Count_Minus_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private void OpenButton_Click(object sender, RoutedEventArgs e)
         {
-            if(Count > 0)
+            if (MoveButtonEvent != null)
             {
-                Count--;
+                MoveButtonEvent(sender, new RoutineButtonClicked(0, this));
             }
-            else if(Count < 0)
-            {
-                Count = 0;
-            }
-            UpdateUi();
         }
 
-        private void Count_Plus_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private void UpdateUI()
         {
-            if (Count >= 0)
-            {
-                Count++;
-            }
-            else if (Count < 0)
-            {
-                Count = 0;
-            }
-            UpdateUi();
-        }
-
-        private void Duration_Minus_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            if (Duration > 0)
-            {
-                Duration--;
-            }
-            else if (Count < 0)
-            {
-                Duration = 0;
-            }
-            UpdateUi();
-        }
-
-        private void Duration_Plus_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            if (Duration >= 0 && Duration <= 599)
-            {
-                Duration++;
-            }
-            else if (Count < 0)
-            {
-                Duration = 0;
-            }
-            UpdateUi();
-        }
-
-        private void UpdateUi()
-        {
-            Count_Value.Content = Count.ToString();
-            Duration_Value.Content = DurationConverter(Duration);
-            Body_Textbox.Text = Body;
-            Header_Textbox.Text = Header;
-        }
-
-        private string DurationConverter(int value)
-        {
-            int minutes = (int)(value / 60);
-            int seconds = value % 60;
-            return minutes + ":" + seconds.ToString().PadLeft(2 - seconds.ToString().Length, '0');
+            Header_Textbox.Text = Head;
+            CreatedOnLabel.Content = "Created on: " + createdDate;
         }
 
         private void Header_Textbox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            Header = Header_Textbox.Text;
+            Head = Header_Textbox.Text;
         }
 
-        private void Body_Textbox_TextChanged(object sender, TextChangedEventArgs e)
+        private void AddBelowButton_Click(object sender, RoutedEventArgs e)
         {
-            Body = Body_Textbox.Text;
+            if (MoveButtonEvent != null)
+            {
+                MoveButtonEvent(sender, new RoutineButtonClicked(1, this));
+            }
+        }
+
+        private void DeleteButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (MoveButtonEvent != null)
+            {
+                MoveButtonEvent(sender, new RoutineButtonClicked(-1, this));
+            }
         }
     }
 }

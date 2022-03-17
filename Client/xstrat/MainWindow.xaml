@@ -18,7 +18,7 @@
     </Window.DataContext>
     
     
-    <Border Background="#131313" CornerRadius="12">
+    <Border Background="#131313" CornerRadius="20">
 
         <Grid>
             <Grid.ColumnDefinitions>
@@ -65,51 +65,52 @@
                     
                 </Grid>
             </Border>
-            
 
-            <StackPanel Grid.Row="2" Background="#101010">
-                <RadioButton Content="Home"
+            <Border Background="#101010" Grid.Row="2" CornerRadius="12">
+                <StackPanel >
+                    <RadioButton Content="Home"
                              Height="50"
                              Foreground="White"
                              FontSize="14"
                              Style="{StaticResource MenuButtonTheme}"
                              IsChecked="True"
                              Command="{Binding HomeViewCommand}"/>
-                
-                
-                <RadioButton Content="Settings"
+
+
+                    <RadioButton Content="Settings"
                              Height="50"
                              Foreground="White"
                              FontSize="14"
                              Style="{StaticResource MenuButtonTheme}"
                              Command="{Binding SettingsViewCommand}"/>
 
-                <RadioButton Content="Routines"
+                    <RadioButton Content="Routines"
                              Height="50"
                              Foreground="White"
                              FontSize="14"
                              Style="{StaticResource MenuButtonTheme}"
                              Command="{Binding RoutinesViewCommand}"/>
 
-                <RadioButton Content="Skin Switcher"
+                    <RadioButton Content="Skin Switcher"
                              Height="50"
                              Foreground="White"
                              FontSize="14"
                              Style="{StaticResource MenuButtonTheme}"
                              Command="{Binding SkinSwitcherViewCommand}"/>
 
-                <RadioButton Content="About"
+                    <RadioButton Content="About"
                              Height="50"
                              Foreground="White"
                              FontSize="14"
                              Style="{StaticResource MenuButtonTheme}"
                              Command="{Binding AboutViewCommand}"/>
-                
-            </StackPanel>
+
+                </StackPanel>
+            </Border>            
 
             <ContentControl Grid.Row="1"
                             Grid.Column="1"
-                            Margin="10"
+                            Margin="0,0,10,10"
                             Name="contentControl"
                             Content="{Binding CurrentView}"/>
 

@@ -118,12 +118,25 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Core\ApiHandler.cs" />
+    <Compile Include="Core\RoutineButtonClicked.cs" />
+    <Compile Include="Core\RoutineStepButtonClicked.cs" />
+    <Compile Include="Json\Content.cs" />
+    <Compile Include="Json\Routine.cs" />
     <Compile Include="MVVM\ViewModel\RoutinesViewModel.cs" />
     <Compile Include="MVVM\View\RoutinesView.xaml.cs">
       <DependentUpon>RoutinesView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Overlay\OverlayStep.xaml.cs">
+      <DependentUpon>OverlayStep.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Overlay\RoutineOverlay.xaml.cs">
+      <DependentUpon>RoutineOverlay.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Theme\Routine.xaml.cs">
       <DependentUpon>Routine.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Theme\RoutineStep.xaml.cs">
+      <DependentUpon>RoutineStep.xaml</DependentUpon>
     </Compile>
     <Compile Include="Theme\ToggleSwitch.xaml.cs">
       <DependentUpon>ToggleSwitch.xaml</DependentUpon>
@@ -172,11 +185,23 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Overlay\OverlayStep.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Overlay\RoutineOverlay.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Theme\MenuButtonTheme.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Theme\Routine.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Theme\RoutineStep.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

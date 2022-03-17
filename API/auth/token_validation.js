@@ -6,7 +6,7 @@ module.exports = {
       token = token.split(" ")[1];// Remove Bearer from string
       jwt.verify(token, process.env.KEY, (err, decoded) => {
         if (err) {
-          return res.json({
+          return res.status(401).json({
             success: 0,
             message: "Invalid Token..."
           });
@@ -20,7 +20,7 @@ module.exports = {
         }
       });
     } else {
-      return res.json({
+      return res.status(401).json({
         success: 0,
         message: "Access Denied! Unauthorized User"
       });

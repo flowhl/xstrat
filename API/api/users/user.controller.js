@@ -1,10 +1,17 @@
-const { create_user, getMemberByUserID,getUserByUserId,getUsers,getUserByEmail, deleteAccount, changeEmail, changeName, changePassword, getMyMember, getTeamByUser_id, updateTeamName, deleteTeam, newTeam, createVerification, getVerification, clearVerification, activateAccount} = require("./user.service");
+const { create_user, getMemberByUserID,getUserByUserId,getUsers,getUserByEmail, deleteAccount, changeEmail, changeName, changePassword, getMyMember, getTeamByUser_id, updateTeamName, deleteTeam, newTeam, createVerification, getVerification, clearVerification, activateAccount, newRoutine, deleteRoutine, getRoutineContent, saveRoutine, getRoutines, renameRoutine} = require("./user.service");
 
 const {genSaltSync, hashSync, compareSync} = require("bcrypt");
 const { sign } = require("jsonwebtoken");
-const {sendEmail} = require("./user.mailservice")
+const {sendEmail} = require("./user.mailservice");
+const res = require("express/lib/response");
 module.exports = {
 //#region user control
+    testConnection: (req, res) => {
+        return res.status(200).json({
+            success: 1
+            });
+    },
+
     login: (req, res) => {
         const body = req.body;
         getUserByEmail(body.email, (err, results) => {
@@ -379,7 +386,125 @@ module.exports = {
     },
     //only if admin
     deleteTeam: (req, res) => {
-
-    }
+        //ENTER HERE
+    },
+//#endregion
+//#region Routines
+    newRoutine: (req, res) => {
+        console.log(req.id)
+        const user_id = req.id;
+        newRoutine(user_id, (err, results) =>{
+            if (err) {
+                console.log(err);
+                return res.status(500).json({
+                    success: 0,
+                    message: "Database connection error"
+                });
+            }
+            else{
+                return res.status(200).json({
+                    success: 1,
+                    message: "DB OK"
+                });
+            }
+        })
+    },
+    deleteRoutine: (req, res) => {
+        const user_id = req.id;
+        const routine_id = req.body.routine_id;
+        deleteRoutine(user_id, routine_id, (err, results) =>{
+            if (err) {
+                console.log(err);
+                return res.status(500).json({
+                    success: 0,
+                    message: "Database connection error"
+                });
+            }
+            else{
+                return res.status(200).json({
+                    success: 1,
+                    message: "DB OK"
+                });
+            }
+        })
+    },
+    getRoutineContent: (req, res) => {
+        const user_id = req.id;
+        routine_id = req.body.routine_id;
+        getRoutineContent(user_id, routine_id, (err, results) =>{
+            if (err) {
+                console.log(err);
+                return res.status(500).json({
+                    success: 0,
+                    message: "Database connection error"
+                });
+            }
+            else{
+                return res.status(200).json({
+                    success: 1,
+                    data:results
+                });
+            }
+        })
+    },
+    getRoutines: (req, res) => {
+        const user_id = req.id;
+        getRoutines(user_id, (err, results) =>{
+            if (err) {
+                console.log(err);
+                return res.status(500).json({
+                    success: 0,
+                    message: "Database connection error"
+                });
+            }
+            else{
+                return res.status(200).json({
+                    success: 1,
+                    data: results
+                });
+            }
+        })
+    },
+    saveRoutine: (req, res) => {
+        const routine_id = req.body.routine_id;
+        const user_id = req.id;
+        const title = req.body.title;
+        const content = req.body.content;
+        saveRoutine(title, content, user_id, routine_id, (err, message) => {
+            if (err) {
+                console.log(err);
+                return res.status(500).json({
+                    success: 0,
+                    message: "Database connection error"
+                });
+            }
+            else{
+                return res.status(200).json({
+                    success: 1,
+                    message: message
+                });
+            }
+        })
+    },
+    renameRoutine: (req, res) => {
+        const routine_id = req.body.routine_id;
+        const user_id = req.id;
+        const title = req.body.title;
+        renameRoutine(title, user_id, routine_id, (err, message) => {
+            if (err) {
+                console.log(err);
+                return res.status(500).json({
+                    success: 0,
+                    message: "Database connection error"
+                });
+            }
+            else{
+                return res.status(200).json({
+                    success: 1,
+                    message: message
+                });
+            }
+        })
+    },
 //#endregion
 };

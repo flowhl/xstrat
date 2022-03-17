@@ -5,60 +5,28 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:xstrat.Theme" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
-             d:DesignHeight="200" d:DesignWidth="800">
+          d:DesignHeight="100" d:DesignWidth="290">
     <Grid>
-        
-        <Viewbox HorizontalAlignment="Left" Height="200" Width="800">
-            <StackPanel Orientation="Horizontal" Width="800" Height="200">
-                <StackPanel Orientation="Vertical" Width="480" Height="200" HorizontalAlignment="Left">
-                    <TextBox Foreground="White" Background="Transparent" FontSize="60" Text="Header" Height="80" BorderThickness="0" x:Name="Header_Textbox" TextChanged="Header_Textbox_TextChanged"></TextBox>
-                    <ScrollViewer VerticalScrollBarVisibility="Auto" Height="120">
-                        <TextBox Foreground="White" Background="Transparent" FontSize="35" Text="Description" MinHeight="120" BorderThickness="0" x:Name="Body_Textbox" TextChanged="Body_Textbox_TextChanged" AcceptsReturn="True" TextWrapping="Wrap"></TextBox>
-                    </ScrollViewer>
-                    
-                </StackPanel>
-                <StackPanel Width="280" Orientation="Vertical" Height="200">
-                    <StackPanel Orientation="Horizontal" Height="100" HorizontalAlignment="Center">
-                        <Button x:Name="Count_Plus" MouseLeftButtonDown="Count_Plus_MouseLeftButtonDown" BorderThickness="0" Height="80" Width="80" Background="#336cb5">
-                            <materialDesign:PackIcon Width="80" Height="80" HorizontalAlignment="Center" VerticalAlignment="Center" Kind="Add" Foreground="White"/>
-                            <Button.Resources>
-                                <Style TargetType="Border">
-                                    <Setter Property="CornerRadius" Value="10" />
-                                </Style>
-                            </Button.Resources>
-                        </Button>
-                        <Label x:Name="Count_Value" Foreground="White" FontWeight="SemiBold" Content="1" FontSize="70" VerticalAlignment="Center" HorizontalContentAlignment="Center" Margin="20,0,20,0" />
-                        <Button x:Name="Count_Minus" MouseLeftButtonDown="Count_Minus_MouseLeftButtonDown" BorderThickness="0"  Height="80" Width="80" Background="#336cb5">
-                            <materialDesign:PackIcon Width="80" Height="80" HorizontalAlignment="Center" VerticalAlignment="Center" Kind="Minus" Foreground="White"/>
-                            <Button.Resources>
-                                <Style TargetType="Border">
-                                    <Setter Property="CornerRadius" Value="10" />
-                                </Style>
-                            </Button.Resources>
-                        </Button>
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal" Height="100" HorizontalAlignment="Center">
-                        <Button x:Name="Duration_Plus" MouseLeftButtonDown="Duration_Plus_MouseLeftButtonDown" BorderThickness="0" Height="60" Width="60" Background="#336cb5">
-                            <materialDesign:PackIcon Width="60" Height="60" HorizontalAlignment="Center" VerticalAlignment="Center" Kind="Add" Foreground="White"/>
-                            <Button.Resources>
-                                <Style TargetType="Border">
-                                    <Setter Property="CornerRadius" Value="10" />
-                                </Style>
-                            </Button.Resources>
-                        </Button>
-                        <Label Foreground="White" x:Name="Duration_Value" FontWeight="SemiBold" Content="1:00" FontSize="50" VerticalAlignment="Center" Margin="20,0,20,0" />
-                        <Button x:Name="Duration_Minus" MouseLeftButtonDown="Duration_Minus_MouseLeftButtonDown" BorderThickness="0"  Height="60" Width="60" Background="#336cb5">
-                            <materialDesign:PackIcon Width="60" Height="60" HorizontalAlignment="Center" VerticalAlignment="Center" Kind="Minus" Foreground="White"/>
-                            <Button.Resources>
-                                <Style TargetType="Border">
-                                    <Setter Property="CornerRadius" Value="10" />
-                                </Style>
-                            </Button.Resources>
-                        </Button>
-                    </StackPanel>
-                </StackPanel>
-                <Rectangle Height="200" Width="50" HorizontalAlignment="Right" Fill="#303030"></Rectangle>
+        <StackPanel Orientation="Horizontal" Width="340" Height="100" HorizontalAlignment="Left">
+            <StackPanel Orientation="Vertical" Width="180" VerticalAlignment="Center">
+                <TextBox Foreground="White" Background="Transparent" FontSize="24" Text="Header" Height="40" BorderThickness="0" x:Name="Header_Textbox" VerticalContentAlignment="Center" TextChanged="Header_Textbox_TextChanged"></TextBox>
+                <Label Foreground="White" Name="CreatedOnLabel" FontSize="10">Created on: Date</Label>
             </StackPanel>
-        </Viewbox>
+            <Button Background="#336cb5" Foreground="White" FontSize="13" FontWeight="SemiBold" Margin="10,5,10,0" BorderThickness="0" Content="Open" Height="30" Width="70" Name="OpenButton" Click="OpenButton_Click">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="10"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+            <Grid  Width="20" HorizontalAlignment="Left">
+                <StackPanel Orientation="Horizontal" Width="20" HorizontalAlignment="Left">
+                        <Button Height="20" Width="20" Background="Transparent" Foreground="White" BorderThickness="0" Name="DeleteButton" VerticalAlignment="Center" Margin="0,0,0,0" Click="DeleteButton_Click">
+                            <materialDesign:PackIcon Kind="Delete" Foreground="White" Width="20" Height="20" HorizontalAlignment="Center"></materialDesign:PackIcon>
+                        </Button>                
+                </StackPanel>
+                <Rectangle Height="100" Width="20" HorizontalAlignment="Left" Fill="#303030" Panel.ZIndex="-1"></Rectangle>
+            </Grid>
+        </StackPanel>
     </Grid>
 </UserControl>

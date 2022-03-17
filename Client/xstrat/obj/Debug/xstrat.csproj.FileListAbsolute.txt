@@ -66,6 +66,13 @@ D:\Github repos\xstrat\Client\xstrat\obj\Debug\xstrat.exe
 D:\Github repos\xstrat\Client\xstrat\obj\Debug\xstrat.pdb
 D:\Github repos\xstrat\Client\xstrat\obj\Debug\xstrat.csproj.AssemblyReference.cache
 D:\Github repos\xstrat\Client\xstrat\obj\Debug\MVVM\View\RoutinesView.g.cs
-D:\Github repos\xstrat\Client\xstrat\obj\Debug\Theme\Routine.g.cs
 D:\Github repos\xstrat\Client\xstrat\obj\Debug\MVVM\View\RoutinesView.baml
+D:\Github repos\xstrat\Client\xstrat\obj\Debug\Theme\RoutineStep.g.cs
+D:\Github repos\xstrat\Client\xstrat\obj\Debug\Theme\RoutineStep.baml
+D:\Github repos\xstrat\Client\xstrat\obj\Debug\xstrat.csproj.SuggestedBindingRedirects.cache
+D:\Github repos\xstrat\Client\xstrat\obj\Debug\Theme\Routine.g.cs
 D:\Github repos\xstrat\Client\xstrat\obj\Debug\Theme\Routine.baml
+D:\Github repos\xstrat\Client\xstrat\obj\Debug\Overlay\OverlayStep.g.cs
+D:\Github repos\xstrat\Client\xstrat\obj\Debug\Overlay\RoutineOverlay.g.cs
+D:\Github repos\xstrat\Client\xstrat\obj\Debug\Overlay\OverlayStep.baml
+D:\Github repos\xstrat\Client\xstrat\obj\Debug\Overlay\RoutineOverlay.baml
