@@ -15,19 +15,19 @@
                     </ScrollViewer>
                     
                 </StackPanel>
-                <StackPanel Width="180" Orientation="Vertical" Height="100">
-                    <StackPanel Orientation="Horizontal" Height="50" HorizontalAlignment="Center">
-                        <Button x:Name="Count_Plus" Click="Count_Plus_Click"  BorderThickness="0" Height="40" Width="40" Background="#336cb5">
-                            <materialDesign:PackIcon Width="40" Height="40" HorizontalAlignment="Center" VerticalAlignment="Center" Kind="Add" Foreground="White"/>
+                <StackPanel Width="180" Orientation="Vertical" Height="100" HorizontalAlignment="Right">
+                <StackPanel Orientation="Horizontal" Height="50" HorizontalAlignment="Center" Width="150">
+                        <Button x:Name="Count_Plus" Click="Count_Plus_Click"  BorderThickness="0" Height="30" Width="30" Background="#336cb5">
+                            <materialDesign:PackIcon Width="30" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center" Kind="Add" Foreground="White"/>
                             <Button.Resources>
                                 <Style TargetType="Border">
                                     <Setter Property="CornerRadius" Value="10" />
                                 </Style>
                             </Button.Resources>
                         </Button>
-                        <Label x:Name="Count_Value" Foreground="White" FontWeight="SemiBold" Content="1" FontSize="35" VerticalAlignment="Center" HorizontalContentAlignment="Center" Margin="20,0,20,0" />
-                        <Button x:Name="Count_Minus" Click="Count_Minus_Click"  BorderThickness="0"  Height="40" Width="40" Background="#336cb5">
-                            <materialDesign:PackIcon Width="40" Height="40" HorizontalAlignment="Center" VerticalAlignment="Center" Kind="Minus" Foreground="White"/>
+                    <Label x:Name="Count_Value" Foreground="White" FontWeight="SemiBold" Content="1" Width="70" FontSize="25" VerticalAlignment="Center" HorizontalContentAlignment="Center" Margin="0,0,0,0" VerticalContentAlignment="Center" />
+                        <Button x:Name="Count_Minus" Click="Count_Minus_Click"  BorderThickness="0"  Height="30" Width="30" Background="#336cb5">
+                            <materialDesign:PackIcon Width="30" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center" Kind="Minus" Foreground="White"/>
                             <Button.Resources>
                                 <Style TargetType="Border">
                                     <Setter Property="CornerRadius" Value="10" />
@@ -35,7 +35,7 @@
                             </Button.Resources>
                         </Button>
                     </StackPanel>
-                    <StackPanel Orientation="Horizontal" Height="50" HorizontalAlignment="Center">
+                <StackPanel Orientation="Horizontal" Height="50" HorizontalAlignment="Center" Width="150">
                         <Button x:Name="Duration_Plus" Click="Duration_Plus_Click"  BorderThickness="0" Height="30" Width="30" Background="#336cb5">
                             <materialDesign:PackIcon Width="30" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center" Kind="Add" Foreground="White"/>
                             <Button.Resources>
@@ -44,7 +44,7 @@
                                 </Style>
                             </Button.Resources>
                         </Button>
-                        <Label Foreground="White" x:Name="Duration_Value" FontWeight="SemiBold" Content="1:00" FontSize="25" VerticalAlignment="Center" Margin="20,0,20,0" />
+                        <Label Foreground="White" x:Name="Duration_Value" FontWeight="SemiBold" Content="1:00" HorizontalContentAlignment="Center" FontSize="25" VerticalAlignment="Center" Width="70" Margin="0,0,0,0" />
                         <Button x:Name="Duration_Minus" Click="Duration_Minus_Click" BorderThickness="0"  Height="30" Width="30" Background="#336cb5">
                             <materialDesign:PackIcon Width="30" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center" Kind="Minus" Foreground="White"/>
                             <Button.Resources>

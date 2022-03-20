@@ -4,11 +4,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using xstrat.MVVM.View;
 
 namespace xstrat.MVVM.ViewModel
 {
     class MainViewModel : ObservableObject
     {
+        MainWindow wnd = (MainWindow)Application.Current.MainWindow;
         public RelayCommand HomeViewCommand { get; set; }
         public RelayCommand SettingsViewCommand { get; set; }
         public RelayCommand AboutViewCommand { get; set; }
@@ -16,6 +19,7 @@ namespace xstrat.MVVM.ViewModel
         public RelayCommand LoginViewCommand { get; set; }
         public RelayCommand SkinSwitcherViewCommand { get; set; }
         public RelayCommand RoutinesViewCommand { get; set; }
+        public RelayCommand StratMakerViewCommand { get; set; }
 
 
         public HomeViewModel HomeVM { get; set; }
@@ -25,15 +29,18 @@ namespace xstrat.MVVM.ViewModel
         public LoginViewModel LoginVM { get; set; }
         public SkinSwitcherViewModel SkinSwitcherVM { get; set; }
         public RoutinesViewModel RoutinesVM { get; set; }
-
+        public StratMakerViewModel StratMakerVM { get; set; }
         public object _currentView;
 
         public object CurrentView
         {
             get { return _currentView; }
             set {
-                _currentView = value;
-                OnPropertyChanged();
+                if (wnd.IsLoggedIn || value.GetType() == typeof(LoginView) || value.GetType() == typeof(RegisterView))
+                {
+                    _currentView = value;
+                    OnPropertyChanged();
+                }
             }
         }
 
@@ -46,6 +53,7 @@ namespace xstrat.MVVM.ViewModel
             RegisterVM = new RegisterViewModel();
             SkinSwitcherVM = new SkinSwitcherViewModel();
             RoutinesVM = new RoutinesViewModel();
+            StratMakerVM = new StratMakerViewModel();
             CurrentView = HomeVM;
 
             HomeViewCommand = new RelayCommand(o => {CurrentView = HomeVM;});
@@ -55,6 +63,7 @@ namespace xstrat.MVVM.ViewModel
             LoginViewCommand = new RelayCommand(o => { CurrentView = LoginVM; });
             SkinSwitcherViewCommand = new RelayCommand(o => { CurrentView = SkinSwitcherVM; });
             RoutinesViewCommand = new RelayCommand(o => { CurrentView = RoutinesVM; });
+            StratMakerViewCommand = new RelayCommand(o => { CurrentView = StratMakerVM; });
         }
     }
 }

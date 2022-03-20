@@ -1,0 +1,14 @@
+﻿2022-03-20 17:46:11> Program: Starting Squirrel Updater: --releasify D:\Github_repos\xstrat\Client\Deployment\GeneratedNugets\XStrat.1.1.0.nupkg --releaseDir=D:\Github_repos\xstrat\Client\Deployment\Releases
+2022-03-20 17:46:11> Program: Bootstrapper EXE found at:D:\Github_repos\xstrat\Client\packages\squirrel.windows.1.9.0\tools\Setup.exe
+2022-03-20 17:46:11> Program: Creating release package: D:\Github_repos\xstrat\Client\Deployment\Releases\XStrat.1.1.0.nupkg
+2022-03-20 17:46:11> ReleasePackage: Creating release package: D:\Github_repos\xstrat\Client\Deployment\Releases\XStrat.1.1.0.nupkg => D:\Github_repos\xstrat\Client\Deployment\Releases\XStrat-1.1.0-full.nupkg
+2022-03-20 17:46:11> ReleasePackage: Extracting dependent packages: []
+2022-03-20 17:46:11> ReleasePackage: Removing unnecessary data
+2022-03-20 17:46:13> Program: Building embedded zip file for Setup.exe
+2022-03-20 17:57:13> Program: Starting Squirrel Updater: --releasify D:\Github_repos\xstrat\Client\Deployment\GeneratedNugets\XStrat.1.1.0.nupkg --releaseDir=D:\Github_repos\xstrat\Client\Deployment\Releases
+2022-03-20 17:57:13> Program: Bootstrapper EXE found at:D:\Github_repos\xstrat\Client\packages\squirrel.windows.1.9.0\tools\Setup.exe
+2022-03-20 17:57:13> Program: Creating release package: D:\Github_repos\xstrat\Client\Deployment\Releases\XStrat.1.1.0.nupkg
+2022-03-20 17:57:13> ReleasePackage: Creating release package: D:\Github_repos\xstrat\Client\Deployment\Releases\XStrat.1.1.0.nupkg => D:\Github_repos\xstrat\Client\Deployment\Releases\XStrat-1.1.0-full.nupkg
+2022-03-20 17:57:13> ReleasePackage: Extracting dependent packages: []
+2022-03-20 17:57:13> ReleasePackage: Removing unnecessary data
+2022-03-20 17:57:15> Program: Building embedded zip file for Setup.exe

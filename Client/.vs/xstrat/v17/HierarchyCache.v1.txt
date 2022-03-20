@@ -1,0 +1,254 @@
+﻿++Solution 'xstrat' ‎(1 of 1 project)
+i:{00000000-0000-0000-0000-000000000000}:xstrat.sln
+++xstrat
+i:{00000000-0000-0000-0000-000000000000}:xstrat
+++Properties
+i:{981ca63b-9151-4839-9db2-bf1a3551d1ab}:d:\github repos\xstrat\client\xstrat\properties\
+++AssemblyInfo.cs
+i:{981ca63b-9151-4839-9db2-bf1a3551d1ab}:d:\github repos\xstrat\client\xstrat\properties\assemblyinfo.cs
+++Resources.resx
+i:{981ca63b-9151-4839-9db2-bf1a3551d1ab}:d:\github repos\xstrat\client\xstrat\properties\resources.resx
+++Settings.settings
+i:{981ca63b-9151-4839-9db2-bf1a3551d1ab}:d:\github repos\xstrat\client\xstrat\properties\settings.settings
+++References
+i:{981ca63b-9151-4839-9db2-bf1a3551d1ab}:
+++DeltaCompressionDotNet
+i:{981ca63b-9151-4839-9db2-bf1a3551d1ab}:
+++DeltaCompressionDotNet.MsDelta
+i:{981ca63b-9151-4839-9db2-bf1a3551d1ab}:
+++DeltaCompressionDotNet.PatchApi
+i:{981ca63b-9151-4839-9db2-bf1a3551d1ab}:
+++MaterialDesignColors
+i:{981ca63b-9151-4839-9db2-bf1a3551d1ab}:
+++MaterialDesignThemes.Wpf
+i:{981ca63b-9151-4839-9db2-bf1a3551d1ab}:
+++Microsoft.Bcl.AsyncInterfaces
+i:{981ca63b-9151-4839-9db2-bf1a3551d1ab}:
+++Microsoft.Build.Utilities.v4.0
+i:{981ca63b-9151-4839-9db2-bf1a3551d1ab}:
+++Microsoft.CSharp
+i:{981ca63b-9151-4839-9db2-bf1a3551d1ab}:
+++Microsoft.WindowsAPICodePack
+i:{981ca63b-9151-4839-9db2-bf1a3551d1ab}:
+++Microsoft.WindowsAPICodePack.ExtendedLinguisticServices
+i:{981ca63b-9151-4839-9db2-bf1a3551d1ab}:
+++Microsoft.WindowsAPICodePack.Sensors
+i:{981ca63b-9151-4839-9db2-bf1a3551d1ab}:
+++Microsoft.WindowsAPICodePack.Shell
+i:{981ca63b-9151-4839-9db2-bf1a3551d1ab}:
+++Microsoft.WindowsAPICodePack.ShellExtensions
+i:{981ca63b-9151-4839-9db2-bf1a3551d1ab}:
+++Mono.Cecil
+i:{981ca63b-9151-4839-9db2-bf1a3551d1ab}:
+++Mono.Cecil.Mdb
+i:{981ca63b-9151-4839-9db2-bf1a3551d1ab}:
+++Mono.Cecil.Pdb
+i:{981ca63b-9151-4839-9db2-bf1a3551d1ab}:
+++Mono.Cecil.Rocks
+i:{981ca63b-9151-4839-9db2-bf1a3551d1ab}:
+++Newtonsoft.Json
+i:{981ca63b-9151-4839-9db2-bf1a3551d1ab}:
+++NuGet.Squirrel
+i:{981ca63b-9151-4839-9db2-bf1a3551d1ab}:
+++PresentationCore
+i:{981ca63b-9151-4839-9db2-bf1a3551d1ab}:
+++PresentationFramework
+i:{981ca63b-9151-4839-9db2-bf1a3551d1ab}:
+++RestSharp
+i:{981ca63b-9151-4839-9db2-bf1a3551d1ab}:
+++SharpCompress
+i:{981ca63b-9151-4839-9db2-bf1a3551d1ab}:
+++Splat
+i:{981ca63b-9151-4839-9db2-bf1a3551d1ab}:
+++Squirrel
+i:{981ca63b-9151-4839-9db2-bf1a3551d1ab}:
+++System
+i:{981ca63b-9151-4839-9db2-bf1a3551d1ab}:
+++System.Buffers
+i:{981ca63b-9151-4839-9db2-bf1a3551d1ab}:
+++System.ComponentModel.Composition
+i:{981ca63b-9151-4839-9db2-bf1a3551d1ab}:
+++System.ComponentModel.Composition.Registration
+i:{981ca63b-9151-4839-9db2-bf1a3551d1ab}:
+++System.ComponentModel.DataAnnotations
+i:{981ca63b-9151-4839-9db2-bf1a3551d1ab}:
+++System.Core
+i:{981ca63b-9151-4839-9db2-bf1a3551d1ab}:
+++System.Data
+i:{981ca63b-9151-4839-9db2-bf1a3551d1ab}:
+++System.Data.DataSetExtensions
+i:{981ca63b-9151-4839-9db2-bf1a3551d1ab}:
+++System.Drawing
+i:{981ca63b-9151-4839-9db2-bf1a3551d1ab}:
+++System.IO.Compression
+i:{981ca63b-9151-4839-9db2-bf1a3551d1ab}:
+++System.Memory
+i:{981ca63b-9151-4839-9db2-bf1a3551d1ab}:
+++System.Net.Http
+i:{981ca63b-9151-4839-9db2-bf1a3551d1ab}:
+++System.Numerics
+i:{981ca63b-9151-4839-9db2-bf1a3551d1ab}:
+++System.Numerics.Vectors
+i:{981ca63b-9151-4839-9db2-bf1a3551d1ab}:
+++System.Runtime.CompilerServices.Unsafe
+i:{981ca63b-9151-4839-9db2-bf1a3551d1ab}:
+++System.Text.Encodings.Web
+i:{981ca63b-9151-4839-9db2-bf1a3551d1ab}:
+++System.Text.Json
+i:{981ca63b-9151-4839-9db2-bf1a3551d1ab}:
+++System.Threading.Tasks.Extensions
+i:{981ca63b-9151-4839-9db2-bf1a3551d1ab}:
+++System.ValueTuple
+i:{981ca63b-9151-4839-9db2-bf1a3551d1ab}:
+++System.Windows.Forms
+i:{981ca63b-9151-4839-9db2-bf1a3551d1ab}:
+++System.Xaml
+i:{981ca63b-9151-4839-9db2-bf1a3551d1ab}:
+++System.Xml
+i:{981ca63b-9151-4839-9db2-bf1a3551d1ab}:
+++System.Xml.Linq
+i:{981ca63b-9151-4839-9db2-bf1a3551d1ab}:
+++WindowsBase
+i:{981ca63b-9151-4839-9db2-bf1a3551d1ab}:
+++WPFExtensions
+i:{981ca63b-9151-4839-9db2-bf1a3551d1ab}:
+++Core
+i:{981ca63b-9151-4839-9db2-bf1a3551d1ab}:d:\github repos\xstrat\client\xstrat\core\
+++ApiHandler.cs
+i:{981ca63b-9151-4839-9db2-bf1a3551d1ab}:d:\github repos\xstrat\client\xstrat\core\apihandler.cs
+++Logger.cs
+i:{981ca63b-9151-4839-9db2-bf1a3551d1ab}:d:\github repos\xstrat\client\xstrat\core\logger.cs
+++ObservableObject.cs
+i:{981ca63b-9151-4839-9db2-bf1a3551d1ab}:d:\github repos\xstrat\client\xstrat\core\observableobject.cs
+++RelayCommand.cs
+i:{981ca63b-9151-4839-9db2-bf1a3551d1ab}:d:\github repos\xstrat\client\xstrat\core\relaycommand.cs
+++RoutineButtonClicked.cs
+i:{981ca63b-9151-4839-9db2-bf1a3551d1ab}:d:\github repos\xstrat\client\xstrat\core\routinebuttonclicked.cs
+++RoutineStepButtonClicked.cs
+i:{981ca63b-9151-4839-9db2-bf1a3551d1ab}:d:\github repos\xstrat\client\xstrat\core\routinestepbuttonclicked.cs
+++SettingsHandler.cs
+i:{981ca63b-9151-4839-9db2-bf1a3551d1ab}:d:\github repos\xstrat\client\xstrat\core\settingshandler.cs
+++Fonts
+i:{981ca63b-9151-4839-9db2-bf1a3551d1ab}:d:\github repos\xstrat\client\xstrat\fonts\
+++Images
+i:{981ca63b-9151-4839-9db2-bf1a3551d1ab}:d:\github repos\xstrat\client\xstrat\images\
+++Json
+i:{981ca63b-9151-4839-9db2-bf1a3551d1ab}:d:\github repos\xstrat\client\xstrat\json\
+++Content.cs
+i:{981ca63b-9151-4839-9db2-bf1a3551d1ab}:d:\github repos\xstrat\client\xstrat\json\content.cs
+++Routine.cs
+i:{981ca63b-9151-4839-9db2-bf1a3551d1ab}:d:\github repos\xstrat\client\xstrat\json\routine.cs
+++MVVM
+i:{981ca63b-9151-4839-9db2-bf1a3551d1ab}:d:\github repos\xstrat\client\xstrat\mvvm\
+++Model
+i:{981ca63b-9151-4839-9db2-bf1a3551d1ab}:d:\github repos\xstrat\client\xstrat\mvvm\model\
+++View
+i:{981ca63b-9151-4839-9db2-bf1a3551d1ab}:d:\github repos\xstrat\client\xstrat\mvvm\view\
+++AboutView.xaml
+i:{981ca63b-9151-4839-9db2-bf1a3551d1ab}:d:\github repos\xstrat\client\xstrat\mvvm\view\aboutview.xaml
+++HomeView.xaml
+i:{981ca63b-9151-4839-9db2-bf1a3551d1ab}:d:\github repos\xstrat\client\xstrat\mvvm\view\homeview.xaml
+++LoginView.xaml
+i:{981ca63b-9151-4839-9db2-bf1a3551d1ab}:d:\github repos\xstrat\client\xstrat\mvvm\view\loginview.xaml
+++LoginView.xaml.cs
+i:{981ca63b-9151-4839-9db2-bf1a3551d1ab}:d:\github repos\xstrat\client\xstrat\mvvm\view\loginview.xaml.cs
+++RegisterView.xaml
+i:{981ca63b-9151-4839-9db2-bf1a3551d1ab}:d:\github repos\xstrat\client\xstrat\mvvm\view\registerview.xaml
+++RoutinesView.xaml
+i:{981ca63b-9151-4839-9db2-bf1a3551d1ab}:d:\github repos\xstrat\client\xstrat\mvvm\view\routinesview.xaml
+++SettingsView.xaml
+i:{981ca63b-9151-4839-9db2-bf1a3551d1ab}:d:\github repos\xstrat\client\xstrat\mvvm\view\settingsview.xaml
+++SkinSwitcherView.xaml
+i:{981ca63b-9151-4839-9db2-bf1a3551d1ab}:d:\github repos\xstrat\client\xstrat\mvvm\view\skinswitcherview.xaml
+++StratMakerView.xaml
+i:{981ca63b-9151-4839-9db2-bf1a3551d1ab}:d:\github repos\xstrat\client\xstrat\mvvm\view\stratmakerview.xaml
+++ViewModel
+i:{981ca63b-9151-4839-9db2-bf1a3551d1ab}:d:\github repos\xstrat\client\xstrat\mvvm\viewmodel\
+++AboutViewModel.cs
+i:{981ca63b-9151-4839-9db2-bf1a3551d1ab}:d:\github repos\xstrat\client\xstrat\mvvm\viewmodel\aboutviewmodel.cs
+++HomeViewModel.cs
+i:{981ca63b-9151-4839-9db2-bf1a3551d1ab}:d:\github repos\xstrat\client\xstrat\mvvm\viewmodel\homeviewmodel.cs
+++LoginViewModel.cs
+i:{981ca63b-9151-4839-9db2-bf1a3551d1ab}:d:\github repos\xstrat\client\xstrat\mvvm\viewmodel\loginviewmodel.cs
+++MainViewModel.cs
+i:{981ca63b-9151-4839-9db2-bf1a3551d1ab}:d:\github repos\xstrat\client\xstrat\mvvm\viewmodel\mainviewmodel.cs
+++RegisterViewModel.cs
+i:{981ca63b-9151-4839-9db2-bf1a3551d1ab}:d:\github repos\xstrat\client\xstrat\mvvm\viewmodel\registerviewmodel.cs
+++RoutinesViewModel.cs
+i:{981ca63b-9151-4839-9db2-bf1a3551d1ab}:d:\github repos\xstrat\client\xstrat\mvvm\viewmodel\routinesviewmodel.cs
+++SettingsViewModel.cs
+i:{981ca63b-9151-4839-9db2-bf1a3551d1ab}:d:\github repos\xstrat\client\xstrat\mvvm\viewmodel\settingsviewmodel.cs
+++SkinSwitcherViewModel.cs
+i:{981ca63b-9151-4839-9db2-bf1a3551d1ab}:d:\github repos\xstrat\client\xstrat\mvvm\viewmodel\skinswitcherviewmodel.cs
+++StratMakerViewModel.cs
+i:{981ca63b-9151-4839-9db2-bf1a3551d1ab}:d:\github repos\xstrat\client\xstrat\mvvm\viewmodel\stratmakerviewmodel.cs
+++Overlay
+i:{981ca63b-9151-4839-9db2-bf1a3551d1ab}:d:\github repos\xstrat\client\xstrat\overlay\
+++OverlayStep.xaml
+i:{981ca63b-9151-4839-9db2-bf1a3551d1ab}:d:\github repos\xstrat\client\xstrat\overlay\overlaystep.xaml
+++RoutineOverlay.xaml
+i:{981ca63b-9151-4839-9db2-bf1a3551d1ab}:d:\github repos\xstrat\client\xstrat\overlay\routineoverlay.xaml
+++RoutineOverlay.xaml.cs
+i:{981ca63b-9151-4839-9db2-bf1a3551d1ab}:d:\github repos\xstrat\client\xstrat\overlay\routineoverlay.xaml.cs
+++Theme
+i:{981ca63b-9151-4839-9db2-bf1a3551d1ab}:d:\github repos\xstrat\client\xstrat\theme\
+++MenuButtonTheme.xaml
+i:{981ca63b-9151-4839-9db2-bf1a3551d1ab}:d:\github repos\xstrat\client\xstrat\theme\menubuttontheme.xaml
+++Routine.xaml
+i:{981ca63b-9151-4839-9db2-bf1a3551d1ab}:d:\github repos\xstrat\client\xstrat\theme\routine.xaml
+++RoutineStep.xaml
+i:{981ca63b-9151-4839-9db2-bf1a3551d1ab}:d:\github repos\xstrat\client\xstrat\theme\routinestep.xaml
+++RoutineStep.xaml.cs
+i:{981ca63b-9151-4839-9db2-bf1a3551d1ab}:d:\github repos\xstrat\client\xstrat\theme\routinestep.xaml.cs
+++ToggleSwitch.xaml
+i:{981ca63b-9151-4839-9db2-bf1a3551d1ab}:d:\github repos\xstrat\client\xstrat\theme\toggleswitch.xaml
+++App.config
+i:{981ca63b-9151-4839-9db2-bf1a3551d1ab}:d:\github repos\xstrat\client\xstrat\app.config
+++App.xaml
+i:{981ca63b-9151-4839-9db2-bf1a3551d1ab}:d:\github repos\xstrat\client\xstrat\app.xaml
+++App.xaml.cs
+i:{981ca63b-9151-4839-9db2-bf1a3551d1ab}:d:\github repos\xstrat\client\xstrat\app.xaml.cs
+++MainWindow.xaml
+i:{981ca63b-9151-4839-9db2-bf1a3551d1ab}:d:\github repos\xstrat\client\xstrat\mainwindow.xaml
+++MainWindow.xaml.cs
+i:{981ca63b-9151-4839-9db2-bf1a3551d1ab}:d:\github repos\xstrat\client\xstrat\mainwindow.xaml.cs
+++packages.config
+i:{981ca63b-9151-4839-9db2-bf1a3551d1ab}:d:\github repos\xstrat\client\xstrat\packages.config
+++Resources.Designer.cs
+i:{981ca63b-9151-4839-9db2-bf1a3551d1ab}:d:\github repos\xstrat\client\xstrat\properties\resources.designer.cs
+++Settings.Designer.cs
+i:{981ca63b-9151-4839-9db2-bf1a3551d1ab}:d:\github repos\xstrat\client\xstrat\properties\settings.designer.cs
+++128.png
+i:{981ca63b-9151-4839-9db2-bf1a3551d1ab}:d:\github repos\xstrat\client\xstrat\images\128.png
+++close.png
+i:{981ca63b-9151-4839-9db2-bf1a3551d1ab}:d:\github repos\xstrat\client\xstrat\images\close.png
+++dock-window.png
+i:{981ca63b-9151-4839-9db2-bf1a3551d1ab}:d:\github repos\xstrat\client\xstrat\images\dock-window.png
+++icon.ico
+i:{981ca63b-9151-4839-9db2-bf1a3551d1ab}:d:\github repos\xstrat\client\xstrat\images\icon.ico
+++slogan.png
+i:{981ca63b-9151-4839-9db2-bf1a3551d1ab}:d:\github repos\xstrat\client\xstrat\images\slogan.png
+++topbar.png
+i:{981ca63b-9151-4839-9db2-bf1a3551d1ab}:d:\github repos\xstrat\client\xstrat\images\topbar.png
+++AboutView.xaml.cs
+i:{981ca63b-9151-4839-9db2-bf1a3551d1ab}:d:\github repos\xstrat\client\xstrat\mvvm\view\aboutview.xaml.cs
+++HomeView.xaml.cs
+i:{981ca63b-9151-4839-9db2-bf1a3551d1ab}:d:\github repos\xstrat\client\xstrat\mvvm\view\homeview.xaml.cs
+++RegisterView.xaml.cs
+i:{981ca63b-9151-4839-9db2-bf1a3551d1ab}:d:\github repos\xstrat\client\xstrat\mvvm\view\registerview.xaml.cs
+++RoutinesView.xaml.cs
+i:{981ca63b-9151-4839-9db2-bf1a3551d1ab}:d:\github repos\xstrat\client\xstrat\mvvm\view\routinesview.xaml.cs
+++SettingsView.xaml.cs
+i:{981ca63b-9151-4839-9db2-bf1a3551d1ab}:d:\github repos\xstrat\client\xstrat\mvvm\view\settingsview.xaml.cs
+++SkinSwitcherView.xaml.cs
+i:{981ca63b-9151-4839-9db2-bf1a3551d1ab}:d:\github repos\xstrat\client\xstrat\mvvm\view\skinswitcherview.xaml.cs
+++StratMakerView.xaml.cs
+i:{981ca63b-9151-4839-9db2-bf1a3551d1ab}:d:\github repos\xstrat\client\xstrat\mvvm\view\stratmakerview.xaml.cs
+++OverlayStep.xaml.cs
+i:{981ca63b-9151-4839-9db2-bf1a3551d1ab}:d:\github repos\xstrat\client\xstrat\overlay\overlaystep.xaml.cs
+++Routine.xaml.cs
+i:{981ca63b-9151-4839-9db2-bf1a3551d1ab}:d:\github repos\xstrat\client\xstrat\theme\routine.xaml.cs
+++ToggleSwitch.xaml.cs
+i:{981ca63b-9151-4839-9db2-bf1a3551d1ab}:d:\github repos\xstrat\client\xstrat\theme\toggleswitch.xaml.cs
+++xstrat (unloaded)
+++Solution 'xstrat' ‎(0 of 1 project)

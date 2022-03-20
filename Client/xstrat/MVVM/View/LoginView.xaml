@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:xstrat.MVVM.View" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:local="clr-namespace:xstrat.MVVM.View" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:local1="clr-namespace:xstrat.Theme"
              mc:Ignorable="d" 
              d:DesignHeight="775" d:DesignWidth="1150">
     <Grid>
@@ -23,8 +23,13 @@
                     <PasswordBox x:Name="password" Height="30" Width="200" CaretBrush="White" Background="Transparent" BorderThickness="0" Password="" Margin="5,5,5,5" VerticalContentAlignment="Center"  Foreground="White"></PasswordBox>
                 </StackPanel>
             </Border>
-            
-            <Label Foreground="#336cb5" HorizontalAlignment="Right" Name="ForgotPW" MouseDown="ForgotPW_MouseDown">Forgot Password</Label>
+            <Grid>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                    <local1:ToggleSwitch x:Name="RememberMe" Height="15"></local1:ToggleSwitch>
+                    <Label Foreground="#336cb5" HorizontalAlignment="Right">Remember me</Label>
+                </StackPanel>
+                <Label Foreground="#336cb5" HorizontalAlignment="Right" Name="ForgotPW" MouseDown="ForgotPW_MouseDown">Forgot Password</Label>
+            </Grid>
             <Button Height="40" Width="250" Name="LoginBtn" Foreground="White" Content="Login" FontSize="17" Background="#202020" BorderThickness="0" Margin="0,20,0,0" Click="Login_Click">
                 <Button.Resources>
                     <Style TargetType="Border">
@@ -32,6 +37,7 @@
                     </Style>
                 </Button.Resources>
             </Button>
+
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10,0,0">
                 <Border Background="#336cb5" Height="8" BorderThickness="0" Width="100" CornerRadius="5"></Border>
                 <Label Foreground="#336cb5" Content="OR"></Label>

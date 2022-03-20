@@ -311,6 +311,10 @@ namespace xstrat.MVVM.View
 
         private void OpenOverlayButton_Click(object sender, RoutedEventArgs e)
         {
+            if(overlay != null)
+            {
+                overlay.Close();
+            }
             overlay = new RoutineOverlay(currentRoutine_title);
             var overlaySteps = new List<OverlayStep>();
             foreach (var step in routineSteps)
@@ -323,6 +327,8 @@ namespace xstrat.MVVM.View
                 overlaySteps[0].IsSelected = true;
                 overlay.Initialize(overlaySteps);
                 overlay.Show();
+                overlay.Top = 0;
+                overlay.Left = 0;
             }
         }
 

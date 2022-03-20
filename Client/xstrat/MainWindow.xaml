@@ -77,13 +77,13 @@
                              Command="{Binding HomeViewCommand}"/>
 
 
-                    <RadioButton Content="Settings"
+                    <RadioButton Content="Strats"
                              Height="50"
                              Foreground="White"
                              FontSize="14"
                              Style="{StaticResource MenuButtonTheme}"
-                             Command="{Binding SettingsViewCommand}"/>
-
+                             Command="{Binding StratMakerViewCommand}"/>
+                    
                     <RadioButton Content="Routines"
                              Height="50"
                              Foreground="White"
@@ -97,6 +97,13 @@
                              FontSize="14"
                              Style="{StaticResource MenuButtonTheme}"
                              Command="{Binding SkinSwitcherViewCommand}"/>
+                    
+                    <RadioButton Content="Settings"
+                             Height="50"
+                             Foreground="White"
+                             FontSize="14"
+                             Style="{StaticResource MenuButtonTheme}"
+                             Command="{Binding SettingsViewCommand}"/>
 
                     <RadioButton Content="About"
                              Height="50"

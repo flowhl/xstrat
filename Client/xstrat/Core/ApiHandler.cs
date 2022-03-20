@@ -82,7 +82,12 @@ namespace xstrat
             return (false, "db error");
         }
 
-
+        /// <summary>
+        /// Login by api call
+        /// </summary>
+        /// <param name="_email"></param>
+        /// <param name="_pw"></param>
+        /// <returns></returns>
         public static async Task<(bool, string)> LoginAsync(string _email, string _pw)
         {
             Waiting();
@@ -100,6 +105,11 @@ namespace xstrat
             return (false, "db error");
         }
 
+        /// <summary>
+        /// verifies the api token by api call
+        /// </summary>
+        /// <param name="token"></param>
+        /// <returns></returns>
         public static async Task<bool> VerifyToken(string token)
         {
             Waiting();
@@ -118,6 +128,11 @@ namespace xstrat
             return (false);
         }
 
+        /// <summary>
+        /// sends email to reset password - not implemented yet!
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
         public static async Task<bool> ResetEmail()
         {
             Waiting();
@@ -125,6 +140,10 @@ namespace xstrat
             EndWaiting();
         }
 
+        /// <summary>
+        /// adds new routine to db by api call
+        /// </summary>
+        /// <returns></returns>
         public static async Task<(bool, string)> NewRoutine()
         {
             Waiting();
@@ -141,6 +160,11 @@ namespace xstrat
             return (false, "db error");
         }
 
+        /// <summary>
+        /// deletes routine by api call
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public static async Task<(bool, string)> DeleteRoutine(int id)
         {
             Waiting();
@@ -158,6 +182,11 @@ namespace xstrat
             return (false, "db error");
         }
 
+        /// <summary>
+        /// Gets routines content by api call
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public static async Task<(bool, string)> GetRoutineContent(int id)
         {
             Waiting();
@@ -174,6 +203,11 @@ namespace xstrat
             EndWaiting();
             return (false, "db error");
         }
+
+        /// <summary>
+        /// Loads all routines by api call
+        /// </summary>
+        /// <returns></returns>
         public static async Task<(bool, string)> GetAllRoutines()
         {
             Waiting();
@@ -189,6 +223,14 @@ namespace xstrat
             EndWaiting();
             return (false, "db error");
         }
+
+        /// <summary>
+        /// Saves routine by api call
+        /// </summary>
+        /// <param name="ntitle"></param>
+        /// <param name="ncontent"></param>
+        /// <param name="n_id"></param>
+        /// <returns></returns>
         public static async Task<(bool, string)> SaveRoutine(string ntitle, string ncontent, int n_id)
         {
             Waiting();
@@ -205,6 +247,13 @@ namespace xstrat
             EndWaiting();
             return (false, "db error");
         }
+
+        /// <summary>
+        /// renames a routine by api call
+        /// </summary>
+        /// <param name="ntitle"></param>
+        /// <param name="n_id"></param>
+        /// <returns></returns>
         public static async Task<(bool, string)> RenameRoutine(string ntitle, int n_id)
         {
             Waiting();
@@ -222,11 +271,17 @@ namespace xstrat
             return (false, "db error");
         }
 
+        /// <summary>
+        /// Sets waiting cursor
+        /// </summary>
         private static void Waiting()
         {
             Cursor.Current = Cursors.WaitCursor;
         }
 
+        /// <summary>
+        /// Removes waiting cursor
+        /// </summary>
         private static void EndWaiting()
         {
             Cursor.Current = Cursors.Default;

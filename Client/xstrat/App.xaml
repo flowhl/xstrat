@@ -30,6 +30,9 @@
             <DataTemplate DataType="{x:Type viewModel:RoutinesViewModel}">
                 <view:RoutinesView/>
             </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModel:StratMakerViewModel}">
+                <view:StratMakerView/>
+            </DataTemplate>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

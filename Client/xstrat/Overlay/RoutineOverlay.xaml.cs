@@ -26,11 +26,8 @@ namespace xstrat.Overlay
         {
             InitializeComponent();
             Extender.IsExpanded = true;
-            var topLeftCornerOfMainWindow = new System.Drawing.Point((int)System.Windows.Application.Current.MainWindow.Left, (int)System.Windows.Application.Current.MainWindow.Top);
-            var currentScreen = System.Windows.Forms.Screen.FromPoint(topLeftCornerOfMainWindow);
-
-            this.Top = currentScreen.WorkingArea.Top;
-            this.Left = currentScreen.WorkingArea.Left;
+            this.Top = 0-this.Height;
+            this.Left = 0;
             TitleText.Content = titleText;
         }
 
@@ -56,12 +53,12 @@ namespace xstrat.Overlay
                         if (step.isFinished)
                         {
                             int i = steps.IndexOf(step) + 1;
-                            if (i < steps.Count - 1)
+                            if (i <= steps.Count)
                             {
                                 steps[i].IsSelected = true;
                                 step.IsSelected = false;
                             }
-                            else if (i == steps.Count - 1)
+                            else if (i == steps.Count)
                             {
                                 isFinished = true;
                             }

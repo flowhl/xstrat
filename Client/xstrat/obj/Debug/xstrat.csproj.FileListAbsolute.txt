@@ -1,78 +1,97 @@
-D:\Github repos\xstrat\Client\xstrat\bin\Debug\Images\close.png
-D:\Github repos\xstrat\Client\xstrat\bin\Debug\Images\dock-window.png
-D:\Github repos\xstrat\Client\xstrat\bin\Debug\xstrat.exe.config
-D:\Github repos\xstrat\Client\xstrat\bin\Debug\xstrat.exe
-D:\Github repos\xstrat\Client\xstrat\bin\Debug\xstrat.pdb
-D:\Github repos\xstrat\Client\xstrat\bin\Debug\MaterialDesignColors.dll
-D:\Github repos\xstrat\Client\xstrat\bin\Debug\MaterialDesignThemes.Wpf.dll
-D:\Github repos\xstrat\Client\xstrat\bin\Debug\Microsoft.Bcl.AsyncInterfaces.dll
-D:\Github repos\xstrat\Client\xstrat\bin\Debug\Microsoft.WindowsAPICodePack.dll
-D:\Github repos\xstrat\Client\xstrat\bin\Debug\Microsoft.WindowsAPICodePack.ExtendedLinguisticServices.dll
-D:\Github repos\xstrat\Client\xstrat\bin\Debug\Microsoft.WindowsAPICodePack.Sensors.dll
-D:\Github repos\xstrat\Client\xstrat\bin\Debug\Microsoft.WindowsAPICodePack.Shell.dll
-D:\Github repos\xstrat\Client\xstrat\bin\Debug\Microsoft.WindowsAPICodePack.ShellExtensions.dll
-D:\Github repos\xstrat\Client\xstrat\bin\Debug\Newtonsoft.Json.dll
-D:\Github repos\xstrat\Client\xstrat\bin\Debug\RestSharp.dll
-D:\Github repos\xstrat\Client\xstrat\bin\Debug\System.Buffers.dll
-D:\Github repos\xstrat\Client\xstrat\bin\Debug\System.Memory.dll
-D:\Github repos\xstrat\Client\xstrat\bin\Debug\System.Numerics.Vectors.dll
-D:\Github repos\xstrat\Client\xstrat\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
-D:\Github repos\xstrat\Client\xstrat\bin\Debug\System.Text.Encodings.Web.dll
-D:\Github repos\xstrat\Client\xstrat\bin\Debug\System.Text.Json.dll
-D:\Github repos\xstrat\Client\xstrat\bin\Debug\System.Threading.Tasks.Extensions.dll
-D:\Github repos\xstrat\Client\xstrat\bin\Debug\System.ValueTuple.dll
-D:\Github repos\xstrat\Client\xstrat\bin\Debug\MaterialDesignColors.pdb
-D:\Github repos\xstrat\Client\xstrat\bin\Debug\MaterialDesignThemes.Wpf.pdb
-D:\Github repos\xstrat\Client\xstrat\bin\Debug\MaterialDesignThemes.Wpf.xml
-D:\Github repos\xstrat\Client\xstrat\bin\Debug\Microsoft.Bcl.AsyncInterfaces.xml
-D:\Github repos\xstrat\Client\xstrat\bin\Debug\Newtonsoft.Json.xml
-D:\Github repos\xstrat\Client\xstrat\bin\Debug\RestSharp.xml
-D:\Github repos\xstrat\Client\xstrat\bin\Debug\System.Buffers.xml
-D:\Github repos\xstrat\Client\xstrat\bin\Debug\System.Memory.xml
-D:\Github repos\xstrat\Client\xstrat\bin\Debug\System.Numerics.Vectors.xml
-D:\Github repos\xstrat\Client\xstrat\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
-D:\Github repos\xstrat\Client\xstrat\bin\Debug\System.Text.Encodings.Web.xml
-D:\Github repos\xstrat\Client\xstrat\bin\Debug\System.Text.Json.xml
-D:\Github repos\xstrat\Client\xstrat\bin\Debug\System.Threading.Tasks.Extensions.xml
-D:\Github repos\xstrat\Client\xstrat\bin\Debug\System.ValueTuple.xml
-D:\Github repos\xstrat\Client\xstrat\obj\Debug\MainWindow.g.cs
-D:\Github repos\xstrat\Client\xstrat\obj\Debug\MVVM\View\AboutView.g.cs
-D:\Github repos\xstrat\Client\xstrat\obj\Debug\MVVM\View\HomeView.g.cs
-D:\Github repos\xstrat\Client\xstrat\obj\Debug\MVVM\View\LoginView.g.cs
-D:\Github repos\xstrat\Client\xstrat\obj\Debug\MVVM\View\RegisterView.g.cs
-D:\Github repos\xstrat\Client\xstrat\obj\Debug\MVVM\View\SettingsView.g.cs
-D:\Github repos\xstrat\Client\xstrat\obj\Debug\MVVM\View\SkinSwitcherView.g.cs
-D:\Github repos\xstrat\Client\xstrat\obj\Debug\Theme\ToggleSwitch.g.cs
-D:\Github repos\xstrat\Client\xstrat\obj\Debug\App.g.cs
-D:\Github repos\xstrat\Client\xstrat\obj\Debug\GeneratedInternalTypeHelper.g.cs
-D:\Github repos\xstrat\Client\xstrat\obj\Debug\xstrat_MarkupCompile.cache
-D:\Github repos\xstrat\Client\xstrat\obj\Debug\xstrat_MarkupCompile.lref
-D:\Github repos\xstrat\Client\xstrat\obj\Debug\App.baml
-D:\Github repos\xstrat\Client\xstrat\obj\Debug\MainWindow.baml
-D:\Github repos\xstrat\Client\xstrat\obj\Debug\MVVM\View\AboutView.baml
-D:\Github repos\xstrat\Client\xstrat\obj\Debug\MVVM\View\HomeView.baml
-D:\Github repos\xstrat\Client\xstrat\obj\Debug\MVVM\View\LoginView.baml
-D:\Github repos\xstrat\Client\xstrat\obj\Debug\MVVM\View\RegisterView.baml
-D:\Github repos\xstrat\Client\xstrat\obj\Debug\MVVM\View\SettingsView.baml
-D:\Github repos\xstrat\Client\xstrat\obj\Debug\MVVM\View\SkinSwitcherView.baml
-D:\Github repos\xstrat\Client\xstrat\obj\Debug\Theme\MenuButtonTheme.baml
-D:\Github repos\xstrat\Client\xstrat\obj\Debug\Theme\ToggleSwitch.baml
-D:\Github repos\xstrat\Client\xstrat\obj\Debug\xstrat.g.resources
-D:\Github repos\xstrat\Client\xstrat\obj\Debug\xstrat.Properties.Resources.resources
-D:\Github repos\xstrat\Client\xstrat\obj\Debug\xstrat.csproj.GenerateResource.cache
-D:\Github repos\xstrat\Client\xstrat\obj\Debug\xstrat.csproj.CoreCompileInputs.cache
-D:\Github repos\xstrat\Client\xstrat\obj\Debug\xstrat.csproj.CopyComplete
-D:\Github repos\xstrat\Client\xstrat\obj\Debug\xstrat.exe
-D:\Github repos\xstrat\Client\xstrat\obj\Debug\xstrat.pdb
-D:\Github repos\xstrat\Client\xstrat\obj\Debug\xstrat.csproj.AssemblyReference.cache
-D:\Github repos\xstrat\Client\xstrat\obj\Debug\MVVM\View\RoutinesView.g.cs
-D:\Github repos\xstrat\Client\xstrat\obj\Debug\MVVM\View\RoutinesView.baml
-D:\Github repos\xstrat\Client\xstrat\obj\Debug\Theme\RoutineStep.g.cs
-D:\Github repos\xstrat\Client\xstrat\obj\Debug\Theme\RoutineStep.baml
-D:\Github repos\xstrat\Client\xstrat\obj\Debug\xstrat.csproj.SuggestedBindingRedirects.cache
-D:\Github repos\xstrat\Client\xstrat\obj\Debug\Theme\Routine.g.cs
-D:\Github repos\xstrat\Client\xstrat\obj\Debug\Theme\Routine.baml
-D:\Github repos\xstrat\Client\xstrat\obj\Debug\Overlay\OverlayStep.g.cs
-D:\Github repos\xstrat\Client\xstrat\obj\Debug\Overlay\RoutineOverlay.g.cs
-D:\Github repos\xstrat\Client\xstrat\obj\Debug\Overlay\OverlayStep.baml
-D:\Github repos\xstrat\Client\xstrat\obj\Debug\Overlay\RoutineOverlay.baml
+D:\Github_repos\xstrat\Client\xstrat\bin\Debug\Images\close.png
+D:\Github_repos\xstrat\Client\xstrat\bin\Debug\Images\dock-window.png
+D:\Github_repos\xstrat\Client\xstrat\bin\Debug\xstrat.exe.config
+D:\Github_repos\xstrat\Client\xstrat\bin\Debug\xstrat.exe
+D:\Github_repos\xstrat\Client\xstrat\bin\Debug\xstrat.pdb
+D:\Github_repos\xstrat\Client\xstrat\bin\Debug\MaterialDesignColors.dll
+D:\Github_repos\xstrat\Client\xstrat\bin\Debug\MaterialDesignThemes.Wpf.dll
+D:\Github_repos\xstrat\Client\xstrat\bin\Debug\Microsoft.Bcl.AsyncInterfaces.dll
+D:\Github_repos\xstrat\Client\xstrat\bin\Debug\Microsoft.WindowsAPICodePack.dll
+D:\Github_repos\xstrat\Client\xstrat\bin\Debug\Microsoft.WindowsAPICodePack.ExtendedLinguisticServices.dll
+D:\Github_repos\xstrat\Client\xstrat\bin\Debug\Microsoft.WindowsAPICodePack.Sensors.dll
+D:\Github_repos\xstrat\Client\xstrat\bin\Debug\Microsoft.WindowsAPICodePack.Shell.dll
+D:\Github_repos\xstrat\Client\xstrat\bin\Debug\Microsoft.WindowsAPICodePack.ShellExtensions.dll
+D:\Github_repos\xstrat\Client\xstrat\bin\Debug\Newtonsoft.Json.dll
+D:\Github_repos\xstrat\Client\xstrat\bin\Debug\RestSharp.dll
+D:\Github_repos\xstrat\Client\xstrat\bin\Debug\System.Buffers.dll
+D:\Github_repos\xstrat\Client\xstrat\bin\Debug\System.Memory.dll
+D:\Github_repos\xstrat\Client\xstrat\bin\Debug\System.Numerics.Vectors.dll
+D:\Github_repos\xstrat\Client\xstrat\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+D:\Github_repos\xstrat\Client\xstrat\bin\Debug\System.Text.Encodings.Web.dll
+D:\Github_repos\xstrat\Client\xstrat\bin\Debug\System.Text.Json.dll
+D:\Github_repos\xstrat\Client\xstrat\bin\Debug\System.Threading.Tasks.Extensions.dll
+D:\Github_repos\xstrat\Client\xstrat\bin\Debug\System.ValueTuple.dll
+D:\Github_repos\xstrat\Client\xstrat\bin\Debug\MaterialDesignColors.pdb
+D:\Github_repos\xstrat\Client\xstrat\bin\Debug\MaterialDesignThemes.Wpf.pdb
+D:\Github_repos\xstrat\Client\xstrat\bin\Debug\MaterialDesignThemes.Wpf.xml
+D:\Github_repos\xstrat\Client\xstrat\bin\Debug\Microsoft.Bcl.AsyncInterfaces.xml
+D:\Github_repos\xstrat\Client\xstrat\bin\Debug\Newtonsoft.Json.xml
+D:\Github_repos\xstrat\Client\xstrat\bin\Debug\RestSharp.xml
+D:\Github_repos\xstrat\Client\xstrat\bin\Debug\System.Buffers.xml
+D:\Github_repos\xstrat\Client\xstrat\bin\Debug\System.Memory.xml
+D:\Github_repos\xstrat\Client\xstrat\bin\Debug\System.Numerics.Vectors.xml
+D:\Github_repos\xstrat\Client\xstrat\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+D:\Github_repos\xstrat\Client\xstrat\bin\Debug\System.Text.Encodings.Web.xml
+D:\Github_repos\xstrat\Client\xstrat\bin\Debug\System.Text.Json.xml
+D:\Github_repos\xstrat\Client\xstrat\bin\Debug\System.Threading.Tasks.Extensions.xml
+D:\Github_repos\xstrat\Client\xstrat\bin\Debug\System.ValueTuple.xml
+D:\Github_repos\xstrat\Client\xstrat\obj\Debug\MainWindow.g.cs
+D:\Github_repos\xstrat\Client\xstrat\obj\Debug\MVVM\View\AboutView.g.cs
+D:\Github_repos\xstrat\Client\xstrat\obj\Debug\MVVM\View\HomeView.g.cs
+D:\Github_repos\xstrat\Client\xstrat\obj\Debug\MVVM\View\LoginView.g.cs
+D:\Github_repos\xstrat\Client\xstrat\obj\Debug\MVVM\View\RegisterView.g.cs
+D:\Github_repos\xstrat\Client\xstrat\obj\Debug\MVVM\View\SettingsView.g.cs
+D:\Github_repos\xstrat\Client\xstrat\obj\Debug\MVVM\View\SkinSwitcherView.g.cs
+D:\Github_repos\xstrat\Client\xstrat\obj\Debug\Theme\ToggleSwitch.g.cs
+D:\Github_repos\xstrat\Client\xstrat\obj\Debug\App.g.cs
+D:\Github_repos\xstrat\Client\xstrat\obj\Debug\GeneratedInternalTypeHelper.g.cs
+D:\Github_repos\xstrat\Client\xstrat\obj\Debug\xstrat_MarkupCompile.cache
+D:\Github_repos\xstrat\Client\xstrat\obj\Debug\xstrat_MarkupCompile.lref
+D:\Github_repos\xstrat\Client\xstrat\obj\Debug\App.baml
+D:\Github_repos\xstrat\Client\xstrat\obj\Debug\MainWindow.baml
+D:\Github_repos\xstrat\Client\xstrat\obj\Debug\MVVM\View\AboutView.baml
+D:\Github_repos\xstrat\Client\xstrat\obj\Debug\MVVM\View\HomeView.baml
+D:\Github_repos\xstrat\Client\xstrat\obj\Debug\MVVM\View\LoginView.baml
+D:\Github_repos\xstrat\Client\xstrat\obj\Debug\MVVM\View\RegisterView.baml
+D:\Github_repos\xstrat\Client\xstrat\obj\Debug\MVVM\View\SettingsView.baml
+D:\Github_repos\xstrat\Client\xstrat\obj\Debug\MVVM\View\SkinSwitcherView.baml
+D:\Github_repos\xstrat\Client\xstrat\obj\Debug\Theme\MenuButtonTheme.baml
+D:\Github_repos\xstrat\Client\xstrat\obj\Debug\Theme\ToggleSwitch.baml
+D:\Github_repos\xstrat\Client\xstrat\obj\Debug\xstrat.g.resources
+D:\Github_repos\xstrat\Client\xstrat\obj\Debug\xstrat.Properties.Resources.resources
+D:\Github_repos\xstrat\Client\xstrat\obj\Debug\xstrat.csproj.GenerateResource.cache
+D:\Github_repos\xstrat\Client\xstrat\obj\Debug\xstrat.csproj.CoreCompileInputs.cache
+D:\Github_repos\xstrat\Client\xstrat\obj\Debug\xstrat.csproj.CopyComplete
+D:\Github_repos\xstrat\Client\xstrat\obj\Debug\xstrat.exe
+D:\Github_repos\xstrat\Client\xstrat\obj\Debug\xstrat.pdb
+D:\Github_repos\xstrat\Client\xstrat\obj\Debug\xstrat.csproj.AssemblyReference.cache
+D:\Github_repos\xstrat\Client\xstrat\obj\Debug\MVVM\View\RoutinesView.g.cs
+D:\Github_repos\xstrat\Client\xstrat\obj\Debug\MVVM\View\RoutinesView.baml
+D:\Github_repos\xstrat\Client\xstrat\obj\Debug\Theme\RoutineStep.g.cs
+D:\Github_repos\xstrat\Client\xstrat\obj\Debug\Theme\RoutineStep.baml
+D:\Github_repos\xstrat\Client\xstrat\obj\Debug\Theme\Routine.g.cs
+D:\Github_repos\xstrat\Client\xstrat\obj\Debug\Theme\Routine.baml
+D:\Github_repos\xstrat\Client\xstrat\obj\Debug\Overlay\OverlayStep.g.cs
+D:\Github_repos\xstrat\Client\xstrat\obj\Debug\Overlay\RoutineOverlay.g.cs
+D:\Github_repos\xstrat\Client\xstrat\obj\Debug\Overlay\OverlayStep.baml
+D:\Github_repos\xstrat\Client\xstrat\obj\Debug\Overlay\RoutineOverlay.baml
+D:\Github_repos\xstrat\Client\xstrat\obj\Debug\xstrat.csproj.SuggestedBindingRedirects.cache
+D:\Github_repos\xstrat\Client\xstrat\obj\Debug\MVVM\View\StratMakerView.g.cs
+D:\Github_repos\xstrat\Client\xstrat\obj\Debug\MVVM\View\StratMakerView.baml
+D:\Github_repos\xstrat\Client\xstrat\bin\Debug\WPFExtensions.dll
+D:\Github_repos\xstrat\Client\xstrat\bin\Debug\DeltaCompressionDotNet.dll
+D:\Github_repos\xstrat\Client\xstrat\bin\Debug\DeltaCompressionDotNet.MsDelta.dll
+D:\Github_repos\xstrat\Client\xstrat\bin\Debug\DeltaCompressionDotNet.PatchApi.dll
+D:\Github_repos\xstrat\Client\xstrat\bin\Debug\Mono.Cecil.dll
+D:\Github_repos\xstrat\Client\xstrat\bin\Debug\Mono.Cecil.Mdb.dll
+D:\Github_repos\xstrat\Client\xstrat\bin\Debug\Mono.Cecil.Pdb.dll
+D:\Github_repos\xstrat\Client\xstrat\bin\Debug\Mono.Cecil.Rocks.dll
+D:\Github_repos\xstrat\Client\xstrat\bin\Debug\NuGet.Squirrel.dll
+D:\Github_repos\xstrat\Client\xstrat\bin\Debug\SharpCompress.dll
+D:\Github_repos\xstrat\Client\xstrat\bin\Debug\Squirrel.dll
+D:\Github_repos\xstrat\Client\xstrat\bin\Debug\Mono.Cecil.pdb
+D:\Github_repos\xstrat\Client\xstrat\bin\Debug\Mono.Cecil.Mdb.pdb
+D:\Github_repos\xstrat\Client\xstrat\bin\Debug\Mono.Cecil.Pdb.pdb
+D:\Github_repos\xstrat\Client\xstrat\bin\Debug\Mono.Cecil.Rocks.pdb
+D:\Github_repos\xstrat\Client\xstrat\bin\Debug\NuGet.Squirrel.pdb
+D:\Github_repos\xstrat\Client\xstrat\bin\Debug\Squirrel.pdb

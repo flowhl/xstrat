@@ -7,8 +7,5 @@
              mc:Ignorable="d" 
              d:DesignHeight="775" d:DesignWidth="1150"
              Background="Transparent">
-    <StackPanel>
-        <TextBlock Text="asdasdasdasd" Foreground="White" FontSize="28" Margin="0,700,0,20" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
-
-    </StackPanel>
+    <StackPanel/>
 </UserControl>

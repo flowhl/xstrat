@@ -8,6 +8,30 @@
              d:DesignHeight="775" d:DesignWidth="1150"
              >
     <Grid>
-            
+        <StackPanel Orientation="Horizontal">
+            <StackPanel Orientation="Vertical">
+                <Border BorderThickness="0" Background="#202020" CornerRadius="10" Width="300" Height="400" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,10,10,10">
+                    <StackPanel Orientation="Vertical" Margin="5,5,5,5">
+                        <Label Foreground="White" FontSize="28" Content="Version:" HorizontalAlignment="Center" FontWeight="SemiBold"></Label>
+                        <Label Foreground="White" FontSize="20" HorizontalAlignment="Center">Alpha 1.1.0</Label>
+                        <TextBlock TextWrapping="Wrap" Foreground="White" FontSize="16" Margin="0,10,0,0" HorizontalAlignment="Center">This is just a pre release version for development. Please be patient for beta release</TextBlock>
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+            <StackPanel Orientation="Vertical">
+                <Border BorderThickness="0" Background="#202020" CornerRadius="10" Width="300" Height="400" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,10,10,10">
+                    <StackPanel Orientation="Vertical" Margin="5,5,5,5">
+                        <Label Foreground="White" FontSize="28" Content="Used Libraries:" HorizontalAlignment="Center" FontWeight="SemiBold"></Label>
+                        <Label Foreground="White" FontSize="16" HorizontalAlignment="Center">Squirrel.Windows</Label>
+                        <Label Foreground="White" FontSize="16" HorizontalAlignment="Center">Material Design</Label>
+                        <Label Foreground="White" FontSize="16" HorizontalAlignment="Center">RestSharp</Label>
+                        <Label Foreground="White" FontSize="16" HorizontalAlignment="Center">Newtonsoft JSON</Label>
+                        <Label Foreground="White" FontSize="16" HorizontalAlignment="Center">Windows API Core Pack</Label>
+                        <Label Foreground="White" FontSize="16" HorizontalAlignment="Center">WPF Extensions</Label>
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+        </StackPanel>
+        
     </Grid>
 </UserControl>

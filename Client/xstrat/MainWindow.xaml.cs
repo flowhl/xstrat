@@ -5,6 +5,7 @@ using xstrat.MVVM.View;
 using xstrat.Core;
 using xstrat.MVVM.ViewModel;
 using System;
+using Squirrel;
 
 namespace xstrat
 {
@@ -15,6 +16,8 @@ namespace xstrat
     {
         MainViewModel mv;
         public bool NewlyRegistered = false;
+        public bool IsLoggedIn = false;
+        UpdateManager manager;
         public MainWindow()
         {
             InitializeComponent();
@@ -22,6 +25,26 @@ namespace xstrat
             SettingsHandler.Initialize();
             ApiHandler.Initialize();
             Task loginTask = LoginWindowAsync();
+            Loaded += MainWindow_Loaded;
+        }
+
+        private async void CheckForUpdate()
+        {
+            if(manager != null)
+            {
+                var updateinfo = await manager.CheckForUpdate();
+                if(updateinfo.ReleasesToApply.Count > 0)
+                {
+                    await manager.UpdateApp();
+                    MessageBox.Show("New Update found. Please restart your client to install");
+                }
+            }
+        }
+
+        private async void MainWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            manager = await UpdateManager.GitHubUpdateManager(@"https://github.com/flowhl/xstrat");
+            CheckForUpdate();
         }
 
         /// <summary>
@@ -68,11 +91,11 @@ namespace xstrat
                 bool verified = await ApiHandler.VerifyToken(SettingsHandler.token);
                 if(verified)
                 {
+                    IsLoggedIn = true;
                     return;
                 }
             }
             mv.CurrentView = new LoginView();
-            //mv.showLogin();
         }
 
         /// <summary>
@@ -92,6 +115,7 @@ namespace xstrat
             }
             ApiHandler.AddBearer(token);
             NewlyRegistered = false;
+            IsLoggedIn = true;
             mv.CurrentView = new HomeView();
         }
         public void RegisterComplete()
