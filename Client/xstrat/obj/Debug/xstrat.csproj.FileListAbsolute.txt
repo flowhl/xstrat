@@ -75,7 +75,6 @@ D:\Github_repos\xstrat\Client\xstrat\obj\Debug\Overlay\OverlayStep.g.cs
 D:\Github_repos\xstrat\Client\xstrat\obj\Debug\Overlay\RoutineOverlay.g.cs
 D:\Github_repos\xstrat\Client\xstrat\obj\Debug\Overlay\OverlayStep.baml
 D:\Github_repos\xstrat\Client\xstrat\obj\Debug\Overlay\RoutineOverlay.baml
-D:\Github_repos\xstrat\Client\xstrat\obj\Debug\xstrat.csproj.SuggestedBindingRedirects.cache
 D:\Github_repos\xstrat\Client\xstrat\obj\Debug\MVVM\View\StratMakerView.g.cs
 D:\Github_repos\xstrat\Client\xstrat\obj\Debug\MVVM\View\StratMakerView.baml
 D:\Github_repos\xstrat\Client\xstrat\bin\Debug\WPFExtensions.dll
@@ -95,3 +94,6 @@ D:\Github_repos\xstrat\Client\xstrat\bin\Debug\Mono.Cecil.Pdb.pdb
 D:\Github_repos\xstrat\Client\xstrat\bin\Debug\Mono.Cecil.Rocks.pdb
 D:\Github_repos\xstrat\Client\xstrat\bin\Debug\NuGet.Squirrel.pdb
 D:\Github_repos\xstrat\Client\xstrat\bin\Debug\Squirrel.pdb
+D:\Github_repos\xstrat\Client\xstrat\bin\Debug\Splat.dll
+D:\Github_repos\xstrat\Client\xstrat\bin\Debug\Splat.pdb
+D:\Github_repos\xstrat\Client\xstrat\obj\Debug\xstrat.csproj.SuggestedBindingRedirects.cache

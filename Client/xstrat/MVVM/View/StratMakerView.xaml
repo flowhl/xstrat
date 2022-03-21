@@ -17,7 +17,13 @@
         </Grid.RowDefinitions>
         <Border Background="#202020" BorderThickness="0" CornerRadius="0,0,20,0" Grid.Row="1">
             <Grid>
-                
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="300"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <StackPanel Orientation="Vertical" Grid.Column="0">
+                    <ComboBox Width="150" Margin="10,10,10,10" Name="MapSelector" SelectionChanged="MapSelector_SelectionChanged"></ComboBox>
+                </StackPanel>
             </Grid>
         </Border>
         <Border Background="#161616" BorderThickness="0"  Grid.Row="0">
@@ -28,7 +34,7 @@
                 </Grid.ColumnDefinitions>
                 <wpfext:ZoomControl Background="Transparent">
                     <Grid Name="MapContent">
-                        
+                        <StackPanel Orientation="Horizontal" Name="ImageStack"></StackPanel>
                     </Grid>
                 </wpfext:ZoomControl>
                 <Expander ExpandDirection="Left" Grid.Column="1" HorizontalAlignment="Right" IsEnabled="True" Background="#171717">

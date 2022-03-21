@@ -161,7 +161,11 @@
     <Compile Include="Core\ApiHandler.cs" />
     <Compile Include="Core\RoutineButtonClicked.cs" />
     <Compile Include="Core\RoutineStepButtonClicked.cs" />
+    <Compile Include="Core\StratHandler.cs" />
     <Compile Include="Json\Content.cs" />
+    <Compile Include="Json\Floor.cs" />
+    <Compile Include="Json\Position.cs" />
+    <Compile Include="Json\XMap.cs" />
     <Compile Include="Json\Routine.cs" />
     <Compile Include="MVVM\ViewModel\RoutinesViewModel.cs" />
     <Compile Include="MVVM\ViewModel\StratMakerViewModel.cs" />
@@ -343,29 +347,22 @@
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\MaterialDesignThemes.4.3.0\build\MaterialDesignThemes.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\MaterialDesignThemes.4.3.0\build\MaterialDesignThemes.targets'))" />
   </Target>
-  
   <Target Name="AfterBuild">
     <ItemGroup>
       <NugetTools Include="$(SolutionDir)packages\NuGet.CommandLine.*\tools\NuGet.exe" />
       <SquirrelTools Include="$(SolutionDir)packages\squirrel.windows.*\tools\Squirrel.exe" />
     </ItemGroup>
-	
     <Copy SourceFiles="@(SquirrelTools->'%(FullPath)')" DestinationFiles="$(OutDir)..\Update.exe" Condition="!Exists('$(OutDir)..\Update.exe')" />
-	
     <GetAssemblyIdentity AssemblyFiles="$(TargetPath)">
       <Output TaskParameter="Assemblies" ItemName="assemblyInfo" />
     </GetAssemblyIdentity>
-	
     <PropertyGroup>
       <Version>$([System.Version]::Parse(%(assemblyInfo.Version)).ToString(3))</Version>
-	  
       <NuspecFile>$(SolutionDir)xstrat\xstrat.nuspec</NuspecFile>
     </PropertyGroup>
-	
     <XmlPeek XmlInputPath="$(NuspecFile)" Query="/package/metadata/id/text()">
       <Output TaskParameter="Result" ItemName="ID" />
     </XmlPeek>
-	
     <Exec Condition=" '$(Configuration)' == 'Release'" Command="@(NugetTools->'%(FullPath)') pack $(NuspecFile) -Version $(Version) -Properties Configuration=Release -OutputDirectory $(SolutionDir)Deployment\GeneratedNugets" />
     <Exec Condition=" '$(Configuration)' == 'Release'" Command="@(SquirrelTools->'%(FullPath)') --releasify $(SolutionDir)Deployment\GeneratedNugets\@(ID).$(Version).nupkg --releaseDir=$(SolutionDir)Deployment\Releases" />
   </Target>

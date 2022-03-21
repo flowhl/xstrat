@@ -19,7 +19,7 @@ namespace xstrat.MVVM.ViewModel
         public RelayCommand LoginViewCommand { get; set; }
         public RelayCommand SkinSwitcherViewCommand { get; set; }
         public RelayCommand RoutinesViewCommand { get; set; }
-        public RelayCommand StratMakerViewCommand { get; set; }
+       public RelayCommand StratMakerViewCommand { get; set; }
 
 
         public HomeViewModel HomeVM { get; set; }
@@ -36,11 +36,8 @@ namespace xstrat.MVVM.ViewModel
         {
             get { return _currentView; }
             set {
-                if (wnd.IsLoggedIn || value.GetType() == typeof(LoginView) || value.GetType() == typeof(RegisterView))
-                {
-                    _currentView = value;
-                    OnPropertyChanged();
-                }
+                _currentView = value;
+                OnPropertyChanged();
             }
         }
 
@@ -56,14 +53,14 @@ namespace xstrat.MVVM.ViewModel
             StratMakerVM = new StratMakerViewModel();
             CurrentView = HomeVM;
 
-            HomeViewCommand = new RelayCommand(o => {CurrentView = HomeVM;});
-            SettingsViewCommand = new RelayCommand(o => { CurrentView = SettingsVM; });
-            AboutViewCommand = new RelayCommand(o => { CurrentView = AboutVM; });
+            HomeViewCommand = new RelayCommand(o => { if(wnd.IsLoaded) CurrentView = HomeVM;});
+            SettingsViewCommand = new RelayCommand(o => { if (wnd.IsLoaded) CurrentView = SettingsVM; });
+            AboutViewCommand = new RelayCommand(o => { if (wnd.IsLoaded) CurrentView = AboutVM; });
             RegisterViewCommand = new RelayCommand(o => { CurrentView = RegisterVM; });
             LoginViewCommand = new RelayCommand(o => { CurrentView = LoginVM; });
-            SkinSwitcherViewCommand = new RelayCommand(o => { CurrentView = SkinSwitcherVM; });
-            RoutinesViewCommand = new RelayCommand(o => { CurrentView = RoutinesVM; });
-            StratMakerViewCommand = new RelayCommand(o => { CurrentView = StratMakerVM; });
+            SkinSwitcherViewCommand = new RelayCommand(o => { if (wnd.IsLoaded) CurrentView = SkinSwitcherVM; });
+            RoutinesViewCommand = new RelayCommand(o => { if (wnd.IsLoaded) CurrentView = RoutinesVM; });
+            StratMakerViewCommand = new RelayCommand(o => { if (wnd.IsLoaded) CurrentView = StratMakerVM; });
         }
     }
 }
