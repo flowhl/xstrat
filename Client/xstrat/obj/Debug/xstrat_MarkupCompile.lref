@@ -1,4 +1,4 @@
-﻿
+﻿D:\Github_repos\xstrat\Client\xstrat\obj\Debug\GeneratedInternalTypeHelper.g.cs
 FD:\Github_repos\xstrat\Client\xstrat\App.xaml;;
 FD:\Github_repos\xstrat\Client\xstrat\MainWindow.xaml;;
 FD:\Github_repos\xstrat\Client\xstrat\MVVM\View\AboutView.xaml;;
@@ -11,8 +11,10 @@ FD:\Github_repos\xstrat\Client\xstrat\MVVM\View\SkinSwitcherView.xaml;;
 FD:\Github_repos\xstrat\Client\xstrat\MVVM\View\StratMakerView.xaml;;
 FD:\Github_repos\xstrat\Client\xstrat\Overlay\OverlayStep.xaml;;
 FD:\Github_repos\xstrat\Client\xstrat\Overlay\RoutineOverlay.xaml;;
+FD:\Github_repos\xstrat\Client\xstrat\Theme\MapFloor.xaml;;
 FD:\Github_repos\xstrat\Client\xstrat\Theme\MenuButtonTheme.xaml;;
 FD:\Github_repos\xstrat\Client\xstrat\Theme\Routine.xaml;;
 FD:\Github_repos\xstrat\Client\xstrat\Theme\RoutineStep.xaml;;
 FD:\Github_repos\xstrat\Client\xstrat\Theme\ToggleSwitch.xaml;;
+FD:\Github_repos\xstrat\Client\xstrat\Theme\WallControl.xaml;;
 

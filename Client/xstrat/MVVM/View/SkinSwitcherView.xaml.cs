@@ -115,7 +115,7 @@ namespace xstrat.MVVM.View
             foreach (DirectoryInfo dir in source.GetDirectories())
                 CopyFiles(dir, target.CreateSubdirectory(dir.Name));
             foreach (FileInfo file in source.GetFiles())
-                file.CopyTo(System.IO.Path.Combine(target.FullName, file.Name));
+                file.CopyTo(System.IO.Path.Combine(target.FullName, file.Name), true);
         }
     }
 }

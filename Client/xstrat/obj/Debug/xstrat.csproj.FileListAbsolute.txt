@@ -97,3 +97,8 @@ D:\Github_repos\xstrat\Client\xstrat\bin\Debug\Squirrel.pdb
 D:\Github_repos\xstrat\Client\xstrat\bin\Debug\Splat.dll
 D:\Github_repos\xstrat\Client\xstrat\bin\Debug\Splat.pdb
 D:\Github_repos\xstrat\Client\xstrat\obj\Debug\xstrat.csproj.SuggestedBindingRedirects.cache
+D:\Github_repos\xstrat\Client\xstrat\obj\Debug\Theme\WallControl.g.cs
+D:\Github_repos\xstrat\Client\xstrat\obj\Debug\Theme\WallControl.baml
+D:\Github_repos\xstrat\Client\xstrat\obj\Debug\Theme\MapFloor.g.cs
+D:\Github_repos\xstrat\Client\xstrat\obj\Debug\Theme\MapFloor.baml
+D:\Github_repos\xstrat\Client\xstrat\bin\Debug\Notifications.Wpf.dll

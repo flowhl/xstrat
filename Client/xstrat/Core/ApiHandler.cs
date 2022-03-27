@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using xstrat.Core;
 
 namespace xstrat
 {
@@ -31,7 +32,9 @@ namespace xstrat
 
             if (response.StatusCode != System.Net.HttpStatusCode.OK) //success
             {
-                MessageBox.Show("Api could not be reached. Please check your connection");
+                Notify.sendError("API Error", "Api could not be reached. Please check your connection. XStrat will close now.");
+                await Task.Delay(5000);
+                //MessageBox.Show("Api could not be reached. Please check your connection");
                 App.Current.Shutdown();
             }
         }

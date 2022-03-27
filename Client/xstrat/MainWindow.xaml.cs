@@ -12,7 +12,7 @@ namespace xstrat
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : System.Windows.Window
     {
         MainViewModel mv;
         public bool NewlyRegistered = false;
@@ -36,7 +36,8 @@ namespace xstrat
                 if(updateinfo.ReleasesToApply.Count > 0)
                 {
                     await manager.UpdateApp();
-                    MessageBox.Show("New Update found. Please restart your client to install");
+                    //MessageBox.Show("New Update found. Please restart your client to install");
+                    Notify.sendInfo("Update available", "New Update found. Please restart your client to install");
                 }
             }
         }

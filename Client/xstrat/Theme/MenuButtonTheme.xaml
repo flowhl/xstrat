@@ -34,4 +34,57 @@
         </Style.Triggers>
         
     </Style>
+
+    <ControlTemplate x:Key="MyMenuItemTemplateKey" TargetType="MenuItem">
+        <Grid Name="Border" Height="25">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="32" SharedSizeGroup="Icon"/>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" SharedSizeGroup="Shortcut"/>
+                <ColumnDefinition Width="13"/>
+            </Grid.ColumnDefinitions>
+            <Border Name="BorderIcon" Grid.Column="0" BorderBrush="Red" BorderThickness="0,0,1,0">
+                <ContentPresenter Name="Icon" Margin="5,0,5,0" VerticalAlignment="Center" ContentSource="Icon"/>
+            </Border>
+            <ContentPresenter Name="HeaderHost" Grid.Column="1" ContentSource="Header" Margin="5,0,0,0" VerticalAlignment="Center" RecognizesAccessKey="True"/>
+            <TextBlock x:Name="InputGestureText" Grid.Column="2" Text="{TemplateBinding InputGestureText}" Margin="10,2,2,2" VerticalAlignment="Center" DockPanel.Dock="Right" />
+            <Border Name="BorderChecked" Grid.Column="3" CornerRadius="2" Background="Transparent" Margin="5,2,5,2"/>
+            <Border Name="BorderDisable" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="Transparent"/>
+        </Grid>
+        <ControlTemplate.Triggers>
+            <Trigger Property="Icon" Value="{x:Null}">
+                <Setter TargetName="Icon" Property="Visibility" Value="Hidden"/>
+            </Trigger>
+            <Trigger Property="IsHighlighted" Value="true">
+                <Setter TargetName="Border" Property="Background" Value="Blue"/>
+            </Trigger>
+            <Trigger Property="IsChecked" Value="True">
+                <Setter TargetName="BorderChecked" Property="Background" Value="Green"/>
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter TargetName="BorderDisable" Property="Background" Value="#3FFFFFFF"/>
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="True">
+                <Setter Property="Foreground" Value="Black"/>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+    <Style x:Key="MyMenuItemStyle" TargetType="MenuItem">
+        <Setter Property="OverridesDefaultStyle" Value="True"/>
+        <Setter Property="FontFamily" Value="Verdana"/>
+        <Setter Property="FontSize" Value="8.5pt"/>
+        <Style.Triggers>
+            <Trigger Property="Role" Value="TopLevelItem">
+                <Setter Property="Template" Value="{StaticResource MyMenuItemTemplateKey}"/>
+            </Trigger>
+
+            <Trigger Property="Role" Value="SubmenuItem">
+                <Setter Property="Template" Value="{StaticResource MyMenuItemTemplateKey}"/>
+            </Trigger>
+            <Trigger Property="IsChecked" Value="True">
+                <Setter Property="Foreground" Value="Green"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
 </ResourceDictionary>

@@ -63,6 +63,7 @@ namespace xstrat
             }
             finally
             {
+                Notify.sendError("Error", exception.Message + " | " + message);
                 Logger.Log(exception.Message + " | " + message);
             }
         }

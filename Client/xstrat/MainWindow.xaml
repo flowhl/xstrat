@@ -16,34 +16,38 @@
     <Window.DataContext>
         <viewModel:MainViewModel/>
     </Window.DataContext>
-    
-    
+        
     <Border Background="#131313" CornerRadius="20">
 
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="200"/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
-            
-            <Grid.RowDefinitions>
-                <RowDefinition Height="25"/>
-                <RowDefinition/>
-            </Grid.RowDefinitions>
 
-            <Border Grid.ColumnSpan="2"
+        <Grid>
+
+        <!--Hier sollen notifications rein-->     
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="200"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="25"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+
+                <Border Grid.ColumnSpan="2"
                     Background="#303030"
                     MouseDown="Border_MouseDown">
 
 
-                <Grid HorizontalAlignment="Stretch">
+                    <Grid HorizontalAlignment="Stretch">
 
-                    <Image Source="./Images/topbar.png" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="3,0,0,0"/>
+                        <Image Source="./Images/topbar.png" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="3,0,0,0"/>
 
-                    <StackPanel HorizontalAlignment="Right"
+                        <StackPanel HorizontalAlignment="Right"
                                 Orientation="Horizontal">
 
-                        <Button Width="20" Height="20"
+                            <Button Width="20" Height="20"
                                 Content="🗕"
                                 Background="Transparent"
                                 BorderThickness="0"
@@ -51,24 +55,24 @@
                                 FontWeight="Bold"
                                 Margin="0,0,0,3"
                                 Click="ButtonMinimize_Click"></Button>
-                        
-                        <Button Width="20" Height="20"
+
+                            <Button Width="20" Height="20"
                                 Content="🗙"
                                 Background="Transparent"
                                 BorderThickness="0"
                                 Foreground="Gray"
                                 FontWeight="Bold"
                                 Click="ButtonClose_Click"></Button>
-                        
-                        
-                    </StackPanel>
-                    
-                </Grid>
-            </Border>
 
-            <Border Background="#101010" Grid.Row="2" CornerRadius="12">
-                <StackPanel >
-                    <RadioButton Content="Home"
+
+                        </StackPanel>
+
+                    </Grid>
+                </Border>
+
+                <Border Background="#101010" Grid.Row="2" CornerRadius="12">
+                    <StackPanel >
+                        <RadioButton Content="Home"
                              Height="50"
                              Foreground="White"
                              FontSize="14"
@@ -77,53 +81,55 @@
                              Command="{Binding HomeViewCommand}"/>
 
 
-                    <RadioButton Content="Strats"
+                        <RadioButton Content="Strats"
                              Height="50"
                              Foreground="White"
                              FontSize="14"
                              Style="{StaticResource MenuButtonTheme}"
                              Command="{Binding StratMakerViewCommand}"/>
-                    
-                    <RadioButton Content="Routines"
+
+                        <RadioButton Content="Routines"
                              Height="50"
                              Foreground="White"
                              FontSize="14"
                              Style="{StaticResource MenuButtonTheme}"
                              Command="{Binding RoutinesViewCommand}"/>
 
-                    <RadioButton Content="Skin Switcher"
+                        <RadioButton Content="Skin Switcher"
                              Height="50"
                              Foreground="White"
                              FontSize="14"
                              Style="{StaticResource MenuButtonTheme}"
                              Command="{Binding SkinSwitcherViewCommand}"/>
-                    
-                    <RadioButton Content="Settings"
+
+                        <RadioButton Content="Settings"
                              Height="50"
                              Foreground="White"
                              FontSize="14"
                              Style="{StaticResource MenuButtonTheme}"
                              Command="{Binding SettingsViewCommand}"/>
 
-                    <RadioButton Content="About"
+                        <RadioButton Content="About"
                              Height="50"
                              Foreground="White"
                              FontSize="14"
                              Style="{StaticResource MenuButtonTheme}"
                              Command="{Binding AboutViewCommand}"/>
 
-                </StackPanel>
-            </Border>            
+                    </StackPanel>
+                </Border>
 
-            <ContentControl Grid.Row="1"
+                <ContentControl Grid.Row="1"
                             Grid.Column="1"
                             Margin="0,0,10,10"
                             Name="contentControl"
                             Content="{Binding CurrentView}"/>
 
 
-        </Grid>
+            </Grid>
 
+        </Grid>
+       
         
 
     </Border>

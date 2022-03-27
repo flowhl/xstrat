@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:wpfext="clr-namespace:WPFExtensions.Controls;assembly=WPFExtensions"
-             xmlns:local="clr-namespace:xstrat.MVVM.View"
+             xmlns:local="clr-namespace:xstrat.MVVM.View" xmlns:local1="clr-namespace:xstrat.Theme"
              mc:Ignorable="d" 
              d:DesignHeight="775" d:DesignWidth="1150">
     <Grid>
@@ -12,10 +12,14 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
             <RowDefinition/>
             <RowDefinition Height="150"/>
         </Grid.RowDefinitions>
-        <Border Background="#202020" BorderThickness="0" CornerRadius="0,0,20,0" Grid.Row="1">
+        <DockPanel>
+            <Menu DockPanel.Dock="Top" Background="#202020" Name="Menu"/>
+        </DockPanel>
+        <Border Background="#202020" BorderThickness="0" CornerRadius="0,0,20,0" Grid.Row="2">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="300"/>
@@ -26,7 +30,7 @@
                 </StackPanel>
             </Grid>
         </Border>
-        <Border Background="#161616" BorderThickness="0"  Grid.Row="0">
+        <Border Background="#161616" BorderThickness="0"  Grid.Row="1">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
@@ -34,7 +38,10 @@
                 </Grid.ColumnDefinitions>
                 <wpfext:ZoomControl Background="Transparent">
                     <Grid Name="MapContent">
-                        <StackPanel Orientation="Horizontal" Name="ImageStack"></StackPanel>
+                        <Canvas Name="WallsLayer" Panel.ZIndex="1">
+                            <local1:WallControl x:Name="WallControl1" Height="9" Width="60" Panel.ZIndex="2" Canvas.Left="300" Canvas.Top="200"></local1:WallControl>
+                        </Canvas>
+                        <StackPanel Orientation="Horizontal" Name="MapStack"></StackPanel>
                     </Grid>
                 </wpfext:ZoomControl>
                 <Expander ExpandDirection="Left" Grid.Column="1" HorizontalAlignment="Right" IsEnabled="True" Background="#171717">

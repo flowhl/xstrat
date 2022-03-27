@@ -89,6 +89,9 @@
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="Notifications.Wpf, Version=0.1.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Notifications.Wpf.0.1.1\lib\net461\Notifications.Wpf.dll</HintPath>
+    </Reference>
     <Reference Include="NuGet.Squirrel, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\squirrel.windows.1.9.0\lib\Net45\NuGet.Squirrel.dll</HintPath>
     </Reference>
@@ -159,12 +162,15 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Core\ApiHandler.cs" />
+    <Compile Include="Core\Notify.cs" />
     <Compile Include="Core\RoutineButtonClicked.cs" />
     <Compile Include="Core\RoutineStepButtonClicked.cs" />
-    <Compile Include="Core\StratHandler.cs" />
+    <Compile Include="Core\Wallstates.cs" />
     <Compile Include="Json\Content.cs" />
     <Compile Include="Json\Floor.cs" />
+    <Compile Include="Json\Map.cs" />
     <Compile Include="Json\Position.cs" />
+    <Compile Include="Json\Strat.cs" />
     <Compile Include="Json\XMap.cs" />
     <Compile Include="Json\Routine.cs" />
     <Compile Include="MVVM\ViewModel\RoutinesViewModel.cs" />
@@ -181,6 +187,9 @@
     <Compile Include="Overlay\RoutineOverlay.xaml.cs">
       <DependentUpon>RoutineOverlay.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Theme\MapFloor.xaml.cs">
+      <DependentUpon>MapFloor.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Theme\Routine.xaml.cs">
       <DependentUpon>Routine.xaml</DependentUpon>
     </Compile>
@@ -189,6 +198,9 @@
     </Compile>
     <Compile Include="Theme\ToggleSwitch.xaml.cs">
       <DependentUpon>ToggleSwitch.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Theme\WallControl.xaml.cs">
+      <DependentUpon>WallControl.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -246,6 +258,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Theme\MapFloor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Theme\MenuButtonTheme.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -259,6 +275,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Theme\ToggleSwitch.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Theme\WallControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
