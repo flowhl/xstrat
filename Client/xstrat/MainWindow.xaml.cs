@@ -4,9 +4,7 @@ using System.Windows.Input;
 using xstrat.MVVM.View;
 using xstrat.Core;
 using xstrat.MVVM.ViewModel;
-using System;
 using Squirrel;
-
 namespace xstrat
 {
     /// <summary>
