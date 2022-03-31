@@ -248,7 +248,7 @@ module.exports = {
     },
     verifyTeamJoinPassword: (team_id, join_password) =>{
         pool.query(
-            'SELECT COUNT(id) FROM team WHERE id = ? AND join_password = ?',
+            'SELECT COUNT(id) AS count FROM team WHERE id = ? AND join_password = ?',
             [
                 team_id,
                 join_password

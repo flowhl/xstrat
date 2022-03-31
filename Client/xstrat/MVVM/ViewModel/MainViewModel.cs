@@ -19,7 +19,8 @@ namespace xstrat.MVVM.ViewModel
         public RelayCommand LoginViewCommand { get; set; }
         public RelayCommand SkinSwitcherViewCommand { get; set; }
         public RelayCommand RoutinesViewCommand { get; set; }
-       public RelayCommand StratMakerViewCommand { get; set; }
+        public RelayCommand StratMakerViewCommand { get; set; }
+        public RelayCommand TeamViewCommand { get; set; }
 
 
         public HomeViewModel HomeVM { get; set; }
@@ -30,6 +31,7 @@ namespace xstrat.MVVM.ViewModel
         public SkinSwitcherViewModel SkinSwitcherVM { get; set; }
         public RoutinesViewModel RoutinesVM { get; set; }
         public StratMakerViewModel StratMakerVM { get; set; }
+        public TeamViewModel TeamVM { get; set; }
         public object _currentView;
 
         public object CurrentView
@@ -51,6 +53,7 @@ namespace xstrat.MVVM.ViewModel
             SkinSwitcherVM = new SkinSwitcherViewModel();
             RoutinesVM = new RoutinesViewModel();
             StratMakerVM = new StratMakerViewModel();
+            TeamVM = new TeamViewModel();
             CurrentView = HomeVM;
 
             HomeViewCommand = new RelayCommand(o => { if(wnd.IsLoaded) CurrentView = HomeVM;});
@@ -61,6 +64,7 @@ namespace xstrat.MVVM.ViewModel
             SkinSwitcherViewCommand = new RelayCommand(o => { if (wnd.IsLoaded) CurrentView = SkinSwitcherVM; });
             RoutinesViewCommand = new RelayCommand(o => { if (wnd.IsLoaded) CurrentView = RoutinesVM; });
             StratMakerViewCommand = new RelayCommand(o => { if (wnd.IsLoaded) CurrentView = StratMakerVM; });
+            TeamViewCommand = new RelayCommand(o => { if (wnd.IsLoaded) CurrentView = TeamVM; });
         }
     }
 }

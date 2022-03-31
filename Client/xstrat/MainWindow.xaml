@@ -9,7 +9,7 @@
         mc:Ignorable="d"
         Height="800" Width="1350"
         WindowStyle="None"
-        ResizeMode="NoResize"
+        ResizeMode="CanResize"
         Background="Transparent"
         AllowsTransparency="True">
 
@@ -19,10 +19,6 @@
         
     <Border Background="#131313" CornerRadius="20">
 
-
-        <Grid>
-
-        <!--Hier sollen notifications rein-->     
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="200"/>
@@ -88,7 +84,14 @@
                              Style="{StaticResource MenuButtonTheme}"
                              Command="{Binding StratMakerViewCommand}"/>
 
-                        <RadioButton Content="Routines"
+                    <RadioButton Content="Team"
+                             Height="50"
+                             Foreground="White"
+                             FontSize="14"
+                             Style="{StaticResource MenuButtonTheme}"
+                             Command="{Binding TeamViewCommand}"/>
+
+                    <RadioButton Content="Routines"
                              Height="50"
                              Foreground="White"
                              FontSize="14"
@@ -127,10 +130,5 @@
 
 
             </Grid>
-
-        </Grid>
-       
-        
-
     </Border>
 </Window>

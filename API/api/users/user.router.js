@@ -8,7 +8,6 @@ const {
      changeEmail, 
      changeName, 
      changePassword,
-     getMyMember,
      verifyToken,
      getTeamByUser_id,
      deleteUser,
@@ -20,7 +19,12 @@ const {
      getRoutines,
      saveRoutine,
      testConnection,
-     renameRoutine
+     renameRoutine,
+     getTeamJoinPassword,
+     deleteTeam,
+     leaveTeam,
+     updateTeamName,
+     joinTeam
     } = require("./user.controller");
 const router = require("express").Router();
 const {checkToken} = require("../../auth/token_validation");
@@ -33,9 +37,9 @@ router.post("/changeEmail", [checkToken], changeEmail)
 router.post("/changeName", [checkToken], changeName)
 router.post("/changePassword", [checkToken], changePassword)
 router.post("/deleteAccount", [checkToken], deleteAccount)
+router.post("/teamofuser",[checkToken], getTeamByUser_id)
 //#endregion
 //#region apprequests
-router.get("/mymember", [checkToken], getMyMember)
 // router.get("/mygame", [checkToken], getMyGame) //game of my team
 // router.get("/myteam", [checkToken], getMyTeam) 
 // router.get("/gamebyteamid", [checkToken], getGameByTeamId)
@@ -65,5 +69,15 @@ router.get("/routines/all", [checkToken], getRoutines)
 router.post("/routines/save", [checkToken], saveRoutine)
 router.post("/routines/rename", [checkToken], renameRoutine)
 //#endregion
+//#region team
+router.get("team/info", [checkToken],) //missing stuff
+router.get("team/joinpassword", [checkToken], getTeamJoinPassword)
+router.get("team/leave", [checkToken], leaveTeam)
+router.get("team/delete", [checkToken], deleteTeam)
 
+router.post("team/new", [checkToken], createTeam)
+router.post("team/updateName", [checkToken], updateTeamName)
+router.post("team/join", [checkToken], joinTeam)
+
+//#endregion
 module.exports = router

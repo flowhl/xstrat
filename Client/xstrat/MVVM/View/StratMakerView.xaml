@@ -17,7 +17,7 @@
             <RowDefinition Height="150"/>
         </Grid.RowDefinitions>
         <DockPanel>
-            <Menu DockPanel.Dock="Top" Background="#202020" Name="Menu"/>
+            <Menu DockPanel.Dock="Top" Background="#202020" Name="Menu" Width="Auto"/>
         </DockPanel>
         <Border Background="#202020" BorderThickness="0" CornerRadius="0,0,20,0" Grid.Row="2">
             <Grid>

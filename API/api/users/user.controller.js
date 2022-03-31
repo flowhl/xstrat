@@ -1,4 +1,4 @@
-const { create_user, getMemberByUserID,getUserByUserId,getUsers,getUserByEmail, deleteAccount, changeEmail, changeName, changePassword, getMyMember, getTeamByUser_id, updateTeamName, deleteTeam, newTeam, createVerification, getVerification, clearVerification, activateAccount, newRoutine, deleteRoutine, getRoutineContent, saveRoutine, getRoutines, renameRoutine} = require("./user.service");
+const { create_user, getMemberByUserID,getUserByUserId,getUsers,getUserByEmail, deleteAccount, changeEmail, changeName, changePassword, getTeamByUser_id, updateTeamName, deleteTeam, newTeam, createVerification, getVerification, clearVerification, activateAccount, newRoutine, deleteRoutine, getRoutineContent, saveRoutine, getRoutines, renameRoutine, verifyTeamAdmin, verifyTeamJoinPassword, joinTeam, getTeamJoinPassword} = require("./user.service");
 
 const {genSaltSync, hashSync, compareSync} = require("bcrypt");
 const { sign } = require("jsonwebtoken");
@@ -6,12 +6,13 @@ const {sendEmail} = require("./user.mailservice");
 const res = require("express/lib/response");
 module.exports = {
 //#region user control
+    //tested
     testConnection: (req, res) => {
         return res.status(200).json({
             success: 1
             });
     },
-
+    //tested
     login: (req, res) => {
         const body = req.body;
         getUserByEmail(body.email, (err, results) => {
@@ -44,6 +45,7 @@ module.exports = {
         }
         });
     },
+    //tested
     createUser: (req, res) => {
       console.log(req.body.email, req.body.name, req.body.password)
       const body = req.body;
@@ -98,6 +100,7 @@ module.exports = {
       }
       
     },
+    //tested
     activateAccount: (req, res) => {
         const token = req.params.token;
         getVerification(token, (err, results) => {
@@ -146,11 +149,13 @@ module.exports = {
         }
         );
     },
+    //tested
     verifyToken:(req, res) =>{
         return res.status(200).json({
             success: 1
         });
     },
+    //not tested
     changeEmail: (req, res) => {
         const body = req.body;
           const id = req.params.id;
@@ -168,6 +173,7 @@ module.exports = {
               });
           });
     },
+    //not tested
     changeName: (req, res) => {
       const body = req.body;
         const id = req.params.id;
@@ -185,8 +191,10 @@ module.exports = {
             });
         });
     },
+    //not tested
     changePassword: (req, res) => {
     const id = req.params.id;
+    const body = req.body;
     if(body.password != undefined){
         const salt = genSaltSync(10);
         body.password = hashSync(body.password, salt);
@@ -211,6 +219,7 @@ module.exports = {
         });
     };
     }, 
+    //tested
     deleteAccount: (req, res) => {
         deleteAccount(req.id, (err) => {
           if (err) {
@@ -226,6 +235,7 @@ module.exports = {
           });
       })
     },
+    //tested
     getUserByEmail:(req, res) =>{
         const email = req.params.id;
         getUserByEmail(email, (err,results) => {
@@ -251,29 +261,7 @@ module.exports = {
 
 //#endregion
 //#region apprequests
-    getMyMember: (req, res) => {
-        const id = req.id;
-        getMyMember(id, (err, results) => {
-            if (err) {
-                console.log(err);
-                return res.status(500).json({
-                    success: 0,
-                    message: "Database connection error"
-                });
-            }
-            else if(!results){
-                return res.status(200).json({
-                    success: 0,
-                    data: "Member not found"
-                });
-            }
-            return res.status(200).json({
-                success: 1,
-                data: results
-            });
-        })
-    },
-
+    //not tested
     getUserByUserId: (req, res) =>{
         const id = req.body.id;
         getUserByUserId(id, (err,results) => {
@@ -296,7 +284,7 @@ module.exports = {
             });
         })
     },
-
+    //tested
     getUsers:(req, res) =>{
       getUsers((err,results) => {
           if (err) {
@@ -320,8 +308,9 @@ module.exports = {
   },
 //#endregion
 //#region team
+    //testing
     getTeamByUser_id: (req, res) => {
-        const id = req.id;
+        const id = req.params.id;
         getTeamByUser_id(id, (err, results) => {
             if (err) {
                 console.log(err);
@@ -342,9 +331,11 @@ module.exports = {
             });
         });
     },
+    //not tested
+    //only if subscribed
     createTeam: (req, res) => {
         const name = req.body.name;
-        const user_id = req.id;
+        const user_id = req.params.id;
         const game_id = req.body.game_id;
         const pw = Math.random().toString(36).slice(-8);
         newTeam(name, user_id, game_id, pw, (err, results) => {
@@ -356,19 +347,30 @@ module.exports = {
                 });
             }
             else{
-                return res.status(200).json({
-                    success: 1,
-                    data: results
-                });
+                joinTeam(results.team_id, user_id, (err, res) => {
+                    if(err){
+                        return res.status(500).json({
+                            success: 0,
+                            message: "Database connection error"
+                        });
+                    }
+                    else{
+                        return res.status(200).json({
+                            success: 1,
+                            data: results
+                        });
+                    }
+                })  
+                
             }
         }) 
     },
     //only if admin
+    //not tested
     updateTeamName: (req, res) => {
-        const team_id = req.params.team_id;
-        const user_id = req.id;
-        const newname = req.params.newname;
-        updateTeamName(team_id, user_id, newname, (err, results) =>{
+        const user_id = req.params.id;
+        const newname = req.body.newname;
+        getTeamByUser_id(id, (err, results) => {
             if (err) {
                 console.log(err);
                 return res.status(500).json({
@@ -376,20 +378,167 @@ module.exports = {
                     message: "Database connection error"
                 });
             }
-            else{
+            else if(!results){
                 return res.status(200).json({
-                    success: 1,
-                    data: results
+                    success: 0,
+                    data: "Team not found"
                 });
             }
-        })
-    },
+            const team_id = data.team_id
+            verifyTeamAdmin(team_id, id,(req,res) => {
+                if (err) {
+                    console.log(err);
+                    return res.status(500).json({
+                        success: 0,
+                        message: "Database connection error"
+                    });
+                }
+                else if(results.count != 1){
+                    return res.status(200).json({
+                        success: 0,
+                        data: "You are not the team admin"
+                    });
+                }
+                updateTeamName(team_id, user_id, newname, (err, results) =>{
+                    if (err) {
+                        console.log(err);
+                        return res.status(500).json({
+                            success: 0,
+                            message: "Database connection error"
+                        });
+                    }
+                    else{
+                        return res.status(200).json({
+                            success: 1,
+                            data: results
+                        });
+                    }
+                });
+        });
+    })},
     //only if admin
+    //not tested
     deleteTeam: (req, res) => {
-        //ENTER HERE
+        const id = req.params.id;
+        getTeamByUser_id(id, (err, results) => {
+            if (err) {
+                console.log(err);
+                return res.status(500).json({
+                    success: 0,
+                    message: "Database connection error"
+                });
+            }
+            else if(!results){
+                return res.status(200).json({
+                    success: 0,
+                    data: "Team not found"
+                });
+            }
+            const team_id = data.team_id
+            verifyTeamAdmin(team_id, id,(req,res) => {
+                if (err) {
+                    console.log(err);
+                    return res.status(500).json({
+                        success: 0,
+                        message: "Database connection error"
+                    });
+                }
+                else if(results.count != 1){
+                    return res.status(200).json({
+                        success: 0,
+                        data: "You are not the team admin"
+                    });
+                }
+                deleteTeam(team_id, id, (err, res) => {
+                    if (err) {
+                        console.log(err);
+                        return res.status(500).json({
+                            success: 0,
+                            message: "Database connection error"
+                        });
+                    }
+                    return res.status(200).json({
+                        success: 1,
+                        data: "DB OK"
+                    });
+                    
+                })
+
+            })
+        });
+    },
+    joinTeam: (req, res) => {
+        const id = req.params.id;
+        const join_password = req.body.join_password;
+        const team_id = req.body.team_id;
+        verifyTeamJoinPassword(team_id, join_password, (err, res) => {
+            if (err) {
+                console.log(err);
+                return res.status(500).json({
+                    success: 0,
+                    message: "Database connection error"
+                });
+            }
+            if(res.count == 1){
+                joinTeam(team_id, id,(err, res) => {
+                    if (err) {
+                        console.log(err);
+                        return res.status(500).json({
+                            success: 0,
+                            message: "Database connection error"
+                        });
+                    }
+                    return res.status(200).json({
+                        success: 1,
+                        data: "DB OK"
+                    });
+                })
+            }
+            else{
+                return res.status(200).json({
+                    success: 0,
+                    message: "Wrong Team ID or password"
+                });
+            }
+            
+        })
+        
+    },
+    leaveTeam: (req, res) => {
+        const id = req.params.id;
+        leaveTeam(id, (err, res) => {
+            if (err) {
+                console.log(err);
+                return res.status(500).json({
+                    success: 0,
+                    message: "Database connection error"
+                });
+            }
+            return res.status(200).json({
+                success: 1,
+                data: "DB OK"
+            });
+        });
+    },
+    getTeamJoinPassword: (req, res) => {
+        const id = req.params.id;
+        getTeamJoinPassword(id, (err, res) =>{
+            if (err) {
+                console.log(err);
+                return res.status(500).json({
+                    success: 0,
+                    message: "Database connection error"
+                });
+            }
+            return res.status(200).json({
+                success: 1,
+                data: res
+            });
+        })
     },
 //#endregion
 //#region Routines
+    //tested
     newRoutine: (req, res) => {
         console.log(req.id)
         const user_id = req.id;
@@ -409,6 +558,7 @@ module.exports = {
             }
         })
     },
+    //tested
     deleteRoutine: (req, res) => {
         const user_id = req.id;
         const routine_id = req.body.routine_id;
@@ -428,6 +578,7 @@ module.exports = {
             }
         })
     },
+    //tested
     getRoutineContent: (req, res) => {
         const user_id = req.id;
         routine_id = req.body.routine_id;
@@ -447,6 +598,7 @@ module.exports = {
             }
         })
     },
+    //tested
     getRoutines: (req, res) => {
         const user_id = req.id;
         getRoutines(user_id, (err, results) =>{
@@ -465,6 +617,7 @@ module.exports = {
             }
         })
     },
+    //tested
     saveRoutine: (req, res) => {
         const routine_id = req.body.routine_id;
         const user_id = req.id;
@@ -486,6 +639,7 @@ module.exports = {
             }
         })
     },
+    //tested
     renameRoutine: (req, res) => {
         const routine_id = req.body.routine_id;
         const user_id = req.id;

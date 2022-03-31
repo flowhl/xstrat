@@ -178,11 +178,15 @@
     <Compile Include="Json\Routine.cs" />
     <Compile Include="MVVM\ViewModel\RoutinesViewModel.cs" />
     <Compile Include="MVVM\ViewModel\StratMakerViewModel.cs" />
+    <Compile Include="MVVM\ViewModel\TeamViewModel.cs" />
     <Compile Include="MVVM\View\RoutinesView.xaml.cs">
       <DependentUpon>RoutinesView.xaml</DependentUpon>
     </Compile>
     <Compile Include="MVVM\View\StratMakerView.xaml.cs">
       <DependentUpon>StratMakerView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MVVM\View\TeamView.xaml.cs">
+      <DependentUpon>TeamView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Overlay\OverlayStep.xaml.cs">
       <DependentUpon>OverlayStep.xaml</DependentUpon>
@@ -250,6 +254,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MVVM\View\StratMakerView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MVVM\View\TeamView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -364,9 +372,6 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Windows Logo.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="license.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="AfterBuild">
