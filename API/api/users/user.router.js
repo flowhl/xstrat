@@ -70,14 +70,14 @@ router.post("/routines/save", [checkToken], saveRoutine)
 router.post("/routines/rename", [checkToken], renameRoutine)
 //#endregion
 //#region team
-router.get("team/info", [checkToken],) //missing stuff
-router.get("team/joinpassword", [checkToken], getTeamJoinPassword)
-router.get("team/leave", [checkToken], leaveTeam)
-router.get("team/delete", [checkToken], deleteTeam)
+router.get("/team/info", [checkToken],) //missing stuff
+router.get("/team/joinpassword", [checkToken], getTeamJoinPassword)
+router.get("/team/leave", [checkToken], leaveTeam)
+router.post("/team/delete", [checkToken], deleteTeam)
 
-router.post("team/new", [checkToken], createTeam)
-router.post("team/updateName", [checkToken], updateTeamName)
-router.post("team/join", [checkToken], joinTeam)
+router.post("/team/new", [checkToken], createTeam)
+router.post("/team/updateName", [checkToken], updateTeamName)
+router.post("/team/join", [checkToken], joinTeam)
 
 //#endregion
 module.exports = router

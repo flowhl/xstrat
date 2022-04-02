@@ -11,9 +11,9 @@ module.exports = {
                 data.email,
                 data.password,
             ],
-            (error,results,fields)=>{
-                if(error){
-                   return callBack(error);
+            (err,results,fields)=>{
+                if(err){
+                   return callBack(err);
                 }
                 console.log(results);
                 return callBack(null,results);                
@@ -27,9 +27,9 @@ module.exports = {
                 token,
                 user_id
             ],
-            (error,results,fields)=>{
-                if(error){
-                   return callBack(error);
+            (err,results,fields)=>{
+                if(err){
+                   return callBack(err);
                 }
                 console.log(results);
                 return callBack(null,results);                
@@ -40,9 +40,9 @@ module.exports = {
         pool.query(
             "SELECT * FROM verification WHERE string = ? AND time > (NOW() - INTERVAL '1' HOUR)",
             [token],
-            (error,results,fields)=>{
-                if(error){
-                   return callBack(error);
+            (err,results,fields)=>{
+                if(err){
+                   return callBack(err);
                 }
                 return callBack(null,results);                
             }
@@ -51,9 +51,9 @@ module.exports = {
     clearVerification:(callBack) => {
         pool.query(
             "DELETE FROM verification WHERE time < (NOW() - INTERVAL '1' HOUR)",
-            (error,results,fields)=>{
-                if(error){
-                   return callBack(error);
+            (err,results,fields)=>{
+                if(err){
+                   return callBack(err);
                 }
                 return callBack(null,results);                
             }
@@ -63,9 +63,9 @@ module.exports = {
         pool.query(
             "Update user SET active = 1 WHERE id = ?",
             [user_id],
-            (error,results,fields)=>{
-                if(error){
-                   return callBack(error);
+            (err,results,fields)=>{
+                if(err){
+                   return callBack(err);
                 }
                 return callBack(null,results);                
             }
@@ -74,9 +74,9 @@ module.exports = {
     deleteAccount: (id, callBack) =>{
         pool.query("DELETE FROM user WHERE id = ?",
         [id],
-        (error,results,fields)=>{
-            if(error){
-               return callBack(error);
+        (err,results,fields)=>{
+            if(err){
+               return callBack(err);
             }
                 return callBack(null,results);
         }
@@ -89,9 +89,9 @@ module.exports = {
                 data.email,
                 id
             ],
-            (error,results,fields)=>{
-                if(error){
-                   return callBack(error);
+            (err,results,fields)=>{
+                if(err){
+                   return callBack(err);
                 }
                 return callBack(null,"DB OK");                
             }
@@ -104,9 +104,9 @@ module.exports = {
                 data.name,
                 id
             ],
-            (error,results,fields)=>{
-                if(error){
-                   return callBack(error);
+            (err,results,fields)=>{
+                if(err){
+                   return callBack(err);
                 }
                 return callBack(null,"DB OK");                
             }
@@ -119,9 +119,9 @@ module.exports = {
                 data.password,
                 id
             ],
-            (error,results,fields)=>{
-                if(error){
-                   return callBack(error);
+            (err,results,fields)=>{
+                if(err){
+                   return callBack(err);
                 }
                 return callBack(null,"DB OK");                
             }
@@ -134,9 +134,9 @@ module.exports = {
         pool.query(
             "SELECT * FROM user WHERE id = ?",
         [id],
-        (error,results,fields)=>{
-            if(error){
-               return callBack(error);
+        (err,results,fields)=>{
+            if(err){
+               return callBack(err);
             }
             return callBack(null,results);                
         }
@@ -145,9 +145,9 @@ module.exports = {
     getUsers: (callBack) => {
         pool.query(
             "SELECT * FROM user",
-        (error,results,fields)=>{
-            if(error){
-               return callBack(error);
+        (err,results,fields)=>{
+            if(err){
+               return callBack(err);
             }
             return callBack(null,results);                
         }
@@ -157,9 +157,9 @@ module.exports = {
         pool.query(
             "SELECT * FROM team WHERE user_id = ?",
         [id],
-        (error,results,fields)=>{
-            if(error){
-               return callBack(error);
+        (err,results,fields)=>{
+            if(err){
+               return callBack(err);
             }
             return callBack(null,results);                
         }
@@ -169,9 +169,9 @@ module.exports = {
         pool.query(
             "SELECT * FROM user WHERE email = ? AND active = 1",
         [email],
-        (error,results,fields)=>{
-            if(error){
-               return callBack(error);
+        (err,results,fields)=>{
+            if(err){
+               return callBack(err);
             }
             return callBack(null,results[0]);                
         }
@@ -181,9 +181,9 @@ module.exports = {
         pool.query(
             "SELECT * FROM member WHERE user_id = ?",
         [id],
-        (error,results,fields)=>{
-            if(error){
-               return callBack(error);
+        (err,results,fields)=>{
+            if(err){
+               return callBack(err);
             }
             return callBack(null,results[0]);                
         }
@@ -193,28 +193,33 @@ module.exports = {
         pool.query(
             "SELECT team_id FROM user WHERE id = ?",
         [id],
-        (error,results,fields)=>{
-            if(error){
-            return callBack(error);
+        (err,results,fields)=>{
+            if(err){
+            return callBack(err);
             }
             return callBack(null,results[0]);
         }
         );
     },
-    newTeam: (name, user_id, game_id, pw, callBack) => {
-        //for some reason this sql does not work - fix later
-        pool.query("INSERT INTO team (name, admin_user_id, game_id, join_password) values(?,?,?,?)"),
-        [name, user_id, game_id, pw],
-        (error,results,fields) => {
-            if(error){
+    newTeam: (name, user_id, game_id, pw, callBack) => {     
+        console.log(name, user_id, game_id, pw);
+        pool.query("INSERT INTO team (name, admin_user_id, game_id, join_password) Values (?,?,?,?)",
+        [
+            name,
+            user_id,
+            game_id, 
+            pw
+        ],
+        (err,results,fields) => {
+            if(err){
                 console.log(err);
-                return callBack(error);
+                return callBack(err);
             }
-            console.log(results);
             return callBack(null,results);                
-        };
+        }
+        );
     },
-    updateTeamName: (team_id, user_id, newname) =>{
+    updateTeamName: (team_id, user_id, newname, callBack) =>{
         pool.query(
             'Update team SET name = ? WHERE id = ? AND admin_user_id = ?',
             [
@@ -222,24 +227,24 @@ module.exports = {
                 team_id,
                 user_id
             ],
-            (error, results)=>{
-                if(error){
-                   return callBack(error);
+            (err, results)=>{
+                if(err){
+                   return callBack(err);
                 }
                 return callBack(null,"DB OK");                
             }
         );
     },
-    deleteTeam: (team_id, user_id,) => {
+    deleteTeam: (team_id, user_id, callBack) => {
         pool.query(
             'DELETE FROM team WHERE id = ? AND admin_user_id = ?',
             [
                 team_id,
                 user_id
             ],
-            (error, results)=>{
-                if(error){
-                   return callBack(error);
+            (err, results)=>{
+                if(err){
+                   return callBack(err);
                 }
                 return callBack(null,"DB OK");                
             }
@@ -253,60 +258,88 @@ module.exports = {
                 team_id,
                 join_password
             ],
-            (error,results)=>{
-                if(error){
-                   return callBack(error);
+            (err,results)=>{
+                if(err){
+                   return callBack(err);
                 }
                 return callBack(results,"DB OK");                
             }
         );
     },
-    verifyTeamAdmin: (team_id, user_id) =>{
+    verifyTeamAdmin: (team_id, user_id, callBack) => {
         pool.query(
             'SELECT COUNT(id) FROM team WHERE id = ? AND admin_user_id = ?',
             [
                 team_id,
                 user_id
             ],
-            (error,results)=>{
-                if(error){
-                   return callBack(error);
+            (err,results)=>{
+                if(err){
+                   return callBack(err);
                 }
                 
                 return callBack(null,results);                
             }
         );
     },
-    joinTeam: (team_id, user_id) => {
+    joinTeam: (team_id, user_id, callBack) => {
         pool.query(
             'Update user SET team_id = ? WHERE id = ?',
             [
                 team_id,
                 user_id
             ],
-            (error)=>{
-                if(error){
-                   return callBack(error);
+            (err,results,fields) => {
+                if(err){
+                    console.log(err);
+                    return callBack(err);
                 }
-                return callBack(null,"DB OK");                
+                return callBack(null,results);                
             }
         );
     },
-    leaveTeam: (user_id) => {
+    leaveTeam: (user_id, callBack) => {
         pool.query(
             'Update user SET team_id = null WHERE id = ?',
             [
                 user_id
             ],
-            (error)=>{
-                if(error){
-                   return callBack(error);
+            (err)=>{
+                if(err){
+                   return callBack(err);
                 }
                 return callBack(null,"DB OK");                
             }
         );
     },
-    
+    getTeamJoinPassword: (user_id, callBack) => {
+        pool.query(
+            'SELECT id, join_password FROM team WHERE admin_user_id = ?',
+            [
+                user_id
+            ],
+            (err, result)=>{
+                if(err){
+                   return callBack(err);
+                }
+                return callBack(null, result);                
+            }
+        );
+    },
+    getTeamInfo: (user_id, callBack) => {
+        pool.query(
+            'SELECT id, join_password FROM team WHERE admin_user_id = ?',
+            [
+                user_id
+            ],
+            (err, result)=>{
+                if(err){
+                   return callBack(err);
+                }
+                return callBack(null, result);                
+            }
+        );
+    },
 
 //#endregion
 //#region routines
@@ -316,10 +349,10 @@ module.exports = {
             "Routine",
             user_id
         ],
-        (error,results,fields) => {
-            if(error){
-                console.log(error);
-                return callBack(error);
+        (err,results,fields) => {
+            if(err){
+                console.log(err);
+                return callBack(err);
             }
             console.log(results);
             return callBack(null,results);                
@@ -332,10 +365,10 @@ module.exports = {
             user_id,
             routine_id
         ],
-        (error,results,fields) => {
-            if(error){
-                console.log(error);
-                return callBack(error);
+        (err,results,fields) => {
+            if(err){
+                console.log(err);
+                return callBack(err);
             }
             console.log(results);
             return callBack(null,results);                
@@ -349,9 +382,9 @@ module.exports = {
                 routine_id,
                 user_id
             ],
-            (error,results)=>{
-                if(error){
-                   return callBack(error);
+            (err,results)=>{
+                if(err){
+                   return callBack(err);
                 }
                 return callBack(null,results);                
             }
@@ -363,9 +396,9 @@ module.exports = {
             [
                 user_id
             ],
-            (error,results)=>{
-                if(error){
-                   return callBack(error);
+            (err,results)=>{
+                if(err){
+                   return callBack(err);
                 }
                 return callBack(null,results);                
             }
@@ -380,9 +413,9 @@ module.exports = {
                 user_id,
                 routine_id
             ],
-            (error)=>{
-                if(error){
-                   return callBack(error);
+            (err)=>{
+                if(err){
+                   return callBack(err);
                 }
                 return callBack(null,"DB OK");                
             }
@@ -396,9 +429,9 @@ module.exports = {
                 user_id,
                 routine_id
             ],
-            (error)=>{
-                if(error){
-                   return callBack(error);
+            (err)=>{
+                if(err){
+                   return callBack(err);
                 }
                 return callBack(null,"DB OK");                
             }
