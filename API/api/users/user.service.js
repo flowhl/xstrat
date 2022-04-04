@@ -177,18 +177,6 @@ module.exports = {
         }
         );
     },
-    getMyMember: (id, callBack) => {
-        pool.query(
-            "SELECT * FROM member WHERE user_id = ?",
-        [id],
-        (err,results,fields)=>{
-            if(err){
-               return callBack(err);
-            }
-            return callBack(null,results[0]);                
-        }
-        );
-    },
     getTeamByUser_id:(id, callBack) => {
         pool.query(
             "SELECT team_id FROM user WHERE id = ?",
@@ -340,6 +328,35 @@ module.exports = {
             }
         );
     },
+    getTeamFullInfo: (team_id, callBack) => {
+        pool.query(
+            'SELECT team.name AS team_name, user.name AS admin_name, game.name AS game_name FROM team JOIN user ON user.id = team.admin_user_id LEFT JOIN game ON game.id = team.game_id WHERE team.id = ?',
+            [
+                team_id
+            ],
+            (err, result)=>{
+                if(err){
+                   return callBack(err);
+                }
+                return callBack(null, result);                
+            }
+        );
+    },
+    getTeamMembers: (team_id, callBack) => {
+        pool.query(
+            "SELECT id, name, color FROM user WHERE user.team_id = ?",
+            [
+                team_id
+            ],
+            (err, results, fields)=>{
+                if(err){
+                   return callBack(err);
+                }
+                return callBack(null, results);                
+            }
+        );
+    },
+    
 
 //#endregion
 //#region routines

@@ -1,4 +1,4 @@
-const { create_user, getMemberByUserID,getUserByUserId,getUsers,getUserByEmail, deleteAccount, changeEmail, changeName, changePassword, getTeamByUser_id, updateTeamName, deleteTeam, newTeam, createVerification, getVerification, clearVerification, activateAccount, newRoutine, deleteRoutine, getRoutineContent, saveRoutine, getRoutines, renameRoutine, verifyTeamAdmin, verifyTeamJoinPassword, joinTeam, getTeamJoinPassword} = require("./user.service");
+const { create_user, getMemberByUserID,getUserByUserId,getUsers,getUserByEmail, deleteAccount, changeEmail, changeName, changePassword, getTeamByUser_id, updateTeamName, deleteTeam, newTeam, createVerification, getVerification, clearVerification, activateAccount, newRoutine, deleteRoutine, getRoutineContent, saveRoutine, getRoutines, renameRoutine, verifyTeamAdmin, verifyTeamJoinPassword, joinTeam, getTeamJoinPassword, getTeamMembers, getTeamFullInfo} = require("./user.service");
 
 const {genSaltSync, hashSync, compareSync} = require("bcrypt");
 const { sign } = require("jsonwebtoken");
@@ -548,6 +548,62 @@ module.exports = {
                 data: results
             });
         })
+    },
+    getTeamFullInfo: (req, res) => {
+        const id = req.id;
+        getTeamByUser_id(id, (err, results) => {
+            if (err) {
+                console.log(err);
+                return res.status(500).json({
+                    success: 0,
+                    message: "Database connection error"
+                });
+            }
+            else{
+                const team_id = results.team_id
+                getTeamFullInfo(team_id, (err, results2) => {
+                    if (err) {
+                        console.log(err);
+                        return res.status(500).json({
+                            success: 0,
+                            message: "Database connection error"
+                        });
+                    }
+                    else{
+                        return res.status(200).json({
+                            success: 1,
+                            data: results2
+                        });
+                    }
+                })
+            }
+        });
+    },
+    getAllTeamMembers: (req, res) => {
+        const id = req.id;
+        getTeamByUser_id(id, (err, results1) => {
+            if (err) {
+                console.log(err);
+                return res.status(500).json({
+                    success: 0,
+                    message: "Database connection error"
+                });
+            }
+            const team_id = results1.team_id;
+            getTeamMembers(team_id , (err, results) => {
+                if (err) {
+                    console.log(err);
+                    return res.status(500).json({
+                        success: 0,
+                        message: "Database connection error"
+                    });
+                }
+                return res.status(200).json({
+                    success: 1,
+                    data: results
+                });
+            });
+        })        
     },
 //#endregion
 //#region Routines

@@ -13,26 +13,19 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace xstrat.MVVM.View
+namespace xstrat.Theme
 {
     /// <summary>
-    /// Interaction logic for TeamView.xaml
+    /// Interaction logic for Teammate.xaml
     /// </summary>
-    public partial class TeamView : UserControl
+    public partial class Teammate : UserControl
     {
-        public TeamView()
+        public Teammate(string name, int ID, string color)
         {
             InitializeComponent();
-        }
-
-        private void JoinBtn_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void CreateBtn_Click(object sender, RoutedEventArgs e)
-        {
-
+            UserName.Text = name;
+            UserID.Content = ID;
+            UserColorRectangle.Fill = new SolidColorBrush((Color)ColorConverter.ConvertFromString(color));
         }
     }
 }

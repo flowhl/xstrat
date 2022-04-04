@@ -52,8 +52,7 @@ namespace xstrat
         }
 
         #endregion
-        #region requests
-
+        #region logins
         /// <summary>
         /// registers a new account
         /// </summary>
@@ -142,6 +141,91 @@ namespace xstrat
             throw new NotImplementedException();
             EndWaiting();
         }
+        #endregion
+        #region team
+
+        public static async Task<(bool, string)> NewTeam(string name, int game_id)
+        {
+                Waiting();
+                var request = new RestRequest("team/new", Method.Post);
+                request.RequestFormat = DataFormat.Json;
+                request.AddJsonBody(new { name = name });
+                request.AddJsonBody(new { game_id = game_id});
+
+                var response = await client.ExecuteAsync<RestResponse>(request);
+                if (response.StatusCode == System.Net.HttpStatusCode.OK) //success
+                {
+                    EndWaiting();
+                    return (true, response.Content);
+                }
+                EndWaiting();
+                return (false, "db error");
+        }
+        public static async Task<(bool, string)> TeamJoinpassword()
+        {
+            Waiting();
+            var request = new RestRequest("team/joinpassword", Method.Get);
+            request.RequestFormat = DataFormat.Json;
+
+            var response = await client.ExecuteAsync<RestResponse>(request);
+            if (response.StatusCode == System.Net.HttpStatusCode.OK) //success
+            {
+                EndWaiting();
+                return (true, response.Content);
+            }
+            EndWaiting();
+            return (false, "db error");
+        }
+
+        public static async Task<(bool, string)> UpdateNameTeam(string _newname)
+        {
+            Waiting();
+            var request = new RestRequest("team/new", Method.Post);
+            request.RequestFormat = DataFormat.Json;
+            request.AddJsonBody(new { newname = _newname });
+
+            var response = await client.ExecuteAsync<RestResponse>(request);
+            if (response.StatusCode == System.Net.HttpStatusCode.OK) //success
+            {
+                EndWaiting();
+                return (true, response.Content);
+            }
+            EndWaiting();
+            return (false, "db error");
+        }
+        public static async Task<(bool, string)> TeamMembers()
+        {
+            Waiting();
+            var request = new RestRequest("team/members", Method.Get);
+            request.RequestFormat = DataFormat.Json;
+
+            var response = await client.ExecuteAsync<RestResponse>(request);
+            if (response.StatusCode == System.Net.HttpStatusCode.OK) //success
+            {
+                EndWaiting();
+                return (true, response.Content);
+            }
+            EndWaiting();
+            return (false, "db error");
+        }
+        public static async Task<(bool, string)> TeamInfo()
+        {
+            Waiting();
+            var request = new RestRequest("team/info", Method.Get);
+            request.RequestFormat = DataFormat.Json;
+
+            var response = await client.ExecuteAsync<RestResponse>(request);
+            if (response.StatusCode == System.Net.HttpStatusCode.OK) //success
+            {
+                EndWaiting();
+                return (true, response.Content);
+            }
+            EndWaiting();
+            return (false, "db error");
+        }
+
+        #endregion
+        #region routines
 
         /// <summary>
         /// adds new routine to db by api call
@@ -273,6 +357,8 @@ namespace xstrat
             EndWaiting();
             return (false, "db error");
         }
+        #endregion
+        #region helper methodes
 
         /// <summary>
         /// Sets waiting cursor

@@ -104,3 +104,9 @@ D:\Github_repos\xstrat\Client\xstrat\obj\Debug\xstrat.exe
 D:\Github_repos\xstrat\Client\xstrat\obj\Debug\xstrat.pdb
 D:\Github_repos\xstrat\Client\xstrat\obj\Debug\MVVM\View\TeamView.g.cs
 D:\Github_repos\xstrat\Client\xstrat\obj\Debug\MVVM\View\TeamView.baml
+D:\Github_repos\xstrat\Client\xstrat\obj\Debug\Theme\TeamDashboard.g.cs
+D:\Github_repos\xstrat\Client\xstrat\obj\Debug\Theme\TeammateSelector.g.cs
+D:\Github_repos\xstrat\Client\xstrat\obj\Debug\Theme\TeamDashboard.baml
+D:\Github_repos\xstrat\Client\xstrat\obj\Debug\Theme\TeammateSelector.baml
+D:\Github_repos\xstrat\Client\xstrat\obj\Debug\Theme\Teammate.g.cs
+D:\Github_repos\xstrat\Client\xstrat\obj\Debug\Theme\Teammate.baml
