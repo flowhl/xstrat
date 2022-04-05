@@ -26,11 +26,11 @@ const {
      updateTeamName,
      joinTeam,
      getAllTeamMembers,
-     getTeamFullInfo
+     getTeamFullInfo,
+     getAllGames
     } = require("./user.controller");
 const router = require("express").Router();
 const {checkToken} = require("../../auth/token_validation");
-
 //#region user control
 router.post("/login", login)
 router.post("/register",createUser)
@@ -62,6 +62,7 @@ router.post("/createteam", [checkToken], createTeam)
 router.get("/", testConnection);
 router.get("/getusers", [checkToken], getUsers)
 router.get("/account/activate/:token", activateAccount)
+router.get("/games", [checkToken], getAllGames)
 //#endregion
 //#region Routines
 router.post("/routines/new", [checkToken], newRoutine)

@@ -2,6 +2,20 @@ const res = require("express/lib/response");
 const pool = require("../../config/database");
 
 module.exports = {
+//#region logging
+    create_log: (requestUri) =>{
+        pool.query(
+            "INSERT INTO logs(request) VALUES (?)",
+            [requestUri],
+            (err,results)=>{
+            if(err){
+              console.log("logging error:",err)
+            }
+                
+            }
+        );
+    },
+//#endregion
 //#region user control
     create_user:(data, callBack) =>{
         pool.query(
@@ -153,9 +167,20 @@ module.exports = {
         }
         );
     },
+    getGames: (callBack) => {
+        pool.query(
+            "SELECT * FROM game",
+        (err,results)=>{
+            if(err){
+               return callBack(err);
+            }
+            return callBack(null,results);                
+        }
+        );
+    },
     getMemberByUserID: (id, callBack) => {
         pool.query(
-            "SELECT * FROM team WHERE user_id = ?",
+            "SELECT * FROM team WHERE user_id = ? AND deleted = 0",
         [id],
         (err,results,fields)=>{
             if(err){
@@ -225,7 +250,7 @@ module.exports = {
     },
     deleteTeam: (team_id, user_id, callBack) => {
         pool.query(
-            'DELETE FROM team WHERE id = ? AND admin_user_id = ?',
+            'UPDATE team SET deleted = 1 WHERE id = ? AND admin_user_id = ?',
             [
                 team_id,
                 user_id
@@ -241,7 +266,7 @@ module.exports = {
     },
     verifyTeamJoinPassword: (team_id, join_password) =>{
         pool.query(
-            'SELECT COUNT(id) AS count FROM team WHERE id = ? AND join_password = ?',
+            'SELECT COUNT(id) AS count FROM team WHERE id = ? AND join_password = ? AND deleted = 0',
             [
                 team_id,
                 join_password
@@ -256,7 +281,7 @@ module.exports = {
     },
     verifyTeamAdmin: (team_id, user_id, callBack) => {
         pool.query(
-            'SELECT COUNT(id) FROM team WHERE id = ? AND admin_user_id = ?',
+            'SELECT COUNT(id) FROM team WHERE id = ? AND admin_user_id = ? AND deleted = 0',
             [
                 team_id,
                 user_id
@@ -302,21 +327,7 @@ module.exports = {
     },
     getTeamJoinPassword: (user_id, callBack) => {
         pool.query(
-            'SELECT id, join_password FROM team WHERE admin_user_id = ?',
-            [
-                user_id
-            ],
-            (err, result)=>{
-                if(err){
-                   return callBack(err);
-                }
-                return callBack(null, result);                
-            }
-        );
-    },
-    getTeamInfo: (user_id, callBack) => {
-        pool.query(
-            'SELECT id, join_password FROM team WHERE admin_user_id = ?',
+            'SELECT id, join_password FROM team WHERE admin_user_id = ? AND deleted = 0',
             [
                 user_id
             ],
@@ -330,7 +341,7 @@ module.exports = {
     },
     getTeamFullInfo: (team_id, callBack) => {
         pool.query(
-            'SELECT team.name AS team_name, user.name AS admin_name, game.name AS game_name FROM team JOIN user ON user.id = team.admin_user_id LEFT JOIN game ON game.id = team.game_id WHERE team.id = ?',
+            'SELECT team.name AS team_name, user.name AS admin_name, game.name AS game_name FROM team JOIN user ON user.id = team.admin_user_id LEFT JOIN game ON game.id = team.game_id WHERE team.id = ? AND team.deleted = 0',
             [
                 team_id
             ],

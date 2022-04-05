@@ -171,6 +171,7 @@
     <Compile Include="Core\Wallstates.cs" />
     <Compile Include="Json\Content.cs" />
     <Compile Include="Json\Floor.cs" />
+    <Compile Include="Json\Game.cs" />
     <Compile Include="Json\Map.cs" />
     <Compile Include="Json\Position.cs" />
     <Compile Include="Json\Strat.cs" />
@@ -211,8 +212,8 @@
     <Compile Include="Theme\Teammate.xaml.cs">
       <DependentUpon>Teammate.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Theme\TeammateSelector.xaml.cs">
-      <DependentUpon>TeammateSelector.xaml</DependentUpon>
+    <Compile Include="Theme\DataSelector.xaml.cs">
+      <DependentUpon>DataSelector.xaml</DependentUpon>
     </Compile>
     <Compile Include="Theme\ToggleSwitch.xaml.cs">
       <DependentUpon>ToggleSwitch.xaml</DependentUpon>
@@ -304,7 +305,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Theme\TeammateSelector.xaml">
+    <Page Include="Theme\DataSelector.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

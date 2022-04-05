@@ -1,4 +1,5 @@
 const jwt = require("jsonwebtoken");
+const { create_log } = require("../api/users/user.service");
 module.exports = {
   checkToken: (req, res, next) => {
     let token = req.headers["authorization"];
@@ -16,6 +17,8 @@ module.exports = {
           req.email = decoded.email;
           req.id = decoded.id;
           console.log("req", req.id)
+          //logging
+          create_log(req.originalUrl)         
           next();
         }
       });

@@ -17,6 +17,6 @@
             <TextBlock Name="UserName" Foreground="White" FontWeight="Normal" VerticalAlignment="Center" Margin="2"></TextBlock>
         </Viewbox>
         <Rectangle Fill="Cyan" Height="25" Width="25" Grid.Column="1" Stroke="#181818" Name="UserColorRectangle"></Rectangle>
-        <Label Foreground="#303030" Name="UserID" Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15">123</Label>
+        <Label Foreground="#808080" Name="UserID" Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15">123</Label>
     </Grid>
 </UserControl>

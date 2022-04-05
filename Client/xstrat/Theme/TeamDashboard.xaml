@@ -7,56 +7,71 @@
              mc:Ignorable="d" 
              d:DesignHeight="400" d:DesignWidth="800">
     <Grid>
-        <StackPanel Orientation="Horizontal">
-            <Border BorderThickness="0" Background="#161616" CornerRadius="10" Width="350" Height="380" Margin="10,10,10,10" HorizontalAlignment="Left" Name="OverviewPanel">
-                <StackPanel Orientation="Vertical" Margin="5,5,5,5">
-                    <Label Name="TeamName" Foreground="White" FontSize="20" FontWeight="SemiBold" Margin="0,5,0,0" HorizontalAlignment="Center">Your Team:</Label>
-                    <Label Name="AdminName" Foreground="White" FontSize="16" FontWeight="Normal" Margin="20,10,0,0" HorizontalAlignment="Center">Admin: Ichbineinmegaadmin</Label>
-                    <Label Name="GameName" Foreground="White" FontSize="16" FontWeight="Normal" Margin="20,-5,0,0" HorizontalAlignment="Center">Game: R6 Siege</Label>
-                    <!--<local:TeammateSelector></local:TeammateSelector>-->
-                    <StackPanel Orientation="Horizontal">
-                        <Label Margin="94,0,0,0" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="15" FontWeight="SemiBold">Name</Label>
-                        <Label Margin="48,0,0,0" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="15" FontWeight="SemiBold">Color</Label>
-                        <Label Margin="20,0,0,0" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="15" FontWeight="SemiBold">ID</Label>
+        <StackPanel Orientation="Vertical" VerticalAlignment="Top">
+            <StackPanel Orientation="Horizontal">
+                <Border BorderThickness="0" Background="#161616" CornerRadius="10" Width="350" Height="130" Margin="10,10,10,10" HorizontalAlignment="Left" Name="OverviewPanel">
+                    <StackPanel Orientation="Vertical" Margin="5,5,5,5">
+                        <!--<local:DataSelector type="2" ></local:DataSelector>-->
+                        <Label Name="TeamName" Foreground="#336cb5" FontSize="24" FontWeight="SemiBold" Margin="0,5,0,0" HorizontalAlignment="Center">Your Team:</Label>
+                        <Label Name="AdminName" Foreground="White" FontSize="16" FontWeight="Normal" Margin="0,0,0,0" HorizontalAlignment="Center">Admin: Ichbineinmegaadmin</Label>
+                        <Label Name="GameName" Foreground="White" FontSize="16" FontWeight="Normal" Margin="0,-5,0,0" HorizontalAlignment="Center">Game: R6 Siege</Label>
                     </StackPanel>
-                    <ScrollViewer VerticalScrollBarVisibility="Auto" Height="220" Margin="0,0,0,0">
-                        <StackPanel Orientation="Vertical" Name="MemberSP"></StackPanel>
-                    </ScrollViewer>
-                </StackPanel>
-            </Border>
-            <Border BorderThickness="0" Background="#161616" CornerRadius="10" Width="150" Height="380" Margin="10,10,10,10" HorizontalAlignment="Left" Name="ControlPanel">
-                <StackPanel Orientation="Vertical" Margin="5,5,5,5">
-                    <Button Height="30" Width="120" Name="LeaveBtn" Foreground="White" Content="Leave" FontSize="10" Background="#202020" BorderThickness="0" Margin="0,20,0,0" Click="LeaveBtn_Click">
-                        <Button.Resources>
-                            <Style TargetType="Border">
-                                <Setter Property="CornerRadius" Value="10"/>
-                            </Style>
-                        </Button.Resources>
-                    </Button>
-                    <Button Height="30" Width="120" Name="JoinPWAdminBtn" Foreground="White" Content="Show join password" FontSize="10" Background="#202020" BorderThickness="0" Margin="0,10,0,0" Click="JoinPWAdminBtn_Click">
-                        <Button.Resources>
-                            <Style TargetType="Border">
-                                <Setter Property="CornerRadius" Value="10"/>
-                            </Style>
-                        </Button.Resources>
-                    </Button>
-                    <Button Height="30" Width="120" Name="RenameAdminBtn" Foreground="White" Content="Rename" FontSize="10" Background="#202020" BorderThickness="0" Margin="0,10,0,0" Click="RenameAdminBtn_Click">
-                        <Button.Resources>
-                            <Style TargetType="Border">
-                                <Setter Property="CornerRadius" Value="10"/>
-                            </Style>
-                        </Button.Resources>
-                    </Button>
-                    <Button Height="30" Width="120" Name="DeleteAdminBtn" Foreground="White" Content="Delete" FontSize="10" Background="#202020" BorderThickness="0" Margin="0,10,0,0" Click="DeleteAdminBtn_Click">
-                        <Button.Resources>
-                            <Style TargetType="Border">
-                                <Setter Property="CornerRadius" Value="10"/>
-                            </Style>
-                        </Button.Resources>
-                    </Button>
-                </StackPanel>
-            </Border>
+                </Border>
+                <Border BorderThickness="0" Background="#161616" CornerRadius="10" Width="150" Height="130" Margin="10,10,10,10" HorizontalAlignment="Left" Name="ControlPanel">
+                    <StackPanel Orientation="Vertical" Margin="5,5,5,5">
+                        <Label Foreground="White" FontSize="16" FontWeight="SemiBold" Margin="0,5,0,0" HorizontalAlignment="Center">Controls:</Label>
+                        <Button Height="30" Width="120" Name="LeaveBtn" Foreground="White" Content="Leave" FontSize="15" Background="#202020" BorderThickness="0" Margin="0,0,0,0" Click="LeaveBtn_Click">
+                            <Button.Resources>
+                                <Style TargetType="Border">
+                                    <Setter Property="CornerRadius" Value="10"/>
+                                </Style>
+                            </Button.Resources>
+                        </Button>
+                 </StackPanel>
+                </Border>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Border BorderThickness="0" Background="#161616" CornerRadius="10" Width="350" Height="230" Margin="10,10,10,10" HorizontalAlignment="Left" Name="MatesPanel">
+                    <StackPanel Orientation="Vertical" Margin="5,5,5,5">
+                        <Label Foreground="White" FontSize="16" FontWeight="SemiBold" Margin="0,5,0,0" HorizontalAlignment="Center">Member:</Label>
+                        <StackPanel Orientation="Horizontal" Margin="0,0,0,0">
+                            <Label Margin="94,0,0,0" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="15" FontWeight="SemiBold">Name</Label>
+                            <Label Margin="48,0,0,0" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="15" FontWeight="SemiBold">Color</Label>
+                            <Label Margin="20,0,0,0" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="15" FontWeight="SemiBold">ID</Label>
+                        </StackPanel>
+                        <ScrollViewer VerticalScrollBarVisibility="Auto" Height="150" Margin="0,0,0,0">
+                            <StackPanel Orientation="Vertical" Name="MemberSP"></StackPanel>
+                        </ScrollViewer>
+                    </StackPanel>
+                </Border>
+                <Border BorderThickness="0" Background="#161616" CornerRadius="10" Width="150" Height="230" Margin="10,10,10,10" HorizontalAlignment="Left" Name="ControlPanel2">
+                    <StackPanel Orientation="Vertical" Margin="5,5,5,5">
+                        <Label Foreground="White" FontSize="16" FontWeight="SemiBold" Margin="0,5,0,0" HorizontalAlignment="Center">Admin Controls:</Label>
+                        <Button Height="30" Width="120" Name="JoinPWAdminBtn" Foreground="White" Content="Show join password" FontSize="12" Background="#202020" BorderThickness="0" Margin="0,0,0,0" Click="JoinPWAdminBtn_Click">
+                            <Button.Resources>
+                                <Style TargetType="Border">
+                                    <Setter Property="CornerRadius" Value="10"/>
+                                </Style>
+                            </Button.Resources>
+                        </Button>
+                        <Button Height="30" Width="120" Name="RenameAdminBtn" Foreground="White" Content="Rename" FontSize="15" Background="#202020" BorderThickness="0" Margin="0,10,0,0" Click="RenameAdminBtn_Click">
+                            <Button.Resources>
+                                <Style TargetType="Border">
+                                    <Setter Property="CornerRadius" Value="10"/>
+                                </Style>
+                            </Button.Resources>
+                        </Button>
+                        <Button Height="30" Width="120" Name="DeleteAdminBtn" Foreground="White" Content="Delete" FontSize="15" Background="#202020" BorderThickness="0" Margin="0,10,0,0" Click="DeleteAdminBtn_Click">
+                            <Button.Resources>
+                                <Style TargetType="Border">
+                                    <Setter Property="CornerRadius" Value="10"/>
+                                </Style>
+                            </Button.Resources>
+                        </Button>
+                    </StackPanel>
+                </Border>
+            </StackPanel>
         </StackPanel>
-
+        
     </Grid>
 </UserControl>

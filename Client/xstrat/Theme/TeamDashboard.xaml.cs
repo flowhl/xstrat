@@ -119,6 +119,5 @@ namespace xstrat.Theme
                 throw new Exception("Teammates could not be loaded");
             }
         }
-
     }
 }

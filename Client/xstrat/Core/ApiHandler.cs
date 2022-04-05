@@ -142,6 +142,22 @@ namespace xstrat
             EndWaiting();
         }
         #endregion
+        #region Client requests
+        public static async Task<(bool, string)> Games()
+        {
+            Waiting();
+            var request = new RestRequest("games", Method.Get);
+            request.RequestFormat = DataFormat.Json;
+            var response = await client.ExecuteAsync<RestResponse>(request);
+            if (response.StatusCode == System.Net.HttpStatusCode.OK) //success
+            {
+                EndWaiting();
+                return (true, response.Content);
+            }
+            EndWaiting();
+            return (false, "db error");
+        }
+        #endregion
         #region team
 
         public static async Task<(bool, string)> NewTeam(string name, int game_id)
