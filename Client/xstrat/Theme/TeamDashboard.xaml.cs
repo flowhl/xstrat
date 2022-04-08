@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Microsoft.VisualBasic;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
@@ -29,30 +30,58 @@ namespace xstrat.Theme
         public TeamDashboard()
         {
             InitializeComponent();
-            RetrieveTeamMates();
-            RetrieveTeamInfoAsync();
+            Retrieve();
+        }
+        public async void Retrieve()
+        {
+            await RetrieveTeamMatesAsync();
+            await RetrieveTeamInfoAsync();
+            await CheckAdmin();
         }
 
-        private void LeaveBtn_Click(object sender, RoutedEventArgs e)
+        private async Task CheckAdmin()
         {
+            (bool, string) result = await ApiHandler.VerifyAdmin();
+            if (result.Item1)
+            {
+                ControlPanelAdmin.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                ControlPanelAdmin.Visibility = Visibility.Collapsed;
+            }
+        }
 
+        private async void LeaveBtn_Click(object sender, RoutedEventArgs e)
+        {
+            (bool, string) result = await ApiHandler.LeaveTeam();
+            if (result.Item1)
+            {
+                Notify.sendSuccess("Success", "Left successfully");
+                Retrieve();
+            }
+            else
+            {
+                Notify.sendError("Error", result.Item2);
+            }
         }
 
         private void JoinPWAdminBtn_Click(object sender, RoutedEventArgs e)
         {
-
+            JoinPWAdminBtn_ClickAsync();
         }
 
         private void RenameAdminBtn_Click(object sender, RoutedEventArgs e)
         {
-
+            string input = Interaction.InputBox("New name:", "Rename Team");
+            RenameAdminBtn_ClickAsync(input);
         }
-
         private void DeleteAdminBtn_Click(object sender, RoutedEventArgs e)
         {
-
+            DeleteAdminBtn_ClickAsync();
         }
-        private async void RetrieveTeamMates()
+        
+        private async Task RetrieveTeamMatesAsync()
         {
             var result = await ApiHandler.TeamMembers();
             if (result.Item1)
@@ -63,8 +92,8 @@ namespace xstrat.Theme
                 var data = json.SelectToken("data").ToString();
                 if (data != null && data != "")
                 {
-                    List<xstrat.Json.User> rList = JsonConvert.DeserializeObject<List<Json.User>>(data);
                     teammates.Clear();
+                    List<xstrat.Json.User> rList = JsonConvert.DeserializeObject<List<Json.User>>(data);
                     teammates = rList;
                 }
                 else
@@ -84,13 +113,14 @@ namespace xstrat.Theme
             else
             {
                 Notify.sendError("Error", "Teammates could not be loaded");
-                throw new Exception("Teammates could not be loaded");
-
             }
         }
         private async Task RetrieveTeamInfoAsync()
         {
             var result = await ApiHandler.TeamInfo();
+            TeamName.Content = "Create or join a team";
+            AdminName.Content = "Admin: ";
+            GameName.Content = "Game: ";
             if (result.Item1)
             {
                 string response = result.Item2;
@@ -99,24 +129,84 @@ namespace xstrat.Theme
                 var data = json.SelectToken("data").ToString();
                 if (data != null && data != "")
                 {
-                    TeamInfo = JsonConvert.DeserializeObject<List<teamInfo>>(data).First();
+                    try
+                    {
+                        TeamInfo = JsonConvert.DeserializeObject<List<teamInfo>>(data).First();
+                    }
+                    catch(Exception ex)
+                    {
+                        Logger.Log("No Teaminfo found!");
+                    }
                 }
                 else
                 {
-                    Notify.sendError("Error", "Teammates could not be loaded");
-                    throw new Exception("Teammates could not be loaded");
+                    Notify.sendError("Error", "Team info could not be loaded");
+                    throw new Exception("Team info could not be loaded");
                 }
                 if (TeamInfo != null)
                 {
                     TeamName.Content = TeamInfo.team_name;
                     AdminName.Content = "Admin: " +TeamInfo.admin_name;
-                    GameName.Content = "Game: "+TeamInfo.game_name;
+                    GameName.Content = "Game: "+ TeamInfo.game_name;
                 }
             }
             else
             {
-                Notify.sendError("Error", "Teammates could not be loaded");
-                throw new Exception("Teammates could not be loaded");
+                Notify.sendError("Error", "Team info could not be loaded");
+            }
+        }
+        private async Task DeleteAdminBtn_ClickAsync()
+        {
+            var result = await ApiHandler.DeleteTeam();
+            if (result.Item1)
+            {
+                Notify.sendSuccess("Success", "Deleted successfully");
+                Retrieve();
+            }
+            else
+            {
+                Notify.sendError("Error", result.Item2);
+            }
+        }
+        private async Task JoinPWAdminBtn_ClickAsync()
+        {
+            var result = await ApiHandler.TeamJoinpassword();
+            if (result.Item1)
+            {
+                JObject json = JObject.Parse(result.Item2);
+                var data = json.SelectToken("data").ToString();
+                if (data != null && data != "")
+                {
+                    try
+                    {
+                        JoinPw joinPw = JsonConvert.DeserializeObject<List<JoinPw>>(data).First();
+                        MessageBox.Show("Team ID: " + joinPw.id.ToString() + "\nJoin password: " + joinPw.join_password , "Your teams' join credentials:");
+                        Notify.sendSuccess("Copied!" ,"Copied the join password to your clipboard");
+                        Clipboard.SetText(joinPw.join_password);
+                    }
+                    catch (Exception ex)
+                    {
+                        Notify.sendError("Error", "No Teaminfo found!");
+                        Logger.Log("No Teaminfo found!");
+                    }
+                }
+            }
+            else
+            {
+                Notify.sendError("Error", result.Item2);
+            }
+        }
+        private async Task RenameAdminBtn_ClickAsync(string newname)
+        {
+            var result = await ApiHandler.RenameTeam(newname);
+            if (result.Item1)
+            {
+                Notify.sendSuccess("Success", "Renamed successfully");
+                Retrieve();
+            }
+            else
+            {
+                Notify.sendError("Error", result.Item2);
             }
         }
     }

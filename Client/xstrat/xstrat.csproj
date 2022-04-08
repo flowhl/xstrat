@@ -59,6 +59,7 @@
       <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.5.0.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Build.Utilities.v4.0" />
+    <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="Microsoft.WindowsAPICodePack, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\WindowsAPICodePack.1.1.2\lib\Microsoft.WindowsAPICodePack.dll</HintPath>
     </Reference>
@@ -172,6 +173,8 @@
     <Compile Include="Json\Content.cs" />
     <Compile Include="Json\Floor.cs" />
     <Compile Include="Json\Game.cs" />
+    <Compile Include="Json\JoinPw.cs" />
+    <Compile Include="Json\NewParams.cs" />
     <Compile Include="Json\Map.cs" />
     <Compile Include="Json\Position.cs" />
     <Compile Include="Json\Strat.cs" />

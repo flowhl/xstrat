@@ -8,7 +8,7 @@
              d:DesignHeight="775" d:DesignWidth="1150">
     <Grid>
         <StackPanel Orientation="Vertical">
-            <StackPanel Orientation="Horizontal" Name="JoinCreatePanel">
+            <StackPanel Orientation="Horizontal" Name="JoinCreatePanel" Visibility="Visible">
                 <Border BorderThickness="0" Background="#161616" CornerRadius="10" Width="350" Height="280" Margin="10,10,10,10" HorizontalAlignment="Left" Name="JoinTeamPannel">
                     <StackPanel Orientation="Vertical" Margin="5,5,5,5">
                         <Label Foreground="White" FontSize="24" FontWeight="SemiBold" Margin="0,10,0,0" HorizontalAlignment="Center">No team? Join now!</Label>
@@ -42,12 +42,7 @@
                                 <TextBox x:Name="team_name" Height="30" Width="200" CaretBrush="White" Background="Transparent" BorderThickness="0" Margin="5,5,5,5" Text="Team Name" VerticalContentAlignment="Center"  Foreground="White"></TextBox>
                             </StackPanel>
                         </Border>
-                        <Border Background="#202020" CornerRadius="10" Margin="0,20,0,0" Width="250">
-                            <StackPanel Orientation="Horizontal">
-                                <materialDesign:PackIcon x:Name="PwIcon" HorizontalAlignment="Center" Kind="Password" VerticalAlignment="Center" Foreground="white" Margin="10,0,0,0"/>
-                                <TextBox x:Name="team_game" Height="30" Width="200" CaretBrush="White" Background="Transparent" BorderThickness="0" Text="Game_id"  Margin="5,5,5,5" VerticalContentAlignment="Center"  Foreground="White"></TextBox>
-                            </StackPanel>
-                        </Border>
+                        <local1:DataSelector type="2" Width="250" Margin="0,20,0,0" x:Name="GameSelector"></local1:DataSelector>
                         <Button Height="40" Width="250" Name="CreateBtn" Foreground="White" Content="Create" FontSize="17" Background="#202020" BorderThickness="0" Margin="0,20,0,0" Click="CreateBtn_Click">
                             <Button.Resources>
                                 <Style TargetType="Border">
@@ -59,7 +54,7 @@
                 </Border>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
-                <local1:TeamDashboard Height="400" Width="800"></local1:TeamDashboard>
+                <local1:TeamDashboard Height="600" Width="800" x:Name="TDashboard"></local1:TeamDashboard>
             </StackPanel>
         </StackPanel>
     </Grid>

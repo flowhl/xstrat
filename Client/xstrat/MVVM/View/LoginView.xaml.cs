@@ -81,6 +81,12 @@ namespace xstrat.MVVM.View
             }
         }
 
-        
+        private void UserControl_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.Key == Key.Enter)
+            {
+                Login();
+            }
+        }
     }
 }

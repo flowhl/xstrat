@@ -1,4 +1,4 @@
-const { create_user, getMemberByUserID,getUserByUserId,getUsers,getUserByEmail, deleteAccount, changeEmail, changeName, changePassword, getTeamByUser_id, updateTeamName, deleteTeam, newTeam, createVerification, getVerification, clearVerification, activateAccount, newRoutine, deleteRoutine, getRoutineContent, saveRoutine, getRoutines, renameRoutine, verifyTeamAdmin, verifyTeamJoinPassword, joinTeam, getTeamJoinPassword, getTeamMembers, getTeamFullInfo, getGames} = require("./user.service");
+const { create_user, getMemberByUserID,getUserByUserId,getUsers,getUserByEmail, deleteAccount, changeEmail, changeName, changePassword, getTeamByUser_id, updateTeamName, deleteTeam, newTeam, createVerification, getVerification, clearVerification, activateAccount, newRoutine, deleteRoutine, getRoutineContent, saveRoutine, getRoutines, renameRoutine, verifyTeamAdmin, verifyTeamJoinPassword, joinTeam, getTeamJoinPassword, getTeamMembers, getTeamFullInfo, getGames, leaveTeam} = require("./user.service");
 
 const {genSaltSync, hashSync, compareSync} = require("bcrypt");
 const { sign } = require("jsonwebtoken");
@@ -48,7 +48,6 @@ module.exports = {
     },
     //tested
     createUser: (req, res) => {
-      console.log(req.body.email, req.body.name, req.body.password)
       const body = req.body;
       if(body.password != undefined){
         const salt = genSaltSync(10);
@@ -307,7 +306,7 @@ module.exports = {
           });
       })
   },
-  getAllGames: (req, res) => {
+  getAllGames:(req, res) => {
     getGames((err, results) => {
         if (err) {
             console.log(err);
@@ -330,7 +329,47 @@ module.exports = {
   },
 //#endregion
 //#region team
-    //testing
+    // tested
+    checkTeamAdmin: (req, res) => {
+        const id = req.id;
+        getTeamByUser_id(id, (err, results) => {
+            if (err) {
+                console.log(err);
+                return res.status(500).json({
+                    success: 0,
+                    message: "Database connection error"
+                });
+            }
+            else if(!results){
+                return res.status(200).json({
+                    success: 0,
+                    message: "Team not found"
+                });
+            }
+            const team_id = results.team_id
+            verifyTeamAdmin(team_id, id,(err2,results2) => {
+                if (err) {
+                    console.log(err2);
+                    return res.status(500).json({
+                        success: 0,
+                        message: "Database connection error"
+                    });
+                }
+                else if(results2[0].count != 1){
+                    return res.status(200).json({
+                        success: 0,
+                        message: "You are not the team admin"
+                    });
+                }
+                return res.status(202).json({
+                    success: 1,
+                    message: "You are the team admin"
+                });
+        });
+    })},
+
+
+    // tested
     getTeamByUser_id: (req, res) => {
         const id = req.id;
         getTeamByUser_id(id, (err, results) => {
@@ -353,7 +392,7 @@ module.exports = {
             });
         });
     },
-    //not tested
+    // tested
     //only if subscribed
     createTeam: (req, res) => {
         const name = req.body.name;
@@ -366,7 +405,7 @@ module.exports = {
                     console.log(err);
                     return res.status(500).json({
                         success: 0,
-                        message: "Database connection error"
+                        message: err.code
                     });
                 }
                 else{
@@ -377,11 +416,11 @@ module.exports = {
                                 console.log(err);
                                 return res.status(500).json({
                                     success: 0,
-                                    message: "Database connection error"
+                                    message: err.code
                                 });
                             }
                             else{
-                                return res.status(200).json({
+                                return res.status(201).json({
                                     success: 1,
                                     team_id: team_id
                                 });
@@ -403,7 +442,7 @@ module.exports = {
     updateTeamName: (req, res) => {
         const user_id = req.id;
         const newname = req.body.newname;
-        getTeamByUser_id(id, (err, results) => {
+        getTeamByUser_id(user_id, (err, results) => {
             if (err) {
                 console.log(err);
                 return res.status(500).json({
@@ -414,43 +453,43 @@ module.exports = {
             else if(!results){
                 return res.status(200).json({
                     success: 0,
-                    data: "Team not found"
+                    message: "Team not found"
                 });
             }
-            const team_id = data.team_id
-            verifyTeamAdmin(team_id, id,(req,res) => {
-                if (err) {
-                    console.log(err);
+            const team_id = results.team_id
+            verifyTeamAdmin(team_id, user_id,(err2, results2) => {
+                if (err2) {
+                    console.log(err2);
                     return res.status(500).json({
                         success: 0,
                         message: "Database connection error"
                     });
                 }
-                else if(results.count != 1){
+                else if(results2[0].count != 1){
                     return res.status(200).json({
                         success: 0,
-                        data: "You are not the team admin"
+                        message: "You are not the team admin"
                     });
                 }
-                updateTeamName(team_id, user_id, newname, (err, results) =>{
-                    if (err) {
-                        console.log(err);
+                updateTeamName(team_id, user_id, newname, (err3, results3) =>{
+                    if (err3) {
+                        console.log(err3);
                         return res.status(500).json({
                             success: 0,
                             message: "Database connection error"
                         });
                     }
                     else{
-                        return res.status(200).json({
+                        return res.status(202).json({
                             success: 1,
-                            data: results
+                            data: results3
                         });
                     }
                 });
         });
     })},
     //only if admin
-    //not tested
+    // tested
     deleteTeam: (req, res) => {
         const id = req.id;
         getTeamByUser_id(id, (err, results) => {
@@ -482,7 +521,6 @@ module.exports = {
                         message: "You are not the team admin"
                     });
                 }
-                console.log(team_id);
                 deleteTeam(team_id, id, (err, results) => {
                     if (err) {
                         console.log(err);
@@ -491,7 +529,7 @@ module.exports = {
                             message: "Database connection error"
                         });
                     }
-                    return res.status(200).json({
+                    return res.status(202).json({
                         success: 1,
                         message: "DB OK"
                     });
@@ -501,11 +539,12 @@ module.exports = {
             })
         });
     },
+    // tested
     joinTeam: (req, res) => {
         const id = req.id;
         const join_password = req.body.join_password;
         const team_id = req.body.team_id;
-        verifyTeamJoinPassword(team_id, join_password, (err, results) => {
+        verifyTeamJoinPassword(team_id, join_password, (err, results1) => {
             if (err) {
                 console.log(err);
                 return res.status(500).json({
@@ -513,7 +552,7 @@ module.exports = {
                     message: "Database connection error"
                 });
             }
-            if(res.count == 1){
+            if(results1[0].count == 1){
                 joinTeam(team_id, id,(err, results) => {
                     if (err) {
                         console.log(err);
@@ -522,7 +561,7 @@ module.exports = {
                             message: "Database connection error"
                         });
                     }
-                    return res.status(200).json({
+                    return res.status(202).json({
                         success: 1,
                         data: "DB OK"
                     });
@@ -538,9 +577,10 @@ module.exports = {
         })
         
     },
+// tested
     leaveTeam: (req, res) => {
         const id = req.id;
-        leaveTeam(id, (err, results) => {
+        getTeamByUser_id(id, (err, results) => {
             if (err) {
                 console.log(err);
                 return res.status(500).json({
@@ -548,12 +588,51 @@ module.exports = {
                     message: "Database connection error"
                 });
             }
-            return res.status(200).json({
-                success: 1,
-                message: "DB OK"
+            else if(!results){
+                return res.status(200).json({
+                    success: 0,
+                    message: "Team not found"
+                });
+            }
+            else{
+                const team_id = results.team_id
+                verifyTeamAdmin(team_id, id,(err2,results2) => {
+                if (err) {
+                    console.log(err2);
+                    return res.status(500).json({
+                        success: 0,
+                        message: "Database connection error"
+                    });
+                }
+                else if(results2[0].count < 1){
+                    leaveTeam(id, (err, results3) => {
+                        if (err) {
+                            console.log(err);
+                            return res.status(500).json({
+                                success: 0,
+                                message: "Database connection error"
+                            });
+                        }
+                        // else{
+                            return res.status(202).json({
+                                success: 1,
+                                message: "DB OK"
+                            });
+                        // }
+                    });
+                }
+                else{
+                        return res.status(200).json({
+                            success: 0,
+                            message: "You are the team admin"
+                        });
+                    }               
             });
+            }
+            
         });
-    },
+        },
+    // tested
     getTeamJoinPassword: (req, res) => {
         const id = req.id;
         getTeamJoinPassword(id, (err, results) =>{
@@ -570,6 +649,7 @@ module.exports = {
             });
         })
     },
+    // tested
     getTeamFullInfo: (req, res) => {
         const id = req.id;
         getTeamByUser_id(id, (err, results) => {
@@ -600,6 +680,7 @@ module.exports = {
             }
         });
     },
+
     getAllTeamMembers: (req, res) => {
         const id = req.id;
         getTeamByUser_id(id, (err, results1) => {
@@ -630,7 +711,6 @@ module.exports = {
 //#region Routines
     //tested
     newRoutine: (req, res) => {
-        console.log(req.id)
         const user_id = req.id;
         newRoutine(user_id, (err, results) =>{
             if (err) {

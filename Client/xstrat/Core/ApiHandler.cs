@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using xstrat.Core;
+using System.Net.Http;
+using xstrat.Json;
 
 namespace xstrat
 {
@@ -50,6 +52,7 @@ namespace xstrat
                 client.Authenticator = new JwtAuthenticator(token);
             }
         }
+
 
         #endregion
         #region logins
@@ -159,23 +162,80 @@ namespace xstrat
         }
         #endregion
         #region team
+        public static async Task<(bool, string)> JoinTeam(string id, string pw)
+        {
+            Waiting();
+            var request = new RestRequest("team/join", Method.Post);
+            request.RequestFormat = DataFormat.Json;
+            request.AddJsonBody(new { join_password = pw });
+            request.AddJsonBody(new { team_id = id});
 
-        public static async Task<(bool, string)> NewTeam(string name, int game_id)
+            var response = await client.ExecuteAsync<RestResponse>(request);
+            if (response.StatusCode == System.Net.HttpStatusCode.Accepted) //success
+            {
+                EndWaiting();
+                return (true, response.Content);
+            }
+            else if (response.StatusCode == System.Net.HttpStatusCode.OK)
+            {
+                EndWaiting();
+                return (false, "Invalid id or password");
+            }
+            EndWaiting();
+            return (false, response.Content);
+        }
+
+        public static async Task<(bool, string)> LeaveTeam()
+        {
+            Waiting();
+            var request = new RestRequest("team/leave", Method.Get);
+            request.RequestFormat = DataFormat.Json;
+
+            var response = await client.ExecuteAsync<RestResponse>(request);
+            if (response.StatusCode == System.Net.HttpStatusCode.Accepted) //success
+            {
+                EndWaiting();
+                return (true, response.Content);
+            }
+            EndWaiting();
+            return (false, response.Content);
+        }
+        public static async Task<(bool, string)> VerifyAdmin()
+        {
+            Waiting();
+            var request = new RestRequest("team/verifyadmin", Method.Get);
+            request.RequestFormat = DataFormat.Json;
+
+            var response = await client.ExecuteAsync<RestResponse>(request);
+            if (response.StatusCode == System.Net.HttpStatusCode.Accepted) //success
+            {
+                EndWaiting();
+                return (true, response.Content);
+            }
+            EndWaiting();
+            return (false, response.Content);
+        }
+
+        public static async Task<(bool, string)> NewTeam(string name, int igame_id)
         {
                 Waiting();
+                if (name == null || name == "")
+                {
+                    return(false, "invalid input");
+                }
                 var request = new RestRequest("team/new", Method.Post);
                 request.RequestFormat = DataFormat.Json;
-                request.AddJsonBody(new { name = name });
-                request.AddJsonBody(new { game_id = game_id});
+                var param = new NewParams { name = name, game_id = igame_id };
+                request.AddJsonBody(param);
 
                 var response = await client.ExecuteAsync<RestResponse>(request);
-                if (response.StatusCode == System.Net.HttpStatusCode.OK) //success
+                if (response.StatusCode == System.Net.HttpStatusCode.Created) //success
                 {
                     EndWaiting();
                     return (true, response.Content);
                 }
                 EndWaiting();
-                return (false, "db error");
+                return (false, response.Content);
         }
         public static async Task<(bool, string)> TeamJoinpassword()
         {
@@ -238,6 +298,37 @@ namespace xstrat
             }
             EndWaiting();
             return (false, "db error");
+        }
+        public static async Task<(bool, string)> DeleteTeam()
+        {
+            Waiting();
+            var request = new RestRequest("team/delete", Method.Post);
+            request.RequestFormat = DataFormat.Json;
+
+            var response = await client.ExecuteAsync<RestResponse>(request);
+            if (response.StatusCode == System.Net.HttpStatusCode.Accepted) //success
+            {
+                EndWaiting();
+                return (true, response.Content);
+            }
+            EndWaiting();
+            return (false, response.Content);
+        }
+        public static async Task<(bool, string)> RenameTeam(string newname)
+        {
+            Waiting();
+            var request = new RestRequest("team/rename ", Method.Post);
+            request.RequestFormat = DataFormat.Json;
+            request.AddJsonBody(new {newname = newname});
+
+            var response = await client.ExecuteAsync<RestResponse>(request);
+            if (response.StatusCode == System.Net.HttpStatusCode.Accepted) //success
+            {
+                EndWaiting();
+                return (true, response.Content);
+            }
+            EndWaiting();
+            return (false, response.Content);
         }
 
         #endregion

@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:xstrat.MVVM.View" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:local1="clr-namespace:xstrat.Theme"
              mc:Ignorable="d" 
-             d:DesignHeight="775" d:DesignWidth="1150">
+             d:DesignHeight="775" d:DesignWidth="1150" KeyDown="UserControl_KeyDown">
     <Grid>
         <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="0,-65,0,0" CanVerticallyScroll="False" VerticalAlignment="Center">
             <Image Source="/Images/slogan.png" Width="260" Height="65"/>
