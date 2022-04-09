@@ -1,4 +1,5 @@
 const res = require("express/lib/response");
+const { callbackPromise } = require("nodemailer/lib/shared");
 const pool = require("../../config/database");
 
 module.exports = {
@@ -365,6 +366,35 @@ module.exports = {
                    return callBack(err);
                 }
                 return callBack(null, results);                
+            }
+        );
+    },
+    getMyColor: (user_id, callBack) => {
+        pool.query(
+            "SELECT color FROM user WHERE user.id = ?",
+            [
+                user_id
+            ],
+            (err, results, fields)=>{
+                if(err){
+                   return callBack(err);
+                }
+                return callBack(null, results);                
+            }
+        );
+    },
+    setMyColor: (user_id, color, callBack) => {
+        pool.query(
+            "Update user Set color = ? WHERE user.id = ?",
+            [
+                color,
+                user_id
+            ],
+            (err, results, fields)=>{
+                if(err){
+                   return callBack(err);
+                }
+                return callBack(null, "DB OK");                
             }
         );
     },

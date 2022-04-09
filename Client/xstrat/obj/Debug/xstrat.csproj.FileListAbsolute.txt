@@ -110,3 +110,7 @@ D:\Github_repos\xstrat\Client\xstrat\obj\Debug\Theme\Teammate.g.cs
 D:\Github_repos\xstrat\Client\xstrat\obj\Debug\Theme\Teammate.baml
 D:\Github_repos\xstrat\Client\xstrat\obj\Debug\Theme\DataSelector.g.cs
 D:\Github_repos\xstrat\Client\xstrat\obj\Debug\Theme\DataSelector.baml
+D:\Github_repos\xstrat\Client\xstrat\bin\Debug\ColorPicker.dll
+D:\Github_repos\xstrat\Client\xstrat\bin\Debug\Microsoft.Xaml.Behaviors.dll
+D:\Github_repos\xstrat\Client\xstrat\bin\Debug\Microsoft.Xaml.Behaviors.pdb
+D:\Github_repos\xstrat\Client\xstrat\bin\Debug\Microsoft.Xaml.Behaviors.xml

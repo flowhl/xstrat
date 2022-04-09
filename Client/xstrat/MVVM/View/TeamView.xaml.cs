@@ -33,10 +33,10 @@ namespace xstrat.MVVM.View
             WaitForAPIAsync();
         }
 
-        private async Task WaitForAPIAsync()
+        public async Task WaitForAPIAsync()
         {
             await Task.Delay(500);
-            if (TDashboard.TeamInfo != null)
+            if (TDashboard.TeamInfo != null && TDashboard.TeamInfo.team_name != null && TDashboard.TeamInfo.team_name != "" && TDashboard.TeamInfo.team_name != "Create or join a team")
             {
                 JoinCreatePanel.Visibility = Visibility.Collapsed;
             }

@@ -17,6 +17,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using xstrat.Core;
 using xstrat.Json;
+using xstrat.MVVM.View;
 
 namespace xstrat.Theme
 {
@@ -37,6 +38,19 @@ namespace xstrat.Theme
             await RetrieveTeamMatesAsync();
             await RetrieveTeamInfoAsync();
             await CheckAdmin();
+            await RetrieveColorAsync();
+            DependencyObject ucParent = this.Parent;
+
+            while (!(ucParent is UserControl))
+            {
+                ucParent = LogicalTreeHelper.GetParent(ucParent);
+            }
+            if(ucParent is UserControl)
+            {
+                var uc = (TeamView)ucParent;
+                await uc.WaitForAPIAsync();
+            }
+
         }
 
         private async Task CheckAdmin()
@@ -44,11 +58,11 @@ namespace xstrat.Theme
             (bool, string) result = await ApiHandler.VerifyAdmin();
             if (result.Item1)
             {
-                ControlPanelAdmin.Visibility = Visibility.Visible;
+                AdminButtons.Visibility = Visibility.Visible;
             }
             else
             {
-                ControlPanelAdmin.Visibility = Visibility.Collapsed;
+                AdminButtons.Visibility = Visibility.Collapsed;
             }
         }
 
@@ -121,6 +135,12 @@ namespace xstrat.Theme
             TeamName.Content = "Create or join a team";
             AdminName.Content = "Admin: ";
             GameName.Content = "Game: ";
+            if(TeamInfo != null)
+            {
+                TeamInfo.admin_name = null;
+                TeamInfo.game_name = null;
+                TeamInfo.team_name = "Create or join a team";
+            }            
             if (result.Item1)
             {
                 string response = result.Item2;
@@ -135,7 +155,7 @@ namespace xstrat.Theme
                     }
                     catch(Exception ex)
                     {
-                        Logger.Log("No Teaminfo found!");
+                        Logger.Log("No Teaminfo found! " + ex.Message);
                     }
                 }
                 else
@@ -155,6 +175,47 @@ namespace xstrat.Theme
                 Notify.sendError("Error", "Team info could not be loaded");
             }
         }
+
+        private async Task RetrieveColorAsync()
+        {
+            var result = await ApiHandler.GetColor();
+            if (result.Item1)
+            {
+                JObject json = JObject.Parse(result.Item2);
+                var data = json.SelectToken("data").ToString();
+                if (data != null && data != "")
+                {
+                    try
+                    {
+                        JColor color = JsonConvert.DeserializeObject<List<JColor>>(data).First();
+                        ColorPickerUI.SelectedColor = (Color)ColorConverter.ConvertFromString(color.color);
+                    }
+                    catch (Exception ex)
+                    {
+                        Notify.sendError("Error", "No Color found!");
+                        Logger.Log("No Color found! " + ex.Message);
+                    }
+                }
+            }
+            else
+            {
+                Notify.sendError("Error", result.Item2);
+            }
+        }
+        private async Task SaveColorAsync()
+        {
+            var result = await ApiHandler.setColor(HexConverter(ColorPickerUI.SelectedColor));
+            if (result.Item1)
+            {
+                Notify.sendSuccess("Success", "Changed color successfully");
+                Retrieve();
+            }
+            else
+            {
+                Notify.sendError("Error", result.Item2);
+            }
+        }
+
         private async Task DeleteAdminBtn_ClickAsync()
         {
             var result = await ApiHandler.DeleteTeam();
@@ -186,8 +247,8 @@ namespace xstrat.Theme
                     }
                     catch (Exception ex)
                     {
-                        Notify.sendError("Error", "No Teaminfo found!");
-                        Logger.Log("No Teaminfo found!");
+                        Notify.sendError("Error", "No JoinPW found!");
+                        Logger.Log("No JoinPW found! " + ex.Message);
                     }
                 }
             }
@@ -208,6 +269,15 @@ namespace xstrat.Theme
             {
                 Notify.sendError("Error", result.Item2);
             }
+        }
+
+        private void SaveColor_Click(object sender, RoutedEventArgs e)
+        {
+            SaveColorAsync();
+        }
+        private String HexConverter(System.Windows.Media.Color c)
+        {
+            return new ColorConverter().ConvertToString(c);
         }
     }
 }

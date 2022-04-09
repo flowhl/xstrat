@@ -215,7 +215,6 @@ namespace xstrat
             EndWaiting();
             return (false, response.Content);
         }
-
         public static async Task<(bool, string)> NewTeam(string name, int igame_id)
         {
                 Waiting();
@@ -252,7 +251,6 @@ namespace xstrat
             EndWaiting();
             return (false, "db error");
         }
-
         public static async Task<(bool, string)> UpdateNameTeam(string _newname)
         {
             Waiting();
@@ -320,6 +318,37 @@ namespace xstrat
             var request = new RestRequest("team/rename ", Method.Post);
             request.RequestFormat = DataFormat.Json;
             request.AddJsonBody(new {newname = newname});
+
+            var response = await client.ExecuteAsync<RestResponse>(request);
+            if (response.StatusCode == System.Net.HttpStatusCode.Accepted) //success
+            {
+                EndWaiting();
+                return (true, response.Content);
+            }
+            EndWaiting();
+            return (false, response.Content);
+        }
+        public static async Task<(bool, string)> GetColor()
+        {
+            Waiting();
+            var request = new RestRequest("team/getcolor", Method.Get);
+            request.RequestFormat = DataFormat.Json;
+
+            var response = await client.ExecuteAsync<RestResponse>(request);
+            if (response.StatusCode == System.Net.HttpStatusCode.OK) //success
+            {
+                EndWaiting();
+                return (true, response.Content);
+            }
+            EndWaiting();
+            return (false, response.Content);
+        }
+        public static async Task<(bool, string)> setColor(string color)
+        {
+            Waiting();
+            var request = new RestRequest("team/setcolor", Method.Post);
+            request.RequestFormat = DataFormat.Json;
+            request.AddJsonBody(new {color = color.Replace("#FF", "#")});
 
             var response = await client.ExecuteAsync<RestResponse>(request);
             if (response.StatusCode == System.Net.HttpStatusCode.Accepted) //success
