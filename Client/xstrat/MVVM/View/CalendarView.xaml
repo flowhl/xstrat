@@ -1,0 +1,23 @@
+﻿<UserControl x:Class="xstrat.MVVM.View.CalendarView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:xstrat.MVVM.View"
+             xmlns:local1="clr-namespace:xstrat.Calendar"
+             mc:Ignorable="d" 
+             d:DesignHeight="775" d:DesignWidth="1150"
+             x:Name="CalendarUI">
+    <Grid>
+
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
+            <Border BorderThickness="0" Background="#202020" CornerRadius="10" Margin="10,10,10,10">
+                <StackPanel Orientation="Vertical">
+                    <Label Foreground="White" FontSize="30" HorizontalAlignment="Center">Team Calendar:</Label>
+                    <local1:CalendarMonth x:Name="CalendarMonthUI" Events="{Binding ElementName=CalendarUI, Path=Events}" GridBrush="#336cb5" GridBorderThickness="0.8"/>
+                </StackPanel>
+            </Border>
+        </ScrollViewer>       
+       
+    </Grid>
+</UserControl>

@@ -1,7 +1,9 @@
 ﻿
 FD:\Github_repos\xstrat\Client\xstrat\App.xaml;;
+FD:\Github_repos\xstrat\Client\xstrat\Calendar\CalendarMonth.xaml;;
 FD:\Github_repos\xstrat\Client\xstrat\MainWindow.xaml;;
 FD:\Github_repos\xstrat\Client\xstrat\MVVM\View\AboutView.xaml;;
+FD:\Github_repos\xstrat\Client\xstrat\MVVM\View\CalendarView.xaml;;
 FD:\Github_repos\xstrat\Client\xstrat\MVVM\View\HomeView.xaml;;
 FD:\Github_repos\xstrat\Client\xstrat\MVVM\View\LoginView.xaml;;
 FD:\Github_repos\xstrat\Client\xstrat\MVVM\View\RegisterView.xaml;;

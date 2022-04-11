@@ -112,3 +112,60 @@
 2022-04-09 15:32:56> DeltaPackageBuilder: \lib\net45\Images\close.png hasn't changed, writing dummy file
 2022-04-09 15:32:56> DeltaPackageBuilder: \lib\net45\Images\dock-window.png hasn't changed, writing dummy file
 2022-04-09 15:32:56> Program: Building embedded zip file for Setup.exe
+2022-04-11 18:01:54> Program: Starting Squirrel Updater: --releasify D:\Github_repos\xstrat\Client\Deployment\GeneratedNugets\XStrat.1.1.2.nupkg --releaseDir=D:\Github_repos\xstrat\Client\Deployment\Releases
+2022-04-11 18:01:54> Program: Bootstrapper EXE found at:D:\Github_repos\xstrat\Client\packages\squirrel.windows.1.9.0\tools\Setup.exe
+2022-04-11 18:01:54> Program: Creating release package: D:\Github_repos\xstrat\Client\Deployment\Releases\XStrat.1.1.2.nupkg
+2022-04-11 18:01:54> ReleasePackage: Creating release package: D:\Github_repos\xstrat\Client\Deployment\Releases\XStrat.1.1.2.nupkg => D:\Github_repos\xstrat\Client\Deployment\Releases\XStrat-1.1.2-full.nupkg
+2022-04-11 18:01:54> ReleasePackage: Extracting dependent packages: []
+2022-04-11 18:01:54> ReleasePackage: Removing unnecessary data
+2022-04-11 18:01:56> DeltaPackageBuilder: Extracting D:\Github_repos\xstrat\Client\Deployment\Releases\XStrat-1.1.1-full.nupkg and D:\Github_repos\xstrat\Client\Deployment\Releases\XStrat-1.1.2-full.nupkg into C:\Users\Florian Wahl\AppData\Local\SquirrelTemp\tempd
+2022-04-11 18:01:57> DeltaPackageBuilder: \lib\net45\ColorPicker.dll not found in base package, marking as new
+2022-04-11 18:01:57> DeltaPackageBuilder: \lib\net45\DeltaCompressionDotNet.dll hasn't changed, writing dummy file
+2022-04-11 18:01:57> DeltaPackageBuilder: \lib\net45\DeltaCompressionDotNet.MsDelta.dll hasn't changed, writing dummy file
+2022-04-11 18:01:57> DeltaPackageBuilder: \lib\net45\DeltaCompressionDotNet.PatchApi.dll hasn't changed, writing dummy file
+2022-04-11 18:01:57> DeltaPackageBuilder: \lib\net45\MaterialDesignColors.dll hasn't changed, writing dummy file
+2022-04-11 18:01:57> DeltaPackageBuilder: \lib\net45\MaterialDesignColors.pdb hasn't changed, writing dummy file
+2022-04-11 18:01:57> DeltaPackageBuilder: \lib\net45\MaterialDesignThemes.Wpf.dll hasn't changed, writing dummy file
+2022-04-11 18:01:57> DeltaPackageBuilder: \lib\net45\MaterialDesignThemes.Wpf.pdb hasn't changed, writing dummy file
+2022-04-11 18:01:57> DeltaPackageBuilder: \lib\net45\Microsoft.Bcl.AsyncInterfaces.dll hasn't changed, writing dummy file
+2022-04-11 18:01:57> DeltaPackageBuilder: \lib\net45\Microsoft.WindowsAPICodePack.dll hasn't changed, writing dummy file
+2022-04-11 18:01:57> DeltaPackageBuilder: \lib\net45\Microsoft.WindowsAPICodePack.ExtendedLinguisticServices.dll hasn't changed, writing dummy file
+2022-04-11 18:01:57> DeltaPackageBuilder: \lib\net45\Microsoft.WindowsAPICodePack.Sensors.dll hasn't changed, writing dummy file
+2022-04-11 18:01:57> DeltaPackageBuilder: \lib\net45\Microsoft.WindowsAPICodePack.Shell.dll hasn't changed, writing dummy file
+2022-04-11 18:01:57> DeltaPackageBuilder: \lib\net45\Microsoft.WindowsAPICodePack.ShellExtensions.dll hasn't changed, writing dummy file
+2022-04-11 18:01:57> DeltaPackageBuilder: \lib\net45\Microsoft.Xaml.Behaviors.dll not found in base package, marking as new
+2022-04-11 18:01:57> DeltaPackageBuilder: \lib\net45\Microsoft.Xaml.Behaviors.pdb not found in base package, marking as new
+2022-04-11 18:01:57> DeltaPackageBuilder: \lib\net45\Mono.Cecil.dll hasn't changed, writing dummy file
+2022-04-11 18:01:58> DeltaPackageBuilder: \lib\net45\Mono.Cecil.Mdb.dll hasn't changed, writing dummy file
+2022-04-11 18:01:58> DeltaPackageBuilder: \lib\net45\Mono.Cecil.Mdb.pdb hasn't changed, writing dummy file
+2022-04-11 18:01:58> DeltaPackageBuilder: \lib\net45\Mono.Cecil.pdb hasn't changed, writing dummy file
+2022-04-11 18:01:58> DeltaPackageBuilder: \lib\net45\Mono.Cecil.Pdb.dll hasn't changed, writing dummy file
+2022-04-11 18:01:58> DeltaPackageBuilder: \lib\net45\Mono.Cecil.Pdb.pdb hasn't changed, writing dummy file
+2022-04-11 18:01:58> DeltaPackageBuilder: \lib\net45\Mono.Cecil.Rocks.dll hasn't changed, writing dummy file
+2022-04-11 18:01:58> DeltaPackageBuilder: \lib\net45\Mono.Cecil.Rocks.pdb hasn't changed, writing dummy file
+2022-04-11 18:01:58> DeltaPackageBuilder: \lib\net45\Newtonsoft.Json.dll hasn't changed, writing dummy file
+2022-04-11 18:01:58> DeltaPackageBuilder: \lib\net45\Notifications.Wpf.dll not found in base package, marking as new
+2022-04-11 18:01:58> DeltaPackageBuilder: \lib\net45\NuGet.Squirrel.dll hasn't changed, writing dummy file
+2022-04-11 18:01:58> DeltaPackageBuilder: \lib\net45\NuGet.Squirrel.pdb hasn't changed, writing dummy file
+2022-04-11 18:01:58> DeltaPackageBuilder: \lib\net45\RestSharp.dll hasn't changed, writing dummy file
+2022-04-11 18:01:58> DeltaPackageBuilder: \lib\net45\SharpCompress.dll hasn't changed, writing dummy file
+2022-04-11 18:01:58> DeltaPackageBuilder: \lib\net45\Splat.dll hasn't changed, writing dummy file
+2022-04-11 18:01:58> DeltaPackageBuilder: \lib\net45\Splat.pdb hasn't changed, writing dummy file
+2022-04-11 18:01:58> DeltaPackageBuilder: \lib\net45\Squirrel.dll hasn't changed, writing dummy file
+2022-04-11 18:01:58> DeltaPackageBuilder: \lib\net45\Squirrel.pdb hasn't changed, writing dummy file
+2022-04-11 18:01:58> DeltaPackageBuilder: \lib\net45\System.Buffers.dll hasn't changed, writing dummy file
+2022-04-11 18:01:58> DeltaPackageBuilder: \lib\net45\System.Memory.dll hasn't changed, writing dummy file
+2022-04-11 18:01:59> DeltaPackageBuilder: \lib\net45\System.Numerics.Vectors.dll hasn't changed, writing dummy file
+2022-04-11 18:01:59> DeltaPackageBuilder: Delta patching C:\Users\Florian Wahl\AppData\Local\SquirrelTemp\tempc\lib\net45\System.Runtime.CompilerServices.Unsafe.dll => C:\Users\Florian Wahl\AppData\Local\SquirrelTemp\tempd\lib\net45\System.Runtime.CompilerServices.Unsafe.dll
+2022-04-11 18:01:59> DeltaPackageBuilder: Delta patching C:\Users\Florian Wahl\AppData\Local\SquirrelTemp\tempc\lib\net45\System.Text.Encodings.Web.dll => C:\Users\Florian Wahl\AppData\Local\SquirrelTemp\tempd\lib\net45\System.Text.Encodings.Web.dll
+2022-04-11 18:01:59> DeltaPackageBuilder: \lib\net45\System.Text.Json.dll hasn't changed, writing dummy file
+2022-04-11 18:01:59> DeltaPackageBuilder: \lib\net45\System.Threading.Tasks.Extensions.dll hasn't changed, writing dummy file
+2022-04-11 18:01:59> DeltaPackageBuilder: \lib\net45\System.ValueTuple.dll hasn't changed, writing dummy file
+2022-04-11 18:01:59> DeltaPackageBuilder: \lib\net45\WPFExtensions.dll hasn't changed, writing dummy file
+2022-04-11 18:01:59> DeltaPackageBuilder: Delta patching C:\Users\Florian Wahl\AppData\Local\SquirrelTemp\tempc\lib\net45\xstrat.exe => C:\Users\Florian Wahl\AppData\Local\SquirrelTemp\tempd\lib\net45\xstrat.exe
+2022-04-11 18:02:00> DeltaPackageBuilder: Delta patching C:\Users\Florian Wahl\AppData\Local\SquirrelTemp\tempc\lib\net45\xstrat.exe.config => C:\Users\Florian Wahl\AppData\Local\SquirrelTemp\tempd\lib\net45\xstrat.exe.config
+2022-04-11 18:02:00> DeltaPackageBuilder: Delta patching C:\Users\Florian Wahl\AppData\Local\SquirrelTemp\tempc\lib\net45\xstrat.pdb => C:\Users\Florian Wahl\AppData\Local\SquirrelTemp\tempd\lib\net45\xstrat.pdb
+2022-04-11 18:02:00> DeltaPackageBuilder: Delta patching C:\Users\Florian Wahl\AppData\Local\SquirrelTemp\tempc\lib\net45\xstrat_ExecutionStub.exe => C:\Users\Florian Wahl\AppData\Local\SquirrelTemp\tempd\lib\net45\xstrat_ExecutionStub.exe
+2022-04-11 18:02:00> DeltaPackageBuilder: \lib\net45\Images\close.png hasn't changed, writing dummy file
+2022-04-11 18:02:00> DeltaPackageBuilder: \lib\net45\Images\dock-window.png hasn't changed, writing dummy file
+2022-04-11 18:02:01> Program: Building embedded zip file for Setup.exe

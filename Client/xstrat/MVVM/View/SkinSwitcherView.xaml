@@ -9,7 +9,7 @@
     <Grid>
         <StackPanel Orientation="Horizontal">
             <Border Width="280" Height="280" Background="#202020" CornerRadius="10" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,10,10">
-                <StackPanel Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,5,5,5">
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="5,5,5,5">
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                         <Label Foreground="White" FontSize="28" FontWeight="SemiBold" VerticalContentAlignment="Center">Skins:</Label>
                         <local1:ToggleSwitch x:Name="TS" MouseLeftButtonDown="TS_MouseLeftButtonDown" Height="40" Margin="10,0,0,0" VerticalContentAlignment="Center"></local1:ToggleSwitch>

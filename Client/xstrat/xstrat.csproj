@@ -171,11 +171,23 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Calendar\CalendarDay.xaml.cs">
+      <DependentUpon>CalendarDay.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Calendar\CalendarEventView.xaml.cs">
+      <DependentUpon>CalendarEventView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Calendar\CalendarMonth.xaml.cs">
+      <DependentUpon>CalendarMonth.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Calendar\ICalendarEvent.cs" />
+    <Compile Include="Calendar\MonthNumberToNameConverter.cs" />
     <Compile Include="Core\ApiHandler.cs" />
     <Compile Include="Core\Notify.cs" />
     <Compile Include="Core\RoutineButtonClicked.cs" />
     <Compile Include="Core\RoutineStepButtonClicked.cs" />
     <Compile Include="Core\Wallstates.cs" />
+    <Compile Include="Json\CalendarEntry.cs" />
     <Compile Include="Json\JColor.cs" />
     <Compile Include="Json\Content.cs" />
     <Compile Include="Json\Floor.cs" />
@@ -189,9 +201,13 @@
     <Compile Include="Json\User.cs" />
     <Compile Include="Json\XMap.cs" />
     <Compile Include="Json\Routine.cs" />
+    <Compile Include="MVVM\ViewModel\CalendarViewModel.cs" />
     <Compile Include="MVVM\ViewModel\RoutinesViewModel.cs" />
     <Compile Include="MVVM\ViewModel\StratMakerViewModel.cs" />
     <Compile Include="MVVM\ViewModel\TeamViewModel.cs" />
+    <Compile Include="MVVM\View\CalendarView.xaml.cs">
+      <DependentUpon>CalendarView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MVVM\View\RoutinesView.xaml.cs">
       <DependentUpon>RoutinesView.xaml</DependentUpon>
     </Compile>
@@ -231,6 +247,18 @@
     <Compile Include="Theme\WallControl.xaml.cs">
       <DependentUpon>WallControl.xaml</DependentUpon>
     </Compile>
+    <Page Include="Calendar\CalendarDay.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Calendar\CalendarEventView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Calendar\CalendarMonth.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -248,6 +276,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="MVVM\View\AboutView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MVVM\View\CalendarView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
