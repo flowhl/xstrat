@@ -1,5 +1,7 @@
 const res = require("express/lib/response");
+const { getEventListeners } = require("nodemailer/lib/ses-transport");
 const { callbackPromise } = require("nodemailer/lib/shared");
+const { end } = require("../../config/database");
 const pool = require("../../config/database");
 
 module.exports = {
@@ -497,9 +499,57 @@ module.exports = {
         );
     },
 
-
-
-
-
 //#endregion
+//#region calendar
+
+    createEvent: (user_id, typ, title, start, end, callback) => {
+        pool.query(
+            'INSERT INTO offday (user_id, typ, title, start, end) VALUES (?,?,?,?,?)',
+            [
+                user_id,
+                typ,
+                title,
+                start,
+                end
+            ],
+            (err, results)=>{
+                if(err){
+                   return callBack(err);
+                }
+                return callBack(null, results);                
+            }
+        );
+    },
+    deleteEvent: (user_id, event_id, callback) => {
+        pool.query(
+            'DELETE FROM offday WHERE user_id = ? AND id = ?',
+            [
+                user_id,
+                event_id
+            ],
+            (err, results)=>{
+                if(err){
+                   return callBack(err);
+                }
+                return callBack(null, results);                
+            }
+        );
+    },
+    getTeamEvents:(team_id, callback) => {
+
+    },
+    getUserEvents:(user_id, callback) => {
+
+        pool.query(
+            'SELECT * FROM offday WHERE user_id = ?',
+            [
+                user_id
+            ],
+            (err)=>{
+                if(err){
+                   return callBack(err);
+                }
+                return callBack(null,"DB OK");                
+            }
+        )}
 };

@@ -24,6 +24,7 @@ namespace xstrat.MVVM.View
         public TeamView()
         {
             InitializeComponent();
+            TeamDashboard.Visibility = Visibility.Visible;
             TDashboard.Loaded += TDashboard_Loaded;
             JoinCreatePanel.Visibility = Visibility.Collapsed;
         }
@@ -97,6 +98,11 @@ namespace xstrat.MVVM.View
         private void CreateBtn_Click(object sender, RoutedEventArgs e)
         {
             CreateBtn_ClickAsync();
+        }
+
+        private void NewOffDay_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

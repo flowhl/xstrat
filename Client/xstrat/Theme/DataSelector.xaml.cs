@@ -29,6 +29,8 @@ namespace xstrat.Theme
         public User selectedUser { get; set; } = null;
         public List<Game> games { get; set; } = new List<Game>();
         public Game selectedGame { get; set; } = null;
+        public List<OffDayType> OffDayTypes = new List<OffDayType>();
+        public OffDayType selectedOffDayType = null; 
         public int type { get; set; } = 0;
 
 
@@ -37,6 +39,7 @@ namespace xstrat.Theme
         /// type:
         /// 1 - teammates
         /// 2 - game
+        /// 3 - offdaytype
         /// </summary>
         /// <param name="type"></param>
         public DataSelector()
@@ -51,6 +54,10 @@ namespace xstrat.Theme
                 else if (type == 2)
                 {
                     RetrieveGames();
+                }
+                else if (type == 3)
+                {
+                    RetrieveOffDayTypes();
                 }
                 UpdateUI();
             };
@@ -118,6 +125,14 @@ namespace xstrat.Theme
             }
         }
 
+        private void RetrieveOffDayTypes()
+        {
+            OffDayTypes.Add(new OffDayType(0, "exactly"));
+            OffDayTypes.Add(new OffDayType(1, "entire day"));
+            OffDayTypes.Add(new OffDayType(2, "weekly"));
+            OffDayTypes.Add(new OffDayType(3, "every second week"));
+            OffDayTypes.Add(new OffDayType(4, "monthly"));
+        }
 
         private void UpdateUI()
         {
@@ -137,6 +152,15 @@ namespace xstrat.Theme
                     CBox.Items.Add(item.name);
                 }
             }
+            else if(type == 3)
+            {
+                CBox.Items.Clear();
+                foreach (var item in OffDayTypes)
+                {
+                    CBox.Items.Add(item.name);
+                }
+
+            }
         }
 
 
@@ -149,6 +173,10 @@ namespace xstrat.Theme
             else if(type == 2)
             {
                 selectedGame = games[CBox.SelectedIndex];
+            }
+            else if(type == 3)
+            {
+                selectedOffDayType = OffDayTypes[CBox.SelectedIndex];
             }
         }
     }
