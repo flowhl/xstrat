@@ -12,9 +12,9 @@ DEBUG;TRACE
 D:\Github_repos\xstrat\Client\xstrat\App.xaml
 27-579216875
 
-68-185861101
+692027017577
 61-1054050766
 Calendar\CalendarDay.xaml;Calendar\CalendarEventView.xaml;Calendar\CalendarMonth.xaml;MainWindow.xaml;MVVM\View\AboutView.xaml;MVVM\View\CalendarView.xaml;MVVM\View\HomeView.xaml;MVVM\View\LoginView.xaml;MVVM\View\RegisterView.xaml;MVVM\View\RoutinesView.xaml;MVVM\View\SettingsView.xaml;MVVM\View\SkinSwitcherView.xaml;MVVM\View\StratMakerView.xaml;MVVM\View\TeamView.xaml;Overlay\OverlayStep.xaml;Overlay\RoutineOverlay.xaml;Theme\MapFloor.xaml;Theme\MenuButtonTheme.xaml;Theme\NumberBox.xaml;Theme\OffdayControl.xaml;Theme\Routine.xaml;Theme\RoutineStep.xaml;Theme\TeamDashboard.xaml;Theme\Teammate.xaml;Theme\DataSelector.xaml;Theme\ToggleSwitch.xaml;Theme\WallControl.xaml;
 
-False
+True
 

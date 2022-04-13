@@ -63,6 +63,41 @@ namespace xstrat.Theme
             };
 
         }
+
+
+        /// <summary>
+        /// type:
+        /// 1 - teammates
+        /// 2 - game
+        /// 3 - offdaytype
+        /// </summary>
+        /// <param name="type"></param>
+        public DataSelector(int type_id)
+        {
+            InitializeComponent();
+            Loaded += (sender, args) =>
+            {
+                if (type == 1)
+                {
+                    RetrieveTeamMates();
+                }
+                else if (type == 2)
+                {
+                    RetrieveGames();
+                }
+                else if (type == 3)
+                {
+                    RetrieveOffDayTypes();
+                }
+                UpdateUI();
+            };
+        }
+
+        public void SelectIndex(int index)
+        {
+            CBox.SelectedIndex = index;
+        }
+
         private async void RetrieveTeamMates()
         {
             var result = await ApiHandler.TeamMembers();

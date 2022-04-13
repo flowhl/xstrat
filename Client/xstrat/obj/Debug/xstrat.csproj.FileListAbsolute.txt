@@ -141,3 +141,5 @@ D:\Github_repos\xstrat\Client\xstrat\bin\Debug\sv\Xceed.Wpf.AvalonDock.resources
 D:\Github_repos\xstrat\Client\xstrat\bin\Debug\zh-Hans\Xceed.Wpf.AvalonDock.resources.dll
 D:\Github_repos\xstrat\Client\xstrat\obj\Debug\Theme\OffdayControl.g.cs
 D:\Github_repos\xstrat\Client\xstrat\obj\Debug\Theme\OffdayControl.baml
+D:\Github_repos\xstrat\Client\xstrat\obj\Debug\Theme\NumberBox.g.cs
+D:\Github_repos\xstrat\Client\xstrat\obj\Debug\Theme\NumberBox.baml

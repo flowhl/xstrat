@@ -13,6 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using xstrat.Core;
+using xstrat.Json;
+using xstrat.Theme;
 
 namespace xstrat.MVVM.View
 {
@@ -102,7 +104,10 @@ namespace xstrat.MVVM.View
 
         private void NewOffDay_Click(object sender, RoutedEventArgs e)
         {
-
+            var od = new OffdayControl();
+            od.Width = 700;
+            od.LoadOffDay(new OffDay(0,0,"2022-01-01",1,"Offday Flo","2022-04-14 12:35:00", "2022-04-14 19:23:00"));
+            OffDaysList.Children.Add(od);
         }
     }
 }

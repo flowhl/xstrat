@@ -77,7 +77,6 @@
                                         <materialDesign:PackIcon Kind="Plus" Width="40" Height="40"></materialDesign:PackIcon>
                                     </Button.Content>
                                 </Button>
-                                <local1:OffdayControl x:Name="ODC1" Width="700"/>
                             </StackPanel>
                         </ScrollViewer>
                         
