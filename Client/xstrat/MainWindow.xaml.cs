@@ -19,9 +19,9 @@ namespace xstrat
         public MainWindow()
         {
             InitializeComponent();
-            mv = (MainViewModel)DataContext;
             SettingsHandler.Initialize();
             ApiHandler.Initialize();
+            mv = (MainViewModel)DataContext;
             Task loginTask = LoginWindowAsync();
             Loaded += MainWindow_Loaded;
         }
@@ -44,6 +44,7 @@ namespace xstrat
         {
             manager = await UpdateManager.GitHubUpdateManager(@"https://github.com/flowhl/xstrat");
             CheckForUpdate();
+            Globals.Init();
         }
 
         /// <summary>

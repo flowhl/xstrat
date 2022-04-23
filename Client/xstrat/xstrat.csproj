@@ -130,6 +130,7 @@
     <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Memory.4.5.4\lib\net461\System.Memory.dll</HintPath>
     </Reference>
+    <Reference Include="System.Messaging" />
     <Reference Include="System.Numerics" />
     <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
@@ -198,6 +199,7 @@
     <Compile Include="Calendar\ICalendarEvent.cs" />
     <Compile Include="Calendar\MonthNumberToNameConverter.cs" />
     <Compile Include="Core\ApiHandler.cs" />
+    <Compile Include="Core\Globals.cs" />
     <Compile Include="Core\Notify.cs" />
     <Compile Include="Core\RoutineButtonClicked.cs" />
     <Compile Include="Core\RoutineStepButtonClicked.cs" />
@@ -240,34 +242,37 @@
     <Compile Include="Overlay\RoutineOverlay.xaml.cs">
       <DependentUpon>RoutineOverlay.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Theme\MapFloor.xaml.cs">
+    <Compile Include="Ui\MapFloor.xaml.cs">
       <DependentUpon>MapFloor.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Theme\NumberBox.xaml.cs">
+    <Compile Include="Ui\NumberBox.xaml.cs">
       <DependentUpon>NumberBox.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Theme\OffdayControl.xaml.cs">
+    <Compile Include="Ui\OffdayControl.xaml.cs">
       <DependentUpon>OffdayControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Theme\Routine.xaml.cs">
+    <Compile Include="Ui\OffDaysList.xaml.cs">
+      <DependentUpon>OffDaysList.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Ui\Routine.xaml.cs">
       <DependentUpon>Routine.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Theme\RoutineStep.xaml.cs">
+    <Compile Include="Ui\RoutineStep.xaml.cs">
       <DependentUpon>RoutineStep.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Theme\TeamDashboard.xaml.cs">
+    <Compile Include="Ui\TeamDashboard.xaml.cs">
       <DependentUpon>TeamDashboard.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Theme\Teammate.xaml.cs">
+    <Compile Include="Ui\Teammate.xaml.cs">
       <DependentUpon>Teammate.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Theme\DataSelector.xaml.cs">
+    <Compile Include="Ui\DataSelector.xaml.cs">
       <DependentUpon>DataSelector.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Theme\ToggleSwitch.xaml.cs">
+    <Compile Include="Ui\ToggleSwitch.xaml.cs">
       <DependentUpon>ToggleSwitch.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Theme\WallControl.xaml.cs">
+    <Compile Include="Ui\WallControl.xaml.cs">
       <DependentUpon>WallControl.xaml</DependentUpon>
     </Compile>
     <Page Include="Calendar\CalendarDay.xaml">
@@ -346,47 +351,51 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Theme\MapFloor.xaml">
+    <Page Include="Ui\MapFloor.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Theme\MenuButtonTheme.xaml">
+    <Page Include="Ui\MenuButtonTheme.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Theme\NumberBox.xaml">
+    <Page Include="Ui\NumberBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Theme\OffdayControl.xaml">
+    <Page Include="Ui\OffdayControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Theme\Routine.xaml">
+    <Page Include="Ui\OffDaysList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Theme\RoutineStep.xaml">
+    <Page Include="Ui\Routine.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Theme\TeamDashboard.xaml">
+    <Page Include="Ui\RoutineStep.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Theme\Teammate.xaml">
+    <Page Include="Ui\TeamDashboard.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Theme\DataSelector.xaml">
+    <Page Include="Ui\Teammate.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Theme\ToggleSwitch.xaml">
+    <Page Include="Ui\DataSelector.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Theme\WallControl.xaml">
+    <Page Include="Ui\ToggleSwitch.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Ui\WallControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

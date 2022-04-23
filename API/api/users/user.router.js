@@ -30,7 +30,12 @@ const {
      getAllGames,
      checkTeamAdmin,
      getMyColor,
-     setMyColor
+     setMyColor,
+     newEvent,
+     deleteEvent,
+     getTeamEvents,
+     getUserEvents,
+     saveEvent
     } = require("./user.controller");
 const router = require("express").Router();
 const {checkToken} = require("../../auth/token_validation");
@@ -92,4 +97,14 @@ router.post("/team/join", [checkToken], joinTeam)
 router.post("/team/setcolor", [checkToken], setMyColor)
 
 //#endregion
+
+//#region offdays
+router.post("/event/new",[checkToken], newEvent)
+router.post("/event/delete",[checkToken], deleteEvent)
+router.get("/event/team",[checkToken], getTeamEvents)
+router.get("/event/user",[checkToken], getUserEvents)
+router.post("/event/save",[checkToken], saveEvent)
+
+//#endregion
+
 module.exports = router

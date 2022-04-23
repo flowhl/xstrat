@@ -15,6 +15,10 @@ namespace xstrat.MVVM.View
             InitializeComponent();
             SkinSwitcherPathDisplay.Text = SettingsHandler.SkinSwitcherPath;
             RememberMeSettings.setStatus(SettingsHandler.StayLoggedin);
+            if(SettingsHandler.APIURL != null)
+            {
+                APIText.Text = SettingsHandler.APIURL;
+            }
         }
 
         private void SkinSwitcherPickPathBtn_Click(object sender, RoutedEventArgs e)
@@ -31,9 +35,10 @@ namespace xstrat.MVVM.View
             }
         }
 
-        private void RememberMeBtn_Click(object sender, RoutedEventArgs e)
+        private void Save_BtnClick(object sender, RoutedEventArgs e)
         {
             SettingsHandler.StayLoggedin = RememberMeSettings.getStatus();
+            SettingsHandler.APIURL = APIText.Text;
             SettingsHandler.Save();
         }
     }

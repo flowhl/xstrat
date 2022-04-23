@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using xstrat.Core;
 using System.Net.Http;
 using xstrat.Json;
+using xstrat.Ui;
 
 namespace xstrat
 {
@@ -25,7 +26,15 @@ namespace xstrat
         {
             if(client == null)
             {
-                client = new RestClient("http://localhost:3000/api");
+
+                if (SettingsHandler.APIURL != null)
+                {
+                    client = new RestClient(SettingsHandler.APIURL);
+                }
+                else
+                {
+                    Notify.sendError("Settings Error", "Please enter a proper url to reach the server. Use https://app.xstrat.app/api as default");
+                }
             }
             var request = new RestRequest("/", Method.Get);
             request.RequestFormat = DataFormat.Json;
@@ -483,6 +492,115 @@ namespace xstrat
             var request = new RestRequest("routines/rename", Method.Post);
             request.RequestFormat = DataFormat.Json;
             request.AddJsonBody(new { title = ntitle, routine_id = n_id });
+
+            var response = await client.ExecuteAsync<RestResponse>(request);
+            if (response.StatusCode == System.Net.HttpStatusCode.OK) //success
+            {
+                EndWaiting();
+                return (true, response.Content);
+            }
+            EndWaiting();
+            return (false, "db error");
+        }
+        #endregion
+        #region OffDays
+        /// <summary>
+        /// adds new routine to db by api call
+        /// </summary>
+        /// <returns></returns>
+        public static async Task<(bool, string)> NewOffDay(int typ, string title, string start, string end)
+        {
+            Waiting();
+            var request = new RestRequest("event/new", Method.Post);
+            request.RequestFormat = DataFormat.Json;
+            request.AddJsonBody(new { typ = typ, title = title, start = start, end = end});
+
+            var response = await client.ExecuteAsync<RestResponse>(request);
+            if (response.StatusCode == System.Net.HttpStatusCode.OK) //success
+            {
+                EndWaiting();
+                return (true, response.Content);
+            }
+            EndWaiting();
+            return (false, "db error");
+        }
+
+        /// <summary>
+        /// deletes routine by api call
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public static async Task<(bool, string)> DeleteOffDay(int id)
+        {
+            Waiting();
+            var request = new RestRequest("event/delete", Method.Post);
+            request.RequestFormat = DataFormat.Json;
+            request.AddJsonBody(new { event_id = id });
+
+            var response = await client.ExecuteAsync<RestResponse>(request);
+            if (response.StatusCode == System.Net.HttpStatusCode.OK) //success
+            {
+                EndWaiting();
+                return (true, response.Content);
+            }
+            EndWaiting();
+            return (false, "db error");
+        }
+
+        
+        /// <summary>
+        /// Loads all routines by api call
+        /// </summary>
+        /// <returns></returns>
+        public static async Task<(bool, string)> GetUserOffDays()
+        {
+            Waiting();
+            var request = new RestRequest("event/user", Method.Get);
+            request.RequestFormat = DataFormat.Json;
+
+            var response = await client.ExecuteAsync<RestResponse>(request);
+            if (response.StatusCode == System.Net.HttpStatusCode.OK) //success
+            {
+                EndWaiting();
+                return (true, response.Content);
+            }
+            EndWaiting();
+            return (false, "db error");
+        }
+
+        /// <summary>
+        /// Loads all routines by api call
+        /// </summary>
+        /// <returns></returns>
+        public static async Task<(bool, string)> GetTeamOffDays()
+        {
+            Waiting();
+            var request = new RestRequest("event/team", Method.Get);
+            request.RequestFormat = DataFormat.Json;
+
+            var response = await client.ExecuteAsync<RestResponse>(request);
+            if (response.StatusCode == System.Net.HttpStatusCode.OK) //success
+            {
+                EndWaiting();
+                return (true, response.Content);
+            }
+            EndWaiting();
+            return (false, "db error");
+        }
+
+        /// <summary>
+        /// Saves routine by api call
+        /// </summary>
+        /// <param name="ntitle"></param>
+        /// <param name="ncontent"></param>
+        /// <param name="n_id"></param>
+        /// <returns></returns>
+        public static async Task<(bool, string)> SaveOffDay(int id, int typ, string title, string start, string end)
+        {
+            Waiting();
+            var request = new RestRequest("event/save", Method.Post);
+            request.RequestFormat = DataFormat.Json;
+            request.AddJsonBody(new {id = id, typ = typ, title = title, start = start, end = end });
 
             var response = await client.ExecuteAsync<RestResponse>(request);
             if (response.StatusCode == System.Net.HttpStatusCode.OK) //success

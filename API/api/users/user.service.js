@@ -502,7 +502,7 @@ module.exports = {
 //#endregion
 //#region calendar
 
-    createEvent: (user_id, typ, title, start, end, callback) => {
+    createEvent: (user_id, typ, title, start, end, callBack) => {
         pool.query(
             'INSERT INTO offday (user_id, typ, title, start, end) VALUES (?,?,?,?,?)',
             [
@@ -520,7 +520,7 @@ module.exports = {
             }
         );
     },
-    deleteEvent: (user_id, event_id, callback) => {
+    deleteEvent: (user_id, event_id, callBack) => {
         pool.query(
             'DELETE FROM offday WHERE user_id = ? AND id = ?',
             [
@@ -535,14 +535,44 @@ module.exports = {
             }
         );
     },
-    getTeamEvents:(team_id, callback) => {
-
+    getTeamEvents:(team_id, callBack) => {
+        pool.query(
+            'SELECT * FROM offday JOIN user ON offday.user_id = user.id WHERE user.team_id = ?',
+            [
+                team_id
+            ],
+            (err, results)=>{
+                if(err){
+                   return callBack(err);
+                }
+                return callBack(null,results);                
+            }
+        )
     },
-    getUserEvents:(user_id, callback) => {
+    getUserEvents:(user_id, callBack) => {
 
         pool.query(
             'SELECT * FROM offday WHERE user_id = ?',
             [
+                user_id
+            ],
+            (err, results)=>{
+                if(err){
+                   return callBack(err);
+                }
+                return callBack(null,results);                
+            }
+        )
+    },
+    saveEvent:(id, user_id, typ, title, start, end, callBack) => {
+        pool.query(
+            'Update offday SET typ = ?, title = ?, start = ?, end = ? WHERE id = ? AND user_id = ?',
+            [
+                typ,
+                title,
+                start,
+                end,
+                id,
                 user_id
             ],
             (err)=>{
@@ -551,5 +581,6 @@ module.exports = {
                 }
                 return callBack(null,"DB OK");                
             }
-        )}
+        );
+    }
 };

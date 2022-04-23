@@ -58,7 +58,7 @@ namespace xstrat.Calendar
 
         public static readonly DependencyProperty Color1Property =
             DependencyProperty.Register("Color1", typeof(SolidColorBrush), typeof(CalendarMonth),
-                new PropertyMetadata((Brush)converter.ConvertFromString("#33b583")));
+                new PropertyMetadata((Brush)converter.ConvertFromString("#b53333")));
 
         public SolidColorBrush Color2
         {
@@ -68,7 +68,7 @@ namespace xstrat.Calendar
 
         public static readonly DependencyProperty Color2Property =
             DependencyProperty.Register("Color2", typeof(SolidColorBrush), typeof(CalendarMonth),
-                new PropertyMetadata((Brush)converter.ConvertFromString("#6333b5")));
+                new PropertyMetadata((Brush)converter.ConvertFromString("#7a33b5")));
 
         public SolidColorBrush HighlightColor
         {
@@ -327,9 +327,6 @@ namespace xstrat.Calendar
                 // add colors of events to array, to pick up them using number
                 SolidColorBrush[] colors = { Color0, Color1, Color2 };
 
-                // index to array of colors
-                int accentColor = 0;
-
                 // loop all events
                 foreach (var e in events.OrderBy(e => e.DateFrom))
                 {
@@ -369,14 +366,14 @@ namespace xstrat.Calendar
                         }
 
                         // get color for event
-                        int accentColorIndex = accentColor % colors.Count();
+                        int accentColorIndex = e.typ;
+
                         CalendarEventView calendarEventView = new CalendarEventView(colors[accentColorIndex], this);
 
                         calendarEventView.DataContext = e;
                         Grid.SetRow(calendarEventView, eventRow);
                         day.Events.Children.Add(calendarEventView);
                     }
-                    accentColor++;
                 }
             }
             else

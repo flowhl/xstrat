@@ -11,6 +11,15 @@ namespace xstrat.Json
         public int? Id { get; set; }
         public int? user_id { get; set; }
         public string creation_date { get; set; }
+
+        /// <summary>
+        /// types:
+        /// 0 exactly
+        /// 1 entire day
+        /// 2 weekly
+        /// 3 every second week
+        /// 4 monthly
+        /// </summary>
         public int typ { get; set; }
         public string title { get; set; }
         public string start { get; set; }

@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:xstrat.MVVM.View" xmlns:local1="clr-namespace:xstrat.Theme"
+             xmlns:local="clr-namespace:xstrat.MVVM.View" xmlns:local1="clr-namespace:xstrat.Ui"
              mc:Ignorable="d" 
              d:DesignHeight="775" d:DesignWidth="1150">
     <StackPanel Orientation="Horizontal" Height="775" Width="1150">
@@ -11,16 +11,23 @@
             <Border BorderThickness="0" Background="#202020" CornerRadius="10" Width="300" Height="200" Margin="10,10,10,10">
                 <StackPanel Orientation="Vertical" Margin="5,5,5,5">
                     <Label Foreground="White" FontSize="18" Content="General:" HorizontalAlignment="Center" FontWeight="SemiBold"></Label>
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-                        <local1:ToggleSwitch x:Name="RememberMeSettings" Height="20"></local1:ToggleSwitch>
-                        <Label Foreground="White" FontSize="14" HorizontalAlignment="Right">Stay logged in for 30 days</Label>
-                        <Button Content="Save" Name="RememberMeBtn" Foreground="White" Background="#252525" BorderThickness="0" Margin="10,0,0,0" Height="25" Width="70" Click="RememberMeBtn_Click">
-                            <Button.Resources>
-                                <Style TargetType="Border">
-                                    <Setter Property="CornerRadius" Value="5"/>
-                                </Style>
-                            </Button.Resources>
-                        </Button>
+                    <StackPanel Orientation="Vertical">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+
+                            <local1:ToggleSwitch x:Name="RememberMeSettings" Height="20"></local1:ToggleSwitch>
+                            <Label Foreground="White" FontSize="14" HorizontalAlignment="Right">Stay logged in for 30 days</Label>
+                            <Button Content="Save" Name="RememberMeBtn" Foreground="White" Background="#252525" BorderThickness="0" Margin="10,0,0,0" Height="25" Width="70" Click="Save_BtnClick">
+                                <Button.Resources>
+                                    <Style TargetType="Border">
+                                        <Setter Property="CornerRadius" Value="5"/>
+                                    </Style>
+                                </Button.Resources>
+                            </Button>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Foreground="White" VerticalAlignment="Bottom">Api-Url:</Label>
+                            <TextBox Name="APIText" Foreground="#336cb5" VerticalContentAlignment="Center" Background="Transparent" Height="25" BorderThickness="0">https://api.xstrat.app</TextBox>
+                        </StackPanel>
                     </StackPanel>
                 </StackPanel>
             </Border>

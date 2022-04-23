@@ -14,6 +14,7 @@ namespace xstrat.Core
         /*FILE:
          * Stay logged in
          * SkinswitcherUbiFolder
+         * API domain
          */
         
 
@@ -25,6 +26,7 @@ namespace xstrat.Core
         public static string token { get; set; }
         public static string SkinSwitcherPath { get; set; }
         public static bool SkinSwitcherStatus { get; set; }
+        public static string APIURL { get; set; }
 
         public static void Initialize()
         {
@@ -49,6 +51,7 @@ namespace xstrat.Core
                 token = lines[1];
                 SkinSwitcherPath = lines[2];
                 SkinSwitcherStatus = Convert.ToBoolean(lines[3]);
+                APIURL = lines[4];
             }
             catch (Exception ex)
             {
@@ -63,7 +66,8 @@ namespace xstrat.Core
             StayLoggedin.ToString(),
             token,
             SkinSwitcherPath,
-            SkinSwitcherStatus.ToString()
+            SkinSwitcherStatus.ToString(),
+            APIURL
             };
 
             using (StreamWriter outputFile = new StreamWriter(Path.Combine(SettingsFile)))
@@ -78,7 +82,8 @@ namespace xstrat.Core
             false.ToString(),
             "",
             "",
-            false.ToString()
+            false.ToString(),
+            ""
             };
 
             using (StreamWriter outputFile = new StreamWriter(Path.Combine(SettingsFile)))

@@ -14,7 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using xstrat.Core;
-using xstrat.Theme;
+using xstrat.Ui;
 
 namespace xstrat.MVVM.View
 {

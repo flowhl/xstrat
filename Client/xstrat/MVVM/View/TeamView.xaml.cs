@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,7 +16,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using xstrat.Core;
 using xstrat.Json;
-using xstrat.Theme;
+using xstrat.Ui;
 
 namespace xstrat.MVVM.View
 {
@@ -26,9 +28,7 @@ namespace xstrat.MVVM.View
         public TeamView()
         {
             InitializeComponent();
-            TeamDashboard.Visibility = Visibility.Visible;
             TDashboard.Loaded += TDashboard_Loaded;
-            JoinCreatePanel.Visibility = Visibility.Collapsed;
         }
 
         private void TDashboard_Loaded(object sender, RoutedEventArgs e)
@@ -42,10 +42,14 @@ namespace xstrat.MVVM.View
             if (TDashboard.TeamInfo != null && TDashboard.TeamInfo.team_name != null && TDashboard.TeamInfo.team_name != "" && TDashboard.TeamInfo.team_name != "Create or join a team")
             {
                 JoinCreatePanel.Visibility = Visibility.Collapsed;
+                TeamDashboard.Visibility = Visibility.Visible;
+                offDayPanel.Visibility = Visibility.Visible;
             }
             else
             {
                 JoinCreatePanel.Visibility = Visibility.Visible;
+                TeamDashboard.Visibility = Visibility.Collapsed;
+                offDayPanel.Visibility = Visibility.Collapsed;
             }
         }
 
@@ -102,12 +106,6 @@ namespace xstrat.MVVM.View
             CreateBtn_ClickAsync();
         }
 
-        private void NewOffDay_Click(object sender, RoutedEventArgs e)
-        {
-            var od = new OffdayControl();
-            od.Width = 700;
-            od.LoadOffDay(new OffDay(0,0,"2022-01-01",1,"Offday Flo","2022-04-14 12:35:00", "2022-04-14 19:23:00"));
-            OffDaysList.Children.Add(od);
-        }
+
     }
 }

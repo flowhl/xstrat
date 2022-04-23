@@ -1,4 +1,4 @@
-const { create_user, getMemberByUserID,getUserByUserId,getUsers,getUserByEmail, deleteAccount, changeEmail, changeName, changePassword, getTeamByUser_id, updateTeamName, deleteTeam, newTeam, createVerification, getVerification, clearVerification, activateAccount, newRoutine, deleteRoutine, getRoutineContent, saveRoutine, getRoutines, renameRoutine, verifyTeamAdmin, verifyTeamJoinPassword, joinTeam, getTeamJoinPassword, getTeamMembers, getTeamFullInfo, getGames, leaveTeam, setMyColor, getMyColor} = require("./user.service");
+const { create_user, getMemberByUserID,getUserByUserId,getUsers,getUserByEmail, deleteAccount, changeEmail, changeName, changePassword, getTeamByUser_id, updateTeamName, deleteTeam, newTeam, createVerification, getVerification, clearVerification, activateAccount, newRoutine, deleteRoutine, getRoutineContent, saveRoutine, getRoutines, renameRoutine, verifyTeamAdmin, verifyTeamJoinPassword, joinTeam, getTeamJoinPassword, getTeamMembers, getTeamFullInfo, getGames, leaveTeam, setMyColor, getMyColor, createEvent, deleteEvent, getTeamEvents, getUserEvents, saveEvent} = require("./user.service");
 
 const {genSaltSync, hashSync, compareSync} = require("bcrypt");
 const { sign } = require("jsonwebtoken");
@@ -866,4 +866,125 @@ module.exports = {
         })
     },
 //#endregion
+//#region calendar
+
+    newEvent: (req, res) => {
+        const user_id = req.id;
+        const typ = req.body.typ;
+        const title = req.body.title;
+        const start = req.body.start;
+        const end = req.body.end;
+        createEvent(user_id, typ, title, start, end, (err, result) => {
+            if (err) {
+                console.log(err);
+                return res.status(500).json({
+                    success: 0,
+                    message: "Database connection error"
+                });
+            }
+            else{
+                return res.status(200).json({
+                    success: 1,
+                    data: result
+                });
+            }
+        })
+    },
+    deleteEvent: (req, res) => {
+        const user_id = req.id;
+        const event_id = req.body.event_id;
+        deleteEvent(user_id, event_id, (err, result) => {
+            if (err) {
+                console.log(err);
+                return res.status(500).json({
+                    success: 0,
+                    message: "Database connection error"
+                });
+            }
+            else{
+                return res.status(200).json({
+                    success: 1,
+                    data: result
+                });
+            }
+        })
+    },
+    //needs to be implemented
+    getTeamEvents: (req, res) => {
+        const id = req.id
+        getTeamByUser_id(id, (err, results) => {
+            if (err) {
+                console.log(err);
+                return res.status(500).json({
+                    success: 0,
+                    message: "Database connection error"
+                });
+            }
+            else if(!results){
+                return res.status(200).json({
+                    success: 0,
+                    message: "Team not found"
+                });
+            }
+            const team_id = results.team_id
+            getTeamEvents(team_id, (err, result) => {
+                if (err) {
+                    console.log(err);
+                    return res.status(500).json({
+                        success: 0,
+                        message: "Database connection error"
+                    });
+                }
+                else{
+                    return res.status(200).json({
+                        success: 1,
+                        data: result
+                    });
+                }
+            })
+        })
+    },
+    getUserEvents: (req, res) => {
+        const user_id = req.id;
+        getUserEvents(user_id,(err, result) => {
+            if (err) {
+                console.log(err);
+                return res.status(500).json({
+                    success: 0,
+                    message: "Database connection error"
+                });
+            }
+            else{
+                return res.status(200).json({
+                    success: 1,
+                    data: result
+                });
+            }
+        })
+    },
+    saveEvent: (req, res) => {
+        const id = req.body.id;
+        const user_id = req.id;
+        const typ = req.body.typ;
+        const title = req.body.title;
+        const start = req.body.start;
+        const end = req.body.end;
+        saveEvent(id, user_id, typ, title, start, end, (err, result) => {
+            if (err) {
+                console.log(err);
+                return res.status(500).json({
+                    success: 0,
+                    message: "Database connection error"
+                });
+            }
+            else{
+                return res.status(200).json({
+                    success: 1,
+                    message: result
+                });
+            }
+        })
+    },
+//#endregion
+
 };
