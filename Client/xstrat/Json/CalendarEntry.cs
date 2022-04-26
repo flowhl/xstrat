@@ -20,5 +20,8 @@ namespace xstrat.Json
         /// </summary>
         public int typ { get; set; }
 
+        public List<Object> args { get; set; }
+
+
     }
 }

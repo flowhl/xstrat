@@ -107,8 +107,8 @@ namespace xstrat.MVVM.View
                     }
                     else
                     {
-                        Notify.sendError("Error", "Routines could not be created");
-                        throw new Exception("Routines could not be created");
+                        Notify.sendError("Error", "Event could not be created");
+                        throw new Exception("Event could not be created");
                     }
                 }
                 else
@@ -199,12 +199,33 @@ namespace xstrat.MVVM.View
             {
                 Notify.sendError("Error", ex.Message);
             }
-
         }
 
         private string GetLabel(OffDay od)
         {
-            return Globals.UserIdToName(od.user_id.GetValueOrDefault()) + ": " + od.title;
+            string stitle = "";
+            if(od.title.Length > 30)
+            {
+                stitle = od.title.Substring(0, 30) + "...";
+            }
+            else
+            {
+                stitle = od.title;
+            }
+
+            string sstart = "";
+            string send = "";
+            try
+            {
+                sstart = od.start.Split(' ')[1].Replace(":00","");
+                send = od.end.Split(' ')[1].Replace(":00", "");
+            }
+            catch (Exception ex)
+            {
+                Notify.sendError("Error", ex.Message);
+            }
+                return Globals.UserIdToName(od.user_id.GetValueOrDefault()) + " | " + stitle + ": " + sstart + "-" + send;
+
         }
         #endregion
     }

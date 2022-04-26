@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace xstrat.Calendar
 {
@@ -14,6 +15,8 @@ namespace xstrat.Calendar
         /// 2 = ??? / purple
         /// </summary>
         int typ { get; set; }
+
+        List<Object> args { get; set; }
 
     }
 }

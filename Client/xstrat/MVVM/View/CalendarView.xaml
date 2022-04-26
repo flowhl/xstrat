@@ -14,7 +14,7 @@
             <Border BorderThickness="0" Background="#202020" CornerRadius="10" Margin="10,10,10,10">
                 <StackPanel Orientation="Vertical">
                     <Label Foreground="White" FontSize="30" HorizontalAlignment="Center">Team Calendar:</Label>
-                    <local1:CalendarMonth x:Name="CalendarMonthUI" Events="{Binding ElementName=CalendarUI, Path=Events}" GridBrush="#336cb5" GridBorderThickness="0.8"/>
+                    <local1:CalendarMonth x:Name="CalendarMonthUI" Events="{Binding ElementName=CalendarUI, Path=Events}" GridBrush="#336cb5" GridBorderThickness="0.8" Height="700"/>
                 </StackPanel>
             </Border>
         </ScrollViewer>       

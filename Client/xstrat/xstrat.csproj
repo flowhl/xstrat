@@ -222,6 +222,7 @@
     <Compile Include="Json\Routine.cs" />
     <Compile Include="MVVM\ViewModel\CalendarViewModel.cs" />
     <Compile Include="MVVM\ViewModel\RoutinesViewModel.cs" />
+    <Compile Include="MVVM\ViewModel\ScrimViewModel.cs" />
     <Compile Include="MVVM\ViewModel\StratMakerViewModel.cs" />
     <Compile Include="MVVM\ViewModel\TeamViewModel.cs" />
     <Compile Include="MVVM\View\CalendarView.xaml.cs">
@@ -229,6 +230,9 @@
     </Compile>
     <Compile Include="MVVM\View\RoutinesView.xaml.cs">
       <DependentUpon>RoutinesView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MVVM\View\ScrimView.xaml.cs">
+      <DependentUpon>ScrimView.xaml</DependentUpon>
     </Compile>
     <Compile Include="MVVM\View\StratMakerView.xaml.cs">
       <DependentUpon>StratMakerView.xaml</DependentUpon>
@@ -259,6 +263,9 @@
     </Compile>
     <Compile Include="Ui\RoutineStep.xaml.cs">
       <DependentUpon>RoutineStep.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Ui\ScrimFinderControl.xaml.cs">
+      <DependentUpon>ScrimFinderControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Ui\TeamDashboard.xaml.cs">
       <DependentUpon>TeamDashboard.xaml</DependentUpon>
@@ -327,6 +334,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="MVVM\View\ScrimView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MVVM\View\SettingsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -376,6 +387,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Ui\RoutineStep.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Ui\ScrimFinderControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -8,6 +8,7 @@ FD:\Github_repos\xstrat\Client\xstrat\MVVM\View\HomeView.xaml;;
 FD:\Github_repos\xstrat\Client\xstrat\MVVM\View\LoginView.xaml;;
 FD:\Github_repos\xstrat\Client\xstrat\MVVM\View\RegisterView.xaml;;
 FD:\Github_repos\xstrat\Client\xstrat\MVVM\View\RoutinesView.xaml;;
+FD:\Github_repos\xstrat\Client\xstrat\MVVM\View\ScrimView.xaml;;
 FD:\Github_repos\xstrat\Client\xstrat\MVVM\View\SettingsView.xaml;;
 FD:\Github_repos\xstrat\Client\xstrat\MVVM\View\SkinSwitcherView.xaml;;
 FD:\Github_repos\xstrat\Client\xstrat\MVVM\View\StratMakerView.xaml;;
@@ -26,4 +27,5 @@ FD:\Github_repos\xstrat\Client\xstrat\Ui\Teammate.xaml;;
 FD:\Github_repos\xstrat\Client\xstrat\Ui\DataSelector.xaml;;
 FD:\Github_repos\xstrat\Client\xstrat\Ui\ToggleSwitch.xaml;;
 FD:\Github_repos\xstrat\Client\xstrat\Ui\WallControl.xaml;;
+FD:\Github_repos\xstrat\Client\xstrat\Ui\ScrimFinderControl.xaml;;
 

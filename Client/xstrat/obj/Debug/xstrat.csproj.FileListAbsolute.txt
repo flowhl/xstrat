@@ -145,3 +145,7 @@ D:\Github_repos\xstrat\Client\xstrat\obj\Debug\xstrat.csproj.CoreCompileInputs.c
 D:\Github_repos\xstrat\Client\xstrat\obj\Debug\xstrat.csproj.CopyComplete
 D:\Github_repos\xstrat\Client\xstrat\obj\Debug\xstrat.exe
 D:\Github_repos\xstrat\Client\xstrat\obj\Debug\xstrat.pdb
+D:\Github_repos\xstrat\Client\xstrat\obj\Debug\MVVM\View\ScrimView.g.cs
+D:\Github_repos\xstrat\Client\xstrat\obj\Debug\MVVM\View\ScrimView.baml
+D:\Github_repos\xstrat\Client\xstrat\obj\Debug\Ui\ScrimFinderControl.g.cs
+D:\Github_repos\xstrat\Client\xstrat\obj\Debug\Ui\ScrimFinderControl.baml

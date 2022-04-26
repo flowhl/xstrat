@@ -116,6 +116,7 @@ namespace xstrat
             ApiHandler.AddBearer(token);
             NewlyRegistered = false;
             IsLoggedIn = true;
+            Globals.Init();
             mv.CurrentView = new HomeView();
         }
         public void RegisterComplete()

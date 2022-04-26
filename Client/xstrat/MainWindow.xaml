@@ -99,6 +99,14 @@
                              Style="{StaticResource MenuButtonTheme}"
                              Command="{Binding CalendarViewCommand}"/>
 
+                    <RadioButton Content="Scrims"
+                             Height="50"
+                             Foreground="White"
+                             FontSize="14"
+                             Style="{StaticResource MenuButtonTheme}"
+                             Command="{Binding ScrimViewCommand}"/>
+
+
 
                     <RadioButton Content="Routines"
                              Height="50"

@@ -42,6 +42,9 @@
             <DataTemplate DataType="{x:Type viewModel:CalendarViewModel}">
                 <view:CalendarView/>
             </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModel:ScrimViewModel}">
+                <view:ScrimView/>
+            </DataTemplate>
 
 
     <!--**************************

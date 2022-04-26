@@ -84,6 +84,7 @@ namespace xstrat.Core
 
         private static void RetrieveOffDayTypes()
         {
+            OffDayTypes.Clear();
             OffDayTypes.Add(new OffDayType(0, "exactly"));
             OffDayTypes.Add(new OffDayType(1, "entire day"));
             OffDayTypes.Add(new OffDayType(2, "weekly"));
