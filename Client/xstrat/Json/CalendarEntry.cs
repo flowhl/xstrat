@@ -22,6 +22,7 @@ namespace xstrat.Json
 
         public List<Object> args { get; set; }
 
-
+        public bool visible { get; set; } = true;
+        public User user { get; set; }
     }
 }

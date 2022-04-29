@@ -126,10 +126,87 @@ namespace xstrat.MVVM.View
                 MakeCalendarEntry(od);
             }
             CalendarMonthUI.DrawDays();
-
+            CreateUserCheckbox();
         }
 
         #region Helper Methods
+        private void UpdateHiddenEntrys()
+        {
+            List<UserCheckbox> checkboxes = new List<UserCheckbox>();
+            foreach (var item in Row2.Children)
+            {
+                checkboxes.Add(item as UserCheckbox);
+            }
+            foreach (var item in Row3.Children)
+            {
+                checkboxes.Add(item as UserCheckbox);
+            }
+            foreach (var item in Row4.Children)
+            {
+                checkboxes.Add(item as UserCheckbox);
+            }
+            foreach (var item in Row5.Children)
+            {
+                checkboxes.Add(item as UserCheckbox);
+            }
+            foreach (var userCheckbox in checkboxes)
+            {
+                var events =  Events.Where(x => x.user.id == userCheckbox.User.id);
+
+                foreach (var _event in events)
+                {
+                    _event.visible = userCheckbox.UserCheckboxItem.IsChecked.GetValueOrDefault(true);
+                }
+            }
+            CalendarMonthUI.DrawDays();
+        }
+
+        public void CreateUserCheckbox()
+        {
+            int counter = 0;
+            foreach (var user in Globals.teammates)
+            {
+                if (user != null)
+                {
+                    StackPanel rowToAdd = null;
+                    if (counter < 3)
+                    {
+                        rowToAdd = Row2;
+                    }
+                    else if (counter < 6)
+                    {
+                        rowToAdd = Row3;
+                    }
+                    else if (counter < 9)
+                    {
+                        rowToAdd= Row4;
+                    }
+                    else if (counter < 12)
+                    {
+                        rowToAdd = Row5;
+                    }
+                    if(rowToAdd != null)
+                    {
+                        UserCheckbox userCheckbox = new UserCheckbox(user);
+                        userCheckbox.UserCheckboxItem.Checked += UserCheckboxItem_Checked;
+                        userCheckbox.UserCheckboxItem.Unchecked += UserCheckboxItem_Unchecked;
+                        rowToAdd.Children.Add(userCheckbox);
+                    }
+                    counter++;
+                }
+            }
+        }
+
+        private void UserCheckboxItem_Unchecked(object sender, RoutedEventArgs e)
+        {
+            UpdateHiddenEntrys();
+        }
+
+        private void UserCheckboxItem_Checked(object sender, RoutedEventArgs e)
+        {
+            UpdateHiddenEntrys();
+        }
+
         private void MakeCalendarEntry(OffDay od)
         {
             try
@@ -142,7 +219,7 @@ namespace xstrat.MVVM.View
                     to = DateTime.ParseExact(od.end, "yyyy/MM/dd HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture);
                     if (from != null && to != null)
                     {
-                        Events.Add(new CalendarEntry() { DateFrom = from, DateTo = to, Label = GetLabel(od), typ = 1 });
+                        Events.Add(new CalendarEntry() { DateFrom = from, DateTo = to, Label = GetLabel(od), typ = 1, user = Globals.getUserFromId(od.user_id.GetValueOrDefault()) });
                     }
                 }
                 else if(od.typ == 1) //entire day
@@ -153,7 +230,7 @@ namespace xstrat.MVVM.View
                     to = DateTime.ParseExact(od.end, "yyyy/MM/dd HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture);
                     if (from != null && to != null)
                     {
-                        Events.Add(new CalendarEntry() { DateFrom = from, DateTo = to, Label = GetLabel(od), typ = 1 });
+                        Events.Add(new CalendarEntry() { DateFrom = from, DateTo = to, Label = GetLabel(od), typ = 1, user = Globals.getUserFromId(od.user_id.GetValueOrDefault()) });
                     }
                 }
                 else if (od.typ == 2) //weekly
@@ -164,7 +241,7 @@ namespace xstrat.MVVM.View
                         to = DateTime.ParseExact(od.end, "yyyy/MM/dd HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture).AddDays(7 * i);
                         if (from != null && to != null)
                         {
-                            Events.Add(new CalendarEntry() { DateFrom = from, DateTo = to, Label = GetLabel(od), typ = 1 });
+                            Events.Add(new CalendarEntry() { DateFrom = from, DateTo = to, Label = GetLabel(od), typ = 1, user = Globals.getUserFromId(od.user_id.GetValueOrDefault()) });
                         }
                     }
                 }
@@ -176,7 +253,7 @@ namespace xstrat.MVVM.View
                         to = DateTime.ParseExact(od.end, "yyyy/MM/dd HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture).AddDays(14 * i);
                         if (from != null && to != null)
                         {
-                            Events.Add(new CalendarEntry() { DateFrom = from, DateTo = to, Label = GetLabel(od), typ = 1 });
+                            Events.Add(new CalendarEntry() { DateFrom = from, DateTo = to, Label = GetLabel(od), typ = 1, user = Globals.getUserFromId(od.user_id.GetValueOrDefault()) });
                         }
                     }
                 }
@@ -188,7 +265,7 @@ namespace xstrat.MVVM.View
                         to = DateTime.ParseExact(od.end, "yyyy/MM/dd HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture).AddMonths(i);
                         if (from != null && to != null)
                         {
-                            Events.Add(new CalendarEntry() { DateFrom = from, DateTo = to, Label = GetLabel(od), typ = 1 });
+                            Events.Add(new CalendarEntry() { DateFrom = from, DateTo = to, Label = GetLabel(od), typ = 1, user = Globals.getUserFromId(od.user_id.GetValueOrDefault()) });
                         }
                     }
                 }
@@ -224,9 +301,32 @@ namespace xstrat.MVVM.View
             {
                 Notify.sendError("Error", ex.Message);
             }
-                return Globals.UserIdToName(od.user_id.GetValueOrDefault()) + " | " + stitle + ": " + sstart + "-" + send;
+            return Globals.UserIdToName(od.user_id.GetValueOrDefault()) + " | " + stitle + ": " + sstart + "-" + send;
 
         }
         #endregion
+
+        private void CheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            if(Events != null)
+            {
+                var sevents = Events.Where(x => x.typ == 1);
+
+                foreach (var _event in sevents)
+                {
+                    _event.visible = ScrimChecks.IsChecked.GetValueOrDefault(true);
+                }
+
+                var odevents = Events.Where(x => x.typ == 1);
+
+                foreach (var _event in odevents)
+                {
+                    _event.visible = OffDayChecks.IsChecked.GetValueOrDefault(true);
+                }
+                CalendarMonthUI.DrawDays();
+            }
+           
+        }
+
     }
 }

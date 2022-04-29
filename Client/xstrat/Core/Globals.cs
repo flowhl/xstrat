@@ -91,5 +91,10 @@ namespace xstrat.Core
             OffDayTypes.Add(new OffDayType(3, "every second week"));
             OffDayTypes.Add(new OffDayType(4, "monthly"));
         }
+
+        public static User getUserFromId(int id)
+        {
+            return teammates.Where(x => x.id == id).First();
+        }
     }
 }

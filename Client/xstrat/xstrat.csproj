@@ -279,6 +279,9 @@
     <Compile Include="Ui\ToggleSwitch.xaml.cs">
       <DependentUpon>ToggleSwitch.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Ui\UserCheckbox.xaml.cs">
+      <DependentUpon>UserCheckbox.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Ui\WallControl.xaml.cs">
       <DependentUpon>WallControl.xaml</DependentUpon>
     </Compile>
@@ -407,6 +410,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Ui\ToggleSwitch.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Ui\UserCheckbox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -149,3 +149,5 @@ D:\Github_repos\xstrat\Client\xstrat\obj\Debug\MVVM\View\ScrimView.g.cs
 D:\Github_repos\xstrat\Client\xstrat\obj\Debug\MVVM\View\ScrimView.baml
 D:\Github_repos\xstrat\Client\xstrat\obj\Debug\Ui\ScrimFinderControl.g.cs
 D:\Github_repos\xstrat\Client\xstrat\obj\Debug\Ui\ScrimFinderControl.baml
+D:\Github_repos\xstrat\Client\xstrat\obj\Debug\Ui\UserCheckbox.g.cs
+D:\Github_repos\xstrat\Client\xstrat\obj\Debug\Ui\UserCheckbox.baml

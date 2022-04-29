@@ -68,7 +68,7 @@ namespace xstrat.Calendar
 
         public static readonly DependencyProperty Color2Property =
             DependencyProperty.Register("Color2", typeof(SolidColorBrush), typeof(CalendarMonth),
-                new PropertyMetadata((Brush)converter.ConvertFromString("#7a33b5")));
+                new PropertyMetadata((Brush)converter.ConvertFromString("#b57033")));
 
         public SolidColorBrush HighlightColor
         {
@@ -330,7 +330,7 @@ namespace xstrat.Calendar
                 // loop all events
                 foreach (var e in events.OrderBy(e => e.DateFrom))
                 {
-                    if (!e.DateFrom.HasValue || !e.DateTo.HasValue)
+                    if (!e.DateFrom.HasValue || !e.DateTo.HasValue || !e.visible)
                     {
                         continue;
                     }

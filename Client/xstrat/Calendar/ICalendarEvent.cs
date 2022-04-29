@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using xstrat.Json;
 
 namespace xstrat.Calendar
 {
@@ -17,6 +18,7 @@ namespace xstrat.Calendar
         int typ { get; set; }
 
         List<Object> args { get; set; }
-
+        bool visible { get; set; }
+        User user { get; set; }
     }
 }
