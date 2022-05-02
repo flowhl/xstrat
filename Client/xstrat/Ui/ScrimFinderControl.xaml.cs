@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using xstrat.Core;
+using xstrat.Json;
 using xstrat.MVVM.View;
 
 namespace xstrat.Ui
@@ -21,22 +23,77 @@ namespace xstrat.Ui
     /// </summary>
     public partial class ScrimFinderControl : UserControl
     {
-        public bool mobtn { get; set; } = false;
-        public bool tubtn { get; set; } = false;
-        public bool webtn { get; set; } = false;
-        public bool thbtn { get; set; } = false;
-        public bool frbtn { get; set; } = false;
-        public bool sabtn { get; set; } = false;
-        public bool subtn { get; set; } = false;
+        #region btn properties
+        public bool mobtn { get; set; } = true;
+        public bool tubtn { get; set; } = true;
+        public bool webtn { get; set; } = true;
+        public bool thbtn { get; set; } = true;
+        public bool frbtn { get; set; } = true;
+        public bool sabtn { get; set; } = true;
+        public bool subtn { get; set; } = true;
 
         private Brush disabledBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#202020"));
         private Brush enabledBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#336cb5"));
 
+        #endregion
+
+        public List<User> Users { get; set; } = new List<User>();
+        public CalendarFilterType FilterType { get; set; }
+        public int PlayerCount { get; set; } = 5;
+
         public ScrimFinderControl()
         {
             InitializeComponent();
+            CalendarTypeSelector.CBox.SelectionChanged += CBox_SelectionChanged;
+            UpdateButtonColors();
+            Loaded += ScrimFinderControl_Loaded;
+            DurHour.Value = 2;
+            ToHour.Value = 23;
+            FromHour.Value = 20;
         }
 
+        private void ScrimFinderControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            //Fill Player selection list for Calendar filter
+            foreach (var user in Globals.teammates)
+            {
+                UserCheckbox userCheckbox = new UserCheckbox(user);
+                Playerlist.Children.Add(userCheckbox);
+            }
+
+            //set default number
+            PlayerAmount.Value = PlayerCount;
+        }
+
+        private void CBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (CalendarTypeSelector != null && CalendarTypeSelector.selectedCalendarFilterType != null)
+            {
+                var type = CalendarTypeSelector.selectedCalendarFilterType.id;
+                if (type == 0) //min players
+                {
+                    PlayerAmount.Visibility = Visibility.Visible;
+                    Playerlist.Visibility = Visibility.Collapsed;
+                }
+                if (type == 1) //specific
+                {
+                    PlayerAmount.Visibility = Visibility.Collapsed;
+                    Playerlist.Visibility = Visibility.Visible;
+                }
+                if (type == 2) //specific min
+                {
+                    PlayerAmount.Visibility = Visibility.Collapsed;
+                    Playerlist.Visibility = Visibility.Visible;
+                }
+                if (type == 3) // everyone
+                {
+                    PlayerAmount.Visibility = Visibility.Collapsed;
+                    Playerlist.Visibility = Visibility.Collapsed;
+                }
+            }
+        }
+
+        #region Day buttons
         private void MoBtn_Click(object sender, RoutedEventArgs e)
         {
             mobtn = !mobtn;
@@ -144,9 +201,21 @@ namespace xstrat.Ui
             }
         }
 
-        
+        #endregion
+
         private void SearchBtn_Click(object sender, RoutedEventArgs e)
         {
+            FilterType = CalendarTypeSelector.selectedCalendarFilterType;
+            Users.Clear();
+            foreach (UserCheckbox uc in Playerlist.Children)
+            {
+                if (uc.UserCheckboxItem.IsChecked.GetValueOrDefault(false))
+                {
+                    Users.Add(uc.User);
+                }
+            }
+            PlayerCount = PlayerAmount.Value;
+
             DependencyObject ucParent = this.Parent;
             if (ucParent != null)
             {

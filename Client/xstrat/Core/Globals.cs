@@ -9,11 +9,31 @@ using xstrat.Json;
 
 namespace xstrat.Core
 {
+    public class Player
+    {
+        public ICollection<Response> Responses { get; set; }
+        public int ID { get; set; }
+    }
+
+    public class Response
+    {
+        public DateTime StartDateTime { get; set; }
+        public DateTime EndDateTime { get; set; }
+
+    }
+
+    public class Window
+    {
+        public DateTime StartDateTime { get; set; }
+        public DateTime EndDateTime { get; set; }
+        public IEnumerable<Player> AvailablePlayers { get; set; }
+    }
     public static class Globals
     {
         public static List<User> teammates { get; set; } = new List<User>();
         public static List<Game> games { get; set; } = new List<Game>();
         public static List<OffDayType> OffDayTypes = new List<OffDayType>();
+        public static List<CalendarFilterType> CalendarFilterTypes = new List<CalendarFilterType>();
 
         public static string UserIdToName(int id)
         {
@@ -25,6 +45,7 @@ namespace xstrat.Core
             RetrieveTeamMates();
             RetrieveGames();
             RetrieveOffDayTypes();
+            RetrieveCalendarFilterTypes();
         }
 
         private static async void RetrieveTeamMates()
@@ -91,10 +112,22 @@ namespace xstrat.Core
             OffDayTypes.Add(new OffDayType(3, "every second week"));
             OffDayTypes.Add(new OffDayType(4, "monthly"));
         }
+        private static void RetrieveCalendarFilterTypes()
+        {
+            CalendarFilterTypes.Clear();
+            CalendarFilterTypes.Add(new CalendarFilterType(0, "min players"));
+            CalendarFilterTypes.Add(new CalendarFilterType(1, "specific players"));
+            CalendarFilterTypes.Add(new CalendarFilterType(2, "min specific players"));
+            CalendarFilterTypes.Add(new CalendarFilterType(3, "everyone"));
+        }
 
         public static User getUserFromId(int id)
         {
             return teammates.Where(x => x.id == id).First();
+        }
+        public static int getUserIdFromName(string name)
+        {
+            return teammates.Where(x => x.name.ToUpper().StartsWith(name.ToUpper())).First().id;
         }
     }
 }

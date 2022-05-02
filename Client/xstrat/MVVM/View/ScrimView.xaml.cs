@@ -19,6 +19,8 @@ using System.Windows.Shapes;
 using xstrat.Calendar;
 using xstrat.Core;
 using xstrat.Json;
+using xstrat.Ui;
+using Window = xstrat.Core.Window;
 
 namespace xstrat.MVVM.View
 {
@@ -80,7 +82,8 @@ namespace xstrat.MVVM.View
         {
             if (e.DataContext is ICalendarEvent calendarEvent)
             {
-                MessageBox.Show($"{calendarEvent.Label} | {calendarEvent.DateFrom} - {calendarEvent.DateTo}");
+                var responseWindow = new CalendarEventInfo(calendarEvent as CalendarEntry);
+                responseWindow.Show();
             }
         }
 
@@ -238,6 +241,15 @@ namespace xstrat.MVVM.View
 
         private void StartSearch()
         {
+            CalendarFilterType calendarFilterType = SFControl.FilterType;
+            int playeramount = SFControl.PlayerCount;
+            List<User> users = SFControl.Users;
+            List<int> SelectedPlayerNumbers = new List<int>();
+            foreach (var player in users)
+            {
+                SelectedPlayerNumbers.Add(player.id);
+            }
+
             ScrimDuration = new TimeSpan(SFControl.DurHour.Value, SFControl.DurMinute.Value, 0);
 
             ScrimStartHour = SFControl.FromHour.Value;
@@ -251,12 +263,12 @@ namespace xstrat.MVVM.View
 
             var now = DateTime.Now;
 
-            for (int i = 0; i < 21; i++)
+            for (int i = 0; i < 31; i++)
             {
                 dates.Add(now.AddDays(i));
             }
 
-            string results = "";
+            //string results = "";
             var players = new List<Player>();
 
             foreach (var date in dates)
@@ -264,7 +276,8 @@ namespace xstrat.MVVM.View
                 foreach (var user in Globals.teammates)
                 {
                     var newPlayer = new Player();
-                    newPlayer.Responses = GetTimespans(date, user.name);
+                    newPlayer.Responses = GetTimespans(date, user.name, SelectedPlayerNumbers, calendarFilterType.id);
+                    newPlayer.ID = user.id;
                     players.Add(newPlayer);
                 }
             }
@@ -272,24 +285,88 @@ namespace xstrat.MVVM.View
             var windows = GetMeetingWindows(players, TimeSpan.FromMinutes(60));
             foreach (var window in windows)
             {
-                if (window.AvailableAttendees.Count() >= 5)
+                if(calendarFilterType.id == 0) //min
                 {
-                    //results += String.Format("Start: {0:yyyy-MM-dd HH:mm}, End: {1:yyyy-MM-dd HH:mm}, Player count: {2}", window.StartDateTime, window.EndDateTime, window.AvailableAttendees.Count()) + "\n";
-                    List<Object> newargs = new List<Object>();
-                    newargs.Add(window);
-                    Events.Add(new CalendarEntry() { DateFrom = window.StartDateTime, DateTo = window.EndDateTime, Label = window.StartDateTime.ToString("HH:mm") + "-" + window.EndDateTime.ToString("HH:mm") + " | " + window.AvailableAttendees.Count(), typ = 2 , args = newargs });
+                    if (window.AvailablePlayers.Count() >= playeramount)
+                    {
+                        //results += String.Format("Start: {0:yyyy-MM-dd HH:mm}, End: {1:yyyy-MM-dd HH:mm}, Player count: {2}", window.StartDateTime, window.EndDateTime, window.AvailableAttendees.Count()) + "\n";
+                        List<Object> newargs = new List<Object>();
+                        newargs.Add(window);
+                        Events.Add(new CalendarEntry() { DateFrom = window.StartDateTime, DateTo = window.EndDateTime, Label = window.StartDateTime.ToString("HH:mm") + "-" + window.EndDateTime.ToString("HH:mm") + " | " + window.AvailablePlayers.Count(), typ = 2, args = newargs });
+                    }
                 }
+
+                if (calendarFilterType.id == 1) //specific
+                {
+                    List<int> AvailablePlayerNumbers = new List<int>();
+                    foreach (var player in window.AvailablePlayers)
+                    {
+                        AvailablePlayerNumbers.Add(player.ID);
+                    }
+
+                    if (SelectedPlayerNumbers.All(i => AvailablePlayerNumbers.Contains(i)))
+                    {
+                        window.AvailablePlayers = window.AvailablePlayers.Where(x => SelectedPlayerNumbers.Contains(x.ID));
+                        List<Object> newargs = new List<Object>();
+                        newargs.Add(window);
+                        Events.Add(new CalendarEntry() { DateFrom = window.StartDateTime, DateTo = window.EndDateTime, Label = window.StartDateTime.ToString("HH:mm") + "-" + window.EndDateTime.ToString("HH:mm") + " | " + window.AvailablePlayers.Count(), typ = 2, args = newargs });
+                    }
+                }
+
+                if (calendarFilterType.id == 2) //specific min
+                {
+                    List<int> AvailablePlayerNumbers = new List<int>();
+                    foreach (var player in window.AvailablePlayers)
+                    {
+                        AvailablePlayerNumbers.Add(player.ID);
+                    }
+
+                    bool hasMinPlayers = true;
+
+                    if(SelectedPlayerNumbers.Where(x => !AvailablePlayerNumbers.Contains(x)).Any())
+                    {
+                        hasMinPlayers = false;
+                    };
+
+                    if (hasMinPlayers)
+                    {
+                        List<Object> newargs = new List<Object>();
+                        newargs.Add(window);
+                        Events.Add(new CalendarEntry() { DateFrom = window.StartDateTime, DateTo = window.EndDateTime, Label = window.StartDateTime.ToString("HH:mm") + "-" + window.EndDateTime.ToString("HH:mm") + " | " + window.AvailablePlayers.Count(), typ = 2, args = newargs });
+                    }
+                }
+
+                if (calendarFilterType.id == 3) //all
+                {
+                    if (window.AvailablePlayers.Count() >= Globals.teammates.Count)
+                    {
+                        List<Object> newargs = new List<Object>();
+                        newargs.Add(window);
+                        Events.Add(new CalendarEntry() { DateFrom = window.StartDateTime, DateTo = window.EndDateTime, Label = window.StartDateTime.ToString("HH:mm") + "-" + window.EndDateTime.ToString("HH:mm") + " | " + window.AvailablePlayers.Count(), typ = 2, args = newargs });
+                    }
+                }
+
+                //if (window.AvailablePlayers.Count() >= 5)
+                //{
+                //    List<Object> newargs = new List<Object>();
+                //    newargs.Add(window);
+                //    Events.Add(new CalendarEntry() { DateFrom = window.StartDateTime, DateTo = window.EndDateTime, Label = window.StartDateTime.ToString("HH:mm") + "-" + window.EndDateTime.ToString("HH:mm") + " | " + window.AvailablePlayers.Count(), typ = 2 , args = newargs });
+                //}
             }
             CalendarMonthUI.DrawDays();
             //MessageBox.Show(results.ToString());
         }
 
-        private List<Response> GetTimespans(DateTime date, string user_name)
+        private List<Response> GetTimespans(DateTime date, string user_name, List<int> SelectedPlayerNumbers, int filtertype)
         {
             List<Response> timespans = new List<Response>();
 
             int day = (int)date.DayOfWeek;
-            
+
+            if ( filtertype == 1 &&  !SelectedPlayerNumbers.Contains(Globals.getUserIdFromName(user_name)))
+            {
+                return timespans;
+            }
 
             if(day == 0)
             {
@@ -392,34 +469,16 @@ namespace xstrat.MVVM.View
             return timespans;
         }
 
-        public class Player
-        {
-            public ICollection<Response> Responses { get; set; }
-            public int ID { get; set; }
-        }
+       
 
-        public class Response
-        {
-            public DateTime StartDateTime { get; set; }
-            public DateTime EndDateTime { get; set; }
-
-        }
-
-        public class Window
-        {
-            public DateTime StartDateTime { get; set; }
-            public DateTime EndDateTime { get; set; }
-            public IEnumerable<Player> AvailableAttendees { get; set; }
-        }
-
-        public IEnumerable<Window> GetMeetingWindows(IEnumerable<Player> attendees, TimeSpan meetingDuration)
+        public IEnumerable<Window> GetMeetingWindows(IEnumerable<Player> players, TimeSpan meetingDuration)
         {
             var windows = new List<Window>();
-            var responses = attendees.SelectMany(x => x.Responses).Where(x => x.EndDateTime - x.StartDateTime >= meetingDuration);
+            var responses = players.SelectMany(x => x.Responses).Where(x => x.EndDateTime - x.StartDateTime >= meetingDuration);
 
             foreach (var time in (responses.Select(x => x.StartDateTime)).Distinct())
             {
-                var matches = attendees.Select(x => new {
+                var matches = players.Select(x => new {
                     Attendee = x,
                     MatchingAvailabilities = x.Responses.Where(y => y.StartDateTime <= time && y.EndDateTime >= time.Add(meetingDuration))
                 });
@@ -428,13 +487,13 @@ namespace xstrat.MVVM.View
                 {
                     StartDateTime = time,
                     EndDateTime = matches.SelectMany(x => x.MatchingAvailabilities).Min(x => x.EndDateTime),
-                    AvailableAttendees = matches.Where(y => y.MatchingAvailabilities.Any()).Select(x => x.Attendee)
+                    AvailablePlayers = matches.Where(y => y.MatchingAvailabilities.Any()).Select(x => x.Attendee)
                 });
             }
 
             foreach (var time in (responses.Select(x => x.EndDateTime)).Distinct())
             {
-                var matches = attendees.Select(x => new {
+                var matches = players.Select(x => new {
                     Attendee = x,
                     MatchingAvailabilities = x.Responses.Where(y => y.EndDateTime >= time && y.StartDateTime <= time.Add(-meetingDuration))
                 });
@@ -443,7 +502,7 @@ namespace xstrat.MVVM.View
                 {
                     EndDateTime = time,
                     StartDateTime = matches.SelectMany(x => x.MatchingAvailabilities).Max(x => x.StartDateTime),
-                    AvailableAttendees = matches.Where(y => y.MatchingAvailabilities.Any()).Select(x => x.Attendee)
+                    AvailablePlayers = matches.Where(y => y.MatchingAvailabilities.Any()).Select(x => x.Attendee)
                 });
             }
 

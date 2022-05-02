@@ -151,3 +151,5 @@ D:\Github_repos\xstrat\Client\xstrat\obj\Debug\Ui\ScrimFinderControl.g.cs
 D:\Github_repos\xstrat\Client\xstrat\obj\Debug\Ui\ScrimFinderControl.baml
 D:\Github_repos\xstrat\Client\xstrat\obj\Debug\Ui\UserCheckbox.g.cs
 D:\Github_repos\xstrat\Client\xstrat\obj\Debug\Ui\UserCheckbox.baml
+D:\Github_repos\xstrat\Client\xstrat\obj\Debug\Ui\CalendarEventInfo.g.cs
+D:\Github_repos\xstrat\Client\xstrat\obj\Debug\Ui\CalendarEventInfo.baml

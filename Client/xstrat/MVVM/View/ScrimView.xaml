@@ -9,12 +9,14 @@
              x:Name="CalendarUISmall">
     <Grid>
         <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
-           <StackPanel Orientation="Vertical">
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-                    <local1:CalendarMonth x:Name="CalendarMonthUI" Events="{Binding ElementName=CalendarUISmall, Path=Events}" GridBrush="#336cb5" GridBorderThickness="0.8" Width="800" Height="600"/>
-                    <local2:ScrimFinderControl x:Name="SFControl" Margin="0,43,0,0"></local2:ScrimFinderControl>
-                </StackPanel>
-            </StackPanel> 
+            <Grid Height="Auto">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="320"/>
+                </Grid.ColumnDefinitions>
+                <local1:CalendarMonth Grid.Column="0" HorizontalAlignment="Stretch"  x:Name="CalendarMonthUI" Events="{Binding ElementName=CalendarUISmall, Path=Events}" GridBrush="#336cb5" GridBorderThickness="0.8" Height="775"/>
+                <local2:ScrimFinderControl Grid.Column="1" x:Name="SFControl" Margin="0,43,0,0" HorizontalAlignment="Center"></local2:ScrimFinderControl>
+            </Grid>
         </ScrollViewer>        
     </Grid>
 </UserControl>

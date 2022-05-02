@@ -205,6 +205,7 @@
     <Compile Include="Core\RoutineStepButtonClicked.cs" />
     <Compile Include="Core\Wallstates.cs" />
     <Compile Include="Json\CalendarEntry.cs" />
+    <Compile Include="Json\CalendarFilterType.cs" />
     <Compile Include="Json\JColor.cs" />
     <Compile Include="Json\Content.cs" />
     <Compile Include="Json\Floor.cs" />
@@ -245,6 +246,9 @@
     </Compile>
     <Compile Include="Overlay\RoutineOverlay.xaml.cs">
       <DependentUpon>RoutineOverlay.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Ui\CalendarEventInfo.xaml.cs">
+      <DependentUpon>CalendarEventInfo.xaml</DependentUpon>
     </Compile>
     <Compile Include="Ui\MapFloor.xaml.cs">
       <DependentUpon>MapFloor.xaml</DependentUpon>
@@ -362,6 +366,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Overlay\RoutineOverlay.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Ui\CalendarEventInfo.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -73,8 +73,9 @@ namespace xstrat.MVVM.View
         {
             if (e.DataContext is ICalendarEvent calendarEvent)
             {
-                MessageBox.Show($"{calendarEvent.Label} | {calendarEvent.DateFrom} - {calendarEvent.DateTo}");
-                
+                var responseWindow = new CalendarEventInfo(calendarEvent as CalendarEntry);
+                responseWindow.Show();
+                //MessageBox.Show($"{calendarEvent.Label} | {calendarEvent.DateFrom} - {calendarEvent.DateTo}");
             }
         }
 

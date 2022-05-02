@@ -1,0 +1,41 @@
+﻿<Window x:Class="xstrat.Ui.CalendarEventInfo"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:xstrat.Ui"
+        mc:Ignorable="d"
+        Title="CalendarEventInfo" Height="320" Width="600" Background="#202020" ShowInTaskbar="False" ResizeMode="NoResize">
+    <Grid>
+        <StackPanel Orientation="Vertical">
+            <Label Name="TypeLabel" Foreground="#808080" HorizontalAlignment="Center" FontSize="28">asd</Label>
+            <Label Name="TitleLabel" Foreground="White" HorizontalAlignment="Center" FontSize="24" Margin="0,-10,0,0">asd</Label>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <StackPanel Orientation="Vertical" MaxWidth="290" Margin="0,0,10,0" HorizontalAlignment="Left">
+                    <Label Foreground="White" FontSize="17">Info:</Label>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Foreground="#808080">From:</Label>
+                        <Label Name="FromLabel" Foreground="White"></Label>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Foreground="#808080">To:</Label>
+                        <Label Name="ToLabel" Foreground="White"></Label>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Foreground="#808080">User:</Label>
+                        <Label Name="UserLabel" Foreground="White"></Label>
+                    </StackPanel>
+                </StackPanel>
+                <StackPanel Orientation="Vertical" Name="PlayerlistSP" Visibility="Collapsed">
+                    <Label Foreground="White" FontSize="17">Users:</Label>
+                    <ScrollViewer VerticalScrollBarVisibility="Auto" Height="150">
+                        <StackPanel Orientation="Vertical" Name="PlayerList" MaxWidth="290" Margin="10,0,0,0" >
+                        </StackPanel>
+                    </ScrollViewer>
+                </StackPanel>                
+            </StackPanel>
+           
+           
+        </StackPanel>
+    </Grid>
+</Window>

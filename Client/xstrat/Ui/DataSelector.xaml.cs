@@ -28,7 +28,8 @@ namespace xstrat.Ui
        
         public User selectedUser { get; set; } = null;
         public Game selectedGame { get; set; } = null;
-        public OffDayType selectedOffDayType = null; 
+        public OffDayType selectedOffDayType = null;
+        public CalendarFilterType selectedCalendarFilterType { get; set; } = null;
         public int type { get; set; } = 0;
 
 
@@ -38,6 +39,7 @@ namespace xstrat.Ui
         /// 1 - teammates
         /// 2 - game
         /// 3 - offdaytype
+        /// 4 - calendar filter
         /// </summary>
         /// <param name="type"></param>
         public DataSelector()
@@ -81,6 +83,7 @@ namespace xstrat.Ui
                 {
                     CBox.Items.Add(item.name);
                 }
+                CBox.SelectedIndex = 0;
             }
             else if (type == 2)
             {
@@ -89,6 +92,7 @@ namespace xstrat.Ui
                 {
                     CBox.Items.Add(item.name);
                 }
+                CBox.SelectedIndex = 0;
             }
             else if(type == 3)
             {
@@ -97,7 +101,17 @@ namespace xstrat.Ui
                 {
                     CBox.Items.Add(item.name);
                 }
+                CBox.SelectedIndex = 0;
 
+            }
+            else if (type == 4)
+            {
+                CBox.Items.Clear();
+                foreach (var item in Globals.CalendarFilterTypes)
+                {
+                    CBox.Items.Add(item.name);
+                }
+                CBox.SelectedIndex = 0;
             }
         }
 
@@ -115,6 +129,10 @@ namespace xstrat.Ui
             else if(type == 3)
             {
                 selectedOffDayType = Globals.OffDayTypes[CBox.SelectedIndex];
+            }
+            else if (type == 4)
+            {
+                selectedCalendarFilterType = Globals.CalendarFilterTypes[CBox.SelectedIndex];
             }
         }
     }

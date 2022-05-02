@@ -43,6 +43,12 @@ namespace xstrat.Ui
         public NumberBox()
         {
             InitializeComponent();
+            Loaded += NumberBox_Loaded;
+        }
+
+        private void NumberBox_Loaded(object sender, RoutedEventArgs e)
+        {
+            Number.Text = _value.ToString();
         }
 
         private void UpBtn_Click(object sender, RoutedEventArgs e)
