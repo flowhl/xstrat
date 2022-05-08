@@ -35,7 +35,11 @@ const {
      deleteEvent,
      getTeamEvents,
      getUserEvents,
-     saveEvent
+     saveEvent,
+     newScrim,
+     deleteScrim,
+     getTeamScrims,
+     saveScrim
     } = require("./user.controller");
 const router = require("express").Router();
 const {checkToken} = require("../../auth/token_validation");
@@ -106,5 +110,12 @@ router.get("/event/user",[checkToken], getUserEvents)
 router.post("/event/save",[checkToken], saveEvent)
 
 //#endregion
+
+//#region scrims
+
+router.post("/scrim/new",[checkToken], newScrim)
+router.post("/scrim/delete",[checkToken], deleteScrim)
+router.get("/scrim/team",[checkToken], getTeamScrims)
+router.post("/scrim/save",[checkToken], saveScrim)
 
 module.exports = router

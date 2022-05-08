@@ -986,5 +986,143 @@ module.exports = {
         })
     },
 //#endregion
+//#region scrim
+
+newScrim: (req, res) => {
+    const user_id = req.id;
+    const typ = req.body.typ;
+    const title = req.body.title;
+    const time = req.body.time;
+    getTeamByUser_id(id, (err, results) => {
+        if (err) {
+            console.log(err);
+            return res.status(500).json({
+                success: 0,
+                message: "Database connection error"
+            });
+        }
+        else if(!results){
+            return res.status(200).json({
+                success: 0,
+                message: "Team not found"
+            });
+        }
+        const team_id = results.team_id
+        createScrim(user_id, title, time, team_id, typ, (err, result) => {
+            if (err) {
+                console.log(err);
+                return res.status(500).json({
+                    success: 0,
+                    message: "Database connection error"
+                });
+            }
+            else{
+                return res.status(200).json({
+                    success: 1,
+                    data: result
+                });
+            }
+        })
+    })
+},
+deleteScrim: (req, res) => {
+    const user_id = req.id;
+    const scrim_id = req.body.scrim_id;
+    deleteScrim(user_id, scrim_id, (err, result) => {
+        if (err) {
+            console.log(err);
+            return res.status(500).json({
+                success: 0,
+                message: "Database connection error"
+            });
+        }
+        else{
+            return res.status(200).json({
+                success: 1,
+                data: result
+            });
+        }
+    })
+},
+//needs to be implemented
+getTeamScrims: (req, res) => {
+    const id = req.id
+    getTeamByUser_id(id, (err, results) => {
+        if (err) {
+            console.log(err);
+            return res.status(500).json({
+                success: 0,
+                message: "Database connection error"
+            });
+        }
+        else if(!results){
+            return res.status(200).json({
+                success: 0,
+                message: "Team not found"
+            });
+        }
+        const team_id = results.team_id
+        getTeamScrims(team_id, (err, result) => {
+            if (err) {
+                console.log(err);
+                return res.status(500).json({
+                    success: 0,
+                    message: "Database connection error"
+                });
+            }
+            else{
+                return res.status(200).json({
+                    success: 1,
+                    data: result
+                });
+            }
+        })
+    })
+},
+saveScrim: (req, res) => {
+    const id = req.body.id;
+    const title = req.body.title;
+    const comment = req.body.comment;
+    const time = req.body.time;
+    const opponent_name = req.body.opponent_name;
+    const map_1_id = req.body.map_1_id;
+    const map_2_id = req.body.map_2_id;
+    const map_3_id = req.body.map_3_id;
+    const typ = req.body.typ;
+    getTeamByUser_id(id, (err, results) => {
+        if (err) {
+            console.log(err);
+            return res.status(500).json({
+                success: 0,
+                message: "Database connection error"
+            });
+        }
+        else if(!results){
+            return res.status(200).json({
+                success: 0,
+                message: "Team not found"
+            });
+        }
+        const team_id = results.team_id
+        saveScrim(id, title, comment, time, opponent_name, team_id, map_1_id, map_2_id, map_3_id, typ, (err, result) => {
+            if (err) {
+                console.log(err);
+                return res.status(500).json({
+                    success: 0,
+                    message: "Database connection error"
+                });
+            }
+            else{
+                return res.status(200).json({
+                    success: 1,
+                    message: result
+                });
+            }
+        })
+    })
+},
+
+//#endregion
+
 
 };

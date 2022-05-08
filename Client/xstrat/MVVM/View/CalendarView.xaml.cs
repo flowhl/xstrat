@@ -67,6 +67,12 @@ namespace xstrat.MVVM.View
 
             // subscribe to double cliked event
             CalendarMonthUI.CalendarEventDoubleClickedEvent += Calendar_CalendarEventDoubleClickedEvent;
+            CalendarMonthUI.CalendarEventMiddleMouseClickedEvent += CalendarMonthUI_CalendarEventMiddleMouseClickedEvent;
+        }
+
+        private void CalendarMonthUI_CalendarEventMiddleMouseClickedEvent(object sender, CalendarEventView e)
+        {
+
         }
 
         private void Calendar_CalendarEventDoubleClickedEvent(object sender, CalendarEventView e)

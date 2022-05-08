@@ -216,6 +216,7 @@
     <Compile Include="Json\OffDay.cs" />
     <Compile Include="Json\OffDayType.cs" />
     <Compile Include="Json\Position.cs" />
+    <Compile Include="Json\Scrim.cs" />
     <Compile Include="Json\Strat.cs" />
     <Compile Include="Json\teamInfo.cs" />
     <Compile Include="Json\User.cs" />
@@ -270,6 +271,9 @@
     </Compile>
     <Compile Include="Ui\ScrimFinderControl.xaml.cs">
       <DependentUpon>ScrimFinderControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Ui\ScrimWindow.xaml.cs">
+      <DependentUpon>ScrimWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Ui\TeamDashboard.xaml.cs">
       <DependentUpon>TeamDashboard.xaml</DependentUpon>
@@ -402,6 +406,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Ui\ScrimFinderControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Ui\ScrimWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

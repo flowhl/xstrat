@@ -76,6 +76,12 @@ namespace xstrat.MVVM.View
 
             // subscribe to double cliked event
             CalendarMonthUI.CalendarEventDoubleClickedEvent += Calendar_CalendarEventDoubleClickedEvent;
+            CalendarMonthUI.CalendarEventMiddleMouseClickedEvent += CalendarMonthUI_CalendarEventMiddleMouseClickedEvent;
+        }
+
+        private void CalendarMonthUI_CalendarEventMiddleMouseClickedEvent(object sender, CalendarEventView e)
+        {
+
         }
 
         private void Calendar_CalendarEventDoubleClickedEvent(object sender, CalendarEventView e)
@@ -154,7 +160,7 @@ namespace xstrat.MVVM.View
                     to = DateTime.ParseExact(od.end, "yyyy/MM/dd HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture);
                     if (from != null && to != null)
                     {
-                        Events.Add(new CalendarEntry() { DateFrom = from, DateTo = to, Label = GetLabel(od), typ = 1 });
+                        Events.Add(new CalendarEntry() { DateFrom = from, DateTo = to, Label = GetLabel(od), typ = 1, user = Globals.getUserFromId(od.user_id.GetValueOrDefault()) });
                     }
                 }
                 else if (od.typ == 1) //entire day
@@ -165,7 +171,7 @@ namespace xstrat.MVVM.View
                     to = DateTime.ParseExact(od.end, "yyyy/MM/dd HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture);
                     if (from != null && to != null)
                     {
-                        Events.Add(new CalendarEntry() { DateFrom = from, DateTo = to, Label = GetLabel(od), typ = 1 });
+                        Events.Add(new CalendarEntry() { DateFrom = from, DateTo = to, Label = GetLabel(od), typ = 1, user = Globals.getUserFromId(od.user_id.GetValueOrDefault()) });
                     }
                 }
                 else if (od.typ == 2) //weekly
@@ -176,7 +182,7 @@ namespace xstrat.MVVM.View
                         to = DateTime.ParseExact(od.end, "yyyy/MM/dd HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture).AddDays(7 * i);
                         if (from != null && to != null)
                         {
-                            Events.Add(new CalendarEntry() { DateFrom = from, DateTo = to, Label = GetLabel(od), typ = 1 });
+                            Events.Add(new CalendarEntry() { DateFrom = from, DateTo = to, Label = GetLabel(od), typ = 1, user = Globals.getUserFromId(od.user_id.GetValueOrDefault()) });
                         }
                     }
                 }
@@ -188,7 +194,7 @@ namespace xstrat.MVVM.View
                         to = DateTime.ParseExact(od.end, "yyyy/MM/dd HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture).AddDays(14 * i);
                         if (from != null && to != null)
                         {
-                            Events.Add(new CalendarEntry() { DateFrom = from, DateTo = to, Label = GetLabel(od), typ = 1 });
+                            Events.Add(new CalendarEntry() { DateFrom = from, DateTo = to, Label = GetLabel(od), typ = 1, user = Globals.getUserFromId(od.user_id.GetValueOrDefault()) });
                         }
                     }
                 }
@@ -200,7 +206,7 @@ namespace xstrat.MVVM.View
                         to = DateTime.ParseExact(od.end, "yyyy/MM/dd HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture).AddMonths(i);
                         if (from != null && to != null)
                         {
-                            Events.Add(new CalendarEntry() { DateFrom = from, DateTo = to, Label = GetLabel(od), typ = 1 });
+                            Events.Add(new CalendarEntry() { DateFrom = from, DateTo = to, Label = GetLabel(od), typ = 1, user = Globals.getUserFromId(od.user_id.GetValueOrDefault()) });
                         }
                     }
                 }

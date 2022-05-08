@@ -153,3 +153,5 @@ D:\Github_repos\xstrat\Client\xstrat\obj\Debug\Ui\UserCheckbox.g.cs
 D:\Github_repos\xstrat\Client\xstrat\obj\Debug\Ui\UserCheckbox.baml
 D:\Github_repos\xstrat\Client\xstrat\obj\Debug\Ui\CalendarEventInfo.g.cs
 D:\Github_repos\xstrat\Client\xstrat\obj\Debug\Ui\CalendarEventInfo.baml
+D:\Github_repos\xstrat\Client\xstrat\obj\Debug\Ui\ScrimWindow.g.cs
+D:\Github_repos\xstrat\Client\xstrat\obj\Debug\Ui\ScrimWindow.baml

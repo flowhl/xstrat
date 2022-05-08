@@ -500,7 +500,7 @@ module.exports = {
     },
 
 //#endregion
-//#region calendar
+//#region events
 
     createEvent: (user_id, typ, title, start, end, callBack) => {
         pool.query(
@@ -537,7 +537,7 @@ module.exports = {
     },
     getTeamEvents:(team_id, callBack) => {
         pool.query(
-            'SELECT * FROM offday JOIN user ON offday.user_id = user.id WHERE user.team_id = ?',
+            'SELECT offday.* FROM offday JOIN user ON offday.user_id = user.id WHERE user.team_id = ?',
             [
                 team_id
             ],
@@ -582,5 +582,81 @@ module.exports = {
                 return callBack(null,"DB OK");                
             }
         );
+    },
+
+    //#endregion
+    //#region scrims
+
+    createScrim: (user_id, title, time, team_id, typ, callBack) => {
+        pool.query(
+            'INSERT INTO scrim (title, time, team_id, typ, creator_id) VALUES (?,?,?,?,?)',
+            [
+                title,
+                time,
+                team_id,
+                typ,
+                user_id
+            ],
+            (err, results)=>{
+                if(err){
+                   return callBack(err);
+                }
+                return callBack(null, results);                
+            }
+        );
+    },
+    deleteScrim: (user_id, scrim_id, callBack) => {
+        pool.query(
+            'DELETE FROM scrim WHERE creator_id = ? AND id = ?',
+            [
+                user_id,
+                scrim_id
+            ],
+            (err, results)=>{
+                if(err){
+                   return callBack(err);
+                }
+                return callBack(null, results);                
+            }
+        );
+    },
+    getTeamScrim:(team_id, callBack) => {
+        pool.query(
+            'SELECT * FROM scrim WHERE team_id = ?',
+            [
+                team_id
+            ],
+            (err, results)=>{
+                if(err){
+                   return callBack(err);
+                }
+                return callBack(null,results);                
+            }
+        )
+    },
+    saveScrim:(id, title, comment, time, opponent_name, team_id, map_1_id, map_2_id, map_3_id, typ, callBack) => {
+        pool.query(
+            'Update scrim SET title = ?, comment = ?, time = ?, opponent_name = ?,  map_1_id = ?, map_2_id = ?, map_3_id = ?, typ = ? WHERE id = ? AND team_id = ?'
+            [
+                title,
+                comment,
+                time,
+                opponent_name,
+                map_1_id,
+                map_2_id,
+                map_3_id,
+                typ,
+                id,
+                team_id
+            ],
+            (err)=>{
+                if(err){
+                   return callBack(err);
+                }
+                return callBack(null,"DB OK");                
+            }
+        );
     }
+
+    //#endregion
 };

@@ -38,7 +38,6 @@ namespace xstrat.Ui
             if (calendarEntry.typ == 1)
             {
                 TypeLabel.Content = "Off day";
-
             }
             if (calendarEntry.typ == 2)
             {
@@ -63,12 +62,15 @@ namespace xstrat.Ui
             }
             try
             {
-
                 FromLabel.Content = calendarEntry.DateFrom.GetValueOrDefault().ToString("yyyy/MM/dd HH:mm:ss");
                 ToLabel.Content = calendarEntry.DateTo.GetValueOrDefault().ToString("yyyy/MM/dd HH:mm:ss");
                 if(calendarEntry.user != null)
                 {
                     UserLabel.Content = calendarEntry.user.name ?? "";
+                }
+                else
+                {
+                    User.Visibility = Visibility.Collapsed;
                 }
                 TitleLabel.Content = calendarEntry.Label;
             }

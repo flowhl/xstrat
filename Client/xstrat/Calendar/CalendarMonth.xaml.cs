@@ -133,6 +133,8 @@ namespace xstrat.Calendar
 
         public event EventHandler<CalendarEventView> CalendarEventDoubleClickedEvent;
 
+        public event EventHandler<CalendarEventView> CalendarEventMiddleMouseClickedEvent;
+
         public ObservableCollection<CalendarDay> DaysInCurrentMonth { get; set; }
 
         public CalendarMonth()
@@ -175,6 +177,11 @@ namespace xstrat.Calendar
         public void CalendarEventDoubleClicked(CalendarEventView calendarEventView)
         {
             CalendarEventDoubleClickedEvent?.Invoke(this, calendarEventView);
+        }
+
+        public void CalendarEventMiddleMouseClicked(CalendarEventView calendarEventView)
+        {
+            CalendarEventMiddleMouseClickedEvent?.Invoke(this, calendarEventView);
         }
 
         internal void CalendarEventClicked(CalendarEventView eventToSelect)

@@ -46,6 +46,10 @@ namespace xstrat.Calendar
             {
                 _calendar.CalendarEventClicked(this);
             }
+            else if(e.ChangedButton == MouseButton.Middle && e.ClickCount == 1)
+            {
+                _calendar.CalendarEventMiddleMouseClicked(this);
+            }
         }
     }
 }
