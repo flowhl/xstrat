@@ -1,4 +1,4 @@
-const { create_user, getMemberByUserID,getUserByUserId,getUsers,getUserByEmail, deleteAccount, changeEmail, changeName, changePassword, getTeamByUser_id, updateTeamName, deleteTeam, newTeam, createVerification, getVerification, clearVerification, activateAccount, newRoutine, deleteRoutine, getRoutineContent, saveRoutine, getRoutines, renameRoutine, verifyTeamAdmin, verifyTeamJoinPassword, joinTeam, getTeamJoinPassword, getTeamMembers, getTeamFullInfo, getGames, leaveTeam, setMyColor, getMyColor, createEvent, deleteEvent, getTeamEvents, getUserEvents, saveEvent} = require("./user.service");
+const { create_user, getMemberByUserID,getUserByUserId,getUsers,getUserByEmail, deleteAccount, changeEmail, changeName, changePassword, getTeamByUser_id, updateTeamName, deleteTeam, newTeam, createVerification, getVerification, clearVerification, activateAccount, newRoutine, deleteRoutine, getRoutineContent, saveRoutine, getRoutines, renameRoutine, verifyTeamAdmin, verifyTeamJoinPassword, joinTeam, getTeamJoinPassword, getTeamMembers, getTeamFullInfo, getGames, leaveTeam, setMyColor, getMyColor, createEvent, deleteEvent, getTeamEvents, getUserEvents, saveEvent, getMaps, createScrim, saveScrim} = require("./user.service");
 
 const {genSaltSync, hashSync, compareSync} = require("bcrypt");
 const { sign } = require("jsonwebtoken");
@@ -325,6 +325,46 @@ module.exports = {
             success: 1,
             data: results
         });
+    })
+  },
+  getMaps:(req, res) => {
+    console.log("asdasd");
+    const id = req.id;
+    getTeamByUser_id(id, (err, results) => {
+        if (err) {
+            console.log(err);
+            return res.status(500).json({
+                success: 0,
+                message: "Database connection error"
+            });
+        }
+        else if(!results){
+            return res.status(200).json({
+                success: 0,
+                message: "Team not found"
+            });
+        }
+        const team_id = results.team_id
+        getMaps(team_id, (err,results) => {
+            
+            if (err) {
+                console.log(err);
+                return res.status(500).json({
+                    success: 0,
+                    message: "Database connection error"
+                });
+            }
+            else if(!results){
+                return res.status(200).json({
+                    success: 0,
+                    data: "Maps not found"
+                });
+            }
+            return res.status(200).json({
+                success: 1,
+                data: results
+            });
+        })
     })
   },
 //#endregion
@@ -989,10 +1029,11 @@ module.exports = {
 //#region scrim
 
 newScrim: (req, res) => {
-    const user_id = req.id;
+    const id = req.id;
     const typ = req.body.typ;
     const title = req.body.title;
-    const time = req.body.time;
+    const time_start = req.body.time_start;
+    const time_end = req.body.time_end;
     getTeamByUser_id(id, (err, results) => {
         if (err) {
             console.log(err);
@@ -1008,7 +1049,7 @@ newScrim: (req, res) => {
             });
         }
         const team_id = results.team_id
-        createScrim(user_id, title, time, team_id, typ, (err, result) => {
+        createScrim(id, title, time_start, time_end, team_id, typ, (err, result) => {
             if (err) {
                 console.log(err);
                 return res.status(500).json({
@@ -1080,10 +1121,11 @@ getTeamScrims: (req, res) => {
     })
 },
 saveScrim: (req, res) => {
-    const id = req.body.id;
+    const id = req.id;
     const title = req.body.title;
     const comment = req.body.comment;
-    const time = req.body.time;
+    const time_start = req.body.time_start;
+    const time_end = req.body.time_end;
     const opponent_name = req.body.opponent_name;
     const map_1_id = req.body.map_1_id;
     const map_2_id = req.body.map_2_id;
@@ -1104,7 +1146,7 @@ saveScrim: (req, res) => {
             });
         }
         const team_id = results.team_id
-        saveScrim(id, title, comment, time, opponent_name, team_id, map_1_id, map_2_id, map_3_id, typ, (err, result) => {
+        saveScrim(id, title, comment, time_start, time_end, opponent_name, team_id, map_1_id, map_2_id, map_3_id, typ, (err, result) => {
             if (err) {
                 console.log(err);
                 return res.status(500).json({

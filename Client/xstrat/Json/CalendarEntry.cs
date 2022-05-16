@@ -24,5 +24,6 @@ namespace xstrat.Json
 
         public bool visible { get; set; } = true;
         public User user { get; set; }
+        public Scrim scrim { get; set; }
     }
 }

@@ -88,8 +88,23 @@ namespace xstrat.MVVM.View
         {
             if (e.DataContext is ICalendarEvent calendarEvent)
             {
-                var responseWindow = new CalendarEventInfo(calendarEvent as CalendarEntry);
-                responseWindow.Show();
+                if(calendarEvent.typ == 0) //scrim
+                {
+                    var responseWindow = new ScrimWindow(calendarEvent.scrim);
+                    responseWindow.Show();
+                }
+
+                if (calendarEvent.typ == 1) //offday
+                {
+                    var responseWindow = new CalendarEventInfo(calendarEvent as CalendarEntry);
+                    responseWindow.Show();
+                }
+
+                if (calendarEvent.typ == 2) //recommendation
+                {
+                    var responseWindow = new ScrimWindow(calendarEvent.args.First() as Core.Window);
+                    responseWindow.Show();
+                }
             }
         }
 

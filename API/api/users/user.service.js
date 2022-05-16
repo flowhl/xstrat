@@ -181,6 +181,19 @@ module.exports = {
         }
         );
     },
+    getMaps: (team_id, callBack) => {
+        pool.query(
+            "SELECT map.* FROM map join team on team.game_id = map.game_id WHERE team.id = ?",[
+                team_id
+            ],
+        (err,results)=>{
+            if(err){
+               return callBack(err);
+            }
+            return callBack(null,results);                
+        }
+        );
+    },
     getMemberByUserID: (id, callBack) => {
         pool.query(
             "SELECT * FROM team WHERE user_id = ? AND deleted = 0",
@@ -587,12 +600,13 @@ module.exports = {
     //#endregion
     //#region scrims
 
-    createScrim: (user_id, title, time, team_id, typ, callBack) => {
+    createScrim: (user_id, title, time_start, time_end, team_id, typ, callBack) => {
         pool.query(
-            'INSERT INTO scrim (title, time, team_id, typ, creator_id) VALUES (?,?,?,?,?)',
+            'INSERT INTO scrim (title, time_start, time_end, team_id, typ, creator_id) VALUES (?,?,?,?,?,?)',
             [
                 title,
-                time,
+                time_start,
+                time_end,
                 team_id,
                 typ,
                 user_id
@@ -634,13 +648,15 @@ module.exports = {
             }
         )
     },
-    saveScrim:(id, title, comment, time, opponent_name, team_id, map_1_id, map_2_id, map_3_id, typ, callBack) => {
+    saveScrim:(id, title, comment, time_start, time_end, opponent_name, team_id, map_1_id, map_2_id, map_3_id, typ, callBack) => {
+        console.log(id, title, comment, time_start, time_end, opponent_name, team_id, map_1_id, map_2_id, map_3_id, typ)
         pool.query(
-            'Update scrim SET title = ?, comment = ?, time = ?, opponent_name = ?,  map_1_id = ?, map_2_id = ?, map_3_id = ?, typ = ? WHERE id = ? AND team_id = ?'
+            'Update scrim SET title = ? , comment = ? , time_start = ? , time_end = ? , opponent_name = ? ,  map_1_id = ? , map_2_id = ? , map_3_id = ? , typ = ? WHERE id = ? AND team_id = ?'
             [
                 title,
                 comment,
-                time,
+                time_start,
+                time_end,
                 opponent_name,
                 map_1_id,
                 map_2_id,

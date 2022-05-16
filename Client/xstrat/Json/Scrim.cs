@@ -11,12 +11,17 @@ namespace xstrat.Json
         public int id { get; set; }
         public string title { get; set; }
         public string comment { get; set; }
-        public string time { get; set; }
+        public string time_start { get; set; }
+        public string time_end { get; set; }
         public string opponent_name { get; set; }
         public int team_id { get; set; }
         public int? map_1_id { get; set; }
         public int? map_2_id { get; set; }
         public int? map_3_id { get; set; }
+        /// <summary>
+        /// 0 - Normal
+        /// 1 - 6+6
+        /// </summary>
         public int typ { get; set; }
         public int creator_id { get; set; }
         public string creation_date { get; set; }

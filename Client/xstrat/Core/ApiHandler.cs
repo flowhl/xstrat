@@ -142,6 +142,21 @@ namespace xstrat
             return (false);
         }
 
+        public static async Task<(bool, string)> GetMaps()
+        {
+            Waiting();
+            var request = new RestRequest("maps", Method.Get);
+            request.RequestFormat = DataFormat.Json;
+            var response = await client.ExecuteAsync<RestResponse>(request);
+            if (response.StatusCode == System.Net.HttpStatusCode.OK) //success
+            {
+                EndWaiting();
+                return (true, response.Content);
+            }
+            EndWaiting();
+            return (false, "db error");
+        }
+
         /// <summary>
         /// sends email to reset password - not implemented yet!
         /// </summary>
@@ -612,6 +627,100 @@ namespace xstrat
             return (false, "db error");
         }
         #endregion
+
+        #region Scrims
+
+        /// <summary>
+        /// adds new scrim to db by api call
+        /// time = timestringfrom + | + timestringto
+        /// </summary>
+        /// <returns></returns>
+        public static async Task<(bool, string)> NewScrim(int typ, string title, string time_start, string time_end)
+        {
+            Waiting();
+            var request = new RestRequest("scrim/new", Method.Post);
+            request.RequestFormat = DataFormat.Json;
+            request.AddJsonBody(new { typ = typ, title = title, time_start = time_start, time_end = time_end });
+
+            var response = await client.ExecuteAsync<RestResponse>(request);
+            if (response.StatusCode == System.Net.HttpStatusCode.OK) //success
+            {
+                EndWaiting();
+                return (true, response.Content);
+            }
+            EndWaiting();
+            return (false, "db error");
+        }
+
+        /// <summary>
+        /// deletes routine by api call
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public static async Task<(bool, string)> DeleteScrim(int id)
+        {
+            Waiting();
+            var request = new RestRequest("scrim/delete", Method.Post);
+            request.RequestFormat = DataFormat.Json;
+            request.AddJsonBody(new { scrim_id = id });
+
+            var response = await client.ExecuteAsync<RestResponse>(request);
+            if (response.StatusCode == System.Net.HttpStatusCode.OK) //success
+            {
+                EndWaiting();
+                return (true, response.Content);
+            }
+            EndWaiting();
+            return (false, "db error");
+        }
+        
+
+        /// <summary>
+        /// Loads all routines by api call
+        /// </summary>
+        /// <returns></returns>
+        public static async Task<(bool, string)> GetTeamScrims()
+        {
+            Waiting();
+            var request = new RestRequest("scrim/team", Method.Get);
+            request.RequestFormat = DataFormat.Json;
+
+            var response = await client.ExecuteAsync<RestResponse>(request);
+            if (response.StatusCode == System.Net.HttpStatusCode.OK) //success
+            {
+                EndWaiting();
+                return (true, response.Content);
+            }
+            EndWaiting();
+            return (false, "db error");
+        }
+
+        /// <summary>
+        /// Saves routine by api call
+        /// </summary>
+        /// <param name="ntitle"></param>
+        /// <param name="ncontent"></param>
+        /// <param name="n_id"></param>
+        /// <returns></returns>
+        public static async Task<(bool, string)> SaveScrim(int id,string title, string comment, string time_start, string time_end, string opponent_name, int? map_1_id, int? map_2_id, int? map_3_id, int typ)
+        {
+            Waiting();
+            var request = new RestRequest("scrim/save", Method.Post);
+            request.RequestFormat = DataFormat.Json;
+            request.AddJsonBody(new { scrim_id = id, title = title, comment = comment, time_start = time_start, time_end = time_end, opponent_name = opponent_name, map_1_id = map_1_id, map_2_id = map_2_id, map_3_id = map_3_id, typ = typ });
+
+            var response = await client.ExecuteAsync<RestResponse>(request);
+            if (response.StatusCode == System.Net.HttpStatusCode.OK) //success
+            {
+                EndWaiting();
+                return (true, response.Content);
+            }
+            EndWaiting();
+            return (false, "db error");
+        }
+
+        #endregion
+
         #region helper methodes
 
         /// <summary>

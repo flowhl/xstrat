@@ -39,7 +39,8 @@ const {
      newScrim,
      deleteScrim,
      getTeamScrims,
-     saveScrim
+     saveScrim,
+     getMaps
     } = require("./user.controller");
 const router = require("express").Router();
 const {checkToken} = require("../../auth/token_validation");
@@ -75,6 +76,7 @@ router.get("/", testConnection);
 router.get("/getusers", [checkToken], getUsers)
 router.get("/account/activate/:token", activateAccount)
 router.get("/games", [checkToken], getAllGames)
+router.get("/maps", [checkToken], getMaps)
 //#endregion
 //#region Routines
 router.post("/routines/new", [checkToken], newRoutine)

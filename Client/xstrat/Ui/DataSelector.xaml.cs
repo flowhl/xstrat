@@ -30,6 +30,8 @@ namespace xstrat.Ui
         public Game selectedGame { get; set; } = null;
         public OffDayType selectedOffDayType = null;
         public CalendarFilterType selectedCalendarFilterType { get; set; } = null;
+        public Map selectedMap { get; set; } = null;
+        public ScrimMode selectedScrimMode { get; set; } = null;
         public int type { get; set; } = 0;
 
 
@@ -40,6 +42,8 @@ namespace xstrat.Ui
         /// 2 - game
         /// 3 - offdaytype
         /// 4 - calendar filter
+        /// 5 - Map
+        /// 6 - ScrimMode
         /// </summary>
         /// <param name="type"></param>
         public DataSelector()
@@ -58,6 +62,9 @@ namespace xstrat.Ui
         /// 1 - teammates
         /// 2 - game
         /// 3 - offdaytype
+        /// 4 - calendar filter
+        /// 5 - Map
+        /// 6 - ScrimMode
         /// </summary>
         /// <param name="type"></param>
         public DataSelector(int type_id)
@@ -113,6 +120,23 @@ namespace xstrat.Ui
                 }
                 CBox.SelectedIndex = 0;
             }
+            else if (type == 5)
+            {
+                CBox.Items.Clear();
+                foreach (var item in Globals.Maps)
+                {
+                    CBox.Items.Add(item.name);
+                }
+            }
+            else if (type == 6)
+            {
+                CBox.Items.Clear();
+                foreach (var item in Globals.ScrimModes)
+                {
+                    CBox.Items.Add(item.name);
+                }
+                CBox.SelectedIndex = 0;
+            }
         }
 
 
@@ -133,6 +157,14 @@ namespace xstrat.Ui
             else if (type == 4)
             {
                 selectedCalendarFilterType = Globals.CalendarFilterTypes[CBox.SelectedIndex];
+            }
+            else if (type == 5)
+            {
+                selectedMap = Globals.Maps[CBox.SelectedIndex];
+            }
+            else if (type == 6)
+            {
+                selectedScrimMode = Globals.ScrimModes[CBox.SelectedIndex];
             }
         }
     }

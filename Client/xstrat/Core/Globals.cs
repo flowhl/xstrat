@@ -30,10 +30,13 @@ namespace xstrat.Core
     }
     public static class Globals
     {
+        public static string TeamName { get; set; }
         public static List<User> teammates { get; set; } = new List<User>();
         public static List<Game> games { get; set; } = new List<Game>();
         public static List<OffDayType> OffDayTypes = new List<OffDayType>();
         public static List<CalendarFilterType> CalendarFilterTypes = new List<CalendarFilterType>();
+        public static List<Map> Maps = new List<Map>();
+        public static List<ScrimMode> ScrimModes = new List<ScrimMode>();
 
         public static string UserIdToName(int id)
         {
@@ -46,6 +49,14 @@ namespace xstrat.Core
             RetrieveGames();
             RetrieveOffDayTypes();
             RetrieveCalendarFilterTypes();
+            RetrieveMaps();
+            RetrieveScrimModes();
+            RetrieveTeamName();
+        }
+
+        private static void RetrieveTeamName()
+        {
+
         }
 
         private static async void RetrieveTeamMates()
@@ -119,6 +130,40 @@ namespace xstrat.Core
             CalendarFilterTypes.Add(new CalendarFilterType(1, "specific players"));
             CalendarFilterTypes.Add(new CalendarFilterType(2, "min specific players"));
             CalendarFilterTypes.Add(new CalendarFilterType(3, "everyone"));
+        }
+        private static async void RetrieveMaps()
+        {
+            var result = await ApiHandler.GetMaps();
+            if (result.Item1)
+            {
+                string resultJson = result.Item2;
+                string response = result.Item2;
+                //convert to json instance
+                JObject json = JObject.Parse(response);
+                var data = json.SelectToken("data").ToString();
+                if (data != null && data != "")
+                {
+                    List<xstrat.Json.Map> rList = JsonConvert.DeserializeObject<List<Json.Map>>(data);
+                    Maps.Clear();
+                    Maps = rList;
+                }
+                else
+                {
+                    Notify.sendError("Error", "Maps could not be loaded");
+                }
+            }
+            else
+            {
+                Notify.sendError("Error", "Maps could not be loaded");
+            }
+        }
+        private static void RetrieveScrimModes()
+        {
+            ScrimModes.Clear();
+            ScrimModes.Add(new ScrimMode(0, "normal"));
+            ScrimModes.Add(new ScrimMode(1, "6+6"));
+            ScrimModes.Add(new ScrimMode(2, "2-2-2"));
+            ScrimModes.Add(new ScrimMode(3, "4+4"));
         }
 
         public static User getUserFromId(int id)

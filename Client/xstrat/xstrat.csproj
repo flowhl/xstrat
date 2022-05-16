@@ -206,6 +206,7 @@
     <Compile Include="Core\Wallstates.cs" />
     <Compile Include="Json\CalendarEntry.cs" />
     <Compile Include="Json\CalendarFilterType.cs" />
+    <Compile Include="Json\Data.cs" />
     <Compile Include="Json\JColor.cs" />
     <Compile Include="Json\Content.cs" />
     <Compile Include="Json\Floor.cs" />
@@ -217,6 +218,7 @@
     <Compile Include="Json\OffDayType.cs" />
     <Compile Include="Json\Position.cs" />
     <Compile Include="Json\Scrim.cs" />
+    <Compile Include="Json\ScrimMode.cs" />
     <Compile Include="Json\Strat.cs" />
     <Compile Include="Json\teamInfo.cs" />
     <Compile Include="Json\User.cs" />
