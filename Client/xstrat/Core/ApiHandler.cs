@@ -33,7 +33,7 @@ namespace xstrat
                 }
                 else
                 {
-                    Notify.sendError("Settings Error", "Please enter a proper url to reach the server. Use https://app.xstrat.app/api as default");
+                    Notify.sendError("Please enter a proper url to reach the server. Use https://app.xstrat.app/api as default");
                 }
             }
             var request = new RestRequest("/", Method.Get);
@@ -43,7 +43,7 @@ namespace xstrat
 
             if (response.StatusCode != System.Net.HttpStatusCode.OK) //success
             {
-                Notify.sendError("API Error", "Api could not be reached. Please check your connection and restart");
+                Notify.sendError("Api could not be reached. Please check your connection and restart");
                 //await Task.Delay(5000);
                 ////MessageBox.Show("Api could not be reached. Please check your connection");
                 //App.Current.Shutdown();
@@ -177,6 +177,21 @@ namespace xstrat
             request.RequestFormat = DataFormat.Json;
             var response = await client.ExecuteAsync<RestResponse>(request);
             if (response.StatusCode == System.Net.HttpStatusCode.OK) //success
+            {
+                EndWaiting();
+                return (true, response.Content);
+            }
+            EndWaiting();
+            return (false, "db error");
+        }
+
+        public static async Task<(bool, string)> GetAdminStatus()
+        {
+            Waiting();
+            var request = new RestRequest("team/verifyadmin", Method.Get);
+            request.RequestFormat = DataFormat.Json;
+            var response = await client.ExecuteAsync<RestResponse>(request);
+            if (response.StatusCode == System.Net.HttpStatusCode.Accepted) //success
             {
                 EndWaiting();
                 return (true, response.Content);
@@ -367,12 +382,76 @@ namespace xstrat
             EndWaiting();
             return (false, response.Content);
         }
-        public static async Task<(bool, string)> setColor(string color)
+        public static async Task<(bool, string)> SetColor(string color)
         {
             Waiting();
             var request = new RestRequest("team/setcolor", Method.Post);
             request.RequestFormat = DataFormat.Json;
             request.AddJsonBody(new {color = color.Replace("#FF", "#")});
+
+            var response = await client.ExecuteAsync<RestResponse>(request);
+            if (response.StatusCode == System.Net.HttpStatusCode.Accepted) //success
+            {
+                EndWaiting();
+                return (true, response.Content);
+            }
+            EndWaiting();
+            return (false, response.Content);
+        }
+
+        public static async Task<(bool, string)> GetDiscordId()
+        {
+            Waiting();
+            var request = new RestRequest("team/getdiscord", Method.Get);
+            request.RequestFormat = DataFormat.Json;
+
+            var response = await client.ExecuteAsync<RestResponse>(request);
+            if (response.StatusCode == System.Net.HttpStatusCode.OK) //success
+            {
+                EndWaiting();
+                return (true, response.Content);
+            }
+            EndWaiting();
+            return (false, response.Content);
+        }
+        public static async Task<(bool, string)> SetDiscordId(string discord)
+        {
+            Waiting();
+            var request = new RestRequest("team/setdiscord", Method.Post);
+            request.RequestFormat = DataFormat.Json;
+            request.AddJsonBody(new { discord = discord});
+
+            var response = await client.ExecuteAsync<RestResponse>(request);
+            if (response.StatusCode == System.Net.HttpStatusCode.Accepted) //success
+            {
+                EndWaiting();
+                return (true, response.Content);
+            }
+            EndWaiting();
+            return (false, response.Content);
+        }
+
+        public static async Task<(bool, string)> GetDiscordWebhook()
+        {
+            Waiting();
+            var request = new RestRequest("team/getwebhook", Method.Get);
+            request.RequestFormat = DataFormat.Json;
+
+            var response = await client.ExecuteAsync<RestResponse>(request);
+            if (response.StatusCode == System.Net.HttpStatusCode.OK) //success
+            {
+                EndWaiting();
+                return (true, response.Content);
+            }
+            EndWaiting();
+            return (false, response.Content);
+        }
+        public static async Task<(bool, string)> SetDiscordWebhook(string webhook)
+        {
+            Waiting();
+            var request = new RestRequest("team/setwebhook", Method.Post);
+            request.RequestFormat = DataFormat.Json;
+            request.AddJsonBody(new { webhook = webhook });
 
             var response = await client.ExecuteAsync<RestResponse>(request);
             if (response.StatusCode == System.Net.HttpStatusCode.Accepted) //success
@@ -635,12 +714,12 @@ namespace xstrat
         /// time = timestringfrom + | + timestringto
         /// </summary>
         /// <returns></returns>
-        public static async Task<(bool, string)> NewScrim(int typ, string title, string time_start, string time_end)
+        public static async Task<(bool, string)> NewScrim(int typ, string title,string opponent_name, string time_start, string time_end)
         {
             Waiting();
             var request = new RestRequest("scrim/new", Method.Post);
             request.RequestFormat = DataFormat.Json;
-            request.AddJsonBody(new { typ = typ, title = title, time_start = time_start, time_end = time_end });
+            request.AddJsonBody(new { typ = typ, title = title, opponent_name = opponent_name, time_start = time_start, time_end = time_end });
 
             var response = await client.ExecuteAsync<RestResponse>(request);
             if (response.StatusCode == System.Net.HttpStatusCode.OK) //success

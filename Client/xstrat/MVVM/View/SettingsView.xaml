@@ -8,6 +8,7 @@
              d:DesignHeight="775" d:DesignWidth="1150">
     <StackPanel Orientation="Horizontal" Height="775" Width="1150">
         <StackPanel Orientation="Vertical">
+            
             <Border BorderThickness="0" Background="#202020" CornerRadius="10" Width="300" Height="200" Margin="10,10,10,10">
                 <StackPanel Orientation="Vertical" Margin="5,5,5,5">
                     <Label Foreground="White" FontSize="18" Content="General:" HorizontalAlignment="Center" FontWeight="SemiBold"></Label>
@@ -16,17 +17,18 @@
 
                             <local1:ToggleSwitch x:Name="RememberMeSettings" Height="20"></local1:ToggleSwitch>
                             <Label Foreground="White" FontSize="14" HorizontalAlignment="Right">Stay logged in for 30 days</Label>
-                            <Button Content="Save" Name="RememberMeBtn" Foreground="White" Background="#252525" BorderThickness="0" Margin="10,0,0,0" Height="25" Width="70" Click="Save_BtnClick">
-                                <Button.Resources>
-                                    <Style TargetType="Border">
-                                        <Setter Property="CornerRadius" Value="5"/>
-                                    </Style>
-                                </Button.Resources>
-                            </Button>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
                             <Label Foreground="White" VerticalAlignment="Bottom">Api-Url:</Label>
                             <TextBox Name="APIText" Foreground="#336cb5" VerticalContentAlignment="Center" Background="Transparent" Height="25" BorderThickness="0">https://api.xstrat.app</TextBox>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Foreground="White" VerticalAlignment="Bottom">Discord-ID:</Label>
+                            <TextBox Name="DCId" Foreground="#336cb5" VerticalContentAlignment="Center" Background="Transparent" Height="25" BorderThickness="0">1234567890</TextBox>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Name="WebhookView">
+                            <Label Foreground="White" VerticalAlignment="Bottom">Discord-Webhook:</Label>
+                            <TextBox Name="DCWebhook" Foreground="#336cb5" VerticalContentAlignment="Center" Background="Transparent" Height="25" BorderThickness="0">https://discord.com/api/webhooks/...</TextBox>
                         </StackPanel>
                     </StackPanel>
                 </StackPanel>
@@ -46,6 +48,13 @@
                     <TextBlock Margin="0,20,0,0" Foreground="#606060" Background="Transparent" TextWrapping="WrapWithOverflow">Select this folder: "C:\Program Files (x86)\Ubisoft\Ubisoft Game Launcher\savegames\YourAccountID\635"</TextBlock>
                 </StackPanel>
             </Border>
+            <Button Content="Save" Name="SaveBtn" Foreground="White" Background="#336cb5" BorderThickness="0" Margin="10,10,10,10" Height="40" Width="300" FontSize="22" Click="Save_BtnClick">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="10"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
         </StackPanel>
     </StackPanel>
 </UserControl>

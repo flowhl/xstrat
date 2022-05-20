@@ -207,6 +207,7 @@
     <Compile Include="Json\CalendarEntry.cs" />
     <Compile Include="Json\CalendarFilterType.cs" />
     <Compile Include="Json\Data.cs" />
+    <Compile Include="Json\DiscordID.cs" />
     <Compile Include="Json\JColor.cs" />
     <Compile Include="Json\Content.cs" />
     <Compile Include="Json\Floor.cs" />
@@ -222,6 +223,7 @@
     <Compile Include="Json\Strat.cs" />
     <Compile Include="Json\teamInfo.cs" />
     <Compile Include="Json\User.cs" />
+    <Compile Include="Json\Webhook.cs" />
     <Compile Include="Json\XMap.cs" />
     <Compile Include="Json\Routine.cs" />
     <Compile Include="MVVM\ViewModel\CalendarViewModel.cs" />

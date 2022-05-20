@@ -21,6 +21,7 @@ using xstrat.Calendar;
 using xstrat.Core;
 using xstrat.Json;
 using xstrat.Ui;
+using static xstrat.Ui.ScrimWindow;
 
 namespace xstrat.MVVM.View
 {
@@ -30,6 +31,7 @@ namespace xstrat.MVVM.View
     public partial class CalendarView : UserControl, INotifyPropertyChanged
     {
         private List<OffDay> offDays = new List<OffDay>();
+        private List<Scrim> scrims = new List<Scrim>();
         public List<ICalendarEvent> _events;
         public List<ICalendarEvent> Events
         {
@@ -61,28 +63,49 @@ namespace xstrat.MVVM.View
             // add example events
             Events = new List<ICalendarEvent>();
             //Events.Add(new CalendarEntry() { DateFrom = DateTime.Now.AddDays(6), DateTo = DateTime.Now.AddDays(6).AddHours(1), Label = "Scrim", typ = 0 });
+
+            RetrieveScrims();
             RetrieveOffDays();
             // draw days with events calendar
+            CreateUserCheckbox();
             CalendarMonthUI.DrawDays();
 
             // subscribe to double cliked event
             CalendarMonthUI.CalendarEventDoubleClickedEvent += Calendar_CalendarEventDoubleClickedEvent;
-            CalendarMonthUI.CalendarEventMiddleMouseClickedEvent += CalendarMonthUI_CalendarEventMiddleMouseClickedEvent;
         }
 
-        private void CalendarMonthUI_CalendarEventMiddleMouseClickedEvent(object sender, CalendarEventView e)
-        {
-
-        }
 
         private void Calendar_CalendarEventDoubleClickedEvent(object sender, CalendarEventView e)
         {
             if (e.DataContext is ICalendarEvent calendarEvent)
             {
-                var responseWindow = new CalendarEventInfo(calendarEvent as CalendarEntry);
-                responseWindow.Show();
-                //MessageBox.Show($"{calendarEvent.Label} | {calendarEvent.DateFrom} - {calendarEvent.DateTo}");
+                if (calendarEvent.typ == 0) //scrim
+                {
+                    var responseWindow = new ScrimWindow(calendarEvent.scrim);
+                    responseWindow.Show();
+                    responseWindow.Closing += ResponseWindow_Closing;
+                }
+
+                if (calendarEvent.typ == 1) //offday
+                {
+                    var responseWindow = new CalendarEventInfo(calendarEvent as CalendarEntry);
+                    responseWindow.Show();
+                    responseWindow.Closing += ResponseWindow_Closing;
+                }
+
+                if (calendarEvent.typ == 2) //recommendation
+                {
+                    var responseWindow = new ScrimWindow(calendarEvent.args.First() as Core.Window);
+                    responseWindow.Show();
+                    responseWindow.Closing += ResponseWindow_Closing;
+                }
             }
+        }
+
+        private void ResponseWindow_Closing(object sender, CancelEventArgs e)
+        {
+            RetrieveScrims();
+            CalendarMonthUI.DrawDays();
         }
 
         public void OnPropertyChanged<T>(Expression<Func<T>> exp)
@@ -114,7 +137,7 @@ namespace xstrat.MVVM.View
                     }
                     else
                     {
-                        Notify.sendError("Error", "Event could not be created");
+                        Notify.sendError("Event could not be created");
                         throw new Exception("Event could not be created");
                     }
                 }
@@ -125,7 +148,7 @@ namespace xstrat.MVVM.View
             }
             catch (Exception ex)
             {
-                Notify.sendError("Error", ex.Message);
+                Notify.sendError(ex.Message);
             }
             
             foreach (var od in offDays)
@@ -133,7 +156,48 @@ namespace xstrat.MVVM.View
                 MakeCalendarEntry(od);
             }
             CalendarMonthUI.DrawDays();
-            CreateUserCheckbox();
+        }
+
+        private async void RetrieveScrims()
+        {
+            try
+            {
+                (bool, string) result = await ApiHandler.GetTeamScrims();
+                if (result.Item1)
+                {
+                    string response = result.Item2;
+                    //convert to json instance
+                    JObject json = JObject.Parse(response);
+                    var data = json.SelectToken("data").ToString();
+                    if (data != null && data != "")
+                    {
+                        List<xstrat.Json.Scrim> scList = JsonConvert.DeserializeObject<List<Json.Scrim>>(data);
+                        scrims.Clear();
+                        foreach (var sc in scList)
+                        {
+                            scrims.Add(sc);
+                        }
+                    }
+                    else
+                    {
+                        Notify.sendError("Scrim could not be created");
+                        throw new Exception("Scrim could not be created");
+                    }
+                }
+                else
+                {
+                    return;
+                }
+            }
+            catch (Exception ex)
+            {
+                Notify.sendError( ex.Message);
+            }
+
+            foreach (var sc in scrims)
+            {
+                MakeCalendarEntry(sc);
+            }
         }
 
         #region Helper Methods
@@ -281,7 +345,27 @@ namespace xstrat.MVVM.View
             }
             catch (Exception ex)
             {
-                Notify.sendError("Error", ex.Message);
+                Notify.sendError(ex.Message);
+            }
+        }
+
+        private void MakeCalendarEntry(Scrim sc)
+        {
+            try
+            {
+                DateTime? from = null;
+                DateTime? to = null;
+                
+                from = DateTime.ParseExact(sc.time_start, "yyyy/MM/dd HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture);
+                to = DateTime.ParseExact(sc.time_end, "yyyy/MM/dd HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture);
+                if (from != null && to != null)
+                {
+                    Events.Add(new CalendarEntry() { DateFrom = from, DateTo = to, Label = GetLabel(sc), typ = 0 , scrim = sc});
+                }
+            }
+            catch (Exception ex)
+            {
+                Notify.sendError(ex.Message);
             }
         }
 
@@ -306,9 +390,36 @@ namespace xstrat.MVVM.View
             }
             catch (Exception ex)
             {
-                Notify.sendError("Error", ex.Message);
+                Notify.sendError(ex.Message);
             }
             return Globals.UserIdToName(od.user_id.GetValueOrDefault()) + " | " + stitle + ": " + sstart + "-" + send;
+
+        }
+
+        private string GetLabel(Scrim sc)
+        {
+            string stitle = "";
+            if (sc.title.Length > 30)
+            {
+                stitle = sc.title.Substring(0, 30) + "...";
+            }
+            else
+            {
+                stitle = sc.title;
+            }
+
+            string sstart = "";
+            string send = "";
+            try
+            {
+                sstart = sc.time_start.Split(' ')[1].Replace(":00", "");
+                send = sc.time_end.Split(' ')[1].Replace(":00", "");
+            }
+            catch (Exception ex)
+            {
+                Notify.sendError(ex.Message);
+            }
+            return "Scrim: " + sc.opponent_name + " | " + stitle + ": " + sstart + "-" + send;
 
         }
         #endregion

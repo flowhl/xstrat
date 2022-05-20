@@ -37,6 +37,7 @@ namespace xstrat.Core
         public static List<CalendarFilterType> CalendarFilterTypes = new List<CalendarFilterType>();
         public static List<Map> Maps = new List<Map>();
         public static List<ScrimMode> ScrimModes = new List<ScrimMode>();
+        public static bool AdminUser = false;
 
         public static string UserIdToName(int id)
         {
@@ -52,11 +53,18 @@ namespace xstrat.Core
             RetrieveMaps();
             RetrieveScrimModes();
             RetrieveTeamName();
+            RetrieveAdminStatus();
         }
 
-        private static void RetrieveTeamName()
+        private static void RetrieveAdminStatus()
         {
 
+        }
+
+        private static async void RetrieveTeamName()
+        {
+            var result = await ApiHandler.GetAdminStatus();
+            AdminUser = result.Item1;
         }
 
         private static async void RetrieveTeamMates()
@@ -77,13 +85,13 @@ namespace xstrat.Core
                 }
                 else
                 {
-                    Notify.sendError("Error", "Teammates could not be loaded");
+                    Notify.sendError("Teammates could not be loaded");
                     throw new Exception("Teammates could not be loaded");
                 }
             }
             else
             {
-                Notify.sendError("Error", "Teammates could not be loaded");
+                Notify.sendError("Teammates could not be loaded");
             }
         }
 
@@ -105,12 +113,12 @@ namespace xstrat.Core
                 }
                 else
                 {
-                    Notify.sendError("Error", "Games could not be loaded");
+                    Notify.sendError("Games could not be loaded");
                 }
             }
             else
             {
-                Notify.sendError("Error", "Games could not be loaded");
+                Notify.sendError("Games could not be loaded");
             }
         }
 
@@ -149,12 +157,12 @@ namespace xstrat.Core
                 }
                 else
                 {
-                    Notify.sendError("Error", "Maps could not be loaded");
+                    Notify.sendError("Maps could not be loaded");
                 }
             }
             else
             {
-                Notify.sendError("Error", "Maps could not be loaded");
+                Notify.sendError("Maps could not be loaded");
             }
         }
         private static void RetrieveScrimModes()

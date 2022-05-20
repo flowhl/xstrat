@@ -245,7 +245,7 @@ namespace xstrat.MVVM.View
                 }
                 else
                 {
-                    Notify.sendError("Error", "Routines could not be created");
+                    Notify.sendError("Routines could not be created");
                     throw new Exception("Routines could not be created");
                 }
                 UpdateUI();
@@ -382,7 +382,7 @@ namespace xstrat.MVVM.View
             }
             else
             {
-                Notify.sendError("Save Error", "Could not save new routine: " + result.Item2);
+                Notify.sendError("Could not save new routine: " + result.Item2);
                 //MessageBox.Show("Could not save Routine: " + result.Item2);
             }
         }
@@ -393,12 +393,12 @@ namespace xstrat.MVVM.View
                 (bool, string) result = await ApiHandler.DeleteRoutine(id);
                 if (result.Item1)
                 {
-                    Notify.sendSuccess("Success", "Successfully saved");
+                    Notify.sendSuccess("Successfully saved");
                     return;
                 }
                 else
                 {
-                    Notify.sendError("Delete Error", "Could not delete routine: " + result.Item2);
+                    Notify.sendError("Could not delete routine: " + result.Item2);
                     //MessageBox.Show("Could not delete Routine: " + result.Item2);
                 }
             }
@@ -410,18 +410,18 @@ namespace xstrat.MVVM.View
                 (bool, string) result = await ApiHandler.SaveRoutine(title, content, routine_id);
                 if (result.Item1)
                 {
-                    Notify.sendSuccess("Success", "Successfully saved");
+                    Notify.sendSuccess("Successfully saved");
                     Retrieve();
                 }
                 else
                 {
-                    Notify.sendError("Save Error", "Could not save routine: " + result.Item2);
+                    Notify.sendError("Could not save routine: " + result.Item2);
                     //MessageBox.Show("Could not save Routine: " + result.Item2);
                 }
             }
             else
             {
-                Notify.sendError("Save Error", "Could not save Routine: Content or title is empty");
+                Notify.sendError( "Could not save Routine: Content or title is empty");
                 //MessageBox.Show("Could not save Routine. content or title is empty");
             }
         }
@@ -438,14 +438,14 @@ namespace xstrat.MVVM.View
                 }
                 else
                 {
-                    Notify.sendError("Rename Error", "Could not rename routine: " + result.Item2);
+                    Notify.sendError("Could not rename routine: " + result.Item2);
                     //MessageBox.Show("Could not rename Routine: " + result.Item2);
                 }
             }
             else
             {
 
-                Notify.sendError("Save Error", "Could not save Routine: Content or title is empty");
+                Notify.sendError("Could not save Routine: Content or title is empty");
                 //MessageBox.Show("Could not save Routine. content or title is empty");
             }
         }

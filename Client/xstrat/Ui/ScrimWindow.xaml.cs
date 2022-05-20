@@ -32,6 +32,10 @@ namespace xstrat.Ui
         public Scrim scrim { get; set; }
         public Core.Window window { get; set; }
 
+
+        public delegate void CalendarEventUpdateEventHandler(object source, EventArgs e);
+        public event CalendarEventUpdateEventHandler CalendarEventUpdated;
+
         public ScrimWindow(xstrat.Core.Window window)
         {
             this.window = window;
@@ -53,6 +57,7 @@ namespace xstrat.Ui
             if(type == 0)
             {
                 TypeLabel.Content = "Create Scrim";
+                Title = "Create Scrim";
                 TitleBox.Text = "Title";
                 CommentBox.Text = "Description";
                 FromHour.Value = window.StartDateTime.Hour;
@@ -62,6 +67,16 @@ namespace xstrat.Ui
                 CreatorLabel.Content = "";
                 CreationDateLabel.Content = "";
                 CalendarDatePicker.SelectedDate = window.StartDateTime.Date;
+                PlayerStack.Children.Clear();
+                foreach (var user in window.AvailablePlayers)
+                {
+                    Label label = new Label();
+                    label.Foreground = Brushes.White;
+                    label.Background = Brushes.Transparent;
+                    label.Margin = new Thickness(5, 0, 5, 0);
+                    label.Content = Globals.getUserFromId(user.ID).name;
+                    PlayerStack.Children.Add(label);
+                }
 
             }
             else if(type == 1)
@@ -69,6 +84,7 @@ namespace xstrat.Ui
                 DateTime start = DateTime.ParseExact(scrim.time_start, "yyyy/MM/dd HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture);
                 DateTime end = DateTime.ParseExact(scrim.time_end, "yyyy/MM/dd HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture);
                 TypeLabel.Content = "Edit Scrim";
+                Title = "Edit Scrim";
                 TitleBox.Text = scrim.title;
                 CommentBox.Text = scrim.comment;
                 CalendarDatePicker.SelectedDate = start.Date;
@@ -88,25 +104,41 @@ namespace xstrat.Ui
         {
             if(type == 1)
             {
-                string start = CalendarDatePicker.SelectedDate.ToString() + " " + FromHour.Value + ":" + FromMinute.Value + ":00";
-                string end = CalendarDatePicker.SelectedDate.ToString() + " " + ToHour.Value + ":" + ToMinute.Value + ":00";
-                var result = await ApiHandler.SaveScrim(scrim.id, TitleBox.Text, CommentBox.Text, start, end, OpponentNameBox.Text, MapSelector1.selectedMap.id, MapSelector2.selectedMap.id, MapSelector3.selectedMap.id, ScrimModeSelector.selectedOffDayType.id);
+                string start = CalendarDatePicker.SelectedDate.ToString().Split(' ')[0] + " " + FromHour.Value.ToString().PadLeft(2, '0') + ":" + FromMinute.Value.ToString().PadLeft(2, '0') + ":00";
+                string end = CalendarDatePicker.SelectedDate.ToString().Split(' ')[0] + " " + ToHour.Value.ToString().PadLeft(2, '0') + ":" + ToMinute.Value.ToString().PadLeft(2, '0') + ":00";
+
+                int map1 = -1;
+                if (MapSelector1.selectedMap != null)
+                {
+                    map1 = MapSelector1.selectedMap.id;
+                }
+                int map2 = -1;
+                if (MapSelector2.selectedMap != null)
+                {
+                    map2 = MapSelector2.selectedMap.id;
+                }
+                int map3 = -1;
+                if (MapSelector3.selectedMap != null)
+                {
+                    map3 = MapSelector3.selectedMap.id;
+                }
+                var result = await ApiHandler.SaveScrim(scrim.id, TitleBox.Text, CommentBox.Text, start, end, OpponentNameBox.Text, map1, map2, map3, ScrimModeSelector.selectedScrimMode.id);
                 if (result.Item1)
                 {
-                    Notify.sendSuccess("Success", "Saved successfully");
-
+                    Notify.sendSuccess("Saved successfully");
+                    Close();
                 }
                 else
                 {
-                    Notify.sendError("Error", result.Item2);
+                    Notify.sendError(result.Item2);
                 }
             }
             else if(type == 0)
             {
-                string start = CalendarDatePicker.SelectedDate.ToString() + " " + FromHour.Value + ":" + FromMinute.Value + ":00";
-                string end = CalendarDatePicker.SelectedDate.ToString() + " " + ToHour.Value + ":" + ToMinute.Value + ":00";
+                string start = CalendarDatePicker.SelectedDate.ToString().Split(' ')[0] + " " + FromHour.Value.ToString().PadLeft(2, '0') + ":" + FromMinute.Value.ToString().PadLeft(2, '0') + ":00";
+                string end = CalendarDatePicker.SelectedDate.ToString().Split(' ')[0] + " " + ToHour.Value.ToString().PadLeft(2, '0') + ":" + ToMinute.Value.ToString().PadLeft(2, '0') + ":00";
                 int? scrim_id = null;
-                var result = await ApiHandler.NewScrim(ScrimModeSelector.selectedScrimMode.id, TitleBox.Text, start, end);
+                var result = await ApiHandler.NewScrim(ScrimModeSelector.selectedScrimMode.id, TitleBox.Text, OpponentNameBox.Text, start, end);
                 if (result.Item1)
                 {
                     string response = result.Item2;
@@ -120,7 +152,7 @@ namespace xstrat.Ui
                     }
                     else
                     {
-                        Notify.sendError("Error", "insertId could not be loaded");
+                        Notify.sendError("insertId could not be loaded");
                         throw new Exception("insertId could not be loaded");
                     }
                     if(scrim_id != null)
@@ -143,25 +175,26 @@ namespace xstrat.Ui
                         var result2 = await ApiHandler.SaveScrim(scrim_id.GetValueOrDefault(), TitleBox.Text, CommentBox.Text, start, end, OpponentNameBox.Text, map1, map2, map3, ScrimModeSelector.selectedScrimMode.id);
                         if (result2.Item1)
                         {
-                            Notify.sendSuccess("Success", "Saved successfully");
+                            Notify.sendSuccess("Saved successfully");
+                            Close();
                         }
                         else
                         {
-                            Notify.sendError("Error when modifying scrim data", result2.Item2);
+                            Notify.sendError("Error when modifying scrim data " + result2.Item2);
                         }
                     }
                     else
                     {
-                        Notify.sendError("Error", "insertId could not be loaded");
+                        Notify.sendError("insertId could not be loaded");
                         throw new Exception("insertId could not be loaded");
                     }
                    
                 }
                 else
                 {
-                    Notify.sendError("Error", result.Item2);
+                    Notify.sendError( result.Item2);
                 }
-
+                CalendarEventUpdated?.Invoke(this, e);
             }
             
         }

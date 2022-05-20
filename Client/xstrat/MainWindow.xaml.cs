@@ -35,7 +35,7 @@ namespace xstrat
                 {
                     await manager.UpdateApp();
                     //MessageBox.Show("New Update found. Please restart your client to install");
-                    Notify.sendInfo("Update available", "New Update found. Please restart your client to install");
+                    Notify.sendInfo("New Update found. Please restart your client to install");
                 }
             }
         }

@@ -70,7 +70,7 @@ namespace xstrat.Ui
                     }
                     catch(Exception ex) 
                     {
-                        Notify.sendError("Error",ex.Message);
+                        Notify.sendError(ex.Message);
                         Logger.Log("Error on MapFloor :" + ex.Message);
                     }
 

@@ -414,6 +414,80 @@ module.exports = {
         );
     },
     
+    getMyDiscord: (user_id, callBack) => {
+        pool.query(
+            "SELECT discord FROM user WHERE user.id = ?",
+            [
+                user_id
+            ],
+            (err, results, fields)=>{
+                if(err){
+                   return callBack(err);
+                }
+                return callBack(null, results);                
+            }
+        );
+    },
+    setMyDiscord: (user_id, discord, callBack) => {
+        pool.query(
+            "Update user Set discord = ? WHERE user.id = ?",
+            [
+                discord,
+                user_id
+            ],
+            (err, results, fields)=>{
+                if(err){
+                   return callBack(err);
+                }
+                return callBack(null, "DB OK");                
+            }
+        );
+    },
+
+    getWebhook: (user_id, callBack) => {
+        pool.query(
+            "SELECT webhook FROM team WHERE team.admin_user_id = ?",
+            [
+                user_id
+            ],
+            (err, results, fields)=>{
+                if(err){
+                   return callBack(err);
+                }
+                return callBack(null, results);                
+            }
+        );
+    },
+    setWebhook: (user_id, webhook, callBack) => {
+        pool.query(
+            "Update team Set webhook = ? WHERE team.admin_user_id = ?",
+            [
+                webhook,
+                user_id
+            ],
+            (err, results, fields)=>{
+                if(err){
+                   return callBack(err);
+                }
+                console.log(results)
+                return callBack(null, "DB OK");                
+            }
+        );
+    },
+    getWebhookByTeamId:(team_id, callBack) => {
+        pool.query(
+        "SELECT webhook FROM team WHERE team.id = ?",
+            [
+                team_id
+            ],
+            (err, results, fields)=>{
+                if(err){
+                    console.log(err);
+                    return callBack(err);
+                }                
+                return callBack(null, results);                
+            })
+    },
 
 //#endregion
 //#region routines
@@ -600,11 +674,12 @@ module.exports = {
     //#endregion
     //#region scrims
 
-    createScrim: (user_id, title, time_start, time_end, team_id, typ, callBack) => {
+    createScrim: (user_id, title, opponent_name, time_start, time_end, team_id, typ, callBack) => {
         pool.query(
-            'INSERT INTO scrim (title, time_start, time_end, team_id, typ, creator_id) VALUES (?,?,?,?,?,?)',
+            'INSERT INTO scrim (title, opponent_name, time_start, time_end, team_id, typ, creator_id) VALUES (?,?,?,?,?,?,?)',
             [
                 title,
+                opponent_name,
                 time_start,
                 time_end,
                 team_id,
@@ -648,10 +723,10 @@ module.exports = {
             }
         )
     },
-    saveScrim:(id, title, comment, time_start, time_end, opponent_name, team_id, map_1_id, map_2_id, map_3_id, typ, callBack) => {
-        console.log(id, title, comment, time_start, time_end, opponent_name, team_id, map_1_id, map_2_id, map_3_id, typ)
+    saveScrim:(scrim_id, title, comment, time_start, time_end, opponent_name, team_id, map_1_id, map_2_id, map_3_id, typ, callBack) => {
+        console.log(scrim_id, title, comment, time_start, time_end, opponent_name, team_id, map_1_id, map_2_id, map_3_id, typ)
         pool.query(
-            'Update scrim SET title = ? , comment = ? , time_start = ? , time_end = ? , opponent_name = ? ,  map_1_id = ? , map_2_id = ? , map_3_id = ? , typ = ? WHERE id = ? AND team_id = ?'
+            'UPDATE scrim SET title = ?, comment = ?, time_start = ?, time_end = ?, opponent_name = ?,  map_1_id = "?", map_2_id = "?", map_3_id = "?", typ = ? WHERE id = ? AND team_id = ?',
             [
                 title,
                 comment,
@@ -662,14 +737,14 @@ module.exports = {
                 map_2_id,
                 map_3_id,
                 typ,
-                id,
+                scrim_id,
                 team_id
             ],
-            (err)=>{
+            (err, results)=>{
                 if(err){
                    return callBack(err);
                 }
-                return callBack(null,"DB OK");                
+                return callBack(null,results);                
             }
         );
     }

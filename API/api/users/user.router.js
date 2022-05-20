@@ -40,10 +40,14 @@ const {
      deleteScrim,
      getTeamScrims,
      saveScrim,
-     getMaps
+     getMaps,
+     setMyDiscord,
+     getMyDiscord,
+     getWebhook,
+     setWebhook
     } = require("./user.controller");
 const router = require("express").Router();
-const {checkToken} = require("../../auth/token_validation");
+const {checkToken, checkAdmin} = require("../../auth/token_validation");
 //#region user control
 router.post("/login", login)
 router.post("/register",createUser)
@@ -87,20 +91,23 @@ router.post("/routines/save", [checkToken], saveRoutine)
 router.post("/routines/rename", [checkToken], renameRoutine)
 //#endregion
 //#region team
-// router.get("/team/info", [checkToken],) //missing stuff
 router.get("/team/joinpassword", [checkToken], getTeamJoinPassword)
 router.get("/team/leave", [checkToken], leaveTeam)
 router.get("/team/members", [checkToken], getAllTeamMembers)
 router.get("/team/info", [checkToken], getTeamFullInfo)
-router.get("/team/verifyadmin", [checkToken], checkTeamAdmin)
+router.get("/team/verifyadmin", [checkToken, checkAdmin], checkTeamAdmin)
 router.get("/team/getcolor", [checkToken], getMyColor)
+router.get("/team/getdiscord", [checkToken], getMyDiscord)
+router.get("/team/getwebhook",[checkToken, checkAdmin], getWebhook)
 
 
-router.post("/team/delete", [checkToken], deleteTeam)
+router.post("/team/delete", [checkToken, checkAdmin], deleteTeam)
 router.post("/team/new", [checkToken], createTeam)
-router.post("/team/rename", [checkToken], updateTeamName)
+router.post("/team/rename", [checkToken, checkAdmin], updateTeamName)
 router.post("/team/join", [checkToken], joinTeam)
 router.post("/team/setcolor", [checkToken], setMyColor)
+router.post("/team/setdiscord", [checkToken], setMyDiscord)
+router.post("/team/setwebhook",[checkToken, checkAdmin], setWebhook)
 
 //#endregion
 
@@ -116,7 +123,7 @@ router.post("/event/save",[checkToken], saveEvent)
 //#region scrims
 
 router.post("/scrim/new",[checkToken], newScrim)
-router.post("/scrim/delete",[checkToken], deleteScrim)
+router.post("/scrim/delete",[checkToken, checkAdmin], deleteScrim)
 router.get("/scrim/team",[checkToken], getTeamScrims)
 router.post("/scrim/save",[checkToken], saveScrim)
 

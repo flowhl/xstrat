@@ -36,6 +36,7 @@ namespace xstrat.MVVM.View
                 Error.Content = null;
             }
             RememberMe.setStatus(SettingsHandler.StayLoggedin);
+            email.Text = SettingsHandler.LastLoginMail;
         }
 
         private void Login_Click(object sender, RoutedEventArgs e)
@@ -66,6 +67,7 @@ namespace xstrat.MVVM.View
                     JObject json = JObject.Parse(response);
                     string baerer = json.SelectToken("token").ToString();
                     SettingsHandler.StayLoggedin = RememberMe.getStatus();
+                    SettingsHandler.LastLoginMail = email.Text.Trim();
                     wnd.LoginComplete(baerer);
                 }
                 else

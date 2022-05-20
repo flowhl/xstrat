@@ -1,10 +1,11 @@
-const { create_user, getMemberByUserID,getUserByUserId,getUsers,getUserByEmail, deleteAccount, changeEmail, changeName, changePassword, getTeamByUser_id, updateTeamName, deleteTeam, newTeam, createVerification, getVerification, clearVerification, activateAccount, newRoutine, deleteRoutine, getRoutineContent, saveRoutine, getRoutines, renameRoutine, verifyTeamAdmin, verifyTeamJoinPassword, joinTeam, getTeamJoinPassword, getTeamMembers, getTeamFullInfo, getGames, leaveTeam, setMyColor, getMyColor, createEvent, deleteEvent, getTeamEvents, getUserEvents, saveEvent, getMaps, createScrim, saveScrim} = require("./user.service");
+const { create_user, getMemberByUserID,getUserByUserId,getUsers,getUserByEmail, deleteAccount, changeEmail, changeName, changePassword, getTeamByUser_id, updateTeamName, deleteTeam, newTeam, createVerification, getVerification, clearVerification, activateAccount, newRoutine, deleteRoutine, getRoutineContent, saveRoutine, getRoutines, renameRoutine, verifyTeamAdmin, verifyTeamJoinPassword, joinTeam, getTeamJoinPassword, getTeamMembers, getTeamFullInfo, getGames, leaveTeam, setMyColor, getMyColor, createEvent, deleteEvent, getTeamEvents, getUserEvents, saveEvent, getMaps, createScrim, saveScrim, getTeamScrim, setMyDiscord, getMyDiscord, setWebhook, getWebhook, getWebhookByTeamId} = require("./user.service");
 
 const {genSaltSync, hashSync, compareSync} = require("bcrypt");
 const { sign } = require("jsonwebtoken");
 const {sendEmail} = require("./user.mailservice");
 const res = require("express/lib/response");
 const { strictEqual } = require("assert");
+const { ScrimCreatedNotification } = require("../../discord/webhook");
 module.exports = {
 //#region user control
     //tested
@@ -328,7 +329,6 @@ module.exports = {
     })
   },
   getMaps:(req, res) => {
-    console.log("asdasd");
     const id = req.id;
     getTeamByUser_id(id, (err, results) => {
         if (err) {
@@ -371,42 +371,11 @@ module.exports = {
 //#region team
     // tested
     checkTeamAdmin: (req, res) => {
-        const id = req.id;
-        getTeamByUser_id(id, (err, results) => {
-            if (err) {
-                console.log(err);
-                return res.status(500).json({
-                    success: 0,
-                    message: "Database connection error"
-                });
-            }
-            else if(!results){
-                return res.status(200).json({
-                    success: 0,
-                    message: "Team not found"
-                });
-            }
-            const team_id = results.team_id
-            verifyTeamAdmin(team_id, id,(err2,results2) => {
-                if (err) {
-                    console.log(err2);
-                    return res.status(500).json({
-                        success: 0,
-                        message: "Database connection error"
-                    });
-                }
-                else if(results2[0].count != 1){
-                    return res.status(200).json({
-                        success: 0,
-                        message: "You are not the team admin"
-                    });
-                }
-                return res.status(202).json({
-                    success: 1,
-                    message: "You are the team admin"
-                });
+        return res.status(202).json({
+            success: 1,
+            message: "You are the team admin"
         });
-    })},
+    },
 
 
     // tested
@@ -779,8 +748,73 @@ module.exports = {
                 message: "DB OK"
             });
         })
+    },    
+    getMyDiscord: (req, res) => {
+        const id = req.id;
+        getMyDiscord(id, (err, results) =>{
+            if (err) {
+                console.log(err);
+                return res.status(500).json({
+                    success: 0,
+                    message: "Database connection error"
+                });
+            }
+            return res.status(200).json({
+                success: 1,
+                data: results
+            });
+        })
     },
-
+    setMyDiscord: (req, res) => {
+        const id = req.id;
+        const discord = req.body.discord;
+        setMyDiscord(id, discord, (err, results) =>{
+            if (err) {
+                console.log(err);
+                return res.status(500).json({
+                    success: 0,
+                    message: "Database connection error"
+                });
+            }
+            return res.status(202).json({
+                success: 1,
+                message: "DB OK"
+            });
+        })
+    },    
+    getWebhook: (req, res) => {
+        const id = req.id;
+        getWebhook(id, (err, results) =>{
+            if (err) {
+                console.log(err);
+                return res.status(500).json({
+                    success: 0,
+                    message: "Database connection error"
+                });
+            }
+            return res.status(200).json({
+                success: 1,
+                data: results
+            });
+        })
+    },
+    setWebhook: (req, res) => {
+        const id = req.id;
+        const webhook = req.body.webhook;
+        setWebhook(id, webhook, (err, results) =>{
+            if (err) {
+                console.log(err);
+                return res.status(500).json({
+                    success: 0,
+                    message: "Database connection error"
+                });
+            }
+            return res.status(202).json({
+                success: 1,
+                message: "DB OK"
+            });
+        })
+    },
 
 //#endregion
 //#region Routines
@@ -1032,6 +1066,7 @@ newScrim: (req, res) => {
     const id = req.id;
     const typ = req.body.typ;
     const title = req.body.title;
+    const opponent_name = req.body.opponent_name;
     const time_start = req.body.time_start;
     const time_end = req.body.time_end;
     getTeamByUser_id(id, (err, results) => {
@@ -1049,7 +1084,7 @@ newScrim: (req, res) => {
             });
         }
         const team_id = results.team_id
-        createScrim(id, title, time_start, time_end, team_id, typ, (err, result) => {
+        createScrim(id, title, opponent_name, time_start, time_end, team_id, typ, (err, result) => {
             if (err) {
                 console.log(err);
                 return res.status(500).json({
@@ -1058,6 +1093,19 @@ newScrim: (req, res) => {
                 });
             }
             else{
+                //notification go here
+                
+                getWebhookByTeamId(team_id, (err2, results2) => {
+                    if(err2){
+                        console.log(err2)
+                    }
+                    else{
+                        const webhook = results2[0].webhook;
+                        if(webhook != undefined && webhook != null){
+                            ScrimCreatedNotification(webhook, id, title, opponent_name);
+                        }
+                    }                    
+                })
                 return res.status(200).json({
                     success: 1,
                     data: result
@@ -1103,7 +1151,7 @@ getTeamScrims: (req, res) => {
             });
         }
         const team_id = results.team_id
-        getTeamScrims(team_id, (err, result) => {
+        getTeamScrim(team_id, (err, result) => {
             if (err) {
                 console.log(err);
                 return res.status(500).json({
@@ -1131,6 +1179,7 @@ saveScrim: (req, res) => {
     const map_2_id = req.body.map_2_id;
     const map_3_id = req.body.map_3_id;
     const typ = req.body.typ;
+    const scrim_id = req.body.scrim_id;
     getTeamByUser_id(id, (err, results) => {
         if (err) {
             console.log(err);
@@ -1146,7 +1195,7 @@ saveScrim: (req, res) => {
             });
         }
         const team_id = results.team_id
-        saveScrim(id, title, comment, time_start, time_end, opponent_name, team_id, map_1_id, map_2_id, map_3_id, typ, (err, result) => {
+        saveScrim(scrim_id, title, comment, time_start, time_end, opponent_name, team_id, map_1_id, map_2_id, map_3_id, typ, (err, result) => {
             if (err) {
                 console.log(err);
                 return res.status(500).json({

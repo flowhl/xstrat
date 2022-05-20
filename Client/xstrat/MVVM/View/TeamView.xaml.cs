@@ -60,13 +60,13 @@ namespace xstrat.MVVM.View
             (bool, string) result = await ApiHandler.JoinTeam(id, pw);
             if (result.Item1)
             {
-                Notify.sendSuccess("Success", "Joint successfully");
+                Notify.sendSuccess("Joint successfully");
                 TDashboard.Retrieve();
                 WaitForAPIAsync();
             }
             else
             {
-                Notify.sendError("Error", result.Item2);
+                Notify.sendError(result.Item2);
             }
         }
 
@@ -80,18 +80,18 @@ namespace xstrat.MVVM.View
                 var result = await ApiHandler.NewTeam(name, game_id);
                 if (result.Item1)
                 {
-                    Notify.sendSuccess("Success", "Created successfully");
+                    Notify.sendSuccess("Created successfully");
                     TDashboard.Retrieve();
                     await WaitForAPIAsync();
                 }
                 else
                 {
-                    Notify.sendError("Error", result.Item2);
+                    Notify.sendError(result.Item2);
                 }
             }
             else
             {
-                Notify.sendWarn("Warning" , "Select a game first");
+                Notify.sendWarn("Select a game first");
             }
 
         }

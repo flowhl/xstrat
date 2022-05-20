@@ -42,7 +42,7 @@ namespace xstrat.Ui
             }
             else
             {
-                Notify.sendError("Save Error", "Could not save new off day: " + result.Item2);
+                Notify.sendError("Could not save new off day: " + result.Item2);
             }
         }
 
@@ -61,7 +61,7 @@ namespace xstrat.Ui
                         if (result.Item1 == false)
                         {
                             success = false;
-                            Notify.sendError("Save Error", "Could not save off days: " + result.Item2);
+                            Notify.sendError("Could not save off days: " + result.Item2);
                         }
                     }
                 }
@@ -69,7 +69,7 @@ namespace xstrat.Ui
             }
             if (success)
             {
-                Notify.sendSuccess("Success", "Saved successfully");
+                Notify.sendSuccess("Saved successfully");
             }
         }
 
@@ -82,11 +82,11 @@ namespace xstrat.Ui
                 if (result.Item1)
                 {
                     RetrieveOffDays();
-                    Notify.sendSuccess("Success", "Deleted successfully");
+                    Notify.sendSuccess("Deleted successfully");
                 }
                 else
                 {
-                    Notify.sendError("Save Error", "Could not delete off day: " + result.Item2);
+                    Notify.sendError("Could not delete off day: " + result.Item2);
                 }
             }
         }
@@ -125,8 +125,8 @@ namespace xstrat.Ui
                 }
                 else
                 {
-                    Notify.sendError("Error", "Routines could not be created");
-                    throw new Exception("Routines could not be created");
+                    Notify.sendError("Offdays could not be created");
+                    throw new Exception("Offdays could not be created");
                 }
                 LoadOffDaysFromList();
             }

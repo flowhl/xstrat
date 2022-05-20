@@ -71,12 +71,12 @@ namespace xstrat.Ui
             (bool, string) result = await ApiHandler.LeaveTeam();
             if (result.Item1)
             {
-                Notify.sendSuccess("Success", "Left successfully");
+                Notify.sendSuccess("Left successfully");
                 Retrieve();
             }
             else
             {
-                Notify.sendError("Error", result.Item2);
+                Notify.sendError( result.Item2);
             }
         }
 
@@ -112,7 +112,7 @@ namespace xstrat.Ui
                 }
                 else
                 {
-                    Notify.sendError("Error", "Teammates could not be loaded");
+                    Notify.sendError("Teammates could not be loaded");
                     throw new Exception("Teammates could not be loaded");
                 }
                 MemberSP.Children.Clear();
@@ -126,7 +126,7 @@ namespace xstrat.Ui
             }
             else
             {
-                Notify.sendError("Error", "Teammates could not be loaded");
+                Notify.sendError("Teammates could not be loaded");
             }
         }
         private async Task RetrieveTeamInfoAsync()
@@ -160,7 +160,7 @@ namespace xstrat.Ui
                 }
                 else
                 {
-                    Notify.sendError("Error", "Team info could not be loaded");
+                    Notify.sendError("Team info could not be loaded");
                     throw new Exception("Team info could not be loaded");
                 }
                 if (TeamInfo != null)
@@ -172,7 +172,7 @@ namespace xstrat.Ui
             }
             else
             {
-                Notify.sendError("Error", "Team info could not be loaded");
+                Notify.sendError("Team info could not be loaded");
             }
         }
 
@@ -192,27 +192,27 @@ namespace xstrat.Ui
                     }
                     catch (Exception ex)
                     {
-                        Notify.sendError("Error", "No Color found!");
+                        Notify.sendError("No Color found!");
                         Logger.Log("No Color found! " + ex.Message);
                     }
                 }
             }
             else
             {
-                Notify.sendError("Error", result.Item2);
+                Notify.sendError(result.Item2);
             }
         }
         private async Task SaveColorAsync()
         {
-            var result = await ApiHandler.setColor(HexConverter(ColorPickerUI.SelectedColor));
+            var result = await ApiHandler.SetColor(HexConverter(ColorPickerUI.SelectedColor));
             if (result.Item1)
             {
-                Notify.sendSuccess("Success", "Changed color successfully");
+                Notify.sendSuccess("Changed color successfully");
                 Retrieve();
             }
             else
             {
-                Notify.sendError("Error", result.Item2);
+                Notify.sendError(result.Item2);
             }
         }
 
@@ -221,12 +221,12 @@ namespace xstrat.Ui
             var result = await ApiHandler.DeleteTeam();
             if (result.Item1)
             {
-                Notify.sendSuccess("Success", "Deleted successfully");
+                Notify.sendSuccess("Deleted successfully");
                 Retrieve();
             }
             else
             {
-                Notify.sendError("Error", result.Item2);
+                Notify.sendError(result.Item2);
             }
         }
         private async Task JoinPWAdminBtn_ClickAsync()
@@ -242,19 +242,19 @@ namespace xstrat.Ui
                     {
                         JoinPw joinPw = JsonConvert.DeserializeObject<List<JoinPw>>(data).First();
                         MessageBox.Show("Team ID: " + joinPw.id.ToString() + "\nJoin password: " + joinPw.join_password , "Your teams' join credentials:");
-                        Notify.sendSuccess("Copied!" ,"Copied the join password to your clipboard");
+                        Notify.sendSuccess("Copied the join password to your clipboard");
                         Clipboard.SetText(joinPw.join_password);
                     }
                     catch (Exception ex)
                     {
-                        Notify.sendError("Error", "No JoinPW found!");
+                        Notify.sendError("No JoinPW found!");
                         Logger.Log("No JoinPW found! " + ex.Message);
                     }
                 }
             }
             else
             {
-                Notify.sendError("Error", result.Item2);
+                Notify.sendError(result.Item2);
             }
         }
         private async Task RenameAdminBtn_ClickAsync(string newname)
@@ -262,12 +262,12 @@ namespace xstrat.Ui
             var result = await ApiHandler.RenameTeam(newname);
             if (result.Item1)
             {
-                Notify.sendSuccess("Success", "Renamed successfully");
+                Notify.sendSuccess("Renamed successfully");
                 Retrieve();
             }
             else
             {
-                Notify.sendError("Error", result.Item2);
+                Notify.sendError( result.Item2);
             }
         }
 
