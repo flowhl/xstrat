@@ -228,7 +228,16 @@ namespace xstrat.Ui
             }
         }
 
-        
-
+        private void NewBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Core.Window window = new Core.Window
+            {
+                StartDateTime = DateTime.Now,
+                EndDateTime = DateTime.Now.AddHours(3),
+                AvailablePlayers = new List<Player>()
+            };
+            var response = new ScrimWindow(window);
+            response.Show();
+        }
     }
 }

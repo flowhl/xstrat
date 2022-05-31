@@ -306,6 +306,16 @@ namespace xstrat.MVVM.View
 
         private string GetLabel(OffDay od)
         {
+            string stitle = "";
+            if (od.title.Length > 30)
+            {
+                stitle = od.title.Substring(0, 30) + "...";
+            }
+            else
+            {
+                stitle = od.title;
+            }
+
             string sstart = "";
             string send = "";
             try
@@ -317,7 +327,9 @@ namespace xstrat.MVVM.View
             {
                 Notify.sendError(ex.Message);
             }
-            return Globals.UserIdToName(od.user_id.GetValueOrDefault()) + ": " + sstart + "-" + send;
+            //return Globals.UserIdToName(od.user_id.GetValueOrDefault()) + " | " + stitle + ": " + sstart + "-" + send;
+            return Globals.UserIdToName(od.user_id.GetValueOrDefault()) + " | " + sstart + "-" + send;
+
         }
 
         private string GetLabel(Scrim sc)
@@ -343,7 +355,8 @@ namespace xstrat.MVVM.View
             {
                 Notify.sendError(ex.Message);
             }
-            return "Scrim: " + sc.opponent_name + " | " + stitle + ": " + sstart + "-" + send;
+            //return "Scrim: " + sc.opponent_name + " | " + stitle + ": " + sstart + "-" + send;
+            return "Scrim: " + sc.opponent_name + " | " + sstart + "-" + send;
 
         }
 

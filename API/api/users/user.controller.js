@@ -1,11 +1,11 @@
-const { create_user, getMemberByUserID,getUserByUserId,getUsers,getUserByEmail, deleteAccount, changeEmail, changeName, changePassword, getTeamByUser_id, updateTeamName, deleteTeam, newTeam, createVerification, getVerification, clearVerification, activateAccount, newRoutine, deleteRoutine, getRoutineContent, saveRoutine, getRoutines, renameRoutine, verifyTeamAdmin, verifyTeamJoinPassword, joinTeam, getTeamJoinPassword, getTeamMembers, getTeamFullInfo, getGames, leaveTeam, setMyColor, getMyColor, createEvent, deleteEvent, getTeamEvents, getUserEvents, saveEvent, getMaps, createScrim, saveScrim, getTeamScrim, setMyDiscord, getMyDiscord, setWebhook, getWebhook, getWebhookByTeamId} = require("./user.service");
+const { create_user, getMemberByUserID,getUserByUserId,getUsers,getUserByEmail, deleteAccount, changeEmail, changeName, changePassword, getTeamByUser_id, updateTeamName, deleteTeam, newTeam, createVerification, getVerification, clearVerification, activateAccount, newRoutine, deleteRoutine, getRoutineContent, saveRoutine, getRoutines, renameRoutine, verifyTeamAdmin, verifyTeamJoinPassword, joinTeam, getTeamJoinPassword, getTeamMembers, getTeamFullInfo, getGames, leaveTeam, setMyColor, getMyColor, createEvent, deleteEvent, getTeamEvents, getUserEvents, saveEvent, getMaps, createScrim, saveScrim, getTeamScrim, setMyDiscord, getMyDiscord, setDiscordData, getDiscordData, getWebhookByTeamId, setDcData, getDcData, deleteScrim, getScrim} = require("./user.service");
 
 const {genSaltSync, hashSync, compareSync} = require("bcrypt");
 const { sign } = require("jsonwebtoken");
 const {sendEmail} = require("./user.mailservice");
 const res = require("express/lib/response");
 const { strictEqual } = require("assert");
-const { ScrimCreatedNotification } = require("../../discord/webhook");
+const { ScrimCreatedNotification, ScrimChangedNotification, ScrimDeletedNotification } = require("../../discord/webhook");
 module.exports = {
 //#region user control
     //tested
@@ -782,9 +782,9 @@ module.exports = {
             });
         })
     },    
-    getWebhook: (req, res) => {
+    getDiscordData: (req, res) => {
         const id = req.id;
-        getWebhook(id, (err, results) =>{
+        getDcData(id, (err, results) =>{
             if (err) {
                 console.log(err);
                 return res.status(500).json({
@@ -798,10 +798,15 @@ module.exports = {
             });
         })
     },
-    setWebhook: (req, res) => {
+    setDiscordData: (req, res) => {
         const id = req.id;
         const webhook = req.body.webhook;
-        setWebhook(id, webhook, (err, results) =>{
+        const sn_created = req.body.sn_created;
+        const sn_changed = req.body.sn_changed;
+        const sn_weekly = req.body.sn_weekly;
+        const sn_soon = req.body.sn_soon;
+        const sn_delay = req.body.sn_delay;
+        setDcData(id, webhook, sn_created, sn_changed, sn_weekly, sn_soon, sn_delay, (err, results) =>{
             if (err) {
                 console.log(err);
                 return res.status(500).json({
@@ -1101,7 +1106,8 @@ newScrim: (req, res) => {
                     }
                     else{
                         const webhook = results2[0].webhook;
-                        if(webhook != undefined && webhook != null){
+                        const sn_created = results2[0].sn_created;
+                        if(webhook != undefined && webhook != null && sn_created == 1){
                             ScrimCreatedNotification(webhook, id, title, opponent_name);
                         }
                     }                    
@@ -1117,6 +1123,22 @@ newScrim: (req, res) => {
 deleteScrim: (req, res) => {
     const user_id = req.id;
     const scrim_id = req.body.scrim_id;
+    var stitle = "";
+    var sopponent_name = "";
+    var time_start = "";
+    var time_end = "";
+
+    getScrim(scrim_id, (err3, results0) => {
+
+        if(err3){
+            console.log(err3);
+        }
+        else{
+            stitle = results0[0].title;
+            sopponent_name = results0[0].opponent_name;
+            time_start = results0[0].time_start;
+            time_end = results0[0].time_end;
+
     deleteScrim(user_id, scrim_id, (err, result) => {
         if (err) {
             console.log(err);
@@ -1126,11 +1148,44 @@ deleteScrim: (req, res) => {
             });
         }
         else{
+            
+            getTeamByUser_id(user_id, (err, results) => {
+                if (err) {
+                    console.log(err);
+                    return res.status(500).json({
+                        success: 0,
+                        message: "Database connection error"
+                    });
+                }
+                else if(!results){
+                    return res.status(200).json({
+                        success: 0,
+                        message: "Team not found"
+                    });
+                }
+                const team_id = results.team_id
+                
+                getWebhookByTeamId(team_id, (err2, results2) => {
+                    if(err2){
+                        console.log(err2)
+                    }
+                    else{
+                        const webhook = results2[0].webhook;
+                        const sn_created = results2[0].sn_created;
+                        if(webhook != undefined && webhook != null && sn_created == 1){
+                            ScrimDeletedNotification(webhook, user_id, stitle, sopponent_name, time_start, time_end);
+                        }
+                    }                    
+                })
+
             return res.status(200).json({
                 success: 1,
                 data: result
             });
+        })
         }
+    }
+    )}
     })
 },
 //needs to be implemented
@@ -1195,20 +1250,54 @@ saveScrim: (req, res) => {
             });
         }
         const team_id = results.team_id
-        saveScrim(scrim_id, title, comment, time_start, time_end, opponent_name, team_id, map_1_id, map_2_id, map_3_id, typ, (err, result) => {
-            if (err) {
-                console.log(err);
-                return res.status(500).json({
-                    success: 0,
-                    message: "Database connection error"
-                });
+
+        getScrim(scrim_id, (err2, results2) => {
+
+            if(err2){
+                console.log(err2);
             }
             else{
-                return res.status(200).json({
-                    success: 1,
-                    message: result
-                });
+                if(results2[0].time_start != time_start || results2[0].time_end != time_end){                    
+                    getWebhookByTeamId(team_id, (err3, results3) => {
+                        if(err2){
+                            console.log(err3)
+                        }
+                        else{
+                            const webhook = results3[0].webhook;
+                            const sn_changed = results3[0].sn_changed;
+                            const ntitle = title;
+                            if(ntitle == null || ntitle == undefined || ntitle == ""){
+                                ntitle = results2[0].title;
+                            }
+                            const nopponent_name = opponent_name;
+                            if(nopponent_name == null || nopponent_name == undefined || nopponent_name == ""){
+                                nopponent_name = results2[0].opponent_name;
+                            }
+                            
+                            if(webhook != undefined && webhook != null && sn_changed == 1){
+                                ScrimChangedNotification(webhook, time_start, time_end, ntitle, nopponent_name, id);
+                            }
+                        }                    
+                    })
+                }
+
             }
+
+            saveScrim(scrim_id, title, comment, time_start, time_end, opponent_name, team_id, map_1_id, map_2_id, map_3_id, typ, (err, result) => {
+                if (err) {
+                    console.log(err);
+                    return res.status(500).json({
+                        success: 0,
+                        message: "Database connection error"
+                    });
+                }
+                else{
+                    return res.status(200).json({
+                        success: 1,
+                        message: result
+                    });
+                }
+            })
         })
     })
 },

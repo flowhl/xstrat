@@ -155,6 +155,9 @@ namespace xstrat.MVVM.View
             {
                 MakeCalendarEntry(od);
             }
+
+            await Task.Delay(100);
+
             CalendarMonthUI.DrawDays();
         }
 
@@ -198,6 +201,7 @@ namespace xstrat.MVVM.View
             {
                 MakeCalendarEntry(sc);
             }
+            CalendarMonthUI.DrawDays();
         }
 
         #region Helper Methods
@@ -222,7 +226,7 @@ namespace xstrat.MVVM.View
             }
             foreach (var userCheckbox in checkboxes)
             {
-                var events =  Events.Where(x => x.user.id == userCheckbox.User.id);
+                var events =  Events.Where(x => x.user != null && x.user.id == userCheckbox.User.id);
 
                 foreach (var _event in events)
                 {
@@ -392,7 +396,8 @@ namespace xstrat.MVVM.View
             {
                 Notify.sendError(ex.Message);
             }
-            return Globals.UserIdToName(od.user_id.GetValueOrDefault()) + " | " + stitle + ": " + sstart + "-" + send;
+            //return Globals.UserIdToName(od.user_id.GetValueOrDefault()) + " | " + stitle + ": " + sstart + "-" + send;
+            return Globals.UserIdToName(od.user_id.GetValueOrDefault()) + " | " + sstart + "-" + send;
 
         }
 
@@ -419,7 +424,8 @@ namespace xstrat.MVVM.View
             {
                 Notify.sendError(ex.Message);
             }
-            return "Scrim: " + sc.opponent_name + " | " + stitle + ": " + sstart + "-" + send;
+            //return "Scrim: " + sc.opponent_name + " | " + stitle + ": " + sstart + "-" + send;
+            return "Scrim: " + sc.opponent_name + " | " + sstart + "-" + send;
 
         }
         #endregion
@@ -428,7 +434,7 @@ namespace xstrat.MVVM.View
         {
             if(Events != null)
             {
-                var sevents = Events.Where(x => x.typ == 1);
+                var sevents = Events.Where(x => x.typ == 0);
 
                 foreach (var _event in sevents)
                 {
@@ -441,6 +447,7 @@ namespace xstrat.MVVM.View
                 {
                     _event.visible = OffDayChecks.IsChecked.GetValueOrDefault(true);
                 }
+
                 CalendarMonthUI.DrawDays();
             }
            

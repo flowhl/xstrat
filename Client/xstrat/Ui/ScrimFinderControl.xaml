@@ -5,9 +5,9 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:xstrat.Ui" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
-             d:DesignHeight="650" d:DesignWidth="320">
+             d:DesignHeight="720" d:DesignWidth="320">
     <Grid>
-        <Border Width="300" HorizontalAlignment="Left" Background="#181818" CornerRadius="20" Height="600" Margin="10,10,10,10" Name="RoutinesOverview" VerticalAlignment="Top">
+        <Border Width="300" HorizontalAlignment="Left" Background="#181818" CornerRadius="20" Height="700" Margin="10,10,10,10" Name="RoutinesOverview" VerticalAlignment="Top">
             <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,5,0,0">
                     <materialDesign:PackIcon Height="30" Width="30" Foreground="White" VerticalAlignment="Center" Kind="Timetable"></materialDesign:PackIcon>
@@ -147,15 +147,35 @@
                     <local:NumberBox x:Name="PlayerAmount" allowNegative="False" limit="100"></local:NumberBox>
                 </Viewbox>
 
-                <!--SEARCH BUTTON-->
-                <Button Height="30" Width="120" Name="SearchBtn" Content="Search" BorderThickness="0" FontSize="15" Background="#202020" Foreground="White" VerticalContentAlignment="Center" Margin="10" Click="SearchBtn_Click">
-                    <Button.Resources>
-                        <Style TargetType="Border">
-                            <Setter Property="CornerRadius" Value="10"/>
-                        </Style>
-                    </Button.Resources>
-                </Button>
+                <StackPanel Margin="5" Orientation="Horizontal" HorizontalAlignment="Center">
+                    
+                    <!--SEARCH BUTTON-->
+                    <Button Height="30" Width="120" Name="SearchBtn" Content="Search" BorderThickness="0" FontSize="15" Background="#202020" Foreground="White" VerticalContentAlignment="Center" Click="SearchBtn_Click">
+                        <Button.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="10"/>
+                            </Style>
+                        </Button.Resources>
+                    </Button>
 
+                    <!--NEW BUTTON-->
+                    <Button Height="30" Width="120" Name="NewBtn" Content="New Scrim" BorderThickness="0" FontSize="15" Background="#202020" Foreground="White" VerticalContentAlignment="Center" Margin="10" Click="NewBtn_Click">
+                        <Button.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="10"/>
+                            </Style>
+                        </Button.Resources>
+                    </Button>
+                </StackPanel>
+
+                <TextBlock Foreground="Black" Background="#D64251" Width="150" Padding="2" Margin="0,20,0,0">Offday</TextBlock>
+                <TextBlock Foreground="Black" Background="#2D9ED5" Width="150" Padding="2" Margin="3">Scrim</TextBlock>
+                <TextBlock Foreground="Black" Background="#4ab859" Width="150" Padding="2">Recommended Scrim</TextBlock>
+                <TextBlock  HorizontalAlignment="Center" Margin="10,20,10,0" Foreground="#888888" TextWrapping="Wrap">
+                    Create a new scrim using the button or use the search to find the perfect scrim times for your team.
+                    You can doubleclick a recommended time to create a new scrim from it or click existing scrims to edit details                    
+                </TextBlock>
+                
             </StackPanel>
         </Border>
     </Grid>

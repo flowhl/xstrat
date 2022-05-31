@@ -27,6 +27,7 @@ namespace xstrat.Core
         public DateTime StartDateTime { get; set; }
         public DateTime EndDateTime { get; set; }
         public IEnumerable<Player> AvailablePlayers { get; set; }
+
     }
     public static class Globals
     {
@@ -53,18 +54,18 @@ namespace xstrat.Core
             RetrieveMaps();
             RetrieveScrimModes();
             RetrieveTeamName();
-            RetrieveAdminStatus();
+            RetrieveAdminStatusAsync();
         }
 
-        private static void RetrieveAdminStatus()
+        private static async Task RetrieveAdminStatusAsync()
         {
-
+            var result = await ApiHandler.GetAdminStatus();
+            AdminUser = result.Item1;
         }
 
         private static async void RetrieveTeamName()
         {
-            var result = await ApiHandler.GetAdminStatus();
-            AdminUser = result.Item1;
+
         }
 
         private static async void RetrieveTeamMates()

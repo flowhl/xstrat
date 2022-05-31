@@ -77,7 +77,7 @@ namespace xstrat.Ui
                     label.Content = Globals.getUserFromId(user.ID).name;
                     PlayerStack.Children.Add(label);
                 }
-
+                DeleteBtn.Visibility = Visibility.Collapsed;
             }
             else if(type == 1)
             {
@@ -85,6 +85,7 @@ namespace xstrat.Ui
                 DateTime end = DateTime.ParseExact(scrim.time_end, "yyyy/MM/dd HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture);
                 TypeLabel.Content = "Edit Scrim";
                 Title = "Edit Scrim";
+                OpponentNameBox.Text = scrim.opponent_name;
                 TitleBox.Text = scrim.title;
                 CommentBox.Text = scrim.comment;
                 CalendarDatePicker.SelectedDate = start.Date;
@@ -95,8 +96,16 @@ namespace xstrat.Ui
                 MapSelector1.SelectIndex(Globals.Maps.IndexOf(Globals.Maps.Where(x => x.id == scrim.map_1_id).FirstOrDefault()));
                 MapSelector2.SelectIndex(Globals.Maps.IndexOf(Globals.Maps.Where(x => x.id == scrim.map_2_id).FirstOrDefault()));
                 MapSelector3.SelectIndex(Globals.Maps.IndexOf(Globals.Maps.Where(x => x.id == scrim.map_3_id).FirstOrDefault()));
-                CreatorLabel.Content = "";
-                CreationDateLabel.Content = "";
+                CreatorLabel.Content = Globals.getUserFromId(scrim.creator_id).name;
+                CreationDateLabel.Content = scrim.creation_date.Replace("T", " ").Replace("Z", "");
+                if (!Globals.AdminUser)
+                {
+                    DeleteBtn.Visibility = Visibility.Collapsed;
+                }
+            }
+            if(PlayerStack.Children.Count < 1)
+            {
+                UserViewer.Visibility = Visibility.Collapsed;
             }
         }
 
@@ -197,6 +206,30 @@ namespace xstrat.Ui
                 CalendarEventUpdated?.Invoke(this, e);
             }
             
+        }
+
+        private void DeleteBtn_Click(object sender, RoutedEventArgs e)
+        {
+            DeleteScrimAsync();
+        }
+
+        public async Task DeleteScrimAsync()
+        {
+            if(type == 1)
+            {
+                var result = await ApiHandler.DeleteScrim(scrim.id);
+                if (result.Item1)
+                {
+                    Notify.sendSuccess("Deleted successfully");
+                    Close();
+                }
+                else
+                {
+                    Notify.sendError("Scrim could not be delted: " + result.Item2);
+                    throw new Exception("Scrim could not be delted: " + result.Item2);
+
+                }
+            }
         }
     }
 }

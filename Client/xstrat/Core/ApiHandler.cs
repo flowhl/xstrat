@@ -431,10 +431,10 @@ namespace xstrat
             return (false, response.Content);
         }
 
-        public static async Task<(bool, string)> GetDiscordWebhook()
+        public static async Task<(bool, string)> GetDiscordData()
         {
             Waiting();
-            var request = new RestRequest("team/getwebhook", Method.Get);
+            var request = new RestRequest("team/getdiscordata", Method.Get);
             request.RequestFormat = DataFormat.Json;
 
             var response = await client.ExecuteAsync<RestResponse>(request);
@@ -446,12 +446,12 @@ namespace xstrat
             EndWaiting();
             return (false, response.Content);
         }
-        public static async Task<(bool, string)> SetDiscordWebhook(string webhook)
+        public static async Task<(bool, string)> SetDiscordWebhook(string webhook, int sn_created, int sn_changed, int sn_weekly, int sn_soon, int sn_delay)
         {
             Waiting();
-            var request = new RestRequest("team/setwebhook", Method.Post);
+            var request = new RestRequest("team/setdiscorddata", Method.Post);
             request.RequestFormat = DataFormat.Json;
-            request.AddJsonBody(new { webhook = webhook });
+            request.AddJsonBody(new { webhook = webhook, sn_created = sn_created, sn_changed = sn_changed, sn_weekly = sn_weekly, sn_soon = sn_soon, sn_delay = sn_delay});
 
             var response = await client.ExecuteAsync<RestResponse>(request);
             if (response.StatusCode == System.Net.HttpStatusCode.Accepted) //success

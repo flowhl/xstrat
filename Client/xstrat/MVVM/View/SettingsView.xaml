@@ -14,25 +14,57 @@
                     <Label Foreground="White" FontSize="18" Content="General:" HorizontalAlignment="Center" FontWeight="SemiBold"></Label>
                     <StackPanel Orientation="Vertical">
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-
-                            <local1:ToggleSwitch x:Name="RememberMeSettings" Height="20"></local1:ToggleSwitch>
                             <Label Foreground="White" FontSize="14" HorizontalAlignment="Right">Stay logged in for 30 days</Label>
+                            <local1:ToggleSwitch x:Name="RememberMeSettings" Height="20"></local1:ToggleSwitch>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
                             <Label Foreground="White" VerticalAlignment="Bottom">Api-Url:</Label>
                             <TextBox Name="APIText" Foreground="#336cb5" VerticalContentAlignment="Center" Background="Transparent" Height="25" BorderThickness="0">https://api.xstrat.app</TextBox>
                         </StackPanel>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+
+            <Border BorderThickness="0" Background="#202020" CornerRadius="10" Width="300" Height="230" Margin="10,10,10,10">
+                <StackPanel Orientation="Vertical" Margin="5,5,5,5">
+                    <Label Foreground="White" FontSize="18" Content="Discord:" HorizontalAlignment="Center" FontWeight="SemiBold"></Label>
+                    <StackPanel Orientation="Vertical">
                         <StackPanel Orientation="Horizontal">
                             <Label Foreground="White" VerticalAlignment="Bottom">Discord-ID:</Label>
                             <TextBox Name="DCId" Foreground="#336cb5" VerticalContentAlignment="Center" Background="Transparent" Height="25" BorderThickness="0">1234567890</TextBox>
                         </StackPanel>
-                        <StackPanel Orientation="Horizontal" Name="WebhookView">
-                            <Label Foreground="White" VerticalAlignment="Bottom">Discord-Webhook:</Label>
-                            <TextBox Name="DCWebhook" Foreground="#336cb5" VerticalContentAlignment="Center" Background="Transparent" Height="25" BorderThickness="0">https://discord.com/api/webhooks/...</TextBox>
+                        <StackPanel Orientation="Vertical" Name="DcAdminView">
+                                <StackPanel Orientation="Horizontal" Name="WebhookView">
+                                <Label Foreground="White" VerticalAlignment="Bottom">Discord-Webhook:</Label>
+                                <TextBox Name="DCWebhook" Foreground="#336cb5" VerticalContentAlignment="Center" Background="Transparent" Height="25" BorderThickness="0">https://discord.com/api/webhooks/...</TextBox>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Name="DiscordNotify1">
+                                <Label Foreground="White" VerticalAlignment="Bottom">New scrim notification:</Label>
+                                <local1:ToggleSwitch Height="20" x:Name="SwNew"></local1:ToggleSwitch>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Name="DiscordNotify2">
+                                <Label Foreground="White" VerticalAlignment="Bottom">Scrim time changed notification:</Label>
+                                <local1:ToggleSwitch Height="20" x:Name="SwTimeChanged"></local1:ToggleSwitch>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Name="DiscordNotify3">
+                                <Label Foreground="White" VerticalAlignment="Bottom">Scrim starting soon notification:</Label>
+                                <local1:ToggleSwitch Height="20" x:Name="SwStartingSoon"></local1:ToggleSwitch>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Name="DiscordNotify4">
+                                <Label Foreground="White" VerticalAlignment="Bottom">Weekly scrim summary:</Label>
+                                <local1:ToggleSwitch Height="20" x:Name="SwWeeklySummary"></local1:ToggleSwitch>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Name="DiscordNotify5">
+                                <Label Foreground="White" VerticalAlignment="Bottom">Starting soon notification delay (in minutes):</Label>
+                                <Viewbox Height="20" Width="30">
+                                <local1:NumberBox x:Name="ScrimTimeDelay" allowNegative="False" Value="60" limit="300"></local1:NumberBox>                                    
+                                </Viewbox>
+                            </StackPanel>
                         </StackPanel>
                     </StackPanel>
                 </StackPanel>
             </Border>
+
             <Border BorderThickness="0" Background="#202020" CornerRadius="10" Width="300" Height="200" Margin="10,10,10,10">
                 <StackPanel Orientation="Vertical" Margin="5,5,5,5">
                     <Label Foreground="White" FontSize="18" Content="Skin Switcher:" FontWeight="SemiBold" HorizontalAlignment="Center"></Label>

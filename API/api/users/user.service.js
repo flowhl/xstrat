@@ -444,9 +444,9 @@ module.exports = {
         );
     },
 
-    getWebhook: (user_id, callBack) => {
+    getDcData: (user_id, callBack) => {
         pool.query(
-            "SELECT webhook FROM team WHERE team.admin_user_id = ?",
+            "SELECT webhook, sn_created, sn_changed, sn_weekly, sn_soon, sn_delay FROM team WHERE team.admin_user_id = ?",
             [
                 user_id
             ],
@@ -458,11 +458,16 @@ module.exports = {
             }
         );
     },
-    setWebhook: (user_id, webhook, callBack) => {
+    setDcData: (user_id, webhook, sn_created, sn_changed, sn_weekly, sn_soon, sn_delay, callBack) => {
         pool.query(
-            "Update team Set webhook = ? WHERE team.admin_user_id = ?",
+            "Update team Set webhook = ?, sn_created = ?, sn_changed = ?, sn_weekly = ?, sn_soon = ?, sn_delay = ? WHERE team.admin_user_id = ?",
             [
                 webhook,
+                sn_created,
+                sn_changed,
+                sn_weekly,
+                sn_soon,
+                sn_delay,
                 user_id
             ],
             (err, results, fields)=>{
@@ -476,7 +481,7 @@ module.exports = {
     },
     getWebhookByTeamId:(team_id, callBack) => {
         pool.query(
-        "SELECT webhook FROM team WHERE team.id = ?",
+        "SELECT webhook, sn_created, sn_changed, sn_weekly, sn_soon FROM team WHERE team.id = ?",
             [
                 team_id
             ],
@@ -723,8 +728,21 @@ module.exports = {
             }
         )
     },
+    getScrim:(scrim_id, callBack) => {
+        pool.query(
+            'SELECT * FROM scrim WHERE id = ?',
+            [
+                scrim_id
+            ],
+            (err, results)=>{
+                if(err){
+                   return callBack(err);
+                }
+                return callBack(null,results);                
+            }
+        )
+    },
     saveScrim:(scrim_id, title, comment, time_start, time_end, opponent_name, team_id, map_1_id, map_2_id, map_3_id, typ, callBack) => {
-        console.log(scrim_id, title, comment, time_start, time_end, opponent_name, team_id, map_1_id, map_2_id, map_3_id, typ)
         pool.query(
             'UPDATE scrim SET title = ?, comment = ?, time_start = ?, time_end = ?, opponent_name = ?,  map_1_id = "?", map_2_id = "?", map_3_id = "?", typ = ? WHERE id = ? AND team_id = ?',
             [
@@ -747,7 +765,79 @@ module.exports = {
                 return callBack(null,results);                
             }
         );
-    }
+    },
+    getScrimReminders:(callBack) => {
+        pool.query(
+            'SELECT scrim.id as scrim_id, scrim.title, scrim.opponent_name, scrim.time_start, scrim.time_end, scrim.creator_id, team.webhook, team.id as team_id, team.sn_delay, NOW() as now, user.name as user_name, TIMESTAMPDIFF(MINUTE,NOW(),STR_TO_DATE(scrim.time_start,"%Y/%m/%d %H:%i:%s")) as time_diff  FROM  	scrim      join team on team.id = scrim.team_id      join user on user.id = scrim.creator_id  WHERE  team.sn_soon = 1  AND scrim.time_start  AND TIMESTAMPDIFF(MINUTE,NOW(),STR_TO_DATE(scrim.time_start,"%Y/%m/%d %H:%i:%s"))< team.sn_delay  AND scrim.sn_sent = 0',
+            [],
+            (err, results)=>{
+                if(err){
+                   return callBack(err);
+                }
+                console.log(results);
+                return callBack(null,results);                
+            }
+        )
+    },
+    setScrimSent:(scrim_id, callBack) => {
+        pool.query(
+            'UPDATE scrim SET scrim.sn_sent = 1 WHERE scrim.id = ?',
+            [
+                scrim_id
+            ],
+            (err, results)=>{
+                if(err){
+                   return callBack(err);
+                }
+                return callBack(null,results);                
+            }
+        )
+    },
+    getScrimParticipants:(scrim_id, callBack) => {
+        if(scrim_id != null && scrim_id != undefined){
+            pool.query(
+                'SELECT * FROM scrim_response JOIN user ON user.id = scrim_response.user_id WHERE scrim_id = ? AND typ = 1',
+                [
+                    scrim_id
+                ],
+                (err, results)=>{
+                    if(err){
+                       return callBack(err);
+                    }
+                    return callBack(null,results);                
+                }
+            )
+        }
+        return(null, null);
+        
+    },
+    getTeamsWithSummaryEnabled:(callBack) => {
+        pool.query(
+            'SELECT team.id as team_id, team.webhook FROM team WHERE team.sn_weekly = 1',
+            [],
+            (err, results)=>{
+                if(err){
+                   return callBack(err);
+                }
+                return callBack(null,results);                
+            }
+        )
+    },
+    getTeamScrimInWeek:(team_id, callBack) => {
+        pool.query(
+            'SELECT * FROM scrim WHERE team_id = ? AND YEARWEEK(CURDATE(), 1) =  YEARWEEK(STR_TO_DATE(scrim.time_start,"%Y/%m/%d %H:%i:%s"),1)',
+            [
+                team_id
+            ],
+            (err, results)=>{
+                if(err){
+                   return callBack(err);
+                }
+                return callBack(null,results);                
+            }
+        )
+    },
+
 
     //#endregion
 };

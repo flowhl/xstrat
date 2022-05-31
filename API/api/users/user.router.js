@@ -43,8 +43,8 @@ const {
      getMaps,
      setMyDiscord,
      getMyDiscord,
-     getWebhook,
-     setWebhook
+     getDiscordData,
+     setDiscordData
     } = require("./user.controller");
 const router = require("express").Router();
 const {checkToken, checkAdmin} = require("../../auth/token_validation");
@@ -98,7 +98,7 @@ router.get("/team/info", [checkToken], getTeamFullInfo)
 router.get("/team/verifyadmin", [checkToken, checkAdmin], checkTeamAdmin)
 router.get("/team/getcolor", [checkToken], getMyColor)
 router.get("/team/getdiscord", [checkToken], getMyDiscord)
-router.get("/team/getwebhook",[checkToken, checkAdmin], getWebhook)
+router.get("/team/getdiscordata",[checkToken, checkAdmin], getDiscordData)
 
 
 router.post("/team/delete", [checkToken, checkAdmin], deleteTeam)
@@ -107,7 +107,7 @@ router.post("/team/rename", [checkToken, checkAdmin], updateTeamName)
 router.post("/team/join", [checkToken], joinTeam)
 router.post("/team/setcolor", [checkToken], setMyColor)
 router.post("/team/setdiscord", [checkToken], setMyDiscord)
-router.post("/team/setwebhook",[checkToken, checkAdmin], setWebhook)
+router.post("/team/setdiscorddata",[checkToken, checkAdmin], setDiscordData)
 
 //#endregion
 

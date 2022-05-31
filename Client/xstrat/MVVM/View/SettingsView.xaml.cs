@@ -30,12 +30,12 @@ namespace xstrat.MVVM.View
             }
             if (!Globals.AdminUser)
             {
-                WebhookView.Visibility = Visibility.Collapsed;
+                DcAdminView.Visibility = Visibility.Collapsed;
             }
             else
             {
-                WebhookView.Visibility = Visibility.Visible;
-                RetrieveDiscordWebhookAsync();
+                DcAdminView.Visibility = Visibility.Visible;
+                RetrieveDiscordData();
             }
         }
 
@@ -62,7 +62,7 @@ namespace xstrat.MVVM.View
             SaveDiscordIDAsync();
             if (Globals.AdminUser)
             {
-                SaveDiscordWebhookAsync();
+                SaveDiscordData();
             }
         }
 
@@ -115,9 +115,9 @@ namespace xstrat.MVVM.View
             }
         }
 
-        private async Task RetrieveDiscordWebhookAsync()
+        private async Task RetrieveDiscordData()
         {
-            var result = await ApiHandler.GetDiscordWebhook();
+            var result = await ApiHandler.GetDiscordData();
             if (result.Item1)
             {
                 JObject json = JObject.Parse(result.Item2);
@@ -126,16 +126,21 @@ namespace xstrat.MVVM.View
                 {
                     try
                     {
-                        Webhook webhook = JsonConvert.DeserializeObject<List<Webhook>>(data).First();
-                        if (webhook.webhook != null && webhook.webhook != string.Empty)
+                        DiscordData dcData = JsonConvert.DeserializeObject<List<DiscordData>>(data).First();
+                        if (dcData.webhook != null && dcData.webhook != string.Empty)
                         {
-                            DCWebhook.Text = webhook.webhook;
+                            DCWebhook.Text = dcData.webhook;
                         }
+                        SwNew.setStatus(StringToBool(dcData.sn_created.ToString()));
+                        SwTimeChanged.setStatus(StringToBool(dcData.sn_changed.ToString()));
+                        SwWeeklySummary.setStatus(StringToBool(dcData.sn_weekly.ToString()));
+                        SwStartingSoon.setStatus(StringToBool(dcData.sn_soon.ToString()));
+                        ScrimTimeDelay.Value = dcData.sn_delay;
                     }
                     catch (Exception ex)
                     {
-                        Notify.sendError("No Discord Webhook found!");
-                        Logger.Log("No Discord Webhook found! " + ex.Message);
+                        Notify.sendError("No Discord admin settings found!");
+                        Logger.Log("No admin settings found! " + ex.Message);
                     }
                 }
             }
@@ -144,14 +149,14 @@ namespace xstrat.MVVM.View
                 Notify.sendError(result.Item2);
             }
         }
-        private async Task SaveDiscordWebhookAsync()
+        private async Task SaveDiscordData()
         {
             if (DCWebhook.Text != null && DCWebhook.Text != string.Empty)
             {
-                var result = await ApiHandler.SetDiscordWebhook(DCWebhook.Text);
+                var result = await ApiHandler.SetDiscordWebhook(DCWebhook.Text, Convert.ToInt32(SwNew.getStatus()), Convert.ToInt32(SwTimeChanged.getStatus()), Convert.ToInt32(SwWeeklySummary.getStatus()), Convert.ToInt32(SwStartingSoon.getStatus()), ScrimTimeDelay.Value);
                 if (result.Item1)
                 {
-                    Notify.sendSuccess("Changed Discord Webhook successfully");
+                    Notify.sendSuccess("Changed Discord admin settings successfully");
                 }
                 else
                 {
@@ -173,6 +178,10 @@ namespace xstrat.MVVM.View
             }
 
             return true;
+        }
+        private bool StringToBool(string input)
+        {
+            return (input.Trim() == "1");
         }
     }
 }
