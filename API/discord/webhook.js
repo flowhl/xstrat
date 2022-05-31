@@ -210,6 +210,8 @@ ScrimReminder()
                         const embed = new MessageBuilder()
                         .setTitle('Scrim summary for this week:')
                         .setColor(blue)
+                        .setFooter('You can find more details on the XStrat app')
+                        .setTimestamp();
             
                         hook.send(embed)
                         .then(() => console.log('Sent header webhook successfully for team: ' + team_id))
@@ -242,9 +244,7 @@ ScrimReminder()
             const embed = new MessageBuilder()
             .setTitle('Scrim against ' + opponent_name)
             .setColor(green)
-            .setDescription('Title: ' + title + '\nTime: ' + time_start.split(" ")[1].replace(":00","") + '-' + time_end.split(" ")[1].replace(":00","") + "\nCreated by: " + user_name)
-            .setFooter('You can find more details on the XStrat app')
-            .setTimestamp();
+            .setDescription('Title: ' + title + '\nTime: ' + time_start.replace(":00","") + '-' + time_end.split(" ")[1].replace(":00","") + "\nCreated by: " + user_name)
 
             hook.send(embed)
             .then(() => console.log('Sent deleted webhook successfully:', title))
