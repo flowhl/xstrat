@@ -5,12 +5,20 @@ const red = "#D64251";
 const orange = "#E3673B";
 const yellow = "#E3DE52";
 const green = "#4AB859";
-var minutes = 1, reminder_check_interval = minutes  * 1000;
-setInterval(function() {
-  console.log("Scrim reminder check started");
-  module.exports.ScrimReminder();
-  module.exports.QueueWeeklySummary();
-}, reminder_check_interval);
+
+//cron
+const cron = require('node-cron');
+
+// Schedule tasks to be run on the server.
+cron.schedule('*/5 * * * *', function() {
+    console.log("Scrim reminder check started");
+    module.exports.ScrimReminder();
+});
+cron.schedule('0 1 * * MON', function() {
+    console.log("Weekly summary check started");
+    module.exports.QueueWeeklySummary();
+});
+
 module.exports = {
   ScrimCreatedNotification: (webhook_url, creator_id, title, opponent_name) => 
   {        
