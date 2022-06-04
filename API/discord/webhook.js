@@ -206,6 +206,26 @@ ScrimReminder()
             if(results.length > 0 ){
                 if( String(webhook_url).startsWith("https://discord.com/api/webhooks/"))
                 {
+                    var liststring = "";
+
+                    results.forEach(
+                        element =>{
+                            let substring = "";
+                            if(results.indexOf(element) != 0 ){
+                                substring += '\n---------------------------------\n\n'
+                            }                            
+
+                            substring += '** Scrim on: ' + element.time_start.split(" ")[0] + '**';
+                            substring += '\n**Time:** ' + element.time_start.split(" ")[1].replace(":00","") + '-' + element.time_end.split(" ")[1].replace(":00","");
+                            substring += '\n**Title:** ' + element.title;
+                            substring += '\n**Against:** ' + element.opponent_name ;
+                            
+                            liststring += "\n" + substring
+                        }
+                            
+                    )
+
+
                     const hook = new Webhook(
                         {
                             url: webhook_url,
@@ -218,52 +238,54 @@ ScrimReminder()
                         const embed = new MessageBuilder()
                         .setTitle('Scrim summary for this week:')
                         .setColor(blue)
+                        .setDescription(liststring)
                         .setFooter('You can find more details on the XStrat app')
                         .setTimestamp();
             
                         hook.send(embed)
                         .then(() => console.log('Sent header webhook successfully for team: ' + team_id))
                         .catch(err => console.log(err.message));
+
                 }
             }
-            results.forEach(element => module.exports.WeeklySummarySendWebhook(webhook_url, element.time_start, element.time_end, element.title, element.opponent_name, element.creator_id) )
+            
         }
     })
   },
 
-  WeeklySummarySendWebhook(webhook_url, time_start ,time_end, title, opponent_name, user_id){
-    if( String(webhook_url).startsWith("https://discord.com/api/webhooks/"))
-    {
-        getUserByUserId(user_id, (err, results) => 
-        {
-            if(err){
-                console.log(err);
-            }
-            const user_name = results[0].name;
-            const hook = new Webhook(
-            {
-                url: webhook_url,
-                //If throwErrors is set to false, no errors will be thrown if there is an error sending
-                throwErrors: true,
-                //retryOnLimit gives you the option to not attempt to send the message again if rate limited
-                retryOnLimit: true
-            });
+//   WeeklySummarySendWebhook(webhook_url, time_start ,time_end, title, opponent_name, user_id){
+//     if( String(webhook_url).startsWith("https://discord.com/api/webhooks/"))
+//     {
+//         getUserByUserId(user_id, (err, results) => 
+//         {
+//             if(err){
+//                 console.log(err);
+//             }
+//             const user_name = results[0].name;
+//             const hook = new Webhook(
+//             {
+//                 url: webhook_url,
+//                 //If throwErrors is set to false, no errors will be thrown if there is an error sending
+//                 throwErrors: true,
+//                 //retryOnLimit gives you the option to not attempt to send the message again if rate limited
+//                 retryOnLimit: true
+//             });
 
-            const embed = new MessageBuilder()
-            .setTitle('Scrim against ' + opponent_name)
-            .setColor(green)
-            .setDescription('Title: ' + title + '\nTime: ' + time_start.replace(":00","") + '-' + time_end.split(" ")[1].replace(":00","") + "\nCreated by: " + user_name)
+//             const embed = new MessageBuilder()
+//             .setTitle('Scrim against ' + opponent_name)
+//             .setColor(green)
+//             .setDescription('Title: ' + title + '\nTime: ' + time_start.replace(":00","") + '-' + time_end.split(" ")[1].replace(":00","") + "\nCreated by: " + user_name)
 
-            hook.send(embed)
-            .then(() => console.log('Sent deleted webhook successfully:', title))
-            .catch(err => console.log(err.message));
-        })
+//             hook.send(embed)
+//             .then(() => console.log('Sent deleted webhook successfully:', title))
+//             .catch(err => console.log(err.message));
+//         })
 
-    } 
-    else{
-        console.log("wrong webhook url:", webhook_url);
-    } 
-  },
+//     } 
+//     else{
+//         console.log("wrong webhook url:", webhook_url);
+//     } 
+//   },
 
   QueueWeeklySummary() {
     getTeamsWithSummaryEnabled((err, results) => {

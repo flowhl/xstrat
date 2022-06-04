@@ -28,6 +28,9 @@ namespace xstrat.Ui
         /// 0 - new scrim
         /// 1 - edit scrim
         /// </summary>
+        /// 
+
+        private bool opened = false;
         public int type { get; set; }
         public Scrim scrim { get; set; }
         public Core.Window window { get; set; }
@@ -42,14 +45,28 @@ namespace xstrat.Ui
             type = 0;
             InitializeComponent();
             UpdateUI();
+            Loaded += ScrimWindow_Loaded;
+            GotFocus += ScrimWindow_GotFocus;
+        }
+
+        private void ScrimWindow_GotFocus(object sender, RoutedEventArgs e)
+        {
+            opened = true;
+        }
+
+        private void ScrimWindow_Loaded(object sender, RoutedEventArgs e)
+        {
 
         }
+
         public ScrimWindow(Scrim scrim)
         {
             this.scrim = scrim;
             type = 1;
             InitializeComponent();
             UpdateUI();
+            Loaded += ScrimWindow_Loaded;
+            GotFocus += ScrimWindow_GotFocus;
         }
 
         public void UpdateUI()
@@ -135,6 +152,7 @@ namespace xstrat.Ui
                 if (result.Item1)
                 {
                     Notify.sendSuccess("Saved successfully");
+                    opened = false;
                     Close();
                 }
                 else
@@ -185,6 +203,7 @@ namespace xstrat.Ui
                         if (result2.Item1)
                         {
                             Notify.sendSuccess("Saved successfully");
+                            opened = false;
                             Close();
                         }
                         else
@@ -221,6 +240,7 @@ namespace xstrat.Ui
                 if (result.Item1)
                 {
                     Notify.sendSuccess("Deleted successfully");
+                    opened = false;
                     Close();
                 }
                 else
@@ -229,6 +249,14 @@ namespace xstrat.Ui
                     throw new Exception("Scrim could not be delted: " + result.Item2);
 
                 }
+            }
+        }
+
+        private void Window_Deactivated(object sender, EventArgs e)
+        {
+            if (IsLoaded && opened)
+            {
+                this.Close();
             }
         }
     }

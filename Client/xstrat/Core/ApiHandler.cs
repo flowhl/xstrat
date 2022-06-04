@@ -798,6 +798,55 @@ namespace xstrat
             return (false, "db error");
         }
 
+        /// <summary>
+        /// sets the scrim response:
+        /// 0 default
+        /// 1 accept
+        /// 2 deny
+        /// </summary>
+        /// <param name="scrim_id"></param>
+        /// <param name="typ"></param>
+        /// <returns></returns>
+        public static async Task<(bool, string)> SetScrimResponse(int scrim_id, int typ)
+        {
+            Waiting();
+            var request = new RestRequest("scrim/setresponse", Method.Post);
+            request.RequestFormat = DataFormat.Json;
+            request.AddJsonBody(new { scrim_id = scrim_id, typ = typ});
+
+            var response = await client.ExecuteAsync<RestResponse>(request);
+            if (response.StatusCode == System.Net.HttpStatusCode.OK) //success
+            {
+                EndWaiting();
+                return (true, response.Content);
+            }
+            EndWaiting();
+            return (false, "db error");
+        }
+
+        /// <summary>
+        /// gets the scrim response:
+        /// 0 default
+        /// 1 accept
+        /// 2 deny
+        /// </summary>
+        /// <returns></returns>
+        public static async Task<(bool, string)> GetScrimResponse()
+        {
+            Waiting();
+            var request = new RestRequest("scrim/getresponse", Method.Get);
+            request.RequestFormat = DataFormat.Json;
+
+            var response = await client.ExecuteAsync<RestResponse>(request);
+            if (response.StatusCode == System.Net.HttpStatusCode.OK) //success
+            {
+                EndWaiting();
+                return (true, response.Content);
+            }
+            EndWaiting();
+            return (false, "db error");
+        }
+
         #endregion
 
         #region helper methodes

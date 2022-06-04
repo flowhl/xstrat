@@ -9,14 +9,40 @@
              x:Name="CalendarUISmall">
     <Grid>
         <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
-            <Grid Height="Auto">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="320"/>
-                </Grid.ColumnDefinitions>
-                <local1:CalendarMonth Grid.Column="0" HorizontalAlignment="Stretch" Margin="10" x:Name="CalendarMonthUI" MaxWidth="800" MaxHeight="730" Events="{Binding ElementName=CalendarUISmall, Path=Events}" GridBrush="#336cb5" GridBorderThickness="0.8" Height="775"/>
-                <local2:ScrimFinderControl Grid.Column="1" x:Name="SFControl" Margin="0,43,0,0" HorizontalAlignment="Center"></local2:ScrimFinderControl>
-            </Grid>
+            <StackPanel Orientation="Vertical" >
+
+                <Border Background="#202020" CornerRadius="10" Margin="10">
+                    <Grid Height="Auto" Margin="10">
+                        <StackPanel Orientation="Vertical">
+                            <Button Height="40" Width="250" Name="NewBtn" Foreground="White" Content="New Scrim" FontSize="17" Background="#336cb5" BorderThickness="0" Margin="0,0,0,10" Click="NewBtn_Click">
+                                <Button.Resources>
+                                    <Style TargetType="Border">
+                                        <Setter Property="CornerRadius" Value="10"/>
+                                    </Style>
+                                </Button.Resources>
+                            </Button>
+                            <ScrollViewer MaxHeight="600" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+                                <StackPanel Name="ScrimListPanel" Margin="10" Orientation="Vertical" >
+
+                                </StackPanel>
+                            </ScrollViewer>
+
+                        </StackPanel>
+                    </Grid>
+                </Border>
+                <Border Background="#202020" CornerRadius="10" Margin="10">                    
+                    <Grid Height="Auto" Margin="10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="320"/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Orientation="Vertical">             
+                            <local1:CalendarMonth Grid.Column="0" HorizontalAlignment="Stretch" Margin="10" x:Name="CalendarMonthUI" MaxWidth="800" MaxHeight="730" Events="{Binding ElementName=CalendarUISmall, Path=Events}" GridBrush="#336cb5" GridBorderThickness="0.8" Height="775"/>
+                        </StackPanel>
+                        <local2:ScrimFinderControl Grid.Column="1" x:Name="SFControl" Margin="0,43,0,0" HorizontalAlignment="Center"></local2:ScrimFinderControl>
+                    </Grid>
+                </Border>
+            </StackPanel>
         </ScrollViewer>        
     </Grid>
 </UserControl>

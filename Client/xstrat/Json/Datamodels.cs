@@ -225,6 +225,7 @@ namespace xstrat.Json
         public int typ { get; set; }
         public int creator_id { get; set; }
         public string creation_date { get; set; }
+        public int? response_typ { get; set; }
 
         public Scrim(int id, string title, string comment, string time_start, string time_end, string opponent_name, int team_id, int? map_1_id, int? map_2_id, int? map_3_id, int typ, int creator_id, string creation_date)
         {

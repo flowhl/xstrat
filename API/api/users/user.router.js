@@ -44,7 +44,9 @@ const {
      setMyDiscord,
      getMyDiscord,
      getDiscordData,
-     setDiscordData
+     setDiscordData,
+     getScrimResponse,
+     setScrimResponse
     } = require("./user.controller");
 const router = require("express").Router();
 const {checkToken, checkAdmin} = require("../../auth/token_validation");
@@ -125,6 +127,8 @@ router.post("/event/save",[checkToken], saveEvent)
 router.post("/scrim/new",[checkToken], newScrim)
 router.post("/scrim/delete",[checkToken, checkAdmin], deleteScrim)
 router.get("/scrim/team",[checkToken], getTeamScrims)
+router.get("/scrim/getresponse",[checkToken], getScrimResponse)
 router.post("/scrim/save",[checkToken], saveScrim)
+router.post("/scrim/setresponse",[checkToken], setScrimResponse)
 
 module.exports = router

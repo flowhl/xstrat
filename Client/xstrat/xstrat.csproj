@@ -252,6 +252,9 @@
     <Compile Include="Ui\RoutineStep.xaml.cs">
       <DependentUpon>RoutineStep.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Ui\ScrimControl.xaml.cs">
+      <DependentUpon>ScrimControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Ui\ScrimFinderControl.xaml.cs">
       <DependentUpon>ScrimFinderControl.xaml</DependentUpon>
     </Compile>
@@ -385,6 +388,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Ui\RoutineStep.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Ui\ScrimControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

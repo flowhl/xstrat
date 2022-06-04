@@ -108,6 +108,18 @@ namespace xstrat.MVVM.View
             }
         }
 
+        public void UpdateScrimList()
+        {
+            if(scrims != null && scrims.Count > 0)
+            {
+                ScrimListPanel.Children.Clear();
+                foreach (var scrim in scrims)
+                {
+                    ScrimListPanel.Children.Add(new ScrimControl(scrim));
+                }
+            }
+        }
+
         private void ResponseWindow_Closing(object sender, CancelEventArgs e)
         {
             RetrieveScrims();
@@ -168,7 +180,7 @@ namespace xstrat.MVVM.View
 
         }
 
-        private async void RetrieveScrims()
+        public async void RetrieveScrims()
         {
             try
             {
@@ -210,6 +222,7 @@ namespace xstrat.MVVM.View
                 MakeCalendarEntry(sc);
             }
             CalendarMonthUI.DrawDays();
+            UpdateScrimList();
         }
 
         #region Helper Methods
@@ -640,8 +653,20 @@ namespace xstrat.MVVM.View
             return windows.GroupBy(x => new { x.StartDateTime, x.EndDateTime }).Select(x => x.First()).OrderBy(x => x.StartDateTime).ThenBy(x => x.EndDateTime);
         }
 
-        
+
 
         #endregion
+
+        private void NewBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Core.Window window = new Core.Window
+            {
+                StartDateTime = DateTime.Now,
+                EndDateTime = DateTime.Now.AddHours(3),
+                AvailablePlayers = new List<Player>()
+            };
+            var response = new ScrimWindow(window);
+            response.Show();
+        }
     }
 }

@@ -714,10 +714,11 @@ module.exports = {
             }
         );
     },
-    getTeamScrim:(team_id, callBack) => {
+    getTeamScrim:(team_id, id, callBack) => {
         pool.query(
-            'SELECT * FROM scrim WHERE team_id = ?',
+            'SELECT * FROM scrim LEFT JOIN scrim_response on scrim_response.scrim_id = scrim.id AND scrim_response.user_id = ? WHERE team_id = ?',
             [
+                id,
                 team_id
             ],
             (err, results)=>{
@@ -810,6 +811,42 @@ module.exports = {
         }
         return(null, null);
         
+    },
+    getScrimResponse:(user_id, callBack) =>{
+        if(scrim_id != null && scrim_id != undefined){
+            pool.query(
+                'SELECT * FROM scrim_response WHERE user_id = ?',
+                [
+                    user_id
+                ],
+                (err, results)=>{
+                    if(err){
+                       return callBack(err);
+                    }
+                    return callBack(null,results);                
+                }
+            )
+        }
+        return(null, null);
+    },
+    setScrimResponse:(user_id, scrim_id, response_typ, callBack) =>{
+        pool.query(
+            'INSERT INTO scrim_response (user_id,scrim_id,response_typ) VALUES (?,?,?) ON DUPLICATE KEY UPDATE user_id = ?, scrim_id = ?, response_typ = ?',
+            [
+                user_id,
+                scrim_id,
+                response_typ,
+                user_id,
+                scrim_id,
+                response_typ
+            ],
+            (err, results)=>{
+                if(err){
+                    return callBack(err);
+                }
+                return callBack(null,"DB OK");            
+            }
+        )
     },
     getTeamsWithSummaryEnabled:(callBack) => {
         pool.query(
