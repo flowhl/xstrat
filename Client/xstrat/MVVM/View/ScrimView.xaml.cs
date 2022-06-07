@@ -115,7 +115,11 @@ namespace xstrat.MVVM.View
                 ScrimListPanel.Children.Clear();
                 foreach (var scrim in scrims)
                 {
-                    ScrimListPanel.Children.Add(new ScrimControl(scrim));
+                    DateTime enddate = DateTime.ParseExact(scrim.time_end, "yyyy/MM/dd HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture);
+                    if (enddate >= DateTime.Now)
+                    {
+                        ScrimListPanel.Children.Add(new ScrimControl(scrim));
+                    }
                 }
             }
         }
@@ -667,6 +671,19 @@ namespace xstrat.MVVM.View
             };
             var response = new ScrimWindow(window);
             response.Show();
+            response.Closed += Response_Closed;
+        }
+
+        private void Response_Closed(object sender, EventArgs e)
+        {
+            RetrieveScrims();
+            UpdateScrimList();
+        }
+
+        private void ReloadBtn_Click(object sender, RoutedEventArgs e)
+        {
+            RetrieveScrims();
+            UpdateScrimList();
         }
     }
 }

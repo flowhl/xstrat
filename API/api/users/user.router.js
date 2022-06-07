@@ -46,10 +46,24 @@ const {
      getDiscordData,
      setDiscordData,
      getScrimResponse,
-     setScrimResponse
+     setScrimResponse,
+     getUbisoftId,
+     setUbisoftId,
+     testRun
     } = require("./user.controller");
 const router = require("express").Router();
 const {checkToken, checkAdmin} = require("../../auth/token_validation");
+
+
+const R6 = require('../../tracker/r6stats');
+let email = '';
+let password = '';
+let platform = 'uplay';
+
+let account = R6.createAccount(email, password, platform);
+
+
+
 //#region user control
 router.post("/login", login)
 router.post("/register",createUser)
@@ -131,4 +145,75 @@ router.get("/scrim/getresponse",[checkToken], getScrimResponse)
 router.post("/scrim/save",[checkToken], saveScrim)
 router.post("/scrim/setresponse",[checkToken], setScrimResponse)
 
+//#region tracker
+
+router.get("/user/getubisoftid",[checkToken], getUbisoftId)
+router.post("/user/setubisoftid",[checkToken], setUbisoftId)
+router.get("/tracker/stats",async function(req, res){
+
+    const username = req.body.username;
+    const region = req.body.region;
+
+    let session = await R6.createSession(account).catch(e => { console.error(e) }); 
+    let player = await R6.createPlayer(username, platform, session).catch(e => { console.error(e) }); 
+
+    let stats = await R6.getStats(player, session, region).catch(e => { console.error(e) });
+    if(stats != undefined){
+        return res.status(200).json({
+            success: 1,
+            data: stats
+        });
+    }
+    else{
+        return res.status(500).json({
+            success: 0
+        });
+    }
+  })
+
+  router.get("/tracker/statsbyseason",async function(req, res){
+
+    const username = req.body.username;
+    const region = req.body.region;
+    const season = req.body.season;
+
+    let session = await R6.createSession(account).catch(e => { console.error(e) }); 
+    let player = await R6.createPlayer(username, platform, session).catch(e => { console.error(e) }); 
+
+    let stats = await R6.getStatsBySeason(player, session, season, region).catch(e => { console.error(e) });
+    if(stats != undefined){
+        return res.status(200).json({
+            success: 1,
+            data: stats
+        });
+    }
+    else{
+        return res.status(500).json({
+            success: 0
+        });
+    }
+  })
+
+  router.get("/tracker/statsbyoperator",async function(req, res){
+
+    const username = req.body.username;
+    const team = req.body.team;
+
+    let session = await R6.createSession(account).catch(e => { console.error(e) }); 
+    let player = await R6.createPlayer(username, platform, session).catch(e => { console.error(e) }); 
+
+    let stats = await R6.getStatsByOperator(player, session, team).catch(e => { console.error(e) });
+    if(stats != undefined){
+        return res.status(200).json({
+            success: 1,
+            data: stats
+        });
+    }
+    else{
+        return res.status(500).json({
+            success: 0
+        });
+    }
+  })
+//#endregion
 module.exports = router

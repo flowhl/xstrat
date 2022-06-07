@@ -1,10 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using DragonFruit.Six.Api.Accounts;
+using DragonFruit.Six.Api.Accounts.Enums;
 using Microsoft.WindowsAPICodePack.Dialogs;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -24,6 +28,7 @@ namespace xstrat.MVVM.View
             SkinSwitcherPathDisplay.Text = SettingsHandler.SkinSwitcherPath;
             RememberMeSettings.setStatus(SettingsHandler.StayLoggedin);
             RetrieveDiscordIDAsync();
+            RetrieveUbisoftIDAsync();
             if(SettingsHandler.APIURL != null)
             {
                 APIText.Text = SettingsHandler.APIURL;
@@ -39,6 +44,66 @@ namespace xstrat.MVVM.View
             }
         }
 
+        internal class Credential
+        {
+            [JsonPropertyName("email")]
+            public string Email { get; set; }
+
+            [JsonPropertyName("password")]
+            public string Password { get; set; }
+        }
+
+        
+
+        private async Task RetrieveUbisoftIDAsync()
+        {            
+            var result = await ApiHandler.GetUbisoftID();
+            if (result.Item1)
+            {
+                JObject json = JObject.Parse(result.Item2);
+                var data = json.SelectToken("data").ToString();
+                if (data != null && data != "")
+                {
+                    try
+                    {
+                        UbisoftID ubi = JsonConvert.DeserializeObject<List<UbisoftID>>(data).First();
+                        if (ubi.ubisoft_id != null && ubi.ubisoft_id != string.Empty)
+                        {
+                            UbiIDText.Text = ubi.ubisoft_id;
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Notify.sendError("No discord found!");
+                        Logger.Log("No discord found! " + ex.Message);
+                    }
+                }
+            }
+            else
+            {
+                Notify.sendError(result.Item2);
+            }
+        }
+
+        private async Task SaveUbisoftIDAsync()
+        {
+            if (UbiIDText.Text != null && UbiIDText.Text != string.Empty)
+            {
+                var result = await ApiHandler.SetUbisoftID(UbiIDText.Text);
+                if (result.Item1)
+                {
+                    Notify.sendSuccess("Changed Ubisoft ID successfully");
+                }
+                else
+                {
+                    Notify.sendError(result.Item2);
+                }
+            }
+            else
+            {
+                Notify.sendWarn("Discord ID cannot be empty and has to be digits only");
+            }
+        }
 
         private void SkinSwitcherPickPathBtn_Click(object sender, RoutedEventArgs e)
         {
@@ -60,6 +125,7 @@ namespace xstrat.MVVM.View
             SettingsHandler.APIURL = APIText.Text;
             SettingsHandler.Save();
             SaveDiscordIDAsync();
+            SaveUbisoftIDAsync();
             if (Globals.AdminUser)
             {
                 SaveDiscordData();
@@ -182,6 +248,11 @@ namespace xstrat.MVVM.View
         private bool StringToBool(string input)
         {
             return (input.Trim() == "1");
+        }
+
+        private void FindIDBtn_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

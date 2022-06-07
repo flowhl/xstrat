@@ -8,7 +8,7 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>xstrat</RootNamespace>
     <AssemblyName>xstrat</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
@@ -16,6 +16,7 @@
     <Deterministic>true</Deterministic>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -51,6 +52,24 @@
     </Reference>
     <Reference Include="DeltaCompressionDotNet.PatchApi, Version=1.1.0.0, Culture=neutral, PublicKeyToken=3e8888ee913ed789, processorArchitecture=MSIL">
       <HintPath>..\packages\DeltaCompressionDotNet.1.1.0\lib\net20\DeltaCompressionDotNet.PatchApi.dll</HintPath>
+    </Reference>
+    <Reference Include="DragonFruit.Data, Version=2022.324.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\DragonFruit.Data.2022.324.0\lib\netstandard2.0\DragonFruit.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="DragonFruit.Data.Serializers.Newtonsoft, Version=2022.324.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\DragonFruit.Data.Serializers.Newtonsoft.2022.324.0\lib\netstandard2.0\DragonFruit.Data.Serializers.Newtonsoft.dll</HintPath>
+    </Reference>
+    <Reference Include="DragonFruit.Six.Api, Version=2022.521.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\DragonFruit.Six.Api.2022.521.0\lib\netstandard2.0\DragonFruit.Six.Api.dll</HintPath>
+    </Reference>
+    <Reference Include="DragonFruit.Six.Api.Modern, Version=2021.827.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dragon6.API.Modern.2021.827.3\lib\netstandard2.0\DragonFruit.Six.Api.Modern.dll</HintPath>
+    </Reference>
+    <Reference Include="DragonFruit.Six.Locale, Version=2021.1105.32.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\DragonFruit.Six.Locale.2021.1105.32\lib\netstandard2.0\DragonFruit.Six.Locale.dll</HintPath>
+    </Reference>
+    <Reference Include="JetBrains.Annotations, Version=4242.42.42.42, Culture=neutral, PublicKeyToken=1010a0d8d6380325, processorArchitecture=MSIL">
+      <HintPath>..\packages\JetBrains.Annotations.2022.1.0\lib\net20\JetBrains.Annotations.dll</HintPath>
     </Reference>
     <Reference Include="MaterialDesignColors, Version=2.0.4.3, Culture=neutral, PublicKeyToken=df2a72020bd7962a, processorArchitecture=MSIL">
       <HintPath>..\packages\MaterialDesignColors.2.0.4\lib\net452\MaterialDesignColors.dll</HintPath>
@@ -99,6 +118,18 @@
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="Nito.AsyncEx.Coordination, Version=5.1.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Nito.AsyncEx.Coordination.5.1.2\lib\net461\Nito.AsyncEx.Coordination.dll</HintPath>
+    </Reference>
+    <Reference Include="Nito.AsyncEx.Tasks, Version=5.1.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Nito.AsyncEx.Tasks.5.1.2\lib\net461\Nito.AsyncEx.Tasks.dll</HintPath>
+    </Reference>
+    <Reference Include="Nito.Collections.Deque, Version=1.1.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Nito.Collections.Deque.1.1.1\lib\net461\Nito.Collections.Deque.dll</HintPath>
+    </Reference>
+    <Reference Include="Nito.Disposables, Version=2.2.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Nito.Disposables.2.2.1\lib\net461\Nito.Disposables.dll</HintPath>
+    </Reference>
     <Reference Include="Notifications.Wpf, Version=0.1.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Notifications.Wpf.0.1.1\lib\net461\Notifications.Wpf.dll</HintPath>
     </Reference>
@@ -120,6 +151,12 @@
     <Reference Include="System" />
     <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Collections.Immutable, Version=1.2.5.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Collections.Immutable.1.7.1\lib\net461\System.Collections.Immutable.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.Annotations, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ComponentModel.Annotations.5.0.0\lib\net461\System.ComponentModel.Annotations.dll</HintPath>
     </Reference>
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.ComponentModel.Composition.Registration" />
@@ -203,11 +240,13 @@
     <Compile Include="Core\Notify.cs" />
     <Compile Include="Core\RoutineButtonClicked.cs" />
     <Compile Include="Core\RoutineStepButtonClicked.cs" />
+    <Compile Include="Core\StatsHandler.cs" />
     <Compile Include="Core\Wallstates.cs" />
     <Compile Include="Json\Datamodels.cs" />
     <Compile Include="MVVM\ViewModel\CalendarViewModel.cs" />
     <Compile Include="MVVM\ViewModel\RoutinesViewModel.cs" />
     <Compile Include="MVVM\ViewModel\ScrimViewModel.cs" />
+    <Compile Include="MVVM\ViewModel\StatsViewModel.cs" />
     <Compile Include="MVVM\ViewModel\StratMakerViewModel.cs" />
     <Compile Include="MVVM\ViewModel\TeamViewModel.cs" />
     <Compile Include="MVVM\View\CalendarView.xaml.cs">
@@ -218,6 +257,9 @@
     </Compile>
     <Compile Include="MVVM\View\ScrimView.xaml.cs">
       <DependentUpon>ScrimView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MVVM\View\StatsView.xaml.cs">
+      <DependentUpon>StatsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="MVVM\View\StratMakerView.xaml.cs">
       <DependentUpon>StratMakerView.xaml</DependentUpon>
@@ -340,6 +382,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MVVM\View\SkinSwitcherView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MVVM\View\StatsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

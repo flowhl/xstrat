@@ -849,6 +849,59 @@ namespace xstrat
 
         #endregion
 
+        #region tracker
+
+        /// <summary>
+        /// sets the scrim response:
+        /// 0 default
+        /// 1 accept
+        /// 2 deny
+        /// </summary>
+        /// <param name="scrim_id"></param>
+        /// <param name="typ"></param>
+        /// <returns></returns>
+        public static async Task<(bool, string)> SetUbisoftID(string ubisoft_id)
+        {
+            Waiting();
+            var request = new RestRequest("user/setubisoftid", Method.Post);
+            request.RequestFormat = DataFormat.Json;
+            request.AddJsonBody(new { ubisoft_id = ubisoft_id});
+
+            var response = await client.ExecuteAsync<RestResponse>(request);
+            if (response.StatusCode == System.Net.HttpStatusCode.OK) //success
+            {
+                EndWaiting();
+                return (true, response.Content);
+            }
+            EndWaiting();
+            return (false, "db error");
+        }
+
+        /// <summary>
+        /// gets the scrim response:
+        /// 0 default
+        /// 1 accept
+        /// 2 deny
+        /// </summary>
+        /// <returns></returns>
+        public static async Task<(bool, string)> GetUbisoftID()
+        {
+            Waiting();
+            var request = new RestRequest("user/getubisoftid", Method.Get);
+            request.RequestFormat = DataFormat.Json;
+
+            var response = await client.ExecuteAsync<RestResponse>(request);
+            if (response.StatusCode == System.Net.HttpStatusCode.OK) //success
+            {
+                EndWaiting();
+                return (true, response.Content);
+            }
+            EndWaiting();
+            return (false, "db error");
+        }
+
+        #endregion
+
         #region helper methodes
 
         /// <summary>

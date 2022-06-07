@@ -74,6 +74,11 @@ namespace xstrat.Json
         public string discord { get; set; }
     }
 
+    public class UbisoftID
+    {
+        public string ubisoft_id { get; set; }
+    }
+
     public class Floor
     {
         public int id { get; set; }
@@ -304,6 +309,7 @@ namespace xstrat.Json
         public int id { get; set; }
         public string name { get; set; }
         public string color { get; set; }
+        public string ubisoft_id { get; set; }
     }
 
     public class XMap

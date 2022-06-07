@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:xstrat.MVVM.View" xmlns:local1="clr-namespace:xstrat.Calendar" xmlns:local2="clr-namespace:xstrat.Ui"
+             xmlns:local="clr-namespace:xstrat.MVVM.View" xmlns:local1="clr-namespace:xstrat.Calendar" xmlns:local2="clr-namespace:xstrat.Ui" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
              d:DesignHeight="775" d:DesignWidth="1150"
              x:Name="CalendarUISmall">
@@ -14,14 +14,36 @@
                 <Border Background="#202020" CornerRadius="10" Margin="10">
                     <Grid Height="Auto" Margin="10">
                         <StackPanel Orientation="Vertical">
-                            <Button Height="40" Width="250" Name="NewBtn" Foreground="White" Content="New Scrim" FontSize="17" Background="#336cb5" BorderThickness="0" Margin="0,0,0,10" Click="NewBtn_Click">
-                                <Button.Resources>
-                                    <Style TargetType="Border">
-                                        <Setter Property="CornerRadius" Value="10"/>
-                                    </Style>
-                                </Button.Resources>
-                            </Button>
-                            <ScrollViewer MaxHeight="600" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+                            <Grid>
+                                <Label Foreground="White" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="SemiBold">Your Scrims:</Label>
+
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                                    <Button HorizontalAlignment="Right" Height="40" Width="40" Name="ReloadBtn" Foreground="White" FontSize="17" Background="#336cb5" BorderThickness="0" Margin="10" Click="ReloadBtn_Click">
+                                        <Button.Resources>
+                                            <Style TargetType="Border">
+                                                <Setter Property="CornerRadius" Value="10"/>
+                                            </Style>
+                                        </Button.Resources>
+                                        <Button.Content>
+                                            <materialDesign:PackIcon Height="30" Width="30" Kind="Reload"/>
+                                        </Button.Content>
+                                    </Button>
+                                    
+                                    <Button HorizontalAlignment="Right" Height="40" Width="40" Name="NewBtn" Margin="10" Foreground="White" FontSize="17" Background="#336cb5" BorderThickness="0" Click="NewBtn_Click">
+                                        <Button.Resources>
+                                            <Style TargetType="Border">
+                                                <Setter Property="CornerRadius" Value="10"/>
+                                            </Style>
+                                        </Button.Resources>
+                                        <Button.Content>
+                                            <materialDesign:PackIcon Height="30" Width="30" Kind="Add"/>
+                                        </Button.Content>
+                                    </Button>
+
+                                </StackPanel>
+                                
+                            </Grid>
+                            <ScrollViewer MaxHeight="300" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
                                 <StackPanel Name="ScrimListPanel" Margin="10" Orientation="Vertical" >
 
                                 </StackPanel>

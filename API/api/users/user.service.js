@@ -797,7 +797,7 @@ module.exports = {
     getScrimParticipants:(scrim_id, callBack) => {
         if(scrim_id != null && scrim_id != undefined){
             pool.query(
-                'SELECT * FROM scrim_response JOIN user ON user.id = scrim_response.user_id WHERE scrim_id = ? AND typ = 1',
+                'SELECT * FROM scrim_response JOIN user ON user.id = scrim_response.user_id WHERE scrim_id = ? AND response_typ = 1',
                 [
                     scrim_id
                 ],
@@ -876,5 +876,37 @@ module.exports = {
     },
 
 
+    //#endregion
+
+    //#region Tracker
+    setUbisoftId:(ubisoft_id, user_id, callBack) =>{
+        pool.query(
+            'UPDATE user SET user.ubisoft_id = ? WHERE user.id = ?',
+            [
+                ubisoft_id,
+                user_id
+            ],
+            (err, results)=>{
+                if(err){
+                    return callBack(err);
+                }
+                return callBack(null,"DB OK");            
+            }
+        )
+    },
+    getUbisoftId:(user_id, callBack) => {
+        pool.query(
+            'SELECT user.ubisoft_id FROM user WHERE user.id = ?',
+            [
+                user_id
+            ],
+            (err, results)=>{
+                if(err){
+                   return callBack(err);
+                }
+                return callBack(null,results);                
+            }
+        )
+    },
     //#endregion
 };

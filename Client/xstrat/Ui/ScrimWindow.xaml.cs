@@ -42,6 +42,10 @@ namespace xstrat.Ui
         public ScrimWindow(xstrat.Core.Window window)
         {
             this.window = window;
+            if (window.StartDateTime.Date != window.EndDateTime.Date)
+            {
+                window.EndDateTime = new DateTime(window.StartDateTime.Year, window.StartDateTime.Month, window.StartDateTime.Day, 23, 59, 00);
+            }
             type = 0;
             InitializeComponent();
             UpdateUI();

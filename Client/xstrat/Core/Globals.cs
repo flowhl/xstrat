@@ -1,10 +1,13 @@
-﻿using Newtonsoft.Json;
+﻿using DragonFruit.Six.Api.Accounts;
+using DragonFruit.Six.Api.Accounts.Enums;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using xstrat.Json;
 
 namespace xstrat.Core
@@ -56,6 +59,7 @@ namespace xstrat.Core
             RetrieveTeamName();
             RetrieveAdminStatusAsync();
         }
+
 
         private static async Task RetrieveAdminStatusAsync()
         {

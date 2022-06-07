@@ -1,5 +1,4 @@
-const { create_user, getMemberByUserID,getUserByUserId,getUsers,getUserByEmail, deleteAccount, changeEmail, changeName, changePassword, getTeamByUser_id, updateTeamName, deleteTeam, newTeam, createVerification, getVerification, clearVerification, activateAccount, newRoutine, deleteRoutine, getRoutineContent, saveRoutine, getRoutines, renameRoutine, verifyTeamAdmin, verifyTeamJoinPassword, joinTeam, getTeamJoinPassword, getTeamMembers, getTeamFullInfo, getGames, leaveTeam, setMyColor, getMyColor, createEvent, deleteEvent, getTeamEvents, getUserEvents, saveEvent, getMaps, createScrim, saveScrim, getTeamScrim, setMyDiscord, getMyDiscord, setDiscordData, getDiscordData, getWebhookByTeamId, setDcData, getDcData, deleteScrim, getScrim, getScrimResponse, setScrimResponse} = require("./user.service");
-
+const { create_user, getMemberByUserID,getUserByUserId,getUsers,getUserByEmail, deleteAccount, changeEmail, changeName, changePassword, getTeamByUser_id, updateTeamName, deleteTeam, newTeam, createVerification, getVerification, clearVerification, activateAccount, newRoutine, deleteRoutine, getRoutineContent, saveRoutine, getRoutines, renameRoutine, verifyTeamAdmin, verifyTeamJoinPassword, joinTeam, getTeamJoinPassword, getTeamMembers, getTeamFullInfo, getGames, leaveTeam, setMyColor, getMyColor, createEvent, deleteEvent, getTeamEvents, getUserEvents, saveEvent, getMaps, createScrim, saveScrim, getTeamScrim, setMyDiscord, getMyDiscord, setDiscordData, getDiscordData, getWebhookByTeamId, setDcData, getDcData, deleteScrim, getScrim, getScrimResponse, setScrimResponse, getUbisoftId, setUbisoftId} = require("./user.service");
 const {genSaltSync, hashSync, compareSync} = require("bcrypt");
 const { sign } = require("jsonwebtoken");
 const {sendEmail} = require("./user.mailservice");
@@ -1300,6 +1299,7 @@ saveScrim: (req, res) => {
         })
     })
 },
+
 getScrimResponse: (req, res) => {
     const user_id = req.id;
     getScrimResponse(user_id, (err, result) => {
@@ -1323,6 +1323,49 @@ setScrimResponse: (req, res) => {
     const scrim_id = req.body.scrim_id;
     const typ = req.body.typ;
     setScrimResponse(user_id, scrim_id, typ, (err, result) => {
+        if (err) {
+            console.log(err);
+            return res.status(500).json({
+                success: 0,
+                message: "Database connection error"
+            });
+        }
+        else{
+            return res.status(200).json({
+                success: 1,
+                data: result
+            });
+        }
+    })
+},
+
+
+//#endregion
+//#region tracker
+
+getUbisoftId: (req, res) => {
+    const user_id = req.id;
+    getUbisoftId(user_id, (err, result) => {
+        if (err) {
+            console.log(err);
+            return res.status(500).json({
+                success: 0,
+                message: "Database connection error"
+            });
+        }
+        else{
+            return res.status(200).json({
+                success: 1,
+                data: result
+            });
+        }
+    })
+},
+setUbisoftId: (req, res) => {
+    const user_id = req.id;
+    const ubisoft_id = req.body.ubisoft_id;
+    console.log(ubisoft_id, user_id)
+    setUbisoftId(ubisoft_id, user_id, (err, result) => {
         if (err) {
             console.log(err);
             return res.status(500).json({
